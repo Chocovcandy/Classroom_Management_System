@@ -8,5 +8,6 @@
 <body>
     <h1>Hello World</h1>    
     <h2>Welcome to Laravel</h2>
+    <h3>This is a simple Laravel view</h3>
 </body>
 </html>
