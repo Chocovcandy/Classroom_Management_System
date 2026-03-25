@@ -8,5 +8,7 @@
 <body>
     <h1>dog</h1>
     <h2>chicken</h2>
+    <h3>cat</h3>
+    <h3>bird</h3>
 </body>
 </html>
