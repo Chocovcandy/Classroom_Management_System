@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>login</h1>
-    
+    <h2>Welcome to the login page</h2>
 </body>
 </html>
