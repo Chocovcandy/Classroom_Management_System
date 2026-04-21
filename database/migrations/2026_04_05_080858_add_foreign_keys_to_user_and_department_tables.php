@@ -11,26 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('User', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->foreign('department_id')
-                ->references('id')->on('Department')
+                ->references('id')->on('departments')
                 ->onDelete('set null');
         });
 
-        Schema::table('Department', function (Blueprint $table) {
+        Schema::table('departments', function (Blueprint $table) {
             $table->foreign('head_id')
-                ->references('id')->on('User')
+                ->references('id')->on('users')
                 ->onDelete('set null');
         });
     }
 
     public function down(): void
     {
-        Schema::table('User', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['department_id']);
         });
 
-        Schema::table('Department', function (Blueprint $table) {
+        Schema::table('departments', function (Blueprint $table) {
             $table->dropForeign(['head_id']);
         });
     }

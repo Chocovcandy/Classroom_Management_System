@@ -16,37 +16,84 @@ class UserSeeder extends Seeder
     public function run(): void
     {
          $csDept = Department::where('department_name', 'Computer Science')->first();
-        $mathDept = Department::where('department_name', 'Mathematics')->first();
-
+            $englishDept = Department::where('department_name', 'English')->first();    
+            $managementDept = Department::where('department_name', 'Management')->first();
         // Create users
-        $admin = User::create([
+        $seed1 = User::create([
             'name' => 'Super Admin',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('password'),
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('12345678'),
+            'department_id' => $csDept->id // Assign to CS department
+        ]);
+
+        // Assign Admin role to the first user
+         $seed1->roles()->attach(
+            Role::where('role_name', 'Admin')->value('id')
+        );
+
+        // pich has 1 role 
+        $seed2 = User::create([
+            'name' => 'pich',
+            'email' => 'pich@gmail.com',
+            'password' => bcrypt('12345678'),
+            'department_id' => $csDept->id //Assign to CS department
+        ]);
+        // assign Dean role to the second user
+         $seed2->roles()->attach(
+            Role::where('role_name', 'Dean')->value('id') // Assuming 2 is Dean
+        );
+
+
+        // theary has 2 roles, HoD and Professor
+        $seed3 = User::create([
+            'name' => 'theary',
+            'email' => 'theary@gmail.com',
+            'password' => bcrypt('12345678'),
+            'department_id' => $csDept->id // Assign to CS department
+        ]);
+
+        // same with the third user, assign both HoD and Professor roles
+            $seed3->roles()->attach([
+                Role::where('role_name', 'HoD')->value('id'), // Assuming 3 is HoD
+                Role::where('role_name', 'Professor')->value('id') // Assuming 4 is Professor
+            ]);
+
+        // chy has 1 role, Professor
+         $seed4 = User::create([
+            'name' => 'chy',
+            'email' => 'chy@gmail.com',
+            'password' => bcrypt('12345678'),
+            'department_id' => $csDept->id // Assign to CS department
+        ]);
+        // assign Professor role to the fourth user
+         $seed4->roles()->attach(
+            Role::where('role_name', 'Professor')->value('id')
+        );
+
+        // meii has 1 role, Student
+        $seed5 = User::create([
+            'name' => 'meii',
+            'email' => 'meii@gmail.com',
+            'password' => bcrypt('12345678'),
             'department_id' => $csDept->id
         ]);
 
-        $hod = User::create([
-            'name' => 'CS HoD',
-            'email' => 'hod@example.com',
-            'password' => bcrypt('password'),
-            'department_id' => $csDept->id
+        //same same with the fifth user, assign both Student role
+            $seed5->roles()->attach(
+                Role::where('role_name', 'Student')->value('id')
+            );
+
+        //note: this is the  id each role in the roles table after seeding the RoleSeeder to the database
+        // role_id = 2 for Dean
+        // role_id = 3 for HoD
+        // role_id = 4 for Professor
+        // role_id = 5 for Student
+
+ 
+
+        // Set HoD as department head
+        $csDept->update([
+            'head_id' => $seed3->id, // seed3 is user that named theary and has HoD role, so we set theary as the head of CS department 
         ]);
-
-        $student = User::create([
-            'name' => 'Student A',
-            'email' => 'student@example.com',
-            'password' => bcrypt('password'),
-            'department_id' => $csDept->id
-        ]);
-
-        // Attach roles
-        $admin->roles()->attach(Role::where('role_name', 'Admin')->first());
-        $hod->roles()->attach(Role::where('role_name', 'HoD')->first());
-        $student->roles()->attach(Role::where('role_name', 'Student')->first());
-
-        // Optionally, set HoD as head of CS Department
-        $csDept->head_id = $hod->id;
-        $csDept->save();   
     }
 }

@@ -45,11 +45,11 @@
             Manage Departments
         </a>
 
-        <a href="{{ route('admin.department.assignments') }}"
-           class="block bg-purple-600 text-white text-center py-3 rounded-lg hover:bg-purple-700">
-            Assign Departments
-        </a>
-
+    </div>
+    
+<p>
+            LOG OUT when you're done testing.cuz system will remember you. if you dont logout and go back or close the browser and reopen it, you will still see the logged-in user that you previous login with.
+            So if you want to test other users, make sure to log out first.</p>
     </div>
 
 </div>

@@ -3,79 +3,81 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleSelectController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DepartmentAssignmentController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\UserController;
 
+//public routes
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+// Authentication routes (login, register, etc.) are provided by Breeze
 Route::middleware(['auth'])->group(function () {
 
-    // Role selection
+    // Role selection (after login)
     Route::get('/role/select', [RoleSelectController::class, 'show'])
         ->name('role.select');
 
     Route::post('/role/select', [RoleSelectController::class, 'store'])
         ->name('role.select.store');
 
-    // Profile
-    Route::get('/profile', [ProfileController::class, 'edit'])
-        ->name('profile.edit');
+    // Profile (any logged-in user)
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/profile', 'edit')->name('profile.edit');
+        Route::patch('/profile', 'update')->name('profile.update');
+        Route::delete('/profile', 'destroy')->name('profile.destroy');
+    });
 
-    Route::patch('/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
+    // Admin routes
+    Route::prefix('admin')
+        ->name('admin.')
+        ->middleware(['role:Admin'])
+        ->group(function () {
 
-    Route::delete('/profile', [ProfileController::class, 'destroy'])
-        ->name('profile.destroy');
+            Route::view('/dashboard', 'admin.dashboard')
+                ->name('dashboard');
 
-    // ADMIN ROUTES
-   Route::prefix('admin')
-    ->name('admin.')
-    ->middleware('role:Admin')
-    ->group(function () {
+            Route::resource('users', UserController::class);
+            Route::resource('departments', DepartmentController::class);
+        });
 
-        // Dashboard
-        Route::view('/dashboard', 'admin.dashboard')
-            ->name('dashboard');
+ // Dean rputes
+    Route::prefix('dean')
+        ->name('dean.')
+        ->middleware(['role:Dean'])
+        ->group(function () {
+            Route::view('/dashboard', 'dean.dashboard')
+                ->name('dashboard');
+        });
 
-        // Users CRUD
-        Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    //HoD routes
+    Route::prefix('hod')
+        ->name('hod.')
+        ->middleware(['role:HoD'])
+        ->group(function () {
+            Route::view('/dashboard', 'hod.dashboard')
+                ->name('dashboard');
+        });
+
+    // Professor routes
+    Route::prefix('professor')
+        ->name('professor.')
+        ->middleware(['role:Professor'])
+        ->group(function () {
+            Route::view('/dashboard', 'professor.dashboard')
+                ->name('dashboard');
+        });
+
+    // Student routes
+    Route::prefix('student')
+        ->name('student.')
+        ->middleware(['role:Student'])
+        ->group(function () {
+            Route::view('/dashboard', 'student.dashboard')
+                ->name('dashboard');
+        });
+
     
-        // Departments CRUD
-        Route::resource('departments', DepartmentController::class);
-
-        // Department assignments
-        Route::get('/department-assignments', [DepartmentAssignmentController::class, 'index'])
-            ->name('department.assignments');
-
-        Route::post('/department-assign', [DepartmentAssignmentController::class, 'assign'])
-            ->name('department.assign');
-
-        Route::post('/department-remove', [DepartmentAssignmentController::class, 'remove'])
-            ->name('department.remove');
-
-        Route::post('/department-bulk-assign', [DepartmentAssignmentController::class, 'bulkAssign'])
-            ->name('department.bulkAssign');
-    });
-
-
-    
-    Route::middleware('role:Dean')->group(function () {
-        Route::view('/dean/dashboard', 'dean.dashboard')->name('dean.dashboard');
-    });
-
-    Route::middleware('role:HoD')->group(function () {
-        Route::view('/hod/dashboard', 'hod.dashboard')->name('hod.dashboard');
-    });
-
-    Route::middleware('role:Professor')->group(function () {
-        Route::view('/professor/dashboard', 'professor.dashboard')->name('professor.dashboard');
-    });
-
-    Route::middleware('role:Student')->group(function () {
-        Route::view('/student/dashboard', 'student.dashboard')->name('student.dashboard');
-    });
 });
 
 require __DIR__.'/auth.php';

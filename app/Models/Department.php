@@ -19,14 +19,20 @@ class Department extends Model
     {
         return $this->belongsTo(User::class, 'head_id');
     }
-
+// one Department has many Users.
 public function users()
 {
-    return $this->belongsToMany(User::class, 'department_user', 'department_id', 'user_id');
+    return $this->hasMany(User::class);
+}
+// relationship deans and departments (many to many)
+public function deans()
+{
+    return $this->belongsToMany(
+        User::class,
+        'dean_department',
+        'department_id',
+        'dean_id'
+    );
 }
 
-    public function departments()
-{
-    return $this->belongsToMany(Department::class, 'department_user', 'user_id', 'department_id');
-}
 }

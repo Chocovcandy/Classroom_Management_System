@@ -29,6 +29,7 @@
                 <th class="p-3 text-left">Name</th>
                 <th class="p-3 text-left">Email</th>
                 <th class="p-3 text-left">Role</th>
+                <th class="p-3 text-left">Department</th>
                 <th class="p-3 text-left">Actions</th>
             </tr>
         </thead>
@@ -42,6 +43,10 @@
 
                     <td class="p-3">
                         {{ $user->roles->pluck('role_name')->join(', ') }}
+                    </td>
+                    <td class="p-3">
+                        {{ $user->department?->department_name ?? 'No Department' }}
+
                     </td>
 
                     <td class="p-3 flex gap-2">
@@ -66,6 +71,10 @@
                         </form>
 
                     </td>
+                                @foreach($user->deanDepartments as $dept)
+                <span>{{ $dept->department_name }}</span>
+            @endforeach
+
                 </tr>
             @empty
                 <tr>
