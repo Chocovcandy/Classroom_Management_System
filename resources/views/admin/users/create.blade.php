@@ -100,8 +100,8 @@
 <div class="roles">
     @foreach($departments as $department)
         <label>
-            <input type="radio"
-                   name="department_id"
+            <input type="checkbox"
+                   name="department_ids[]"
                    value="{{ $department->id }}"
                    {{ ($user->department_id == $department->id) ? 'checked' : '' }}>
             {{ $department->department_name }}
