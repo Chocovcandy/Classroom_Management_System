@@ -13,6 +13,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/role_selection', function () {
+    return view('role_selection');
+})->name('role_selection');
+
+
 // Authentication routes (login, register, etc.) are provided by Breeze
 Route::middleware(['auth'])->group(function () { // group func means that everything inside this block shared the same rules
 

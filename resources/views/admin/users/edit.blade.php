@@ -98,6 +98,7 @@
             <label>Old Password</label>
             <input type="password" name="password" placeholder="Please Type the old password"
 
+<<<<<<< Updated upstream
             <label>New Password (optional)</label>
             <input type="password" name="password" placeholder="Leave blank if you don't want to change the password">
 
@@ -115,6 +116,19 @@
             ← Back to users List
         </a>
     </div>
+=======
+<div class="roles">
+    @foreach($departments as $department)
+        <label>
+            <input type="checkbox"
+                   name="department_ids[]"
+                   value="{{ $department->id }}"
+                   {{ ($user->department_id == $department->id) ? 'checked' : '' }}>
+            {{ $department->department_name }}
+        </label>
+    @endforeach
+</div>
+>>>>>>> Stashed changes
 
 
 </body>

@@ -29,9 +29,14 @@
             font-weight: bold;
         }
 
+<<<<<<< Updated upstream
         input {
             width: 100%;
             padding: 8px;
+=======
+        input, select {
+            width: 100%;padding: 8px;
+>>>>>>> Stashed changes
             margin-top: 5px;
             margin-bottom: 15px;
         }
@@ -125,9 +130,27 @@
      <label>Profile Image</label>
         <input type="file" name="profile_image" accept="image/*" >
 
+<<<<<<< Updated upstream
         @error('role_ids')
             <div class="error">{{ $message }}</div>
         @enderror
+=======
+        <!-- DEPARTMENT -->
+
+      <label>Department</label>
+
+<div class="roles">
+    @foreach($departments as $department)
+        <label>
+            <input type="checkbox"
+                   name="department_ids[]"
+                   value="{{ $department->id }}"
+                   {{ ($user->department_id == $department->id) ? 'checked' : '' }}>
+            {{ $department->department_name }}
+        </label>
+    @endforeach
+</div>
+>>>>>>> Stashed changes
 
         <button type="submit">Create User</button>
     </form>

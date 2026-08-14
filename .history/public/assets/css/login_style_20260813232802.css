@@ -1,0 +1,301 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+.auth-choice-page {
+    min-height: 100vh;
+    background: #f8fafc;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px 8%;
+}
+
+
+/* Main Layout */
+
+.auth-choice-layout {
+    width: 100%;
+    max-width: 1150px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 800px;
+
+    align-items: center;
+}
+
+
+/* --------------------------------
+   LEFT SIDE
+-------------------------------- */
+
+.auth-brand {
+    max-width: 480px;
+}
+
+.auth-school-logo {
+    width: 72px;
+    height: 72px;
+
+    object-fit: contain;
+
+    margin-bottom: 25px;
+}
+
+.auth-brand-label {
+    display: block;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #2563eb;
+
+    margin-bottom: 18px;
+}
+
+.auth-brand h1 {
+    margin: 0;
+
+    font-size: clamp(40px, 4vw, 58px);
+
+    line-height: 1.08;
+
+    letter-spacing: -1.5px;
+
+    font-weight: 700;
+
+    color: #172033;
+}
+
+.auth-brand h1 span {
+    display: block;
+
+    color: #2563eb;
+}
+
+.auth-brand p {
+    margin-top: 25px;
+
+    max-width: 420px;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    color: #64748b;
+}
+
+
+/* --------------------------------
+   RIGHT SIDE
+-------------------------------- */
+
+.auth-options {
+    width: 100%;
+    max-width: 500px;
+}
+
+.auth-options-header {
+    margin-bottom: 25px;
+}
+
+.auth-options-header span {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #94a3b8;
+}
+
+.auth-options-header h2 {
+    margin: 8px 0 5px;
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    color: #172033;
+}
+
+.auth-options-header p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* --------------------------------
+   OPTION CARD
+-------------------------------- */
+
+.auth-option-card {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 25px;
+
+    margin-bottom: 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 16px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 6px 20px rgba(15, 23, 42, 0.04);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.auth-option-card:hover {
+    transform: translateX(6px);
+
+    border-color: #bfdbfe;
+
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.09);
+}
+
+
+/* Icons */
+
+.auth-option-icon {
+    flex-shrink: 0;
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 22px;
+}
+
+.login-icon {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.student-icon {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+
+/* Card Text */
+
+.auth-option-info {
+    flex: 1;
+}
+
+.auth-option-label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color: #94a3b8;
+}
+
+.auth-option-info h3 {
+    margin: 0;
+
+    font-size: 19px;
+
+    font-weight: 650;
+
+    color: #172033;
+}
+
+.auth-option-info p {
+    margin: 6px 0 0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: #64748b;
+}
+
+
+/* Arrow */
+
+.auth-option-arrow {
+    flex-shrink: 0;
+
+    font-size: 20px;
+
+    color: #94a3b8;
+
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+.auth-option-card:hover .auth-option-arrow {
+    color: #2563eb;
+
+    transform: translateX(4px);
+}
+
+.img_svg8 svg {
+    display: block;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto 0px;
+}
+
+/* --------------------------------
+   MOBILE
+-------------------------------- */
+
+@media (max-width: 800px) {
+
+    .auth-choice-page {
+        padding: 45px 25px;
+    }
+
+    .auth-choice-layout {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+    .auth-brand {
+        max-width: 600px;
+    }
+
+    .auth-brand h1 {
+        font-size: 42px;
+    }
+
+    .auth-options {
+        max-width: 600px;
+    }
+
+}
