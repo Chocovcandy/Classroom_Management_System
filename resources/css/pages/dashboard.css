@@ -1,0 +1,126 @@
+/*  ______________________ Dashboard page___________________________ */
+
+.dashboard-container {
+
+    /* for create columns in this container and space between them */
+    display: flex;
+    gap: 10px;
+
+    padding: 0;
+
+    min-height: 0; /* lets this shrink to fit .main-content instead of overflowing it */
+
+    /* align items at top */
+
+    /* for testing to see this element to identify this element so that we can design it.
+       will delete after finishing */
+    /* border: 2px solid var(--border-color); */
+}
+
+.dashboard-left {
+
+    /* choose 2 units of space because the right column will take 1 unit
+       cuz we make the left one slightly bigger */
+
+    flex: 2.5;
+
+    /* stack children vertically */
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    min-width: 0;
+    min-height: 0; /* required so its children can shrink/scroll instead of pushing past the bottom */
+    overflow-y: auto; /* if the left column's content is taller than available space, it scrolls */
+
+    /* for testing */
+    /* border: 2px solid var(--border-color); */
+}
+
+
+
+.dashboard-right {
+
+    /* choose only 1.5 units cuz we want the right side to be smaller than left side */
+    flex: 1.4;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    min-width: 0;
+    min-height: 0; /* same reasoning as .dashboard-left */
+    overflow-y: auto;
+
+    /* for testing */
+    /* border: 2px solid var(--border-color); */
+}
+
+
+/* ----------- welcome card ---------- */
+.welcome-card {
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 15px;
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+
+    min-height: 220px;
+    flex-shrink: 0; /* keeps its fixed height, doesn't get squeezed by siblings below it */
+}
+
+
+.welcome-img-container {
+
+    width: 200px;
+    height: 200px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+#welcome-animation{
+    width: 100%;
+    height: 100%;
+}
+
+
+.welcome-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+
+.welcome-text h1 {
+
+    font-size: 28px;
+
+    color: var(--heading-color);
+}
+
+
+
+.welcome-text p {
+
+    font-size: 16px;
+    color: var(--secondary-text-color);
+}

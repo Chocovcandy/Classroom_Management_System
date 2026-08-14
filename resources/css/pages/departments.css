@@ -1,0 +1,352 @@
+/* ============== DEPARTMENT PAGES ============================ */
+/* ------------ INDEX PAGE ------------------------------------- */
+
+.department-page {
+
+
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 10px 10px 5px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+/* --- Header ---------------------------------------------------- */
+
+.department-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 20px;
+    background-color: var(--sidebar-color);
+    border: 1px solid var(--border-color);
+    border-radius: 32px;
+}
+
+.department-header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.department-header-content h1 {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--heading-color);
+}
+
+.department-header-content p {
+    max-width: 480px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--secondary-text-color);
+}
+
+.department-illustration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    padding-right: 50px;
+
+
+}
+
+.department-animation svg {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+
+
+#department-animation {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* =========================================================
+   Create Department Page
+   ========================================================= */
+
+.create-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 15px 30px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* =========================================================
+   Create Header
+   ========================================================= */
+
+.create-header {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 230px;
+    padding: 20px 25px;
+
+    background: var(--card-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+
+    overflow: hidden;
+}
+
+
+/* Decorative background shape */
+
+.create-header::after {
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    right: -90px;
+    top: -100px;
+
+    border-radius: 50%;
+
+    background-color: var(--hover-color);
+
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   Header Content
+   ========================================================= */
+
+.create-header-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 600px;
+}
+
+
+.create-header-content h1 {
+    margin: 0 0 10px;
+
+    font-size: 32px;
+    font-weight: 700;
+
+    color: var(--text-color);
+
+    letter-spacing: -0.5px;
+}
+
+
+.create-header-content p {
+    margin: 0;
+
+    max-width: 520px;
+
+    font-size: 15px;
+    line-height: 1.7;
+
+    color: var(--secondary-text-color);
+}
+
+
+/* =========================================================
+   Illustration
+   ========================================================= */
+
+.create-illustration {
+    position: relative;
+    z-index: 2;
+
+    width: 300px;
+    height: 190px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+
+#department2-animation {
+    width: 250px;
+    height: 250px;
+}
+
+
+
+/* =========================================================
+   Edit Department Page
+   ========================================================= */
+
+.edit-page {
+
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 30px 24px 50px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+
+/* =========================================================
+   Header
+   ========================================================= */
+
+.edit-header {
+
+    position: relative;
+
+    min-height: 220px;
+
+    padding: 38px 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 24px;
+
+    overflow: hidden;
+}
+
+
+/* Decorative circle */
+
+.edit-header::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    right: -100px;
+    top: -120px;
+
+    border-radius: 50%;
+
+    background-color: var(--hover-color);
+
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   Header Content
+   ========================================================= */
+
+.edit-header-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 600px;
+}
+
+
+.edit-eyebrow {
+
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.08em;
+
+    color: var(--button-color);
+}
+
+
+.edit-header-content h1 {
+
+    margin: 0 0 10px;
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    color: var(--text-color);
+}
+
+
+.edit-header-content p {
+
+    margin: 0;
+
+    max-width: 520px;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    color: var(--secondary-text-color);
+}
+
+
+/* =========================================================
+   Illustration
+   ========================================================= */
+
+.edit-header-illustration {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 220px;
+    height: 170px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+
+
+

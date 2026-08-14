@@ -17,15 +17,29 @@ Class CheckRoleSelection
      * @param  string  ...$roles
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function handle(Request $request, Closure $next)
-    {
-        $user = Auth::user();
+public function handle($request, Closure $next)
+{
+    $user = Auth::user();
 
-        // If the user has multiple roles and has NOT selected one yet
-        if ($user && $user->roles->count() > 1 && !$request->session()->has('current_role')) {
-            return redirect()->route('role.select'); // redirect to role selection page
-        }
-
-        return $next($request);
+    if (!$user) {
+        return redirect('/login');
     }
+
+    $roles = $user->roles;
+
+    if ($roles->count() > 1) {
+
+        $currentRole = $request->session()->get('current_role');
+
+        // If no role selected OR invalid role selected
+        if (
+            !$currentRole ||
+            !$roles->pluck('role_name')->contains($currentRole)
+        ) {
+            return redirect()->route('role.select');
+        }
+    }
+
+    return $next($request);
+}
 }

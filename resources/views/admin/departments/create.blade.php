@@ -1,68 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Department</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+@extends('layouts.admin_layout')
 
-<div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+@section('title', 'Create Department')
 
-    <h2 class="text-xl font-bold mb-4 text-gray-800">Create Department</h2>
+@section('content')
 
-    {{-- Success Message --}}
-    @if(session('success'))
-        <div class="bg-green-100 text-green-700 p-2 mb-4 rounded">
-            {{ session('success') }}
+    <!-- Create Department Header -->
+<div class="create-page">
+    <div class="create-header">
+
+        <div class="create-header-content">
+
+            <span class="edit-eyebrow">
+                Department Management
+            </span>
+
+            <h1>Create Department</h1>
+
+            <p>
+                Add a new academic department to the university system.
+                Fill in the information below to create the department.
+            </p>
+
         </div>
-    @endif
 
-    {{-- Error Message --}}
-    @if($errors->any())
-        <div class="bg-red-100 text-red-700 p-2 mb-4 rounded">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>- {{ $error }}</li>
-                @endforeach
-            </ul>
+        <div class="create-illustration">
+            <div id="department2-animation"></div>
         </div>
-    @endif
 
-    <form method="POST" action="{{ route('admin.departments.store') }}">
-        @csrf
+    </div>
 
-        <!-- Department Name -->
-        <label class="block mb-2 text-sm font-medium text-gray-700">
-            Department Name
-        </label>
-        <input type="text" name="department_name"
-               class="w-full border rounded-lg p-2 mb-4"
-               required>
 
-        <!-- Description -->
-        <label class="block mb-2 text-sm font-medium text-gray-700">
-            Description (optional)
-        </label>
-        <textarea name="description"
-                  class="w-full border rounded-lg p-2 mb-4"></textarea>
+    <!-- Department Form -->
 
-        <!-- Submit -->
-        <button type="submit"
-                class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-            Create Department
-        </button>
-    </form>
+    <div class="form-card">
 
-    <!-- Back -->
-    <a href="{{ route('admin.departments.index') }}"
-       class="block mt-4 text-center text-sm text-gray-500 hover:underline">
-        Back to Departments
-    </a>
+        <h2 class="form-title">
+            Department Information
+        </h2>
+
+
+        {{-- Success Message --}}
+
+        @if(session('success'))
+
+            <div class="form-message form-message-success">
+                {{ session('success') }}
+            </div>
+
+        @endif
+
+
+        {{-- Validation Errors --}}
+
+        @if($errors->any())
+
+            <div class="form-message form-message-error">
+
+                <ul>
+
+                    @foreach($errors->all() as $error)
+
+                        <li>{{ $error }}</li>
+
+                    @endforeach
+
+                </ul>
+
+            </div>
+
+        @endif
+
+
+        <form
+            method="POST"
+            action="{{ route('admin.departments.store') }}"
+            class="form">
+
+            @csrf
+
+
+            <!-- Department Name -->
+
+            <div class="form-group">
+
+                <label
+                    for="department_name"
+                    class="form-label">
+
+                    Department Name
+
+                </label>
+
+                <input
+                    type="text"
+                    id="department_name"
+                    name="department_name"
+                    class="form-input"
+                    value="{{ old('department_name') }}"
+                    required>
+
+            </div>
+
+
+            <!-- Description -->
+
+            <div class="form-group">
+
+                <label
+                    for="description"
+                    class="form-label">
+
+                    Description
+
+                    <span class="form-label-optional">
+                        (optional)
+                    </span>
+
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    class="form-textarea">{{ old('description') }}</textarea>
+
+            </div>
+
+
+            <!-- Actions -->
+
+            <div class="form-actions">
+
+                <a
+                    href="{{ route('admin.departments.index') }}"
+                    class="form-cancel">
+
+                    Cancel
+
+                </a>
+
+                <button
+                    type="submit"
+                    class="form-submit">
+
+                    Create Department
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 
 </div>
 
-</body>
-</html>
+<!-- for animation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+
+<script>
+    lottie.loadAnimation({
+        container: document.getElementById('department2-animation'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: "{{ asset('animations/department2.json') }}"
+    });
+</script>
+
+@endsection
+

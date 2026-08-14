@@ -1,0 +1,382 @@
+/* -------Topbar------------------------------------ */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 75px;
+    padding: 0 20px;
+
+    margin: 5px 3px;
+    background-color: var(--sidebar-color);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    /* the top bar stick on top and we will see thm on top while we scroll down */
+    position: sticky;
+    top: 0;
+    /* stack layer of the topbar to the front (1000) - to the front, (-1) to the behind. */
+    z-index: 1000;
+
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* left side of the topbar */
+.topbar-left {
+    display: flex;
+    align-items: center;
+}
+
+/* logo */
+.topbar-logo {
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Right SIde  */
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Nav on topbar right side */
+.topbar-icon {
+    display: flex;
+    align-items: center;
+    gap: 19px; /* gap only work with flex and grid other like inline-block ,contents it wont work and will get ignored */
+}
+
+/* each icon button */
+.icon-btn {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--icon-color);
+
+    width: auto;
+    height: auto;
+
+    border-radius: 10px;
+    /* this cursor mean that when we bring our mouse on it will change to hand pointing for us to show that we can click on that icon*/
+    cursor: pointer;
+}
+
+/* hover effect */
+.icon-btn:hover {
+    background-color: var(--hover-color);
+}
+
+/* all svg */
+.icon-btn svg {
+    width: auto;
+    height: 25px;
+    stroke: var(--icon-color);
+}
+
+
+
+/* Theme Toggle stick on the top bar */
+
+.theme-switch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 6px 12px;
+
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+
+    transition: .3s ease;
+}
+
+
+/* theme icons sun and moon */
+
+.theme-icon {
+    width: 22px;
+    height: 22px;
+
+    color: var(--icon-color);
+
+    /* for transparent  */
+    opacity: .8;
+
+    transition: .3s ease;
+}
+/* swictch wrapper */
+.switch-btn {
+position: relative;
+display: block;
+}
+
+/* Hide default checkbox because we use checkbox type in html and then we transform it to a switch toggle for theme mode */
+.switch-btn input {
+    display: none;
+}
+/* Switch slider track */
+.switch-slider {
+    position: relative;
+
+    width: 48px;
+    height: 26px;
+
+    display: flex;
+    align-items: center;
+
+    background: var(--switch-bg-color);
+
+    border-radius: 999px;
+    cursor: pointer;
+
+    transition: .35s ease;
+
+    border: 1px solid var(--border-color);
+}
+
+/* Switch thumb */
+.switch-thumb {
+
+    position: absolute;
+
+    left: 3px;
+
+    width: 20px;
+    height: 20px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    transition: .35s ease;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,.18);
+}
+/* move thumb */
+.switch-btn input:checked + .switch-slider .switch-thumb {
+    transform: translateX(22px);
+}
+ 
+
+/* active track */
+.switch-btn input:checked + .switch-slider {
+    background: var(--primary-color);
+}
+
+/* profile section  */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding-left: 15px;
+    /* a line to separate the profile section from the icons on the left side of the topbar  */
+    border-left: 2px solid var(--border-color);
+    /* for drop down */
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.img-profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profile-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.profile-text-name,
+.profile-text-role {
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* admin name */
+.profile-text-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--heading-color);
+}
+.profile-text-role {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--secondary-text-color);
+}
+/* role */
+.user-role {
+    font-size: 12px;
+    color: var(--secondary-text-color);
+}
+
+/* smoother feel */
+.icon-btn,
+.profile {
+    transition: 0.2s ease;
+}
+
+/* subtle hover for profile */
+.profile:hover {
+    transform: translateY(-1px);
+}
+
+/* drop down for account info and logout option  */
+
+.profile-drop-down {
+    position: relative;
+}
+
+
+/* dropdown arrow  */
+.profile svg {
+
+    font-size: 12px;
+    color: var(--secondary-text-color);
+
+    transition: transform 0.3s ease;
+
+}
+
+.profile-dropdown.active .profile-arrow {
+    transform: rotate(180deg);
+}
+
+
+/* Dropdown */
+
+.profile-menu{
+    position: absolute;
+
+    top: calc(100% + 12px);
+    right: 0;
+
+    width: 300px;
+
+    background: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 16px;
+
+    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+
+    padding: 20px;
+
+    /* to drop down 
+    none cuz i will make it show by js */
+    display: none;
+
+    z-index: 1000;
+}
+
+.profile-dropdown.active .profile-menu {
+    display: block;
+}
+
+.profile-menu-header{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    text-align:center;
+}
+
+.menu-profile-img{
+
+    width:80px;
+    height:80px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    margin-bottom:12px;
+}
+
+.profile-menu-header h3{
+
+    margin:0;
+
+    color:var(--heading-color);
+
+    font-size:20px;
+}
+
+.profile-menu-header p{
+
+    margin-top:6px;
+    margin-bottom:14px;
+
+    color:var(--secondary-text-color);
+
+    font-size:14px;
+}
+
+.role-badge{
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    background:var(--button-color);
+
+    color:white;
+
+    font-size:12px;
+
+    font-weight:600;
+}
+
+.profile-menu-divider{
+
+    height:1px;
+
+    background:var(--border-color);
+
+    margin:20px 0;
+}
+
+
+.profile-menu a,
+.profile-menu button{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px;
+
+    border:none;
+
+    background:none;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    color:var(--text-color);
+
+    cursor:pointer;
+
+    font-size:15px;
+}
+
+.profile-menu a:hover,
+.profile-menu button:hover{
+
+    background:var(--hover-color);
+}
+
+

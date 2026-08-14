@@ -1,0 +1,42 @@
+/* Reset.css removes the browser's default styling. */
+/* cuz Browsers already add their own CSS.
+just imagine like we prepare the blank paper in canvas before we start designing.
+ */
+
+* {
+
+    margin: 0;
+
+   
+
+    padding: 0;
+
+    box-sizing:border-box;
+
+}
+
+
+img {
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+
+a {
+
+    text-decoration:none;
+
+}
+
+
+button,
+input,
+textarea,
+select {
+
+    font:inherit;
+
+}

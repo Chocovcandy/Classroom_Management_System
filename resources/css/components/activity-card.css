@@ -1,0 +1,345 @@
+/* ------------- Recent Activity Card ------------- */
+
+.activity-card {
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--activity-card-bg);
+
+    border: 1px solid var(--activity-border);
+
+    border-radius: 22px;
+
+    /* overflow: hidden; */
+
+    box-shadow: 0 15px 35px -20px var(--shadow-color);
+
+}
+
+/* to hide the table that is not active. To display the active one (the filter one) */
+
+.activity-list.hidden{
+    display:none;
+}
+
+/* ------------- Header ------------- */
+
+.activity-header {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 20px 16px;
+
+}
+
+
+.activity-header h2 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.02em;
+
+    color: var(--activity-header-text);
+
+}
+
+
+
+/* ------------- Filter Buttons ------------- */
+
+.activity-filter {
+
+    display: flex;
+
+    gap: 8 px;
+
+    padding: 0 20px 14px;
+
+    flex-wrap: wrap;
+
+}
+
+
+
+.activity-filter button {
+
+    padding: 8px 18px;
+
+    border-radius: 50px;
+
+    border: 1px solid var(--activity-border);
+
+    background: var(--activity-card-bg);
+
+    color: var(--secondary-text-color);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all .25s ease;
+
+}
+
+
+
+.activity-filter button:hover {
+
+    background: var(--primary-light);
+
+    color: var(--primary-color);
+
+    border-color: var(--primary-border);
+
+}
+
+
+
+.activity-filter button.active {
+
+    background: var(--primary-color);
+
+    color: var(--button-text-color);
+
+    border-color: var(--primary-color);
+
+    box-shadow: 0 8px 18px -8px var(--primary-color);
+
+}
+
+
+
+/* ------------- Activity List ------------- */
+
+
+.activity-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 0 20px 10px;
+
+}
+
+
+/* only show 4 */
+
+.activity-item:nth-child(n+6){
+
+    display:none;
+
+}
+
+
+
+/* ------------- Activity Row ------------- */
+
+
+.activity-item {
+
+    position: relative;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+    padding:12px 12px;
+
+    border-radius:16px;
+
+    background: transparent;
+
+    transition:.25s ease;
+
+}
+
+
+
+.activity-item:hover {
+
+    background:var(--activity-row-hover);
+
+}
+
+
+
+
+.activity-item svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--primary-color);
+}
+
+.activity-item svg:hover {
+    color: var(--primary-hover);
+}   
+/* Timeline Line */
+
+
+.activity-item::before {
+
+    content:"";
+
+    position:absolute;
+
+    left:33px;
+
+    top:40px;
+
+    bottom:-14px;
+
+    width:2px;
+
+    background:var(--activity-border);
+
+}
+
+
+
+.activity-item:last-child::before {
+
+    display:none;
+
+}
+
+
+
+/* ------------- Profile Image ------------- */
+
+
+.profile-image-container {
+
+    width:42px;
+
+    height:42px;
+
+    flex-shrink:0;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    border-radius:50%;
+
+
+    background:var(--primary-light);
+
+    border:2px solid var(--activity-card-bg);
+
+
+    overflow:hidden;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+
+.user-profile-image {
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+
+.default-profile-icon {
+
+    width:21px;
+
+    height:21px;
+
+    color:var(--activity-avatar-placeholder);
+
+}
+
+
+
+/* ------------- Information ------------- */
+
+
+.activity-info {
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap: 3px;
+
+    padding-top:1px;
+
+}
+
+
+
+.activity-title {
+
+    font-size:14px;
+
+    font-weight:650;
+
+    line-height:1.4;
+
+    color:var(--activity-title);
+
+}
+
+
+
+.activity-subtitle {
+
+    font-size:13px;
+
+    line-height:1.4;
+
+    color:var(--activity-description);
+
+}
+
+
+
+/* ------------- Time ------------- */
+
+
+.activity-time {
+
+    padding-top:3px;
+
+    min-width:60px;
+
+    text-align:right;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    color:var(--activity-time);
+
+}
+
+

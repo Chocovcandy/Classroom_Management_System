@@ -1,0 +1,51 @@
+/* layout : width or how we want each container of the element to appear. */
+/* box-sizing and margin resets already come from reset.css — not repeated here */
+
+
+/* Wraps the topbar + .layout together. The topbar keeps its natural height;
+   .layout takes up whatever is left. No hardcoded topbar height anywhere,
+   so the two can never drift out of sync again. */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh; /* dynamic viewport height, so it works on mobile browsers that hide the address bar */
+  min-height: 0; /* lets .layout shrink to fit .app-shell instead of overflowing */
+  width: 100%;
+}
+
+
+/* ------------------------------ Main Content of admin ------------------------------- */
+/* layout class is the container holding sidebar and main content */
+.layout {
+  display: flex; /* sit side-by-side || one is sidebar, one is main-content */
+  flex: 1; /* fills whatever height is left under the topbar */
+  min-height: 0; /* required so children can scroll instead of overflowing */
+  width: 100%;
+  gap: 10px;
+  padding-right: 5px; /* keeps main-content's rounded corner off the viewport edge */
+}
+
+.sidebar {
+  flex-shrink: 0; /* sidebar keeps its own width, doesn't stretch/shrink oddly */
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+
+
+  border-radius: 15px;
+
+  min-height: 0; /* lets it shrink to fit .layout instead of overflowing */
+  overflow-y: auto; /* if content is genuinely too tall, it scrolls instead of clipping */
+}
+
+/* Whatever page section sits directly inside main-content should stretch
+   to fill it. Each section (.dashboard-container, .department-page, etc.)
+   keeps its own display/flex-direction — this just makes it take the full height. */
+.main-content > * {
+  flex: 1;
+  min-height: 0; /* required so a flex child can scroll internally instead of overflowing */
+}

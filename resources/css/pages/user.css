@@ -1,0 +1,917 @@
+/* =========================================================
+   User Management Page
+   ========================================================= */
+
+.users-page {
+
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 10px 10px 5px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+/* =========================================================
+   Header
+   ========================================================= */
+
+.users-header {
+
+    position: relative;
+
+    min-height: 130px;
+
+    padding: 30px 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background:var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 24px;
+
+    overflow: hidden;
+}
+
+
+/* Decorative circle */
+
+.users-header::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 240px;
+    height: 240px;
+
+    right: -100px;
+    top: -110px;
+
+    border-radius: 50%;
+
+    background-color: var(--hover-color);
+
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   Header Content
+   ========================================================= */
+
+.users-header-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 650px;
+}
+
+
+.users-eyebrow {
+
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.08em;
+
+    color: var(--button-color);
+}
+
+
+.users-header-content h1 {
+
+    margin: 0 0 8px;
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    color: var(--text-color);
+}
+
+
+.users-header-content p {
+
+    margin: 0;
+
+    max-width: 560px;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    color: var(--secondary-text-color);
+}
+
+
+/* =========================================================
+   Create Button
+   ========================================================= */
+
+.users-header-actions {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.users-create-button {
+
+    height: 44px;
+
+    padding: 0 18px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #ffffff;
+
+    background-color: var(--button-color);
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 6px 16px rgba(39, 39, 211, 0.15);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.users-create-button:hover {
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(39, 39, 211, 0.20);
+}
+
+
+.users-create-icon {
+
+    font-size: 19px;
+
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   Main Card
+   ========================================================= */
+
+.users-card {
+
+    width: 100%;
+
+    min-height: auto;
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(30, 40, 80, 0.04);
+}
+
+
+/* =========================================================
+   Toolbar
+   ========================================================= */
+
+.users-toolbar {
+
+    padding: 5px 10px 0;
+
+    display: flex;
+    
+  
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+.users-toolbar-title h2 {
+
+    margin: 0 0 4px;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: var(--text-color);
+}
+
+
+.users-toolbar-title p {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    color: var(--secondary-text-color);
+}
+
+
+/* =========================================================
+   Role Filter
+   ========================================================= */
+
+.users-filter {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+
+.users-filter-button {
+
+    padding: 8px 13px;
+
+    color: var(--secondary-text-color);
+
+    background-color: transparent;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.users-filter-button:hover {
+
+    color: var(--text-color);
+
+    background-color: var(--hover-color);
+}
+
+
+.users-filter-button.active {
+
+    color: #ffffff;
+
+    background-color: var(--button-color);
+
+    border-color: var(--button-color);
+}
+
+
+/* =========================================================
+   Table Wrapper
+   ========================================================= */
+
+.users-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+/* =========================================================
+   Table
+   ========================================================= */
+
+.users-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 14px;
+}
+
+
+.users-table thead {
+
+    background-color: var(--table-header-bg);
+
+    border: 1px solid var(--border-color);
+}
+
+
+.users-table th {
+
+    padding: 10px 10px;
+
+    text-align: left;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.06em;
+
+    color: var(--third-text-color);
+
+    border-radius: 1px solid var(--border-color);
+
+    white-space: nowrap;
+}
+
+
+.users-table td {
+
+    padding: 10px 15px;
+
+    color: var(--text-color);
+
+    border-bottom: 1px solid var(--border-color);
+
+    vertical-align: middle;
+}
+
+
+.users-table tbody tr {
+
+    transition:
+        background-color 0.2s ease;
+}
+
+
+.users-table tbody tr:hover {
+
+    background-color: var(--hover-color);
+}
+
+
+.users-table tbody tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   User
+   ========================================================= */
+
+.user-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 210px;
+}
+
+
+.user-avatar {
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    color: var(--button-color);
+
+    background-color: var(--hover-color);
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+.user-avatar img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.user-details {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    min-width: 0;
+}
+
+
+.user-name {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: var(--text-color);
+}
+
+
+.user-email {
+
+    max-width: 220px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 12px;
+
+    color: var(--secondary-text-color);
+}
+
+
+/* =========================================================
+   Roles
+   ========================================================= */
+
+.user-roles {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+}
+
+
+.user-role {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* Role colors */
+
+.role-admin {
+
+    background-color: #fef2f2;
+
+    color: #dc2626;
+}
+
+
+.role-dean {
+
+    background-color: #f5f3ff;
+
+    color: #7c3aed;
+}
+
+
+.role-hod {
+
+    background-color: #fefce8;
+
+    color: #a16207;
+}
+
+
+.role-professor {
+
+    background-color: #eff6ff;
+
+    color: #2563eb;
+}
+
+
+.role-student {
+
+    background-color: #f0fdf4;
+
+    color: #16a34a;
+}
+
+
+.role-default {
+
+    background-color: var(--bg-color);
+
+    color: var(--secondary-text-color);
+}
+
+
+/* =========================================================
+   Department
+   ========================================================= */
+
+.user-departments {
+
+    max-width: 230px;
+
+    line-height: 1.5;
+
+    font-size: 13px;
+
+    color: var(--secondary-text-color);
+}
+
+
+.empty-value {
+
+    font-size: 12px;
+
+    color: var(--secondary-text-color);
+
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   Actions
+   ========================================================= */
+
+.users-action-heading {
+
+    text-align: right !important;
+}
+
+
+.users-actions {
+
+    text-align: right;
+
+    white-space: nowrap;
+}
+
+
+.user-delete-form {
+
+    display: inline;
+}
+
+
+.user-action-edit,
+.user-action-delete {
+
+    padding: 5px 8px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+
+.user-action-edit {
+
+    color: var(--button-color);
+}
+
+
+.user-action-edit:hover {
+
+    background-color: var(--hover-color);
+}
+
+
+.user-action-delete {
+
+    color: #dc2626;
+
+    background-color: transparent;
+
+    border: none;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+
+.user-action-delete:hover {
+
+    background-color: #fef2f2;
+}
+
+
+
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+.users-footer {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 18px 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    background-color: var(--bg-color);
+
+    border-radius: 0 0 20px 20px;
+
+    border: 1px solid var(--border-color);
+}
+
+
+.users-secondary-button,
+.users-back-button {
+
+    height: 40px;
+
+    padding: 0 15px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition: 0.2s ease;
+}
+
+
+.users-secondary-button {
+
+    color: var(--button-color);
+
+    background-color: var(--hover-color);
+
+    border: 1px solid transparent;
+}
+
+
+.users-secondary-button:hover {
+
+    border-color: var(--border-color);
+}
+
+
+.users-back-button {
+
+    color: var(--secondary-text-color);
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+}
+
+
+.users-back-button:hover {
+
+    color: var(--text-color);
+
+    background-color: var(--hover-color);
+}
+
+
+/* Kept for compatibility: same visual role as
+   .users-secondary-button / .users-back-button above,
+   in case any template still references these names. */
+
+.assign-dean {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    color: var(--button-color);
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+
+.assign-dean:hover {
+
+    text-decoration: underline;
+}
+
+
+.back-dashboard {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 40px;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 8px;
+
+    background-color: var(--card-color);
+
+    color: var(--secondary-text-color);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+
+.back-dashboard:hover {
+
+    background-color: var(--hover-color);
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .users-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 22px;
+    }
+
+
+    .users-toolbar {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .users-filter {
+
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .users-page {
+
+        padding: 20px 16px 40px;
+    }
+
+
+    .users-header {
+
+        padding: 28px 24px;
+    }
+
+
+    .users-header-content h1 {
+
+        font-size: 27px;
+    }
+
+
+    .users-create-button {
+
+        width: 100%;
+    }
+
+
+    .users-header-actions {
+
+        width: 100%;
+    }
+
+
+    .users-toolbar {
+
+        padding: 22px 20px;
+    }
+
+
+    .table-pagination {
+
+        justify-content: center;
+
+        padding: 14px 16px;
+    }
+
+
+    .users-footer {
+
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+
+    .users-secondary-button,
+    .users-back-button {
+
+        width: 100%;
+    }
+
+}
+
+

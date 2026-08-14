@@ -36,7 +36,7 @@ public function store(LoginRequest $request): RedirectResponse
         abort(403, 'No role assigned to this user');
     }
 
-    // Multiple roles → choose role
+    // Multiple roles -> choose role
     if ($roles->count() > 1) {
         return redirect()->route('role.select');
     }

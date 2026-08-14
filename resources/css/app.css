@@ -1,3 +1,100 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* these are from base folder */
+@import url(base/reset.css);
+@import url(base/typography.css);
+@import url(base/variable.css);
+
+/* these are from components folder */
+@import url(components/button.css);
+@import url(components/card.css);
+@import url(components/form.css);
+@import url(components/pagination.css);
+@import url(components/table.css);
+@import url(components/search.css);
+@import url(components/activity-card.css);
+@import url(components/stat-card.css);
+@import url(components/chart.css);
+
+
+/* these are from layouts folder   */
+@import url(layouts/layout.css);
+@import url(layouts/sidebar.css);
+@import url(layouts/navbar.css);
+
+/* these are from pages folder */
+@import url(pages/departments.css);
+@import url(pages/dashboard.css);
+@import url(pages/user.css);
+@import url(pages/announcement.css);
+
+
+
+
+
+/* so after we organized everything. Every singLE css file must import in here.  */
+/* so we when we call @vite that link our css to layout.blade.php we only call this admin.css file that contain every single thing we imported in here.
+ no need to call multiple css files. Only import the file we want in one css file then call it . */
+
+
+/* why are we organized it this way ?*/
+
+/* it is not about showing off perfection. it actually learning somethings new on how do we organized so that we dont get lost when we
+are off for a while and we get back, everything look confusing and we end up spending time try to understand back. 
+an organization of css like this make you learn smth new  be more productive and convienence. It not bout copy and paste by 
+AI. It's the AI helping you finding tool that you wont stressed out bout dupicate css feature making errors every where or 
+writing the same style for every pages is time consuming. but knowing how to organize like this will benefit in the future. */
+
+/* This is the structure of our css */
+/* House
+│
+├── Foundation  ← Base : is where we expect the entire website to look like. It contains what every pages need. eg color, fonts...
+├── Walls       ← Layout : what feature will appear in every pages of admin like sidebar , navi ..etc.
+├── Furniture   ← Components : buttons , forms ,table . 
+└── Rooms       ← Pages: this where we putting everything from above inside each page. eg. dashboard.css we put each items from each folder in this pages to make it good looking.
+
+//////////////////////////////////////////////////
+
+admin/
+│
+├── base/
+│   ├── variables.css      ← Colors, spacing, shadows, radius
+│   ├── reset.css          ← Remove browser defaults
+│   └── typography.css     ← Fonts, headings, paragraphs
+│
+├── layout/
+│   ├── layout.css         ← Main content layout
+│   ├── sidebar.css        ← Sidebar styles
+│   └── navbar.css         ← Top navigation
+│
+├── components/
+│   ├── button.css         ← Primary, secondary, danger buttons
+│   ├── card.css           ← Reusable cards
+│   ├── table.css          ← All CRUD tables
+│   ├── search.css         ← Search bar component
+│   ├── form.css           ← Inputs, labels, selects
+│   ├── pagination.css     ← Laravel pagination
+│   └── badge.css          ← Status badges (Active, Inactive)
+│
+├── pages/
+│   ├── dashboard.css      ← Dashboard-specific layout
+│   ├── department.css     ← Department-only styles
+│   ├── student.css        ← Student-only styles
+│   ├── instructor.css     ← Instructor-only styles
+│   └── course.css         ← Course-only styles
+│
+└── admin.css             ← Imports everything
+
+    separate them by folder like this we can reuse everything across multiple pages for admin. 
+    
+    key concept: make it clean and reusable to prevent duplicate , time saving , and easy to keep track on them and to find them.
+    so no more styling by page it is not just making 1000 of line but to keep track on them is the worst. 
+    imagine trying to find a table s tyling we have scroll up and down trying to find it in thousands line of code. NO WE AINT GONNA DO THAT MATE and you know better than that!!
+*/
+
+ /* so after we organized everything. Every sing css file must import in here.  */
+/* so we when we call @vite that link our css to layout.blade,.php we only call this css file that contain every single thing we imported in here.
+ no need to call multiple css files. Only import the file we want in one css file then call the file . */

@@ -1,0 +1,56 @@
+/* =========== Dashboard chart component  */
+
+
+/* chart graph  */
+
+.chart-card{
+    display: flex;
+    flex-direction: column;
+
+    background: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+
+    padding: 13px;
+
+}
+
+
+.chart-header h2 {
+
+    font-size:20px;
+
+    color:var(--heading-color);
+
+    margin-bottom:5px;
+
+}
+
+
+.chart-header p {
+
+    font-size:13px;
+
+    color:var(--secondary-text-color);
+
+}
+
+
+
+.chart-container {
+
+
+    width:100%;
+    
+    height: 370px;
+
+    position: relative;
+
+}
+
+.chart-container canvas {
+
+    width: 100% !important;
+
+    height: 100% !important;
+}

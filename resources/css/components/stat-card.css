@@ -1,0 +1,128 @@
+/* ==========Dashboard statistic components */
+
+/* -------------- Statistic Card--------------- */
+
+.stat-container {
+
+    display: flex;
+
+    gap: 5px;
+    
+    width: 100%;
+
+    flex-wrap: wrap;
+
+}
+.stat-card {
+
+    flex:1;
+
+    min-width:0;
+
+    height:90px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap: 6px;
+
+    padding: 5px;
+
+    background:var(--card-color);
+
+    border:1px solid var(--border-color);
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:inherit;
+
+    transition:
+        background-color 0.25s ease,
+        transform 0.25s ease;
+
+}
+
+
+
+
+.stat-card:hover {
+
+    transform: translateY(-2px);
+    background-color: var(--hover-color);
+
+
+}
+
+.stat-icon {
+
+    width: 44px;
+
+    height: 44px;
+
+    display: flex;
+    border-radius: 10px;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--student-color);
+
+    flex-shrink: 0;
+}
+
+/* give each stat card its own dedicated icon color instead of reusing one */
+.stat-card:nth-child(2) .stat-icon { background-color: var(--instructor-color); }
+.stat-card:nth-child(3) .stat-icon { background-color: var(--department-color); }
+.stat-card:nth-child(4) .stat-icon { background-color: var(--announcement-color); }
+
+.stat-icon svg {
+
+    width: 25px;
+
+    height: 25px;
+
+    color: var(--button-text-color);
+}
+
+.stat-info {
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    gap:4px;
+
+}
+
+.stat-value {
+
+    font-size:25px;
+
+    font-weight:700;
+
+    line-height:1;
+
+    color:var(--heading-color);
+
+}
+
+.stat-title {
+
+    white-space: nowrap; /* prevent the title from breaking into multiple lines */
+
+font-size:13px;
+
+    font-weight:600;
+
+    line-height:1.2;
+
+    color:var(--secondary-text-color);
+
+}

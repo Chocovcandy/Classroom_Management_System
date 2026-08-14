@@ -1,0 +1,570 @@
+/* ========Department table component=======  */
+
+/* --- dept Table --------------------------------------------------------- */
+
+.department-table-wrapper {
+    overflow: hidden;
+    background: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 32px;
+}
+
+.department-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.department-table thead th {
+    padding: 14px 24px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.06em;
+    color: var(--third-text-color);
+
+    background: var(--table-header-bg);
+    border-bottom: 1px solid var(--table-divider);
+}
+
+.department-table tbody tr {
+    border-bottom: 1px solid var(--table-divider);
+    transition: background-color 0.15s ease;
+}
+
+.department-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.department-table tbody tr:hover {
+    background-color: var(--table-row-hover);
+}
+
+.department-table td {
+    padding: 18px 24px;
+    font-size: 14px;
+    color: var(--text-color);
+    vertical-align: middle;
+}
+
+.department-name-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.department-name-text h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--heading-color);
+}
+
+.department-name-text span {
+    font-size: 12px;
+    color: var(--secondary-text-color);
+}
+
+.department-id {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--secondary-text-color);
+    white-space: nowrap;
+}
+
+.department-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.department-description {
+    max-width: 280px;
+    overflow: hidden;
+    color: var(--secondary-text-color);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.department-date {
+    font-size: 13px;
+    color: var(--secondary-text-color);
+    white-space: nowrap;
+}
+
+/* table icon */
+
+.department-icon {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    color: var(--primary-color);
+    background: var(--primary-light);
+    border-radius: 12px;
+}
+
+.department-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.department-name-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.department-name-text h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--heading-color);
+}
+
+.department-name-text span {
+    font-size: 12px;
+    color: var(--secondary-text-color);
+}
+
+.department-description {
+    max-width: 280px;
+    overflow: hidden;
+    color: var(--secondary-text-color);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.department-date {
+    font-size: 13px;
+    color: var(--secondary-text-color);
+    white-space: nowrap;
+}
+
+/* if department is not found by search  */
+
+
+
+
+
+/* ===================USER PAGE TABLE================================== */
+
+
+/* =========================================================
+   Table Wrapper
+   ========================================================= */
+
+.users-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+/* =========================================================
+   Table
+   ========================================================= */
+
+.users-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 14px;
+}
+
+
+.users-table thead {
+
+    background-color: var(--table-header-bg);
+
+    border: 1px solid var(--border-color);
+}
+
+
+.users-table th {
+
+    padding: 10px 10px;
+
+    text-align: left;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.06em;
+
+    color: var(--third-text-color);
+
+    border-radius: 1px solid var(--border-color);
+
+    white-space: nowrap;
+}
+
+
+.users-table td {
+
+    padding: 10px 15px;
+
+    color: var(--text-color);
+
+    border-bottom: 1px solid var(--border-color);
+
+    vertical-align: middle;
+}
+
+
+.users-table tbody tr {
+
+    transition:
+        background-color 0.2s ease;
+}
+
+
+.users-table tbody tr:hover {
+
+    background-color: var(--hover-color);
+}
+
+
+.users-table tbody tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   User
+   ========================================================= */
+
+.user-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 210px;
+}
+
+
+.user-avatar {
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    color: var(--button-color);
+
+    background-color: var(--hover-color);
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+.user-avatar img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.user-details {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    min-width: 0;
+}
+
+
+.user-name {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: var(--text-color);
+}
+
+
+.user-email {
+
+    max-width: 220px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 12px;
+
+    color: var(--secondary-text-color);
+}
+
+
+/* =========================================================
+   Roles
+   ========================================================= */
+
+.user-roles {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+}
+
+
+.user-role {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* Role colors */
+
+.role-admin {
+
+    background-color: #fef2f2;
+
+    color: #dc2626;
+}
+
+
+.role-dean {
+
+    background-color: #f5f3ff;
+
+    color: #7c3aed;
+}
+
+
+.role-hod {
+
+    background-color: #fefce8;
+
+    color: #a16207;
+}
+
+
+.role-professor {
+
+    background-color: #eff6ff;
+
+    color: #2563eb;
+}
+
+
+.role-student {
+
+    background-color: #f0fdf4;
+
+    color: #16a34a;
+}
+
+
+.role-default {
+
+    background-color: var(--bg-color);
+
+    color: var(--secondary-text-color);
+}
+
+
+/* =========================================================
+   Department
+   ========================================================= */
+
+.user-departments {
+
+    max-width: 230px;
+
+    line-height: 1.5;
+
+    font-size: 13px;
+
+    color: var(--secondary-text-color);
+}
+
+
+.empty-value {
+
+    font-size: 12px;
+
+    color: var(--secondary-text-color);
+
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   Actions
+   ========================================================= */
+
+.users-action-heading {
+
+    text-align: right !important;
+}
+
+
+.users-actions {
+
+    text-align: right;
+
+    white-space: nowrap;
+}
+
+
+.user-delete-form {
+
+    display: inline;
+}
+
+
+.user-action-edit,
+.user-action-delete {
+
+    padding: 5px 8px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+
+.user-action-edit {
+
+    color: var(--button-color);
+}
+
+
+.user-action-edit:hover {
+
+    background-color: var(--hover-color);
+}
+
+
+.user-action-delete {
+
+    color: #dc2626;
+
+    background-color: transparent;
+
+    border: none;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+
+.user-action-delete:hover {
+
+    background-color: #fef2f2;
+}
+
+
+/* =========================================================
+   Empty State
+   ========================================================= */
+
+.table-empty {
+
+    padding: 50px 20px !important;
+
+    text-align: center !important;
+}
+
+
+.table-empty-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.table-empty-icon {
+
+    margin-bottom: 5px;
+
+    font-size: 28px;
+
+    color: var(--secondary-text-color);
+}
+
+
+.table-empty-content h3 {
+
+    margin: 0;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: var(--text-color);
+}
+
+
+.table-empty-content p {
+
+    margin: 0;
+
+    font-size: 12px;
+
+    color: var(--secondary-text-color);
+}
+
+

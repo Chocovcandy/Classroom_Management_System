@@ -1,0 +1,127 @@
+/* ============== Department ================== */
+
+/* ------------ department pagin  */
+.pagination-container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap: 10px;
+    flex-wrap:wrap;
+
+
+}
+
+.pagination-info{
+    font-size:13px;
+    color:var(--secondary-text-color);
+    padding: 0 10px;
+    
+    
+}
+
+.pagination-links{
+    display:flex;
+    align-items:center;
+    gap:4px;
+
+    padding: 0 10px;
+
+    margin: 0 5px;
+
+    background:var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius:12px;
+
+}
+
+.page-btn{
+    width:32px;
+    height:32px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border:none;
+    border-radius:8px;
+    background:transparent;
+
+    font-size:12px;
+    color:var(--secondary-text-color);
+    text-decoration:none;
+
+    transition:background .15s ease, color .15s ease;
+}
+
+.page-btn:hover{
+    background:var(--hover-color);
+    color:var(--text-color);
+}
+
+.page-btn.active{
+    background:var(--primary-color);
+    color:#fff;
+    font-weight:500;
+}
+
+.page-btn.disabled{
+    opacity:.35;
+    pointer-events:none;
+}
+
+.page-dots{
+    width:34px;
+    height:34px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:var(--secondary-text-color);
+    font-size:14px;
+}
+
+.page-icon{
+    width:18px;
+    height:18px;
+}
+
+/* how do we get to customize and styling our pagination instead of just use the default one ? the default ot loy.
+
+    1. make sure we use the paginate func in department controller cuz we are doing the paginate in department. 
+        e.g : paginate(5) mean showing on 5 dept per page.
+    2. Since laravel will either use the default pagination style from bootstrap or from tailwind. for this project it use tailwind.
+        we need to create a vendor folder inside resource folder by using this cmd 
+
+        php artisan vendor:publish --tag=laravel-pagination 
+
+        we will see a bauch of files inside. go and see it yourself. and then among them you will see bootstrap 1 2 ... and tailwind 
+        but first we need to confirm which is laravel using. 
+        - m1 : go to package.json you will we see tailwindcss and other things related to tailwind and 
+        not a single related to bootstrap ,it mean we're using tailwind. NOTE : check in package.json not composer.json (package.js for frontend packages,
+        and composer.json is for PHP packages like laravel breeze or backend stuffs.
+        -m2 : check in : resources/css/app.css. see it for yourself no need to explain.
+
+    3. After we confrim what is using what, then inside we create our custom paginate blade by adding class or cpmponent to make it look cute. 
+        but REMEMBER there is a Pagination folder that have files exactly like the vendor we created by cmd above. 
+        it is inside  vendor folder that is outside of the resource (actually hard to find cuz vea in deep 
+        Classroom_Management_System/vendor/laravel/framework/src/Illuminate/Pagination/resources/views/tailwind.blade.php .....
+        but in case u wanna know) DO NOT CUSTOMIZE LIKE WE DO IN VENDOR UNDER THE RESOURCE FOLDER. this the laravel root. 
+
+    4. go to Classroom_Management_System/app/Providers/AppServiceProvider.php and add this in function inside the file
+
+        use Illuminate\Pagination\Paginator;
+
+                public function boot(): void
+                {
+                    Paginator ::defaultView('vendor.pagination.custom'); 
+                }
+
+        (vendor.pagination.custom ) -> this is where yours custom file go inside. 
+
+        why we use it ? cuz we want all and every pagination to use the default we create not tailwind not boostrap. 
+    
+    5. last step play around with pagination.css right here.Everything works now 
+
+
+
+
+ */

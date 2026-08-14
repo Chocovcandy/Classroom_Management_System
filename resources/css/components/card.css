@@ -1,0 +1,159 @@
+/* ==== Dashboard card component */
+
+/*-------------- overview-card---------------- */
+
+.overview-card {
+
+    display: flex;
+
+    
+
+    flex-direction: column;
+
+    text-align: left;
+
+    gap: 4px;
+
+    padding: 15px 20px 10px;
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+}
+
+.overview-header {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+
+
+}
+
+
+
+.overview-card h2 {
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: var(--heading-color);
+}
+
+
+
+
+.overview-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+
+}
+
+
+
+
+.overview-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 9px 8px;
+
+    color: var(--icon-color);
+
+    font-size: 15px;
+
+    border-radius: 13px;
+
+    min-height: 55px;  
+
+
+
+
+}
+
+.overview-item-text{
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1.5px;
+}
+
+
+
+.overview-item-icon{
+
+    width: 37px;
+
+    height: 37px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color: var(--primary2-color);
+
+    background:var(--primary-light2);
+
+    flex-shrink:0;
+
+}
+
+.overview-item svg {
+
+    width: 21px;
+
+    height: 21px;
+
+    /* prevents icon shrinking */
+    flex-shrink: 0;
+
+
+}
+
+
+.overview-item-name{
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--heading-color);
+}
+
+
+.overview-item-description{
+    font-size: 13px;
+    color: var(--secondary-text-color);
+}
+
+
+.overview-item-value{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    margin-inline-start: auto; /* push the value to the edge of the card*/
+
+    color:var(--forth-text-color);   /* add var color for here */
+
+}
+

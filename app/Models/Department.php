@@ -14,25 +14,23 @@ class Department extends Model
         'description',
         'head_id',
     ];
-
+// head of the department
+// One department has one head (professor), and one professor can be the head of one department.
     public function head()
     {
         return $this->belongsTo(User::class, 'head_id');
     }
 // one Department has many Users.
+
 public function users()
 {
-    return $this->hasMany(User::class);
+    return $this->belongsToMany(User::class, 'department_user');
 }
-// relationship deans and departments (many to many)
-public function deans()
-{
-    return $this->belongsToMany(
-        User::class,
-        'dean_department',
-        'department_id',
-        'dean_id'
-    );
-}
+// one Department has many Courses, and one Course belongs to one Department.
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
 
 }

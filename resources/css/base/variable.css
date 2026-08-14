@@ -1,0 +1,240 @@
+/* root color  */
+:root {
+    /* =========================
+       Layout
+    ========================== */
+
+    --bg-color: #f6f7fa;
+    --sidebar-color: #ffffff;
+    --card-color: #ffffff;
+
+    --surface-color: #fafafc;
+    --surface-hover: #f1f2f6;
+
+    --border-color: #e3e5ec;
+
+    --shadow-color: rgba(20, 20, 40, 0.08);
+
+    /*  Theme mode switch  */
+    --switch-bg-color: rgb(240, 240, 243);
+
+    /* =========================
+       Typography
+    ========================== */
+
+    --heading-color: #1a1b26;
+    --text-color: #33343f;
+    --secondary-text-color: #8b8c92;
+
+    --third-text-color: rgb(253, 253, 253);
+
+    --forth-text-color: rgba(15, 108, 230, 0.867);
+    --placeholder-color: #a3a5b3;
+
+    /* =========================
+       Brand
+    ========================== */
+
+    --primary-color: #333fee;
+    --primary2-color: #036cad;
+    --primary-hover: #1f22a8;
+    --primary-light: #eceeff;
+    --primary-light2: rgba(183, 228, 253, 0.536);
+    --primary-border: #c9ccfb;
+
+    /* =========================
+       Buttons
+    ========================== */
+
+    --button-color: var(--primary-color);
+    --button-hover-color: var(--primary-hover);
+    --button-text-color: #ffffff;
+
+    /* =========================
+       Links
+    ========================== */
+
+    --link-color: var(--primary-color);
+    --link-hover-color: var(--primary-hover);
+
+    /* =========================
+       Stat-card for students, instructors , dept , and announce
+    ========================== */
+    --student-color: rgb(77, 92, 248);
+    --instructor-color: rgb(32, 216, 237);
+    --department-color: rgb(51, 177, 108);
+    --announcement-color: rgb(223, 107, 152);
+
+    /* =========================
+       Icons
+    ========================== */
+
+    --icon-color: #595a5e;
+    --icon-hover-color: var(--primary-color);
+
+    /* =========================
+       Status
+    ========================== */
+
+    --success-color: #22b07d;
+    --light-success-color: #519079;
+    --warning-color: #e2a93b;
+    --danger-color: #e25555;
+    --info-color: #6b8afd;
+
+    /* =========================
+       Table
+    ========================== */
+
+    --table-header-bg: #1526e0dd;
+    --table-row-hover: #f7f8fa;
+    --table-divider: #ececf1;
+
+    /* =========================
+       Charts
+    ========================== */
+
+    --chart-grid-color: #e6e7ee;
+    --chart-label-color: #8b8da0;
+
+    /* =========================
+       Recent Activity
+    ========================== */
+
+    --activity-card-bg: #ffffff;
+    --activity-header-text: #1a1b26;
+
+    --activity-row-bg: #ffffff;
+    --activity-row-hover: #f4f5f8;
+    --activity-row-active: #eef0f4;
+
+    --activity-border: #e6e7ee;
+
+    --activity-avatar-bg: #eef0f4;
+    --activity-avatar-placeholder: #9a9cac;
+
+    --activity-title: #1a1b26;
+    --activity-description: #7a7c8c;
+    --activity-time: #9092a3;
+
+    --activity-badge-bg: #eceeff;
+    --activity-badge-text: #2b2fd6;
+
+    /* view all button */
+    --activity-view-bg: #eceeff;
+    --activity-view-hover: #2b2fd6;
+    --activity-view-text: #2b2fd6;
+    --activity-view-text-hover: rgb(255, 255, 255);
+}
+
+/* ------------------- dark mode color for whole page ----------------------------------*/
+.dark-mode {
+    /* =========================
+       Layout
+    ========================== */
+
+    --bg-color: #0a0c1a;
+    --sidebar-color: #12142a;
+    --card-color: #171933;
+
+    --surface-color: #1c1e3a;
+    --surface-hover: #242648;
+
+    --border-color: #2b2e52;
+
+    --shadow-color: rgba(0, 0, 10, 0.5);
+
+    /*  Theme mode switch  */
+    --switch-bg-color: rgb(208, 77, 77);
+
+    /* =========================
+       Typography
+    ========================== */
+
+    --heading-color: #ffffff;
+    --text-color: #e6e8f7;
+    --secondary-text-color: #9ea1c4;
+    --placeholder-color: #6f72a0;
+
+    /* =========================
+       Brand
+    ========================== */
+
+    --primary-color: #6d76ff;
+    --primary-hover: #8990ff;
+    --primary-light: rgba(109, 118, 255, 0.14);
+    --primary-border: rgba(109, 118, 255, 0.35);
+
+    /* =========================
+       Buttons
+    ========================== */
+
+    --button-color: var(--primary-color);
+    --button-hover-color: var(--primary-hover);
+    --button-text-color: #ffffff;
+
+    /* =========================
+       Links
+    ========================== */
+
+    --link-color: var(--primary-color);
+    --link-hover-color: var(--primary-hover);
+
+    /* =========================
+       Icons
+    ========================== */
+
+    --icon-color: #9fa2c8;
+    --icon-hover-color: #ffffff;
+
+    /* =========================
+       Status
+    ========================== */
+
+    --success-color: #49d5a7;
+    --warning-color: #f2c361;
+    --danger-color: #ff8d8d;
+    --info-color: #8fa8ff;
+
+    /* =========================
+       Table
+    ========================== */
+
+    --table-header-bg: #414df0;
+    --table-row-hover: #1e2140;
+    --table-divider: #2b2e52;
+
+    /* =========================
+       Charts
+    ========================== */
+
+    --chart-grid-color: #2b2e52;
+    --chart-label-color: #9295bd;
+
+    /* ------------- Recent Activity Dark Mode ------------- */
+
+    --activity-card-bg: #151731;
+    --activity-header-text: #f4f5ff;
+
+    --activity-row-bg: #151731;
+    --activity-row-hover: #1e2140;
+    --activity-row-active: #232650;
+
+    --activity-border: #2b2e52;
+
+    --activity-avatar-bg: #232650;
+    --activity-avatar-placeholder: #9296c4;
+
+    --activity-title: #f4f5ff;
+    --activity-description: #a1a4cc;
+    --activity-time: #9295bd;
+
+    --activity-badge-bg: rgba(109, 118, 255, 0.16);
+    --activity-badge-text: #9aa1ff;
+
+    /* view all button */
+    --activity-view-bg: rgba(109, 118, 255, 0.16);
+    --activity-view-hover: #6d76ff;
+    --activity-view-text: #8990ff;
+    --activity-view-text-hover: rgb(255, 255, 255);
+}

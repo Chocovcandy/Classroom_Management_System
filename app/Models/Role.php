@@ -26,19 +26,5 @@ class Role extends Model
 {
     return $this->role_name;
 }
-// when a user registers through register page they MUST automatically become a Student
-public function assignStudentRole()
-{
-    $studentRole = \App\Models\Role::where('role_name', 'Student')->first();
-
-    if (!$studentRole) {
-        throw new \Exception('Student role not found');
-    }
-
-    if (!$this->roles()->where('role_id', $studentRole->id)->exists()) {
-        $this->roles()->attach($studentRole->id);
-    }
-}
-
 
 }

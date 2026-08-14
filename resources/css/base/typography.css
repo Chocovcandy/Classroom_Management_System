@@ -1,0 +1,16 @@
+/* for fonts how we want to style the text of the entire website */
+
+/*--------------------------body--------------*/
+body {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: var(--bg-color);
+
+    color:var(--text-color);
+
+    transition:
+    background-color var(--transition),
+    color var(--transition);
+
+}

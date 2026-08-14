@@ -1,0 +1,132 @@
+ /*-------------- SIDEBAR-------------- */
+
+
+
+.sidebar{
+    flex: 0 0 85px;
+    transition: flex-basis 0.3s ease;
+    min-height: 0; /* lets it shrink to fit .layout instead of overflowing */
+    
+
+    background-color: var(--sidebar-color);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    padding-top: 30px;
+    padding-left: 10px;
+    margin: 5px  ;
+
+
+    overflow: hidden;
+
+    position: sticky;
+
+    /* stack layer of the topbar to the front (1000) - to the front, (-1) to the behind. */
+    z-index: 10;
+
+        box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* closed sidebar */
+.sidebar.closed {
+    flex-basis: 80px;
+    
+}
+
+/* opened sidebar */
+.sidebar.open {
+    flex-basis: 245px;
+}
+
+.sidebar-text {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+
+.sidebar.open .sidebar-text {
+    opacity: 1;
+}
+/*.      SIDEBAR navigation      */
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    /* for spacing between items */
+    margin: 10;
+}
+
+/* space from the top for each navi */
+.sidebar-menu li {
+    margin-bottom: 15px;
+}
+
+/* icon and text in the sidebar */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 8px;
+    margin: 0 6px;
+
+    /* prevent text from breaking into multiple lines */
+    white-space: nowrap;
+
+    color: var(--icon-color);
+    text-decoration: none;
+    font-size: 18px;
+
+    border-radius: 13px;
+
+    position: relative;
+    overflow:hidden;
+    transition: 
+        
+    background-color 0.25s ease,
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+/* hover effect */
+.sidebar-link:hover {
+    background-color: var(--hover-color);
+
+    transform: translateX(5px);
+
+    color: var(--icon-hover-color)
+}
+.sidebar-link.active {
+    background-color: var(--hover-color);
+
+    color: var(--icon-hover-color);
+
+    box-shadow: 
+        0 4px 12px rgba(0,0,0,0.08);
+}
+/* SVG */
+/* sidebar icon styling */
+.sidebar-link svg {
+    width: auto;
+    height: 30px;
+    /* prevents icon shrinking */
+    flex-shrink: 0;
+
+    transition: 
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+.sidebar-link:hover svg {
+    transform: scale(1.12);
+}
+
+
+/* bottom sidebar item */
+.bottom-sidebar {
+    /* push to the bottom */
+    padding: 11px 0px;
+    margin-top: 380px;
+    /* a line to separate setting from the main links like dashboard , users and department the rest */
+    border-top:  1px solid var(--border-color);
+
+}
+
+

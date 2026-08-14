@@ -1,0 +1,149 @@
+/* ================Dashboard buttons ============== */
+
+
+/* quick action buttons */
+.quick-action{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.quick-action h2{
+    font-size: 18px;
+    font-weight: 700;
+    
+    color: var(--heading-color);
+
+    margin-bottom: 8px;
+}
+
+.quick-action-buttons{
+
+    display:flex;
+
+    flex-direction: row;
+
+    gap: 5px;
+
+    flex-wrap:wrap;
+
+}
+
+.quick-action-button{
+
+    padding:10px 12px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border-color);
+
+
+/* none - cuz normally for <a> we dont want that underline under our text and it not cool. */
+    text-decoration:none;
+
+    color:var(--button-text-color);
+
+    background-color: var(--button-color);
+
+    transition:0.25s;
+
+}
+
+.quick-action-button:hover{
+
+    background:var(--button-hover-color);
+
+    transform:translateY(-3px);
+
+}
+
+
+/* ========= Department buttons ============ */
+
+/* --- Add department button -------------------------------------- */
+
+.add-department-btn {
+    width: fit-content;
+    margin-top: 12px;
+    padding: 11px 22px;
+    background-color: var(--button-color);
+    border-radius: 999px;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.add-department-btn:hover {
+    transform: translateX(3px);
+    box-shadow: 0 6px 16px var(--button-hover-color);
+}
+
+.add-department-btn a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    text-decoration: none;
+}
+
+.add-department-btn span {
+    
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--button-text-color);
+}
+/* --- Row actions ------------------------------------------------- */
+
+.table-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--icon-color);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    transition:
+        color 0.15s ease,
+        border-color 0.15s ease,
+        background-color 0.15s ease;
+}
+
+.action-btn svg {
+    width: 15px;
+    height: 15px;
+}
+
+.edit-btn {
+    color: var(--success-color);
+
+    border-color: var(--border-color);
+}
+
+.delete-btn {
+    color: var(--danger-color);
+}
+
+.edit-btn:hover {
+    color: var(--success-color);
+    background: var(--table-row-hover);
+    border-color: var(--success-color);
+}
+
+.delete-btn:hover {
+    color: var(--danger-color);
+    background: var(--table-row-hover);
+    border-color: var(--danger-color);
+}
