@@ -1,0 +1,404 @@
+/* ============================================================
+   STUDENT CLASSROOM
+   ============================================================ */
+
+.student-classroom {
+    width: 100%;
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    padding: 28px 38px 50px;
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   CLASS HEADER
+   ============================================================ */
+
+.student-classroom-header {
+    width: 100%;
+
+    padding: 32px 36px;
+
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e8e8;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+
+    box-sizing: border-box;
+
+    margin-bottom: 18px;
+}
+
+.class-label {
+    display: block;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color: #777;
+
+    margin-bottom: 8px;
+}
+
+.class-header-content h1 {
+    margin: 0;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+.class-header-content p {
+    margin: 10px 0 0;
+
+    font-size: 14px;
+
+    color: #777;
+}
+
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+
+.student-classroom-nav {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 14px;
+
+    margin-bottom: 28px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+}
+
+.classroom-nav-btn {
+    padding: 10px 18px;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #777;
+
+    transition: 0.2s ease;
+}
+
+.classroom-nav-btn:hover {
+    background: #f4f4f4;
+
+    color: #222;
+}
+
+.classroom-nav-btn.active {
+    background: #222;
+
+    color: #fff;
+}
+
+
+/* ============================================================
+   SECTION
+   ============================================================ */
+
+.student-classroom-section {
+    margin-bottom: 42px;
+
+    scroll-margin-top: 30px;
+}
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+}
+
+.section-label {
+    display: block;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+
+    color: #999;
+
+    margin-bottom: 5px;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+
+/* ============================================================
+   CONTENT CARD
+   ============================================================ */
+
+.student-content-card {
+    display: flex;
+
+    gap: 16px;
+
+    width: 100%;
+
+    padding: 20px;
+
+    margin-bottom: 12px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 14px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.025);
+
+    transition: 0.2s ease;
+}
+
+.student-content-card:hover {
+    border-color: #d8d8d8;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ============================================================
+   ICON
+   ============================================================ */
+
+.content-card-icon {
+    width: 42px;
+
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 19px;
+
+    background: #f5f5f5;
+}
+
+
+/* ============================================================
+   CONTENT
+   ============================================================ */
+
+.content-card-body {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.content-card-body h3 {
+    margin: 0 0 7px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+.content-card-body p {
+    margin: 0 0 10px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #666;
+}
+
+.content-date {
+    display: block;
+
+    font-size: 12px;
+
+    color: #999;
+}
+
+
+/* ============================================================
+   ASSIGNMENT
+   ============================================================ */
+
+.assignment-info {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    margin: 12px 0;
+}
+
+.assignment-info span {
+    font-size: 12px;
+
+    color: #777;
+}
+
+.assignment-info strong {
+    color: #444;
+}
+
+
+/* ============================================================
+   ACTION BUTTON
+   ============================================================ */
+
+.student-action-btn {
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding: 8px 13px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    background: #fff;
+
+    color: #333;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.student-action-btn:hover {
+    background: #222;
+
+    border-color: #222;
+
+    color: #fff;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.student-empty-card {
+    padding: 38px 20px;
+
+    text-align: center;
+
+    background: #fff;
+
+    border: 1px dashed #ddd;
+
+    border-radius: 14px;
+}
+
+.empty-icon {
+    font-size: 28px;
+
+    margin-bottom: 10px;
+}
+
+.student-empty-card h3 {
+    margin: 0 0 6px;
+
+    font-size: 15px;
+
+    color: #333;
+}
+
+.student-empty-card p {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #999;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    .student-classroom {
+        padding: 20px 16px 40px;
+    }
+
+    .student-classroom-header {
+        padding: 24px;
+    }
+
+    .class-header-content h1 {
+        font-size: 24px;
+    }
+
+    .student-classroom-nav {
+        overflow-x: auto;
+    }
+
+    .classroom-nav-btn {
+        white-space: nowrap;
+    }
+
+    .student-content-card {
+        padding: 16px;
+    }
+
+}

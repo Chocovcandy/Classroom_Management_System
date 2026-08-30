@@ -1,0 +1,2579 @@
+/* ============================================================
+   CLASSROOM PAGE
+   ============================================================ */
+
+.classroom-page {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    min-height: 100%;
+
+
+}
+
+/* ============================================================
+   CLASSROOM NAVIGATION
+   ============================================================ */
+
+.classroom-nav {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    width: calc(100% - 10px);
+
+    min-height: 60px;
+
+    margin-right: 5px;
+ 
+
+    padding: 8px 10px;
+
+    box-sizing: border-box;
+    overflow-x: auto;
+
+    scrollbar-width: none;
+}
+
+.classroom-nav::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* ============================================================
+   NAVIGATION ITEM
+   ============================================================ */
+
+.classroom-nav-item {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 150px;
+    height: 42px;
+
+    padding: 0 14px;
+
+    flex-shrink: 0;
+
+    color: var(--secondary-text-color);
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* ============================================================
+   ICON
+   ============================================================ */
+
+.classroom-nav-item i {
+    font-size: 17px;
+}
+
+/* ============================================================
+   HOVER — ONLY INACTIVE ITEMS
+   ============================================================ */
+
+.classroom-nav-item:not(.active):hover {
+
+    color: var(--third-text-color);
+
+    background-color: var(--primary-color);
+
+    border-color: var(--primary-color);
+
+    border-radius: 10px;
+
+}
+
+
+/* ============================================================
+   ACTIVE
+   ============================================================ */
+
+.classroom-nav-item.active {
+
+    color: var(--button-color);
+
+}
+
+
+/* ============================================================
+   ACTIVE INDICATOR
+   ============================================================ */
+
+.classroom-nav-item.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 14px;
+
+    right: 14px;
+
+    bottom: 0;
+
+    height: 3px;
+
+    background-color: var(--button-color);
+
+    border-radius: 3px 3px 0 0;
+
+}
+/* ============================================================
+   CLASSROOM CONTENT
+   ============================================================ */
+
+.classroom-content {
+    flex: 1;
+
+    min-height: 0;
+
+    width: 100%;
+
+    padding: 5px 8px 25px 0;
+
+    box-sizing: border-box;
+}
+
+
+
+/* ============================================================
+   WELCOME + ACTIONS ROW
+   ============================================================ */
+
+.classroom-welcome-row {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        240px;
+
+    gap: 10px;
+
+    width: calc(100% - 10px);
+
+    box-sizing: border-box;
+
+}
+
+
+/* ============================================================
+   WELCOME CARD
+   ============================================================ */
+
+.classroom-welcome {
+
+    width: 100%;
+
+    min-height: 100px;
+
+    box-sizing: border-box;
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+}
+
+
+/* ============================================================
+   WELCOME MAIN
+   ============================================================ */
+
+.classroom-welcome-main {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    width: 100%;
+
+    min-height: 190px;
+
+    padding: 24px 28px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* ============================================================
+   WELCOME TEXT
+   ============================================================ */
+
+.classroom-welcome-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    min-width: 0;
+
+}
+
+
+/* ============================================================
+   WELCOME LABEL
+   ============================================================ */
+
+.classroom-welcome-label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--button-color);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+
+}
+
+
+/* ============================================================
+   WELCOME TITLE
+   ============================================================ */
+
+.classroom-welcome-main h1 {
+
+    margin: 0;
+
+    color: var(--heading-color);
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    line-height: 1.25;
+
+}
+
+
+/* ============================================================
+   WELCOME COURSE
+   ============================================================ */
+
+.classroom-welcome-main p {
+
+    margin: 7px 0 0;
+
+    color: var(--secondary-text-color);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* ============================================================
+   CLASSROOM WELCOME ILLUSTRATION
+   ============================================================ */
+
+.classroom-welcome-illustration {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 175px;
+    height: 125px;
+
+    margin-left: 20px;
+
+    flex-shrink: 0;
+
+
+    /* --------------------------------------------------------
+       LOCAL CLASSROOM COLORS
+       -------------------------------------------------------- */
+
+    --classroom-blue: #4f7cff;
+    --classroom-blue-soft: #fff;
+
+    --classroom-green: #48b982;
+    --classroom-green-soft: #fff;
+
+    --classroom-yellow: #e9b94f;
+    --classroom-yellow-soft: #fff;
+
+    --classroom-pink: #e58ab5;
+    --classroom-pink-soft: #fff;
+
+}
+
+
+/* ============================================================
+   SOFT BACKGROUND CIRCLE
+   ============================================================ */
+
+.classroom-welcome-illustration::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 105px;
+    height: 105px;
+
+    background-color:
+        var(--classroom-blue-soft);
+
+    color: var(--border-color);
+
+    border:
+        1px solid var(--classroom-blue);
+
+    border-radius: 50%;
+
+}
+
+
+/* ============================================================
+   PROFESSOR
+   ============================================================ */
+
+.welcome-professor {
+
+    position: absolute;
+
+    z-index: 3;
+
+    left: 18px;
+    bottom: 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    color:
+        var(--classroom-green);
+
+    background-color:
+        var(--classroom-green-soft);
+
+    border:
+        1px solid var(--border-color);
+    border-radius: 50%;
+
+    box-shadow:
+        0 5px 15px var(--shadow-color);
+
+    font-size: 18px;
+
+    transform:
+        rotate(-7deg);
+
+    animation:
+        classroomProfessorFloat 3.5s ease-in-out infinite;
+
+}
+
+
+/* ============================================================
+   MAIN CLASSROOM BOARD
+   ============================================================ */
+
+.welcome-board {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 72px;
+    height: 72px;
+
+    color:
+        var(--classroom-blue);
+
+    background-color:
+        var(--card-color);
+
+    border:
+        1px solid var(--border-color);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 20px var(--shadow-color);
+
+    font-size: 31px;
+
+    transform:
+        rotate(2deg);
+
+    animation:
+        classroomBoardFloat 4s ease-in-out infinite;
+
+}
+
+
+/* ============================================================
+   SMALL FLOATING ICONS
+   ============================================================ */
+
+.welcome-illustration-small {
+
+    position: absolute;
+
+    z-index: 3;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    background-color:
+        var(--card-color);
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 5px 15px var(--shadow-color);
+
+    font-size: 17px;
+
+}
+
+
+/* ============================================================
+   BOOK — YELLOW
+   ============================================================ */
+
+.small-one {
+
+    top: 5px;
+    right: 17px;
+
+    color:
+        var(--classroom-yellow);
+
+    border:
+        1px solid var(--border-color);
+
+    background-color:
+        var(--classroom-yellow-soft);
+
+    transform:
+        rotate(8deg);
+
+    animation:
+        classroomBookFloat 3.2s ease-in-out infinite;
+
+}
+
+
+/* ============================================================
+   GRADUATION — PINK
+   ============================================================ */
+
+.small-two {
+
+    right: 2px;
+    bottom: 15px;
+
+    color:
+        var(--classroom-pink);
+
+      border:
+        1px solid var(--border-color);
+
+    background-color:
+        var(--classroom-pink-soft);
+
+    transform:
+        rotate(6deg);
+
+    animation:
+        classroomGraduationFloat 3.4s ease-in-out infinite;
+
+}
+
+
+/* ============================================================
+   PROFESSOR ANIMATION
+   ============================================================ */
+
+@keyframes classroomProfessorFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(-7deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(4px)
+            rotate(-3deg);
+
+    }
+
+}
+
+
+/* ============================================================
+   BOARD ANIMATION
+   ============================================================ */
+
+@keyframes classroomBoardFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(2deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-4px)
+            rotate(-1deg);
+
+    }
+
+}
+
+
+/* ============================================================
+   BOOK ANIMATION
+   ============================================================ */
+
+@keyframes classroomBookFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(8deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-5px)
+            rotate(3deg);
+
+    }
+
+}
+
+
+/* ============================================================
+   GRADUATION ANIMATION
+   ============================================================ */
+
+@keyframes classroomGraduationFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(6deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(4px)
+            rotate(2deg);
+
+    }
+
+}
+
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+.dark-mode .classroom-welcome-illustration {
+
+    --classroom-blue: #82a4ff;
+    --classroom-blue-soft: #202b46;
+
+    --classroom-green: #6bd29c;
+    --classroom-green-soft: #1d382b;
+
+    --classroom-yellow: #f1ca68;
+    --classroom-yellow-soft: #3b321e;
+
+    --classroom-pink: #efa4c5;
+    --classroom-pink-soft: #3b2732;
+
+}
+/* ============================================================
+   CLASS CODE BOX
+   ============================================================ */
+
+.classroom-code {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    width: fit-content;
+
+    min-width: 230px;
+
+    margin-top: 16px;
+
+    padding: 10px 10px 10px 14px;
+
+    box-sizing: border-box;
+
+    background-color: var(--hover-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 10px;
+
+}
+
+
+/* ============================================================
+   CLASS CODE INFORMATION
+   ============================================================ */
+
+.classroom-code-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    min-width: 0;
+
+}
+
+
+.classroom-code-label {
+
+    color: var(--secondary-text-color);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+}
+
+
+.classroom-code-value {
+
+    color: var(--button-color);
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    line-height: 1.2;
+
+    user-select: text;
+
+}
+
+
+/* ============================================================
+   CLASS CODE ACTIONS
+   ============================================================ */
+
+.classroom-code-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-left: 16px;
+
+}
+
+
+/* ============================================================
+   CLASS CODE BUTTON
+   ============================================================ */
+
+.classroom-code-button {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 34px;
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    color: var(--secondary-text-color);
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.classroom-code-button:hover {
+
+    color: var(--button-color);
+
+    background-color: var(--card-color);
+
+    border-color: var(--button-color);
+
+}
+
+
+.classroom-code-button i {
+
+    font-size: 16px;
+
+}
+
+
+/* ============================================================
+   COPY FEEDBACK
+   ============================================================ */
+
+.copy-feedback {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: calc(100% + 7px);
+
+    transform:
+        translateX(-50%)
+        translateY(3px);
+
+    padding: 4px 7px;
+
+    color: var(--third-text-color);
+
+    background-color: var(--primary-color);
+
+    border-radius: 5px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.classroom-code-button.copied .copy-feedback {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+
+}
+
+
+/* ============================================================
+   RIGHT-SIDE ACTIONS
+   ============================================================ */
+
+.classroom-welcome-actions {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    width: 100%;
+
+}
+
+
+/* ============================================================
+   ACTION CARD
+   ============================================================ */
+
+.classroom-welcome-action {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+    flex: 1;
+
+    padding: 14px;
+
+    box-sizing: border-box;
+
+    color: var(--heading-color);
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 12px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+/* ============================================================
+   ACTION ICON
+   ============================================================ */
+
+.classroom-welcome-action > i:first-child {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 40px;
+
+    height: 40px;
+
+    flex-shrink: 0;
+
+    color: var(--button-color);
+
+    background-color: var(--hover-color);
+
+    border-radius: 9px;
+
+    font-size: 19px;
+
+}
+
+
+/* ============================================================
+   ACTION TEXT
+   ============================================================ */
+
+.classroom-welcome-action span {
+
+    flex: 1;
+
+    min-width: 0;
+
+    color: var(--heading-color);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+
+}
+
+
+/* ============================================================
+   ACTION ARROW
+   ============================================================ */
+
+.classroom-welcome-action .action-arrow {
+
+    flex-shrink: 0;
+
+    color: var(--secondary-text-color);
+
+    font-size: 16px;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+
+}
+
+
+/* ============================================================
+   ACTION HOVER
+   ============================================================ */
+
+.classroom-welcome-action:hover {
+
+    color: var(--third-text-color);
+
+    background-color: var(--primary-color);
+
+    border-color: var(--primary-color);
+
+    transform: translateY(-2px);
+
+}
+
+
+.classroom-welcome-action:hover > i:first-child {
+
+    color: var(--third-text-color);
+
+    background-color: transparent;
+
+}
+
+
+.classroom-welcome-action:hover span {
+
+    transform: translateY(-2px);
+
+    color: var(--third-text-color);
+
+}
+
+
+.classroom-welcome-action:hover .action-arrow {
+
+    color: var(--third-text-color);
+
+    transform: translateX(3px);
+
+}
+
+
+/* ============================================================
+   WELCOME RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 750px) {
+
+    .classroom-welcome-row {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .classroom-welcome-main {
+
+        padding: 20px;
+
+    }
+
+    .classroom-welcome-illustration {
+
+        display: none;
+
+    }
+
+}
+
+/* ============================================================
+   CLASS CODE DISPLAY OVERLAY
+   ============================================================ */
+
+.class-code-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    background-color: rgba(0, 0, 0, 0.75);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+
+}
+
+
+/* ============================================================
+   OPEN STATE
+   ============================================================ */
+
+.class-code-overlay.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+}
+
+
+/* ============================================================
+   DISPLAY CARD
+   ============================================================ */
+
+.class-code-display {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: min(850px, 90vw);
+
+    min-height: 420px;
+
+    padding: 50px;
+
+    box-sizing: border-box;
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    transform: scale(0.95);
+
+    transition: transform 0.25s ease;
+
+}
+
+
+.class-code-overlay.show .class-code-display {
+
+    transform: scale(1);
+
+}
+
+
+/* ============================================================
+   DISPLAY LABEL
+   ============================================================ */
+
+.class-code-display-label {
+
+    margin-bottom: 20px;
+
+    color: var(--secondary-text-color);
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+}
+
+
+/* ============================================================
+   LARGE CLASS CODE
+   ============================================================ */
+
+.class-code-display-value {
+
+    color: var(--button-color);
+
+    font-size: clamp(70px, 12vw, 150px);
+
+    font-weight: 900;
+
+    letter-spacing: 10px;
+
+    line-height: 1;
+
+    user-select: text;
+
+}
+
+
+/* ============================================================
+   DISPLAY HELP TEXT
+   ============================================================ */
+
+.class-code-display-help {
+
+    margin: 25px 0 0;
+
+    color: var(--secondary-text-color);
+
+    font-size: 14px;
+
+}
+
+
+/* ============================================================
+   CLOSE BUTTON
+   ============================================================ */
+
+.class-code-display-close {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 40px;
+
+    height: 40px;
+
+    color: var(--secondary-text-color);
+
+    background-color: var(--hover-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.class-code-display-close:hover {
+
+    color: var(--third-text-color);
+
+    background-color: var(--primary-color);
+
+    border-color: var(--primary-color);
+
+}
+
+
+.class-code-display-close i {
+
+    font-size: 21px;
+
+}
+
+/* ============================================================
+   CLASSROOM MAIN LAYOUT
+   ============================================================ */
+
+.classroom-main-layout {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr);
+
+    width: calc(100% - 10px);
+
+    margin-top: 16px;
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   STREAM
+   ============================================================ */
+
+.classroom-stream {
+    width: 100%;
+
+    min-width: 0;
+}
+
+
+/* ============================================================
+   STREAM HEADER
+   ============================================================ */
+
+.classroom-section-header {
+    display: flex;
+    align-items: center;
+
+    min-height: 48px;
+
+    padding: 0 4px;
+
+    box-sizing: border-box;
+}
+
+
+.classroom-section-label {
+    display: block;
+
+    margin-left: 5px;
+    margin-bottom: 3px;
+
+    color: var(--primary-color);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+
+.classroom-section-header h2 {
+    margin: 0 0 0 5px;
+
+    color: var(--heading-color);
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+/* ============================================================
+   STREAM CONTAINER
+   ============================================================ */
+
+.classroom-stream-card {
+    width: 100%;
+
+    min-height: 520px;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 4px 18px var(--shadow-color);
+}
+
+
+/* ============================================================
+   STREAM ITEM
+   (flat list -- each <article> carries a type modifier class
+   like .stream-item-announcement directly, there is no
+   .stream-section grouping wrapper in the real markup)
+   ============================================================ */
+
+.stream-item {
+    position: relative;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 13px;
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    box-sizing: border-box;
+
+    background-color: var(--surface-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 11px;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.stream-item + .stream-item {
+    margin-top: 8px;
+}
+
+.stream-item:hover {
+    background-color: var(--surface-hover);
+
+    border-color: var(--primary-border);
+
+    box-shadow:
+        0 3px 10px var(--shadow-color);
+}
+
+.stream-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    color: var(--primary-color);
+
+    background-color: var(--primary-light);
+
+    border-radius: 9px;
+
+    font-size: 18px;
+}
+
+.stream-item-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ---------- "Name posted an announcement · 2 hours ago" ---------- */
+.stream-item-posted {
+    margin: 0;
+
+    color: var(--activity-description);
+
+    font-size: 12.5px;
+    line-height: 1.4;
+}
+
+.stream-item-posted strong {
+    color: var(--activity-title);
+    font-weight: 700;
+}
+
+.stream-item-time {
+    color: var(--activity-time);
+    font-weight: 500;
+}
+
+/* ---------- Title ---------- */
+.stream-item-title {
+    margin: 4px 0 0;
+
+    color: var(--activity-title);
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.4;
+}
+
+/* ---------- Topic tag ---------- */
+.stream-item-topic {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-top: 8px;
+    padding: 4px 10px;
+    border-radius: 999px;
+
+    background-color: var(--hover-color);
+    color: var(--secondary-text-color);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.stream-item-topic i {
+    font-size: 13px;
+}
+
+/* ---------- Three-dot menu ---------- */
+.stream-item-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+    margin-top: -3px;
+    padding: 0;
+
+    color: var(--icon-color);
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.stream-item-menu i {
+    font-size: 19px;
+}
+
+.stream-item-menu:hover {
+    color: var(--heading-color);
+    background-color: var(--surface-hover);
+}
+
+/* ---------- Type accent colors (scoped to the item itself,
+   since there's no per-type section wrapper to key off) ---------- */
+.stream-item-announcement .stream-item-icon {
+    color: var(--announcement-color);
+    background-color: var(--announcement-soft);
+}
+
+.stream-item-material .stream-item-icon {
+    color: var(--info-color);
+    background-color: var(--info-soft);
+}
+
+.stream-item-assignment .stream-item-icon {
+    color: var(--student-color);
+    background-color: var(--student-soft);
+}
+
+.stream-item-quiz .stream-item-icon {
+    color: var(--warning-color);
+    background-color: var(--warning-soft);
+}
+
+.stream-item-exam .stream-item-icon {
+    color: var(--danger-color);
+    background-color: var(--danger-soft);
+}
+
+/* ============================================================
+   STREAM DETAIL LINK
+============================================================ */
+
+.stream-item-detail-link {
+    display: inline-block;
+
+    color: inherit;
+    text-decoration: none;
+}
+
+
+.stream-item-detail-link .stream-item-title {
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.stream-item-detail-link:hover .stream-item-title {
+    opacity: 0.7;
+}
+/* ============================================================
+   STREAM RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .classroom-stream-card {
+        padding: 15px;
+        min-height: 450px;
+    }
+
+    .stream-item {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .stream-item-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    .stream-item-posted {
+        font-size: 11px;
+    }
+
+    .stream-item-menu {
+        width: 28px;
+        height: 28px;
+    }
+
+    .stream-item-menu i {
+        font-size: 18px;
+    }
+
+    .stream-item-title {
+        font-size: 13px;
+    }
+
+    .stream-item-topic {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .classroom-stream-card {
+        padding: 12px;
+    }
+
+    .stream-item {
+        padding: 11px;
+        gap: 9px;
+    }
+
+    .stream-item-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+
+    .stream-item-title {
+        font-size: 12.5px;
+    }
+
+    .stream-item-posted {
+        font-size: 10.5px;
+    }
+}
+
+
+
+/* ============================================================
+   EMPTY STREAM
+   ============================================================ */
+
+.classroom-stream-empty {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 470px;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+}
+
+
+.classroom-stream-empty-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 62px;
+    height: 62px;
+
+    margin-bottom: 15px;
+
+    background-color: var(--primary-light);
+
+    border: 1px solid var(--primary-border);
+
+    border-radius: 15px;
+}
+
+.classroom-stream-empty-icon i {
+    color: var(--primary-color);
+    font-size: 30px;
+}
+
+
+.classroom-stream-empty h3 {
+    margin: 0;
+
+    color: var(--heading-color);
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+.classroom-stream-empty p {
+    max-width: 450px;
+
+    margin: 9px 0 0;
+
+    color: var(--secondary-text-color);
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   CLASS INFORMATION MODAL
+   ============================================================ */
+
+.classroom-info-modal {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+}
+
+
+/* ============================================================
+   SHOW MODAL
+   ============================================================ */
+
+.classroom-info-modal.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/* ============================================================
+   OVERLAY
+   ============================================================ */
+
+.classroom-info-modal-overlay {
+    position: absolute;
+    inset: 0;
+
+    background-color: rgba(0, 0, 0, 0.45);
+
+    backdrop-filter: blur(3px);
+}
+
+
+/* ============================================================
+   DIALOG
+   ============================================================ */
+
+.classroom-info-dialog {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 520px;
+
+    max-height: calc(100vh - 40px);
+
+    overflow: hidden;
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.18);
+
+    transform: translateY(10px) scale(0.98);
+
+    transition:
+        transform 0.2s ease;
+}
+
+.classroom-info-modal.show .classroom-info-dialog {
+    transform: translateY(0) scale(1);
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.classroom-info-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 24px 25px 20px;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+.classroom-info-header > div {
+    min-width: 0;
+}
+
+.classroom-info-eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--button-color);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+.classroom-info-header h2 {
+    margin: 0 0 5px;
+
+    color: var(--heading-color);
+
+    font-size: 20px;
+    font-weight: 800;
+
+    line-height: 1.25;
+
+    word-break: break-word;
+}
+
+.classroom-info-header p {
+    margin: 0;
+
+    color: var(--secondary-text-color);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   CLOSE BUTTON
+   ============================================================ */
+
+.classroom-info-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+
+    padding: 0;
+
+    color: var(--secondary-text-color);
+
+    background-color: transparent;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.classroom-info-close i {
+    font-size: 19px;
+}
+
+.classroom-info-close:hover {
+    color: var(--heading-color);
+
+    background-color: var(--hover-color);
+
+    border-color: var(--border-color);
+}
+
+
+/* ============================================================
+   BODY
+   ============================================================ */
+
+.classroom-info-body {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0;
+
+    max-height: 420px;
+
+    overflow-y: auto;
+}
+
+
+/* ============================================================
+   INFORMATION ITEM
+   ============================================================ */
+
+.classroom-info-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 15px 25px;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+.classroom-info-item:last-child {
+    border-bottom: none;
+}
+
+.classroom-info-label {
+    color: var(--secondary-text-color);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.classroom-info-item strong {
+    color: var(--heading-color);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    word-break: break-word;
+}
+
+
+/* ============================================================
+   DESCRIPTION
+   ============================================================ */
+
+.classroom-info-description p {
+    margin: 0;
+
+    color: var(--secondary-text-color);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    white-space: pre-line;
+}
+
+
+/* ============================================================
+   ACTIONS
+   ============================================================ */
+
+.classroom-info-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding: 17px 25px;
+
+    background-color: var(--card-color);
+
+    border-top: 1px solid var(--border-color);
+}
+
+
+/* ============================================================
+   CLOSE / CANCEL
+   ============================================================ */
+
+.classroom-info-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 38px;
+
+    padding: 0 15px;
+
+    color: var(--secondary-text-color);
+
+    background-color: transparent;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.classroom-info-cancel:hover {
+    color: var(--heading-color);
+
+    background-color: var(--hover-color);
+}
+
+
+/* ============================================================
+   EDIT BUTTON
+   ============================================================ */
+
+.classroom-info-edit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    height: 38px;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
+
+    color: var(--button-text-color);
+
+    background-color: var(--button-color);
+
+    border: 1px solid var(--button-color);
+
+    border-radius: 9px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.classroom-info-edit i {
+    font-size: 15px;
+}
+
+.classroom-info-edit:hover {
+    color: var(--button-text-color);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .classroom-info-modal {
+        padding: 12px;
+    }
+
+    .classroom-info-dialog {
+        max-height: calc(100vh - 24px);
+
+        border-radius: 14px;
+    }
+
+    .classroom-info-header {
+        padding: 20px;
+    }
+
+    .classroom-info-item {
+        padding: 14px 20px;
+    }
+
+    .classroom-info-actions {
+        padding: 15px 20px;
+    }
+
+    .classroom-info-cancel,
+    .classroom-info-edit {
+        flex: 1;
+    }
+}
+
+/* ============================================================
+   ANNOUNCEMENT MODAL
+   ============================================================ */
+
+.classroom-announcement-modal {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+}
+
+
+/* ============================================================
+   SHOW
+   ============================================================ */
+
+.classroom-announcement-modal.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/* ============================================================
+   OVERLAY
+   ============================================================ */
+
+.classroom-announcement-overlay {
+    position: absolute;
+    inset: 0;
+
+    background-color: rgba(0, 0, 0, 0.45);
+
+    backdrop-filter: blur(3px);
+}
+
+
+/* ============================================================
+   DIALOG
+   ============================================================ */
+
+.classroom-announcement-dialog {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 560px;
+
+    max-height: calc(100vh - 40px);
+
+    overflow-y: auto;
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.18);
+
+    transform: translateY(10px) scale(0.98);
+
+    transition:
+        transform 0.2s ease;
+}
+
+.classroom-announcement-modal.show
+.classroom-announcement-dialog {
+    transform: translateY(0) scale(1);
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.classroom-announcement-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 24px 25px 20px;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+.classroom-announcement-header > div {
+    min-width: 0;
+}
+
+.classroom-announcement-eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--button-color);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+.classroom-announcement-header h2 {
+    margin: 0 0 5px;
+
+    color: var(--heading-color);
+
+    font-size: 20px;
+    font-weight: 800;
+
+    line-height: 1.3;
+}
+
+.classroom-announcement-header p {
+    margin: 0;
+
+    color: var(--secondary-text-color);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   CLOSE BUTTON
+   ============================================================ */
+
+.classroom-announcement-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    padding: 0;
+
+    color: var(--secondary-text-color);
+
+    background-color: transparent;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.classroom-announcement-close i {
+    font-size: 19px;
+}
+
+.classroom-announcement-close:hover {
+    color: var(--heading-color);
+
+    background-color: var(--hover-color);
+
+    border-color: var(--border-color);
+}
+
+
+/* ============================================================
+   FORM
+   ============================================================ */
+
+.classroom-announcement-form {
+    padding: 24px 25px 25px;
+}
+
+
+/* ============================================================
+   FORM GROUP
+   ============================================================ */
+
+.classroom-announcement-form-group {
+    margin-bottom: 20px;
+}
+
+.classroom-announcement-form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--heading-color);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.classroom-announcement-form-group label span {
+    color: var(--danger-color);
+}
+
+
+/* ============================================================
+   INPUT / TEXTAREA
+   ============================================================ */
+
+.classroom-announcement-form-group input,
+.classroom-announcement-form-group textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 13px;
+
+    color: var(--heading-color);
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.classroom-announcement-form-group input {
+    height: 42px;
+}
+
+.classroom-announcement-form-group textarea {
+    min-height: 135px;
+
+    resize: vertical;
+
+    line-height: 1.6;
+}
+
+.classroom-announcement-form-group input::placeholder,
+.classroom-announcement-form-group textarea::placeholder {
+    color: var(--secondary-text-color);
+
+    opacity: 0.65;
+}
+
+.classroom-announcement-form-group input:focus,
+.classroom-announcement-form-group textarea:focus {
+    border-color: var(--button-color);
+
+    box-shadow:
+        0 0 0 3px var(--focus-ring-color);
+}
+
+
+/* ============================================================
+   ERROR
+   ============================================================ */
+
+.classroom-announcement-error {
+    display: block;
+
+    margin-top: 6px;
+
+    color: var(--danger-color);
+
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   ACTIONS
+   ============================================================ */
+
+.classroom-announcement-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--border-color);
+}
+
+
+/* ============================================================
+   CANCEL
+   ============================================================ */
+
+.classroom-announcement-cancel {
+    min-height: 38px;
+
+    padding: 0 15px;
+
+    color: var(--secondary-text-color);
+
+    background-color: transparent;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 9px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.classroom-announcement-cancel:hover {
+    color: var(--heading-color);
+
+    background-color: var(--hover-color);
+}
+
+
+/* ============================================================
+   SUBMIT
+   ============================================================ */
+
+.classroom-announcement-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    min-height: 38px;
+
+    padding: 0 16px;
+
+    color: var(--button-text-color);
+
+    background-color: var(--button-color);
+
+    border: 1px solid var(--button-color);
+
+    border-radius: 9px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.classroom-announcement-submit i {
+    font-size: 15px;
+}
+
+.classroom-announcement-submit:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .classroom-announcement-modal {
+        padding: 12px;
+    }
+
+    .classroom-announcement-dialog {
+        max-height: calc(100vh - 24px);
+
+        border-radius: 14px;
+    }
+
+    .classroom-announcement-header {
+        padding: 20px;
+    }
+
+    .classroom-announcement-form {
+        padding: 20px;
+    }
+
+    .classroom-announcement-actions {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+    .classroom-announcement-cancel,
+    .classroom-announcement-submit {
+        width: 100%;
+    }
+
+}

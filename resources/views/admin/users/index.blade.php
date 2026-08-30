@@ -527,10 +527,7 @@
         {{-- Footer Actions --}}
         <div class="users-footer">
 
-            <a href="{{ route('admin.assign_dean.index') }}"
-                class="users-secondary-button">
-                Assign Dean Department
-            </a>
+
 
             <a href="{{ route('admin.dashboard') }}"
                 class="users-back-button">

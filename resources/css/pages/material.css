@@ -1,0 +1,614 @@
+/* ============================================================
+   MATERIAL CREATE / EDIT PAGE
+   ============================================================ */
+
+.material-page {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+    padding: 28px 24px 60px;
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.material-page-header {
+    margin-bottom: 24px;
+}
+
+.material-header-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+/* ============================================================
+   BACK BUTTON
+   ============================================================ */
+
+.material-back-btn,
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    width: fit-content;
+
+    margin-bottom: 20px;
+    padding: 8px 12px;
+
+    color: var(--secondary-text-color);
+
+    background-color: transparent;
+
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.material-back-btn i,
+.back-button i {
+    font-size: 16px;
+}
+
+.material-back-btn:hover,
+.back-button:hover {
+    color: var(--button-color);
+
+    background-color: var(--hover-color);
+
+    border-color: var(--button-color);
+
+    transform: translateX(-2px);
+}
+
+
+/* ============================================================
+   HEADER TEXT
+   ============================================================ */
+
+.material-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--button-color);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.material-page-header h1 {
+    margin: 0;
+
+    color: var(--heading-color);
+
+    font-size: 28px;
+    font-weight: 800;
+
+    line-height: 1.25;
+}
+
+.material-page-header p {
+    max-width: 650px;
+
+    margin: 8px 0 0;
+
+    color: var(--secondary-text-color);
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   FORM CARD
+   ============================================================ */
+
+.material-form-card {
+    width: 100%;
+
+    padding: 28px;
+
+    box-sizing: border-box;
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+
+/* ============================================================
+   FORM GROUP
+   ============================================================ */
+
+.material-form-group {
+    margin-bottom: 22px;
+}
+
+.material-form-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.material-form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--heading-color);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.material-form-group label span {
+    margin-left: 2px;
+
+    color: #dc2626;
+}
+
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+
+.material-form-group input[type="text"],
+.material-form-group textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 13px;
+
+    color: var(--heading-color);
+
+    background-color: var(--input-color, var(--card-color));
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.material-form-group input[type="text"] {
+    height: 42px;
+}
+
+.material-form-group textarea {
+    min-height: 135px;
+
+    resize: vertical;
+
+    line-height: 1.6;
+}
+
+.material-form-group input[type="text"]::placeholder,
+.material-form-group textarea::placeholder {
+    color: var(--secondary-text-color);
+    opacity: 0.65;
+}
+
+.material-form-group input[type="text"]:focus,
+.material-form-group textarea:focus {
+    border-color: var(--button-color);
+
+    box-shadow:
+        0 0 0 3px rgba(79, 70, 229, 0.08);
+}
+
+
+/* ============================================================
+   FILE UPLOAD
+   ============================================================ */
+
+.material-upload-box {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    min-height: 100px;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    background-color: var(--hover-color);
+
+    border: 1.5px dashed var(--border-color);
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.material-upload-box:hover {
+    background-color: var(--card-color);
+
+    border-color: var(--button-color);
+
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   UPLOAD ICON
+   ============================================================ */
+
+.material-upload-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    color: var(--button-color);
+
+    background-color: rgba(79, 70, 229, 0.08);
+
+    border-radius: 11px;
+
+    font-size: 23px;
+}
+
+
+/* ============================================================
+   UPLOAD CONTENT
+   ============================================================ */
+
+.material-upload-content {
+    min-width: 0;
+}
+
+.material-upload-content h3 {
+    margin: 0 0 4px;
+
+    color: var(--heading-color);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.material-upload-content p {
+    margin: 3px 0;
+
+    color: var(--secondary-text-color);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+.material-upload-limit {
+    font-size: 10px !important;
+
+    color: var(--secondary-text-color) !important;
+
+    opacity: 0.7;
+}
+
+
+/* ============================================================
+   FILE INPUT
+   ============================================================ */
+
+.material-upload-box input[type="file"] {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   SELECTED FILE
+   ============================================================ */
+
+.selected-file {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 10px;
+    padding: 10px 12px;
+
+    color: var(--secondary-text-color);
+
+    background-color: var(--hover-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    overflow: hidden;
+}
+
+.selected-file strong {
+    color: var(--heading-color);
+
+    font-weight: 700;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   ERRORS
+   ============================================================ */
+
+.material-error {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #dc2626;
+
+    font-size: 11px;
+
+    line-height: 1.4;
+}
+
+.material-alert {
+    margin-bottom: 18px;
+
+    padding: 12px 14px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+.material-alert-success {
+    color: #047857;
+
+    background-color: #ecfdf5;
+
+    border: 1px solid #a7f3d0;
+}
+
+.material-alert-error {
+    color: #b91c1c;
+
+    background-color: #fef2f2;
+
+    border: 1px solid #fecaca;
+}
+
+.material-alert-error ul {
+    margin: 7px 0 0 18px;
+
+    padding: 0;
+}
+
+
+/* ============================================================
+   FORM ACTIONS
+   ============================================================ */
+
+.material-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 26px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--border-color);
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.material-cancel-btn,
+.material-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 38px;
+
+    box-sizing: border-box;
+
+    padding: 0 16px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* ============================================================
+   CANCEL
+   ============================================================ */
+
+.material-cancel-btn {
+    color: var(--secondary-text-color);
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+}
+
+.material-cancel-btn:hover {
+    color: var(--heading-color);
+
+    background-color: var(--hover-color);
+
+    border-color: var(--border-color);
+}
+
+
+/* ============================================================
+   SUBMIT
+   ============================================================ */
+
+.material-submit-btn {
+    color: #ffffff;
+
+    background-color: var(--button-color);
+
+    border: 1px solid var(--button-color);
+}
+
+.material-submit-btn:hover {
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+.material-submit-btn:active {
+    transform: translateY(0);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    .material-page {
+        padding: 22px 16px 45px;
+    }
+
+    .material-form-card {
+        padding: 22px;
+    }
+
+    .material-page-header h1 {
+        font-size: 24px;
+    }
+
+    .material-page-header p {
+        font-size: 12px;
+    }
+
+    .material-upload-box {
+        padding: 17px;
+
+        gap: 13px;
+    }
+
+    .material-upload-icon {
+        width: 44px;
+        height: 44px;
+
+        font-size: 21px;
+    }
+
+    .material-form-actions {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+    .material-cancel-btn,
+    .material-submit-btn {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .material-page {
+        padding: 18px 12px 35px;
+    }
+
+    .material-form-card {
+        padding: 18px;
+
+        border-radius: 13px;
+    }
+
+    .material-upload-box {
+        align-items: flex-start;
+    }
+
+    .material-upload-content h3 {
+        font-size: 12px;
+    }
+
+    .material-upload-content p {
+        font-size: 10px;
+    }
+}

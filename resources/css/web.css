@@ -6,7 +6,7 @@
 
 /* these are from components folder */
 @import url(components/button.css);
-@import url(components/card.css);
+@import url(components/overview-card.css);
 @import url(components/form.css);
 @import url(components/pagination.css);
 @import url(components/table.css);
@@ -26,6 +26,15 @@
 @import url(pages/dashboard.css);
 @import url(pages/user.css);
 @import url(pages/announcement.css);
+@import url(pages/course.css);
+@import url(pages/class-group.css);
+@import url(pages/classroom_group.css);
+@import url(pages/material.css);
+@import url(pages/assignment.css);
+@import url(pages/student.css);
+@import url(pages/student_dashboard.css);
+
+
 
 
 

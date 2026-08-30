@@ -9,6 +9,8 @@ use App\Models\Role;
 use App\Models\Department;
 use App\Models\Schedule;
 use App\Models\Course;
+use App\Models\ClassGroup;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -107,9 +109,6 @@ public function roles()
         return $this->belongsToMany(Course::class, 'student_course');
     }
 
-
-
-
     // SCHEDULES (professor side)
 
     public function teachingSchedules()
@@ -127,4 +126,28 @@ public function roles()
     {
         return $this->hasMany(Schedule::class, 'approved_by');
     }
+
+// CLASS_GROUP RELATIONSHIP
+    public function teachingClassGroups()
+{
+    return $this->hasMany(ClassGroup::class, 'professor_id');
+}
+
+public function classGroups()
+{
+    return $this->belongsToMany(
+        ClassGroup::class,
+        'class_member',
+        'user_id',
+        'class_group_id'
+    )->withTimestamps();
+}
+
+
+public function assignments(): HasMany
+{
+    return $this->hasMany(Assignment::class);
+}
+
+
 }

@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 @extends('layouts.admin_layout')
 
 @section('title', 'Dashboard')
@@ -425,107 +425,71 @@
     <div class="dashboard-right">
 
         <!-- =============================overview card ===========================-->
-        <div class="overview-card">
+<div class="overview-card">
 
             <div class="overview-header">
                 <h2>Today's Summary</h2>
+                <span class="overview-eyebrow">{{ now()->format('M j') }}</span>
             </div>
 
             <div class="overview-content">
 
-                <div class="overview-item">
-
-
+                <div class="overview-item" data-stat="classes">
 
                     <div class="overview-item-icon">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-
                         </svg>
                     </div>
 
-
                     <div class="overview-item-text">
-                        <span class="overview-item-name">
-                            New Users
-                        </span>
-
-                        <span class="overview-item-description">
-                            Registered today :
-                        </span>
-
+                        <span class="overview-item-name">New Users</span>
+                        <span class="overview-item-description">Published today</span>
                     </div>
 
-
                     <span class="overview-item-value">
-                        <!-- add controller here to display new user -->
+                        <!-- add controller here to display new classes -->
                         8
                     </span>
                 </div>
 
-                <div class="overview-item">
+                <div class="overview-item" data-stat="students">
+
                     <div class="overview-item-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building-icon lucide-building">
-                            <path d="M12 10h.01" />
-                            <path d="M12 14h.01" />
-                            <path d="M12 6h.01" />
-                            <path d="M16 10h.01" />
-                            <path d="M16 14h.01" />
-                            <path d="M16 6h.01" />
-                            <path d="M8 10h.01" />
-                            <path d="M8 14h.01" />
-                            <path d="M8 6h.01" />
-                            <path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
-                            <rect x="4" y="2" width="16" height="20" rx="2" />
-                        </svg>
-
-                    </div>
-
-                    <div class="overview-item-text">
-
-                        <span class="overview-item-name">
-                            New Departments
-                        </span>
-
-
-                        <span class="overview-item-description">
-                            Add today :
-                        </span>
-                    </div>
-
-
-                    <span class="overview-item-value">
-                        6
-                    </span>
-
-                </div>
-
-                <div class="overview-item">
-                    <div class="overview-item-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
                         </svg>
-
                     </div>
 
                     <div class="overview-item-text">
-                        <span class="overview-item-name">
-                            New announcements
-                        </span>
-
-                        <span class="overview-item-description">
-                            Published today :
-                        </span>
-
+                        <span class="overview-item-name">New Department</span>
+                        <span class="overview-item-description">Registered today</span>
                     </div>
+
                     <span class="overview-item-value">
-                        <!-- add controller here to display new announcement -->
-                        8
+                        <!-- add controller here to display new students -->
+                        6
                     </span>
                 </div>
 
+                <div class="overview-item" data-stat="announcements">
 
+                    <div class="overview-item-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M18.458 3.11A1 1 0 0 1 19 4v16a1 1 0 0 1-1.581.814L12 16.944V7.056l5.419-3.87a1 1 0 0 1 1.039-.076ZM22 12c0 1.48-.804 2.773-2 3.465v-6.93c1.196.692 2 1.984 2 3.465ZM10 8H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6V8Zm0 9H5v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3Z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+
+                    <div class="overview-item-text">
+                        <span class="overview-item-name">New Announcements</span>
+                        <span class="overview-item-description">Published today</span>
+                    </div>
+
+                    <span class="overview-item-value">
+                        <!-- add controller here to display new announcements -->
+                        8
+                    </span>
+                </div>
 
             </div>
 
@@ -534,16 +498,12 @@
 
                 <div class="quick-action-buttons">
                     <a href="{{ route('admin.users.index') }}" class="quick-action-button">
-                        + Users
-                    </a>
-                    <a href="{{ route('admin.departments.index') }}" class="quick-action-button">
-                        + Departments
+                        + Materials
                     </a>
                     <a href="#" class="quick-action-button">
                         + Announcements
                     </a>
                 </div>
-
             </div>
 
         </div>
@@ -588,66 +548,8 @@
     });
 </script>
 @endsection
-=======
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    
 
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
 
-<body class="bg-gray-100 min-h-screen">
 
-    <div class="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-xl shadow">
-
-        <!-- Header -->
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-xl font-bold text-gray-800">
-                Admin Dashboard
-            </h1>
-
-            <!-- Logout -->
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                    Logout
-                </button>
-            </form>
-        </div>
-
-        <!-- Welcome -->
-        <p class="text-gray-600 mb-6">
-            Welcome, <span class="font-semibold">{{ auth()->user()->name }}</span>
-        </p>
-
-        <!-- Actions -->
-        <div class="flex flex-col gap-4">
-
-            <a href="{{ route('admin.users.index') }}"
-                class="block bg-blue-600 text-white text-center py-3 rounded-lg hover:bg-blue-700">
-                Manage Users
-            </a>
-
-            <a href="{{ route('admin.departments.index') }}"
-                class="block bg-green-600 text-white text-center py-3 rounded-lg hover:bg-green-700">
-                Manage Departments
-            </a>
-
-        </div>
-
-        <p>
-            LOG OUT when you're done testing.cuz system will remember you. if you dont logout and go back or close the
-            browser and reopen it, you will still see the logged-in user that you previous login with.
-            So if you want to test other users, make sure to log out first.</p>
-    </div>
-
-    </div>
-
-</body>
-
-</html>
->>>>>>> Stashed changes

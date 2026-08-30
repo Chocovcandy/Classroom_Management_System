@@ -24,7 +24,7 @@
 
     --heading-color: #1a1b26;
     --text-color: #33343f;
-    --secondary-text-color: #8b8c92;
+    --secondary-text-color: #3a3b3e;
 
     --third-text-color: rgb(253, 253, 253);
 
@@ -35,10 +35,10 @@
        Brand
     ========================== */
 
-    --primary-color: #333fee;
+    --primary-color: #0b1aebce;
     --primary2-color: #036cad;
     --primary-hover: #1f22a8;
-    --primary-light: #eceeff;
+    --primary-light: #0417bb;
     --primary-light2: rgba(183, 228, 253, 0.536);
     --primary-border: #c9ccfb;
 

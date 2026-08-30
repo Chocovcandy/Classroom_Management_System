@@ -6,7 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title', 'Admin Panel')</title>
+    <title>@yield('title', 'User Panel')</title>
     <!-- NOTE : THESE 2 IS ONLY CALL FOR ONCE  -->
     <!--CSS for admin -->
     @vite('resources/css/web.css')

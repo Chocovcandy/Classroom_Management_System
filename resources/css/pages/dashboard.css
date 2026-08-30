@@ -8,6 +8,8 @@
 
     padding: 0;
 
+    margin-top: 8px;
+
     min-height: 0; /* lets this shrink to fit .main-content instead of overflowing it */
 
     /* align items at top */

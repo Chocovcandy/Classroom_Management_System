@@ -34,4 +34,13 @@ class Course extends Model
         return $this->belongsTo(Department::class, 'department_id');
     }
 
+
+    // Class Groups
+    // One course can have many class groups,
+    // and one class group belongs to one course.
+    public function classGroups()
+    {
+        return $this->hasMany(ClassGroup::class, 'course_id');
+    }
+
 }

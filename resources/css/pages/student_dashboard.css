@@ -1,0 +1,519 @@
+/* ============================================================
+   STUDENT DASHBOARD
+   ============================================================ */
+
+.student-overview-card,
+.student-activity-card {
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--border-color, #e8eaf0);
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(30, 41, 59, 0.05);
+}
+
+
+/* ============================================================
+   OVERVIEW CARD
+   ============================================================ */
+
+.student-overview-card {
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+
+.overview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+
+.overview-label,
+.activity-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    color: var(--primary-color, #6c63ff);
+    margin-bottom: 4px;
+}
+
+
+.overview-header h2,
+.student-activity-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-color, #202331);
+}
+
+
+.overview-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: rgba(108, 99, 255, 0.10);
+    color: var(--primary-color, #6c63ff);
+
+    font-size: 21px;
+}
+
+
+
+
+/* ============================================================
+   ICON COLORS
+   ============================================================ */
+
+.assignment-icon {
+    background: rgba(108, 99, 255, 0.10);
+    color: #6c63ff;
+}
+
+
+.material-icon {
+    background: rgba(52, 168, 83, 0.10);
+    color: #34a853;
+}
+
+
+.announcement-icon {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+}
+
+
+.course-icon-small {
+    background: rgba(59, 130, 246, 0.10);
+    color: #3b82f6;
+}
+
+
+/* ============================================================
+   ACTIVITY CARD
+   ============================================================ */
+
+.student-activity-card {
+    padding: 22px;
+
+    overflow: hidden;
+}
+
+
+.student-activity-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+
+.student-activity-header > i {
+    font-size: 21px;
+
+    color: var(--muted-text, #9aa0ae);
+}
+
+
+/* ============================================================
+   FILTER
+   ============================================================ */
+
+.student-activity-filter {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    width: 100%;
+
+    margin-bottom: 18px;
+
+    padding: 4px;
+
+    background: var(--input-bg, #f6f7fa);
+
+    border-radius: 10px;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    scrollbar-width: none;
+}
+
+
+.student-activity-filter::-webkit-scrollbar {
+    display: none;
+}
+
+
+.student-filter-btn {
+    flex: 0 0 auto;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 7px 12px;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    color: var(--muted-text, #8b90a0);
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition: all 0.2s ease;
+}
+
+
+.student-filter-btn:hover {
+    color: var(--primary-color, #6c63ff);
+}
+
+
+.student-filter-btn.active {
+    background: var(--card-bg, #ffffff);
+
+    color: var(--primary-color, #6c63ff);
+
+    box-shadow: 0 2px 6px rgba(30, 41, 59, 0.08);
+}
+
+
+/* ============================================================
+   ACTIVITY LIST
+   ============================================================ */
+
+.student-activity-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.student-activity-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px;
+
+    border-radius: 12px;
+
+    background: var(--input-bg, #f8f9fc);
+
+    border: 1px solid transparent;
+}
+
+
+.student-activity-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+
+.student-activity-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.student-activity-content h4 {
+    margin: 0 0 3px;
+
+    font-size: 12px;
+
+    font-weight: 650;
+
+    color: var(--text-color, #202331);
+}
+
+
+.student-activity-content p {
+    margin: 0;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    color: var(--muted-text, #8b90a0);
+}
+
+
+.activity-time {
+    flex-shrink: 0;
+
+    font-size: 10px;
+
+    color: var(--muted-text, #9ba0ad);
+}
+
+
+/* ============================================================
+   COURSE CARD IMPROVEMENTS
+   ============================================================ */
+
+.courses-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+.course-card {
+    min-width: 0;
+
+    background: var(--card-bg, #ffffff);
+
+    border: 1px solid var(--border-color, #e8eaf0);
+
+    border-radius: 16px;
+
+    padding: 17px;
+
+    box-shadow: 0 6px 20px rgba(30, 41, 59, 0.04);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+.course-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 25px rgba(30, 41, 59, 0.08);
+}
+
+
+.course-card-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+
+.course-code {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    color: var(--primary-color, #6c63ff);
+
+    background: rgba(108, 99, 255, 0.09);
+
+    padding: 5px 8px;
+
+    border-radius: 6px;
+}
+
+
+.course-semester {
+    font-size: 9px;
+
+    color: var(--muted-text, #9297a5);
+}
+
+
+.course-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 13px;
+
+    border-radius: 11px;
+
+    background: rgba(108, 99, 255, 0.10);
+
+    color: var(--primary-color, #6c63ff);
+
+    font-size: 20px;
+}
+
+
+.course-info h3 {
+    margin: 0 0 5px;
+
+    font-size: 14px;
+
+    line-height: 1.35;
+
+    color: var(--text-color, #202331);
+}
+
+
+.course-department {
+    margin: 0;
+
+    font-size: 10px;
+
+    color: var(--muted-text, #8b90a0);
+}
+
+
+.course-teacher {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 15px;
+
+    font-size: 10px;
+
+    color: var(--muted-text, #7f8594);
+}
+
+
+.course-teacher i {
+    font-size: 14px;
+
+    color: var(--primary-color, #6c63ff);
+}
+
+
+.course-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    margin-top: 16px;
+
+    padding-top: 13px;
+
+    border-top: 1px solid var(--border-color, #eceef3);
+}
+
+
+.course-students {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    font-size: 9px;
+
+    color: var(--muted-text, #8b90a0);
+}
+
+
+.course-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 3px;
+
+    padding: 7px 9px;
+
+    border-radius: 7px;
+
+    background: var(--primary-color, #6c63ff);
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    transition: opacity 0.2s ease;
+}
+
+
+.course-button:hover {
+    opacity: 0.88;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1200px) {
+
+    .courses-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .courses-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .student-activity-card,
+    .student-overview-card {
+        padding: 16px;
+    }
+
+}

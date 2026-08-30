@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
         ]);
         // assign Dean role to the second user
          $seed2->roles()->attach(
-            Role::where('role_name', 'Dean')->value('id') // Assuming 2 is Dean
+            Role::where('role_name', 'Professor')->value('id') // Assuming 2 is Dean
         );
 
         // Dean can manage multiple departments

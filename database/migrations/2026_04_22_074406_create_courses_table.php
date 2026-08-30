@@ -21,6 +21,8 @@ return new class extends Migration
             $table->foreignId('department_id')  
                 ->constrained('departments')
                 ->onDelete('cascade');
+
+            $table->string('description');
             
             $table->integer('credits')->nullable();
             $table->timestamps();

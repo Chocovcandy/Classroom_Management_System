@@ -1,0 +1,749 @@
+/* ============================================================
+   MY CLASS GROUPS
+   PROFESSOR
+   ============================================================ */
+
+.cg-page {
+    width: 100%;
+    max-width: 1350px;
+
+    margin: 0 auto;
+    padding: 30px 32px 45px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.cg-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+.cg-header-text {
+    min-width: 0;
+}
+
+
+.cg-eyebrow {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 8px;
+    padding: 6px 11px;
+
+    border-radius: 8px;
+
+    background: var(--hover-color);
+    color: var(--button-color);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+
+.cg-header-text h1 {
+    margin: 0 0 7px;
+
+    font-size: 31px;
+    font-weight: 800;
+
+    line-height: 1.15;
+    letter-spacing: -0.7px;
+
+    color: var(--heading-color);
+}
+
+
+.cg-header-text p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    color: var(--secondary-text-color);
+}
+
+/* ============================================================
+   HEADER ACTIONS
+   ============================================================ */
+
+.cg-header-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-shrink: 0;
+
+}
+
+
+/* ============================================================
+   CREATE CLASS BUTTON
+   ============================================================ */
+
+.cg-create-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    min-height: 42px;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
+
+    color: var(--primary-color);
+
+    background-color: var(--primary-soft);
+
+    border: 1px solid var(--primary-border);
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.cg-create-btn i {
+
+    font-size: 18px;
+
+}
+
+
+.cg-create-btn:hover {
+
+    background-color: var(--hover-color);
+
+    border-color: var(--primary-color);
+
+    transform: translateY(-1px);
+
+}
+/* ============================================================
+   CLASS COUNT
+   ============================================================ */
+
+.cg-summary-chip {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 13px 18px;
+
+    border-radius: 14px;
+
+    background: var(--card-color);
+    border: 1px solid var(--border-color);
+
+    box-shadow:
+        0 5px 18px var(--shadow-color);
+}
+
+
+.cg-summary-chip strong {
+    font-size: 25px;
+    font-weight: 800;
+
+    color: var(--button-color);
+}
+
+
+.cg-summary-chip span {
+    font-size: 12px;
+    font-weight: 600;
+
+    color: var(--secondary-text-color);
+}
+
+
+/* ============================================================
+   CLASS GROUP GRID
+   ============================================================ */
+
+.cg-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 22px;
+
+    align-items: stretch;
+}
+
+
+@media (max-width: 1150px) {
+
+    .cg-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .cg-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ============================================================
+   CLASS CARD
+   ============================================================ */
+
+.cg-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 330px;
+
+    padding: 25px 24px 22px;
+
+    overflow: hidden;
+
+    background: var(--card-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+
+    box-shadow:
+        0 7px 24px var(--shadow-color);
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+
+/* Blue top accent */
+
+.cg-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 5px;
+
+    background: var(--button-color);
+}
+
+
+/* Very subtle blue background glow */
+
+.cg-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    top: -100px;
+    right: -80px;
+
+    border-radius: 50%;
+
+    background: var(--hover-color);
+
+    opacity: 0.55;
+
+    pointer-events: none;
+}
+
+
+.cg-card:hover {
+    transform: translateY(-5px);
+
+    border-color: var(--button-color);
+
+    box-shadow:
+        0 16px 34px var(--shadow-color);
+}
+
+
+/* ============================================================
+   CARD TOP
+   ============================================================ */
+
+.cg-card-top {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+
+/* ============================================================
+   COURSE CODE
+   ============================================================ */
+
+.cg-code-tag {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 12px;
+
+    border-radius: 9px;
+
+    background: var(--hover-color);
+
+    color: var(--button-color);
+
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 0.03em;
+}
+
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+.cg-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 5px 10px;
+
+    border-radius: 999px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+
+.cg-status i {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+}
+
+
+.cg-status-active {
+    background: var(--activity-icon-bg-color);
+    color: var(--success-color);
+}
+
+
+.cg-status-active i {
+    background: var(--success-color);
+}
+
+
+.cg-status-inactive {
+    background: var(--hover-color);
+    color: var(--secondary-text-color);
+}
+
+
+.cg-status-inactive i {
+    background: var(--secondary-text-color);
+}
+
+
+/* ============================================================
+   CARD TITLE
+   ============================================================ */
+
+.cg-card-title {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+
+    font-size: 21px;
+    font-weight: 800;
+
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+
+    color: var(--heading-color);
+}
+
+
+.cg-card-subtitle {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 5px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: var(--secondary-text-color);
+}
+
+
+/* ============================================================
+   DESCRIPTION
+   ============================================================ */
+
+.cg-card-desc {
+    position: relative;
+    z-index: 2;
+
+    margin: 12px 0 0;
+
+    min-height: 42px;
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    color: var(--secondary-text-color);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+
+.cg-card-divider {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    height: 1px;
+
+    margin: 20px 0;
+
+    background: var(--border-color);
+}
+
+
+/* ============================================================
+   CARD STATISTICS
+   ============================================================ */
+
+.cg-card-stats {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+
+.cg-mini-stat {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+
+    padding: 10px;
+
+    border-radius: 12px;
+
+    background: var(--hover-color);
+}
+
+
+.cg-mini-stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 10px;
+
+    background: var(--card-color);
+
+    color: var(--button-color);
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+.cg-mini-stat div {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+
+.cg-mini-stat strong {
+    overflow: hidden;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    color: var(--heading-color);
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.cg-mini-stat strong.cg-code {
+    font-family: monospace;
+
+    font-size: 12px;
+
+    color: var(--button-color);
+}
+
+
+.cg-mini-stat span {
+    margin-top: 2px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+
+    color: var(--secondary-text-color);
+}
+
+
+/* ============================================================
+   OPEN CLASSROOM BUTTON
+   ============================================================ */
+
+.cg-open-btn {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    width: 100%;
+
+    margin-top: auto;
+
+    padding: 13px 17px;
+
+    border-radius: 11px;
+
+    background: var(--button-color);
+    color: var(--button-text-color);
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    box-shadow:
+        0 6px 16px var(--shadow-color);
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        gap 0.2s ease;
+}
+
+
+.cg-open-btn:hover {
+    background: var(--button-hover-color);
+
+    transform: translateY(-2px);
+
+    gap: 13px;
+}
+
+
+.cg-open-btn span {
+    font-size: 16px;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.cg-empty {
+    grid-column: 1 / -1;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 300px;
+
+    padding: 50px 25px;
+
+    text-align: center;
+
+    background: var(--card-color);
+
+    border: 1px dashed var(--border-color);
+
+    border-radius: 20px;
+}
+
+
+.cg-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 64px;
+    height: 64px;
+
+    margin-bottom: 12px;
+
+    border-radius: 17px;
+
+    background: var(--hover-color);
+
+    color: var(--button-color);
+
+    font-size: 27px;
+    font-weight: 800;
+}
+
+
+.cg-empty h2 {
+    margin: 0 0 6px;
+
+    font-size: 19px;
+    font-weight: 750;
+
+    color: var(--heading-color);
+}
+
+
+.cg-empty p {
+    max-width: 350px;
+
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    color: var(--secondary-text-color);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .cg-page {
+        padding: 25px 24px 40px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .cg-page {
+        padding: 22px 18px 35px;
+    }
+
+    .cg-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .cg-header-text h1 {
+        font-size: 27px;
+    }
+
+    .cg-summary-chip {
+        width: fit-content;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .cg-card {
+        min-height: 310px;
+
+        padding: 22px 20px 20px;
+    }
+
+    .cg-card-title {
+        font-size: 19px;
+    }
+
+    .cg-card-stats {
+        grid-template-columns: 1fr;
+    }
+
+}

@@ -1,0 +1,514 @@
+/* ============================================================
+   CREATE ASSIGNMENT PAGE
+============================================================ */
+
+.assignment-create-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 0 50px;
+}
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.assignment-create-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.assignment-header-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.assignment-back-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    background: #ffffff;
+    color: #374151;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.assignment-back-btn:hover {
+    background: #f8fafc;
+    color: #2563eb;
+    border-color: #bfdbfe;
+    transform: translateX(-2px);
+}
+
+.assignment-header-label {
+    display: block;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+
+    color: #64748b;
+
+    margin-bottom: 4px;
+}
+
+.assignment-create-header h2 {
+    margin: 0;
+
+    font-size: 27px;
+    font-weight: 700;
+
+    color: #111827;
+}
+
+.assignment-create-header p {
+    margin: 5px 0 0;
+
+    font-size: 14px;
+    color: #64748b;
+}
+
+
+/* ============================================================
+   MAIN CARD
+============================================================ */
+
+.assignment-create-container {
+    width: 100%;
+}
+
+.assignment-create-card {
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+
+    box-shadow:
+        0 4px 12px rgba(15, 23, 42, 0.04);
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   CARD HEADER
+============================================================ */
+
+.assignment-card-header {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 25px 30px;
+
+    border-bottom: 1px solid #eef0f3;
+
+    background: #fafbfc;
+}
+
+.assignment-card-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    font-size: 23px;
+}
+
+.assignment-card-header h3 {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #111827;
+}
+
+.assignment-card-header p {
+    margin: 4px 0 0;
+
+    font-size: 13px;
+    color: #64748b;
+}
+
+
+/* ============================================================
+   FORM
+============================================================ */
+
+.assignment-form {
+    padding: 30px;
+}
+
+.assignment-form-group {
+    margin-bottom: 24px;
+}
+
+.assignment-form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.assignment-form-group label span {
+    color: #ef4444;
+    margin-left: 2px;
+}
+
+
+/* ============================================================
+   INPUTS
+============================================================ */
+
+.assignment-form-group input,
+.assignment-form-group textarea,
+.assignment-form-group select {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dbe1e8;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    padding: 12px 14px;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    color: #111827;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.assignment-form-group input {
+    height: 46px;
+}
+
+.assignment-form-group textarea {
+    min-height: 150px;
+
+    resize: vertical;
+
+    line-height: 1.6;
+}
+
+.assignment-form-group input::placeholder,
+.assignment-form-group textarea::placeholder {
+    color: #9ca3af;
+}
+
+.assignment-form-group input:focus,
+.assignment-form-group textarea:focus,
+.assignment-form-group select:focus {
+    border-color: #60a5fa;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.08);
+
+    background: #ffffff;
+}
+
+
+/* ============================================================
+   DATE + TIME ROW
+============================================================ */
+
+.assignment-form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+
+/* ============================================================
+   SMALL HELP TEXT
+============================================================ */
+
+.assignment-form-group small {
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 12px;
+    line-height: 1.5;
+
+    color: #94a3b8;
+}
+
+
+/* ============================================================
+   FILE UPLOAD
+============================================================ */
+
+.assignment-file-upload {
+    position: relative;
+}
+
+.assignment-file-upload input[type="file"] {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+
+    overflow: hidden;
+}
+
+.assignment-file-label {
+    min-height: 100px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.assignment-file-label:hover {
+    border-color: #60a5fa;
+    background: #eff6ff;
+}
+
+.assignment-file-label i {
+    font-size: 27px;
+    color: #64748b;
+}
+
+.assignment-file-label span {
+    font-size: 13px;
+    font-weight: 500;
+
+    color: #475569;
+}
+
+
+/* ============================================================
+   VALIDATION ERROR
+============================================================ */
+
+.assignment-error {
+    margin-top: 7px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    color: #dc2626;
+}
+
+
+/* ============================================================
+   FORM FOOTER
+============================================================ */
+
+.assignment-form-footer {
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 8px;
+
+    margin-top: 8px;
+
+    border-top: 1px solid #eef0f3;
+}
+
+
+/* ============================================================
+   CANCEL BUTTON
+============================================================ */
+
+.assignment-cancel-btn {
+    min-width: 100px;
+    height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 18px;
+
+    border: 1px solid #dbe1e8;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.assignment-cancel-btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #1e293b;
+}
+
+
+/* ============================================================
+   SUBMIT BUTTON
+============================================================ */
+
+.assignment-submit-btn {
+    min-width: 170px;
+    height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.assignment-submit-btn:hover {
+    background: #1d4ed8;
+
+    box-shadow:
+        0 5px 12px rgba(37, 99, 235, 0.18);
+
+    transform: translateY(-1px);
+}
+
+.assignment-submit-btn:active {
+    transform: translateY(0);
+}
+
+.assignment-submit-btn i {
+    font-size: 17px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 768px) {
+
+    .assignment-create-page {
+        padding: 10px 15px 40px;
+    }
+
+    .assignment-create-header h2 {
+        font-size: 23px;
+    }
+
+    .assignment-card-header {
+        padding: 22px;
+    }
+
+    .assignment-form {
+        padding: 22px;
+    }
+
+    .assignment-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .assignment-header-left {
+        gap: 12px;
+    }
+
+    .assignment-back-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .assignment-create-header h2 {
+        font-size: 20px;
+    }
+
+    .assignment-card-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+    }
+
+    .assignment-form-footer {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .assignment-cancel-btn,
+    .assignment-submit-btn {
+        width: 100%;
+    }
+
+}
