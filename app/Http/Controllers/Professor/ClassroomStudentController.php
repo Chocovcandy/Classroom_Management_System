@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ClassGroup;
 use Illuminate\Support\Facades\Gate;
 
-class ClassroomStudentsController extends Controller
+class ClassroomStudentController extends Controller
 {
     /**
      * Display students enrolled in the classroom.

@@ -24,7 +24,12 @@ class Department extends Model
 
 public function users()
 {
-    return $this->belongsToMany(User::class, 'department_user');
+    return $this->belongsToMany(
+        User::class,
+        'user_department',
+        'department_id',
+        'user_id'
+    );
 }
 // one Department has many Courses, and one Course belongs to one Department.
     public function courses()
@@ -32,5 +37,8 @@ public function users()
         return $this->hasMany(Course::class);
     }
 
-
+    public function college()
+    {
+        return $this->belongsTo(College::class);
+    }
 }

@@ -144,4 +144,107 @@ public function update(
             'Topic updated successfully.'
         );
 }
+
+/**
+ * Delete topic.
+ */
+public function destroy(
+    Request $request,
+    ClassGroup $classGroup,
+    Topic $topic
+) {
+    Gate::authorize('manage', $classGroup);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Make sure topic belongs to this class group
+    |--------------------------------------------------------------------------
+    */
+
+    if ($topic->class_group_id !== $classGroup->id) {
+        abort(404);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Validate delete option
+    |--------------------------------------------------------------------------
+    */
+
+    $validated = $request->validate([
+        'delete_option' => [
+            'required',
+            'in:topic_only,topic_and_classwork',
+        ],
+    ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Delete Topic Only
+    |--------------------------------------------------------------------------
+    |
+    | Keep all classwork items and remove their topic.
+    | They will appear under "No Topic".
+    |
+    */
+
+    if ($validated['delete_option'] === 'topic_only') {
+
+        $topic->materials()->update([
+            'topic_id' => null,
+        ]);
+
+        $topic->assignments()->update([
+            'topic_id' => null,
+        ]);
+
+        $topic->quizzes()->update([
+            'topic_id' => null,
+        ]);
+
+        $topic->exams()->update([
+            'topic_id' => null,
+        ]);
+
+        $topic->delete();
+
+        return redirect()
+            ->route(
+                'professor.class-groups.classroom-group.classwork',
+                ['classGroup' => $classGroup->id]
+            )
+            ->with(
+                'success',
+                'Topic deleted. Classwork moved to No Topic.'
+            );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Delete Topic + All Classwork
+    |--------------------------------------------------------------------------
+    */
+
+    if ($validated['delete_option'] === 'topic_and_classwork') {
+
+        // We will handle deleting the classwork and its resources here.
+
+        $topic->materials()->delete();
+        $topic->assignments()->delete();
+        $topic->quizzes()->delete();
+        $topic->exams()->delete();
+
+        $topic->delete();
+
+        return redirect()
+            ->route(
+                'professor.class-groups.classroom-group.classwork',
+                ['classGroup' => $classGroup->id]
+            )
+            ->with(
+                'success',
+                'Topic and all classwork deleted successfully.'
+            );
+    }
+}
 }

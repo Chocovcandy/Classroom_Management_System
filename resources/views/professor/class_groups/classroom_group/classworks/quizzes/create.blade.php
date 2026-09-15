@@ -691,6 +691,81 @@
 
 
 /* ============================================================
+   SELECTED FILES
+   ============================================================ */
+
+.quiz-selected-files {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 10px;
+}
+
+
+.quiz-selected-file {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 12px;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 9px;
+
+    background-color: var(--hover-color);
+
+}
+
+
+.quiz-selected-file i {
+    flex-shrink: 0;
+
+    font-size: 20px;
+
+    color: var(--button-color);
+}
+
+
+.quiz-selected-file-info {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.quiz-selected-file-info strong {
+    color: var(--heading-color);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.quiz-selected-file-info span {
+    color: var(--secondary-text-color);
+
+    font-size: 10px;
+}
+
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 
@@ -947,6 +1022,7 @@
                 </div>
 
 
+
                 {{-- TOPIC --}}
 
                 <div class="form-group">
@@ -1089,8 +1165,7 @@
                     </div>
 
                 </div>
-
-
+                
                 {{-- POINTS --}}
 
                 <div class="form-group">
@@ -1125,41 +1200,114 @@
 
                 </div>
 
-                                {{-- ====================================================
-                    ATTACHMENT
-                    ==================================================== --}}
+
+                {{-- GOOGLE FORM URL --}}
 
                 <div class="form-group">
 
-                    <label for="attachment">
+    <label for="google_form_url">
 
-                        Attachment
+        Google Form URL
 
-                        <span class="optional-label">
-                            Optional
-                        </span>
+        <span class="optional-label">
+            Optional
+        </span>
 
+    </label>
+
+    <input
+        type="url"
+        id="google_form_url"
+        name="google_form_url"
+        value="{{ old('google_form_url') }}"
+        placeholder="https://docs.google.com/forms/..."
+    >
+
+    @error('google_form_url')
+
+        <span class="form-error">
+            {{ $message }}
+        </span>
+
+    @enderror
+
+    <small class="form-help">
+        Paste the Google Form link that students will use to take this quiz.
+    </small>
+
+                </div>
+
+                {{-- ====================================================
+                    FILE ATTACHMENTS
+                ===================================================== --}}
+
+                <div class="form-group">
+
+                    <label for="attachments">
+                        Quiz Attachments
                     </label>
 
-                    <input
-                        type="file"
-                        id="attachment"
-                        name="attachment"
+
+                    <div class="file-upload-box">
+
+                        <input
+                            type="file"
+                            id="attachments"
+                            name="attachments[]"
+                            multiple
+                        >
+
+                        <div class="file-upload-content">
+
+                            <i class="bx bx-cloud-upload"></i>
+
+                            <strong>
+                                Choose files
+                            </strong>
+
+                            <span>
+                                Upload one or multiple PDFs, documents, slides,
+                                or other quiz-related materials.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- SELECTED FILES --}}
+                    <div
+                        id="quiz-selected-files"
+                        class="quiz-selected-files"
+                        style="display: none;"
                     >
+                    </div>
 
-                    <small class="form-help">
-                        Attach a file or resource related to this quiz.
-                    </small>
 
-                    @error('attachment')
+                    @error('attachments')
 
-                        <span class="form-error">
+                        <small class="form-error">
                             {{ $message }}
-                        </span>
+                        </small>
 
                     @enderror
 
+
+                    @error('attachments.*')
+
+                        <small class="form-error">
+                            {{ $message }}
+                        </small>
+
+                    @enderror
+
+
+                    <small class="form-help">
+                        Maximum file size: 100 MB per file.
+                    </small>
+
                 </div>
+
 
             </div>
 
@@ -1199,5 +1347,114 @@
     </section>
 
 </div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const fileInput = document.getElementById('attachments');
+    const fileList = document.getElementById('quiz-selected-files');
+
+    if (!fileInput || !fileList) {
+        return;
+    }
+
+    let selectedFiles = [];
+
+    function updateFileInput() {
+        const dataTransfer = new DataTransfer();
+
+        selectedFiles.forEach(function (file) {
+            dataTransfer.items.add(file);
+        });
+
+        fileInput.files = dataTransfer.files;
+    }
+
+    function renderSelectedFiles() {
+
+        fileList.innerHTML = '';
+
+        if (selectedFiles.length === 0) {
+            fileList.style.display = 'none';
+            return;
+        }
+
+        fileList.style.display = 'flex';
+
+        selectedFiles.forEach(function (file, index) {
+
+            const fileItem = document.createElement('div');
+            fileItem.className = 'quiz-selected-file';
+
+            const fileIcon = document.createElement('i');
+            fileIcon.className = 'bx bx-file';
+
+            const fileInfo = document.createElement('div');
+            fileInfo.className = 'quiz-selected-file-info';
+
+            const fileName = document.createElement('strong');
+            fileName.textContent = file.name;
+
+            const fileSize = document.createElement('span');
+            fileSize.textContent =
+                (file.size / 1024 / 1024).toFixed(2) + ' MB';
+
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.className = 'quiz-selected-file-remove';
+            removeButton.innerHTML = '<i class="bx bx-x"></i>';
+            removeButton.title = 'Remove file';
+
+            removeButton.addEventListener('click', function () {
+
+                selectedFiles.splice(index, 1);
+
+                updateFileInput();
+                renderSelectedFiles();
+
+            });
+
+            fileInfo.appendChild(fileName);
+            fileInfo.appendChild(fileSize);
+
+            fileItem.appendChild(fileIcon);
+            fileItem.appendChild(fileInfo);
+            fileItem.appendChild(removeButton);
+
+            fileList.appendChild(fileItem);
+        });
+    }
+
+    fileInput.addEventListener('change', function () {
+
+        const newFiles = Array.from(this.files);
+
+        newFiles.forEach(function (file) {
+
+            const duplicate = selectedFiles.some(function (existingFile) {
+
+                return (
+                    existingFile.name === file.name &&
+                    existingFile.size === file.size &&
+                    existingFile.lastModified === file.lastModified
+                );
+
+            });
+
+            if (!duplicate) {
+                selectedFiles.push(file);
+            }
+
+        });
+
+        updateFileInput();
+        renderSelectedFiles();
+
+    });
+
+});
+</script>
 
 @endsection

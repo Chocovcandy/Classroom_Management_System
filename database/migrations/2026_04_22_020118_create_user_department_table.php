@@ -11,15 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_department', function (Blueprint $table) {
+ Schema::create('user_department', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')
-                  ->constrained('users')
-                  ->onDelete('cascade');
+                ->constrained('users')
+                ->onDelete('cascade');
+
             $table->foreignId('department_id')
-                    ->constrained('departments')
-                    ->onDelete('cascade');
+                ->constrained('departments')
+                ->onDelete('cascade');
+
             $table->timestamps();
+
+            $table->unique(['user_id', 'department_id']);
         });
     }
 

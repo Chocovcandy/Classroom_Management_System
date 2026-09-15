@@ -47,7 +47,6 @@ $request->session()->put('active_role_id', $role->id);
 
 return match ($role->role_name) {
     'Admin' => redirect()->route('admin.dashboard'),
-    'Dean' => redirect()->route('dean.dashboard'),
     'HoD' => redirect()->route('hod.dashboard'),
     'Professor' => redirect()->route('professor.dashboard'),
     'Student' => redirect()->route('student.dashboard'),

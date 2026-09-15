@@ -72,31 +72,34 @@
             <section class="home section" id="home">
                 <div class="home__container container">
 
-                    <div class="home__data">
 
-                        <div class="home__badge">
-                            <span class="home__badge-dot"></span>
-                            <span>Classroom Management System</span>
-                        </div>
+<div class="home__data">
 
-                        <h1 class="home__title">
-                            Smart Classroom &<br>
-                            <span>Academic Collaboration</span><br>
-                            Platform
-                        </h1>
+    <div class="home__badge">
+        <span class="home__badge-dot"></span>
+        <span>Classroom Management System</span>
+    </div>
 
-                        <p class="home__description">
-                            A unified platform connecting students, professors, HODs, and deans
-                            to make academic activities easier, smarter, and more organized.
-                        </p>
+    <h1 class="home__title">
+        Smart Scheduling &<br>
+        <span>Classroom Management</span><br>
+        Platform
+    </h1>
 
-                        <div class="home__buttons">
-                            <a href="{{ route('role_selection') }}" class="button">
-                                Get Started
-                            </a>
-                        </div>
+    <p class="home__description">
+        A unified platform that connects students, professors, and HODs,
+        making academic activities easier, smarter, and more organized.
+    </p>
 
-                    </div>
+    <div class="home__buttons">
+        <a href="{{ route('role_selection') }}" class="button">
+            Get Started
+        </a>
+    </div>
+
+</div>
+
+
 
                     <div class="home__visual">
                         <div class="home__illustration">

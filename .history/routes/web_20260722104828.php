@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 //public routes
 Route::get('/', function () {
     return view('welcome');
-})->name('welcome')
+})->name('welcome');
 
 Route::get('/', function () {
     return view('register');

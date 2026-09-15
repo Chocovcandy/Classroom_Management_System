@@ -1,345 +1,509 @@
-/* ------------- Recent Activity Card ------------- */
+/* ============================================================
+   RECENT ACTIVITY CARD
+============================================================ */
 
 .activity-card {
+    --activity-icon-user-bg: #eef3ff;
+    --activity-icon-user-color: #7189d9;
+    --activity-icon-user-border: #dce6ff;
+
+    --activity-icon-department-bg: #f3efff;
+    --activity-icon-department-color: #9785d6;
+    --activity-icon-department-border: #e7deff;
+
+    --activity-icon-announcement-bg: #fff4e9;
+    --activity-icon-announcement-color: #dca36b;
+    --activity-icon-announcement-border: #ffe5cf;
+
+    --activity-profile-bg: #eef3ff;
+    --activity-profile-color: #7189d9;
 
     display: flex;
     flex-direction: column;
 
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
     background: var(--activity-card-bg);
-
     border: 1px solid var(--activity-border);
-
     border-radius: 22px;
 
-    /* overflow: hidden; */
-
     box-shadow: 0 15px 35px -20px var(--shadow-color);
-
 }
 
-/* to hide the table that is not active. To display the active one (the filter one) */
 
-.activity-list.hidden{
-    display:none;
+/* ============================================================
+   DARK MODE VARIABLES
+============================================================ */
+
+.dark .activity-card,
+.dark-mode .activity-card {
+    --activity-icon-user-bg: rgba(126, 151, 255, 0.14);
+    --activity-icon-user-color: #aebeff;
+    --activity-icon-user-border: rgba(174, 190, 255, 0.22);
+
+    --activity-icon-department-bg: rgba(174, 151, 255, 0.14);
+    --activity-icon-department-color: #cbbdff;
+    --activity-icon-department-border: rgba(203, 189, 255, 0.22);
+
+    --activity-icon-announcement-bg: rgba(238, 177, 103, 0.14);
+    --activity-icon-announcement-color: #f5c994;
+    --activity-icon-announcement-border: rgba(245, 201, 148, 0.22);
+
+    --activity-profile-bg: rgba(126, 151, 255, 0.14);
+    --activity-profile-color: #aebeff;
 }
 
-/* ------------- Header ------------- */
+
+/* ============================================================
+   HEADER
+============================================================ */
 
 .activity-header {
-
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 12px;
 
     padding: 10px 20px 16px;
-
 }
 
-
 .activity-header h2 {
-
     margin: 0;
 
     font-size: 20px;
-
     font-weight: 700;
-
+    line-height: 1.3;
     letter-spacing: -0.02em;
 
     color: var(--activity-header-text);
-
 }
 
 
-
-/* ------------- Filter Buttons ------------- */
+/* ============================================================
+   FILTER BUTTONS
+============================================================ */
 
 .activity-filter {
-
     display: flex;
-
-    gap: 8 px;
+    flex-wrap: wrap;
+    gap: 8px;
 
     padding: 0 20px 14px;
-
-    flex-wrap: wrap;
-
 }
 
-
-
 .activity-filter button {
-
     padding: 8px 18px;
 
+    border: 1px solid var(--activity-border);
     border-radius: 50px;
 
-    border: 1px solid var(--activity-border);
-
     background: var(--activity-card-bg);
-
     color: var(--secondary-text-color);
 
     font-size: 13px;
-
     font-weight: 600;
 
     cursor: pointer;
 
-    transition: all .25s ease;
-
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-
-
+/* Filter buttons are clickable, so hover is allowed here */
 .activity-filter button:hover {
-
-    background: var(--primary-light);
-
-    color: var(--primary-color);
-
-    border-color: var(--primary-border);
-
-}
-
-
-
-.activity-filter button.active {
-
     background: var(--primary-color);
-
-    color: var(--button-text-color);
-
+    color: #ffffff;
     border-color: var(--primary-color);
 
     box-shadow: 0 8px 18px -8px var(--primary-color);
+}
 
+.activity-filter button.active {
+    background: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+
+    box-shadow: 0 8px 18px -8px var(--primary-color);
+}
+
+.activity-filter button.active:hover {
+    background: var(--primary-color);
+    color: #ffffff;
 }
 
 
-
-/* ------------- Activity List ------------- */
-
+/* ============================================================
+   ACTIVITY LIST
+============================================================ */
 
 .activity-list {
-
     display: flex;
-
     flex-direction: column;
 
-    padding: 0 20px 10px;
+    width: 100%;
+    min-width: 0;
 
+    padding: 0 20px 5px;
+}
+
+.activity-list.hidden {
+    display: none;
+}
+
+/* Show only the first five activities */
+.activity-item:nth-child(n + 6) {
+    display: none;
 }
 
 
-/* only show 4 */
-
-.activity-item:nth-child(n+6){
-
-    display:none;
-
-}
-
-
-
-/* ------------- Activity Row ------------- */
-
+/* ============================================================
+   ACTIVITY ROW
+============================================================ */
 
 .activity-item {
-
     position: relative;
 
-    display:flex;
+    display: flex;
+    align-items: flex-start;
 
-    align-items:flex-start;
+    gap: 14px;
+    padding: 12px;
 
-    gap:15px;
-
-    padding:12px 12px;
-
-    border-radius:16px;
-
+    border-radius: 16px;
     background: transparent;
 
-    transition:.25s ease;
-
+    /*
+       Important:
+       These rows are not links or buttons.
+       Therefore, there is no cursor pointer,
+       hover background, or hover animation.
+    */
+    cursor: default;
 }
 
-
-
+/* No activity row hover effect */
 .activity-item:hover {
-
-    background:var(--activity-row-hover);
-
+    background: transparent;
 }
 
 
+/* ============================================================
+   ACTIVITY ICON CONTAINER
+============================================================ */
 
+.activity-icon-container,
+.profile-image-container {
+    position: relative;
+    z-index: 2;
 
-.activity-item svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
     flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    color: var(--primary-color);
+
+    border-radius: 14px;
+    border: 1px solid transparent;
+
+    /*
+       No transform or hover animation.
+       The activity is not clickable.
+    */
+    transform: none;
 }
 
-.activity-item svg:hover {
-    color: var(--primary-hover);
-}   
-/* Timeline Line */
-
-
-.activity-item::before {
-
-    content:"";
-
-    position:absolute;
-
-    left:33px;
-
-    top:40px;
-
-    bottom:-14px;
-
-    width:2px;
-
-    background:var(--activity-border);
-
+/* Prevent icon movement when hovering the row */
+.activity-item:hover .activity-icon-container,
+.activity-item:hover .profile-image-container {
+    transform: none;
 }
 
 
+/* ============================================================
+   SVG ICONS
+============================================================ */
 
-.activity-item:last-child::before {
+.activity-icon-container svg,
+.profile-image-container svg {
+    width: 21px;
+    height: 21px;
 
-    display:none;
+    flex-shrink: 0;
 
+    stroke-width: 2.2;
+}
+
+.activity-icon-container i,
+.profile-image-container i {
+    font-size: 21px;
+    line-height: 1;
 }
 
 
+/* ============================================================
+   USER / ACADEMIC ACTIVITY
+============================================================ */
 
-/* ------------- Profile Image ------------- */
+.activity-card .activity-icon-container.activity-user,
+.activity-card .profile-image-container.activity-user {
+    background: var(--activity-icon-user-bg);
+    border-color: var(--activity-icon-user-border);
+    color: var(--activity-icon-user-color);
+}
 
+
+/* ============================================================
+   DEPARTMENT ACTIVITY
+============================================================ */
+
+.activity-card .activity-icon-container.activity-department,
+.activity-card .profile-image-container.activity-department {
+    background: var(--activity-icon-department-bg);
+    border-color: var(--activity-icon-department-border);
+    color: var(--activity-icon-department-color);
+}
+
+
+/* ============================================================
+   ANNOUNCEMENT ACTIVITY
+============================================================ */
+
+.activity-card .activity-icon-container.activity-announcement,
+.activity-card .profile-image-container.activity-announcement {
+    background: var(--activity-icon-announcement-bg);
+    border-color: var(--activity-icon-announcement-border);
+    color: var(--activity-icon-announcement-color);
+}
+
+
+/* ============================================================
+   DEFAULT PROFILE ICON
+============================================================ */
+
+.activity-card .default-profile-icon {
+    width: 21px;
+    height: 21px;
+
+    color: var(--activity-profile-color);
+}
+
+
+/* ============================================================
+   PROFILE IMAGE
+============================================================ */
 
 .profile-image-container {
+    overflow: hidden;
 
-    width:42px;
+    border-radius: 50%;
+    border: 2px solid var(--activity-card-bg);
 
-    height:42px;
-
-    flex-shrink:0;
-
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-
-    border-radius:50%;
-
-
-    background:var(--primary-light);
-
-    border:2px solid var(--activity-card-bg);
-
-
-    overflow:hidden;
-
-    position:relative;
-
-    z-index:2;
-
+    background: var(--activity-profile-bg);
+    color: var(--activity-profile-color);
 }
-
-
 
 .user-profile-image {
+    width: 100%;
+    height: 100%;
 
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
+    object-fit: cover;
 }
 
 
+/* ============================================================
+   TIMELINE LINE
+============================================================ */
 
-.default-profile-icon {
+.activity-item::before {
+    content: "";
 
-    width:21px;
+    position: absolute;
 
-    height:21px;
+    left: 32px;
+    top: 52px;
+    bottom: -14px;
 
-    color:var(--activity-avatar-placeholder);
+    width: 2px;
 
+    background: var(--activity-border);
+}
+
+.activity-item:last-child::before {
+    display: none;
 }
 
 
-
-/* ------------- Information ------------- */
-
+/* ============================================================
+   ACTIVITY INFORMATION
+============================================================ */
 
 .activity-info {
+    display: flex;
+    flex-direction: column;
 
-    flex:1;
-
-    display:flex;
-
-    flex-direction:column;
+    flex: 1;
+    min-width: 0;
 
     gap: 3px;
-
-    padding-top:1px;
-
+    padding-top: 1px;
 }
-
-
 
 .activity-title {
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.4;
 
-    font-size:14px;
-
-    font-weight:650;
-
-    line-height:1.4;
-
-    color:var(--activity-title);
-
+    color: var(--activity-title);
 }
-
-
 
 .activity-subtitle {
+    font-size: 13px;
+    line-height: 1.4;
 
-    font-size:13px;
-
-    line-height:1.4;
-
-    color:var(--activity-description);
-
+    color: var(--activity-description);
 }
 
 
-
-/* ------------- Time ------------- */
-
+/* ============================================================
+   ACTIVITY TIME
+============================================================ */
 
 .activity-time {
+    min-width: 60px;
 
-    padding-top:3px;
+    padding-top: 3px;
 
-    min-width:60px;
+    text-align: right;
 
-    text-align:right;
+    font-size: 12px;
+    font-weight: 600;
 
-    font-size:12px;
-
-    font-weight:600;
-
-    color:var(--activity-time);
-
+    color: var(--activity-time);
 }
 
 
+/* ============================================================
+   DARK MODE ICON PROTECTION
+============================================================ */
+
+.dark .activity-card .activity-icon-container.activity-user,
+.dark-mode .activity-card .activity-icon-container.activity-user,
+.dark .activity-card .profile-image-container.activity-user,
+.dark-mode .activity-card .profile-image-container.activity-user {
+    background: var(--activity-icon-user-bg);
+    border-color: var(--activity-icon-user-border);
+    color: var(--activity-icon-user-color);
+}
+
+.dark .activity-card .activity-icon-container.activity-department,
+.dark-mode .activity-card .activity-icon-container.activity-department,
+.dark .activity-card .profile-image-container.activity-department,
+.dark-mode .activity-card .profile-image-container.activity-department {
+    background: var(--activity-icon-department-bg);
+    border-color: var(--activity-icon-department-border);
+    color: var(--activity-icon-department-color);
+}
+
+.dark .activity-card .activity-icon-container.activity-announcement,
+.dark-mode .activity-card .activity-icon-container.activity-announcement,
+.dark .activity-card .profile-image-container.activity-announcement,
+.dark-mode .activity-card .profile-image-container.activity-announcement {
+    background: var(--activity-icon-announcement-bg);
+    border-color: var(--activity-icon-announcement-border);
+    color: var(--activity-icon-announcement-color);
+}
+
+.dark .activity-card .profile-image-container,
+.dark-mode .activity-card .profile-image-container {
+    background: var(--activity-profile-bg);
+    color: var(--activity-profile-color);
+}
+
+.dark .activity-card .default-profile-icon,
+.dark-mode .activity-card .default-profile-icon {
+    color: var(--activity-profile-color);
+}
+
+
+/* ============================================================
+   RESPONSIVE DESIGN
+============================================================ */
+
+@media (max-width: 768px) {
+    .activity-header {
+        padding: 16px;
+    }
+
+    .activity-filter {
+        padding: 0 16px 14px;
+    }
+
+    .activity-list {
+        padding: 0 12px 10px;
+    }
+
+    .activity-item {
+        gap: 12px;
+        padding: 10px;
+    }
+
+    .activity-time {
+        min-width: auto;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 520px) {
+    .activity-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .activity-filter button {
+        padding: 7px 13px;
+        font-size: 12px;
+    }
+
+    .activity-icon-container,
+    .profile-image-container {
+        width: 40px;
+        height: 40px;
+    }
+
+    .activity-icon-container svg,
+    .profile-image-container svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .activity-icon-container i,
+    .profile-image-container i {
+        font-size: 20px;
+    }
+
+    .activity-title {
+        font-size: 13px;
+    }
+
+    .activity-subtitle {
+        font-size: 12px;
+    }
+
+    .activity-time {
+        display: none;
+    }
+
+    .activity-item::before {
+        left: 30px;
+    }
+}

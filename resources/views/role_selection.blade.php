@@ -193,11 +193,9 @@
 
     @auth
 
-        @php
-
-            $role = auth()->user()->roles->first()->role_name ?? 'User';
-
-        @endphp
+@php
+    $role = session('current_role_name');
+@endphp
 
 
         <div class="mt-8 w-full max-w-md mx-auto">

@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Exam extends Model
 {
@@ -19,7 +21,9 @@ class Exam extends Model
         'due_date',
         'due_time',
         'points',
-        'attachment',
+        'google_form_url',
+        'created_at',
+        'updated_at',
     ];
 
     protected $casts = [
@@ -49,5 +53,24 @@ class Exam extends Model
     public function topic(): BelongsTo
     {
         return $this->belongsTo(Topic::class);
+    }
+
+    /**
+     * Exam resources.
+     */
+    public function resources(): MorphMany
+    {
+        return $this->morphMany(Resource::class, 'resourceable');
+    }
+
+    /**
+     * Student submissions for this exam.
+     */
+    public function submissions(): HasMany
+    {
+        return $this->hasMany(
+            ExamSubmission::class,
+            'exam_id'
+        );
     }
 }

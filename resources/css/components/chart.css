@@ -1,56 +1,195 @@
-/* =========== Dashboard chart component  */
+/* ============================================================
+   STUDENT ENROLLMENT CHART
+============================================================ */
 
+.chart-card {
 
-/* chart graph  */
+    width: 100%;
 
-.chart-card{
+    max-width: 100%;
+
+    min-width: 0;
+
+    box-sizing: border-box;
+
     display: flex;
+
     flex-direction: column;
 
-    background: var(--card-color);
-    border: 1px solid var(--border-color);
-    border-radius: 15px;
+    padding: 19px;
 
-    padding: 13px;
+    background: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+}
+
+
+/* ============================================================
+   CHART HEADER
+============================================================ */
+
+.chart-header {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    min-width: 0;
+
+    margin-bottom: 8px;
 
 }
 
 
 .chart-header h2 {
 
-    font-size:20px;
+    margin: 0 0 5px;
 
-    color:var(--heading-color);
+    font-size: 24px;
 
-    margin-bottom:5px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    color: var(--heading-color);
 
 }
 
 
 .chart-header p {
 
-    font-size:13px;
+    margin: 0;
 
-    color:var(--secondary-text-color);
+    font-size: 15px;
+
+    line-height: 1.3;
+
+    color: var(--secondary-text-color);
 
 }
 
 
-
+/* ============================================================
+   CHART CONTAINER
+============================================================ */
 .chart-container {
-
-
-    width:100%;
-    
-    height: 370px;
-
     position: relative;
 
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    height: 320px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
+
+
+/* ============================================================
+   CHART CANVAS
+============================================================ */
 
 .chart-container canvas {
 
+    display: block;
+
     width: 100% !important;
 
+    max-width: 100% !important;
+
     height: 100% !important;
+
+    box-sizing: border-box;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE CHART
+============================================================ */
+
+@media (max-width: 850px) {
+
+    .chart-card {
+
+        padding: 16px;
+
+    }
+
+
+    .chart-header {
+
+        margin-bottom: 7px;
+
+    }
+
+
+    .chart-header h2 {
+
+        font-size: 22px;
+
+    }
+
+
+    .chart-header p {
+
+        font-size: 14px;
+
+    }
+
+
+    .chart-container {
+
+        height: 260px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .chart-card {
+
+        padding: 14px;
+
+        border-radius: 16px;
+
+    }
+
+
+    .chart-header {
+
+        margin-bottom: 6px;
+
+    }
+
+
+    .chart-header h2 {
+
+        font-size: 20px;
+
+    }
+
+
+    .chart-header p {
+
+        font-size: 13px;
+
+    }
+
+
+    .chart-container {
+
+        height: 230px;
+
+    }
+
 }

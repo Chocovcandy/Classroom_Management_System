@@ -4,6 +4,84 @@
 
 @section('content')
 
+    <style>
+        /* Department page: wider layout and clearer icon colors */
+        .department-page {
+            width: min(1500px, calc(100% - 24px)) !important;
+            max-width: 1500px !important;
+            margin: 0 auto !important;
+        }
+
+        .department-header,
+        .table-toolbar,
+        .department-table-wrapper,
+        .pagination-wrapper {
+            width: 100%;
+        }
+
+        .department-table {
+            width: 100%;
+        }
+
+        .department-icon {
+            color: #ffffff !important;
+            background: #253fe8 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .department-table tbody tr:nth-child(3n + 1) .department-icon {
+            background: #253fe8 !important;
+            color: #ffffff !important;
+        }
+
+        .department-table tbody tr:nth-child(3n + 2) .department-icon {
+            background: #4f46e5 !important;
+            color: #ffffff !important;
+        }
+
+        .department-table tbody tr:nth-child(3n) .department-icon {
+            background: #0891b2 !important;
+            color: #ffffff !important;
+        }
+
+        .department-icon svg {
+            stroke: currentColor !important;
+        }
+
+        .edit-btn {
+            color: #059669 !important;
+        }
+
+        .edit-btn svg {
+            stroke: currentColor !important;
+        }
+
+        .delete-btn {
+            color: #ef4444 !important;
+        }
+
+        .delete-btn svg {
+            stroke: currentColor !important;
+        }
+
+        @media (max-width: 900px) {
+            .department-page {
+                width: calc(100% - 20px) !important;
+            }
+
+            .department-table-wrapper {
+                overflow-x: auto;
+            }
+
+            .department-table {
+                min-width: 850px;
+            }
+        }
+    </style>
+
+
 <div class="department-page">
 
     <!-- Header -->
@@ -60,7 +138,7 @@
                     <input type="text"
                         name="search"
                         value="{{ request('search') }}"
-                        placeholder="Search users...">
+                        placeholder="Search departments...">
 
                 </div>
 
@@ -109,8 +187,8 @@
 
 
                     <div class="table-dropdown-header">
-                        <h3>Sort Users</h3>
-                        <p>Choose how users are ordered.</p>
+                        <h3>Sort Departments</h3>
+                        <p>Choose how departments are ordered.</p>
                     </div>
 
 
@@ -141,7 +219,7 @@
 
                     <div class="table-dropdown-actions">
 
-                        <a href="{{ route('admin.users.index', array_filter([
+                        <a href="{{ route('admin.departments.index', array_filter([
                             'search' => request('search'),
                             'sort' => request('sort'),
                         ])) }}"
@@ -294,7 +372,7 @@
                 @empty
             <!-- /* WHEN USERS SEARCH IS NOT FOUND WE SHOW THIS MESSAGE */ -->
                     <tr>
-                        <td colspan="6" class="table-empty">
+                        <td colspan="5" class="table-empty">
 
                             <div class="table-empty-content">
 

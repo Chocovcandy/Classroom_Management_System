@@ -117,5 +117,8 @@ public function topics(): HasMany
     return $this->hasMany(Topic::class)
                 ->orderBy('order');
 }
-
+public function projects(): HasMany
+{
+    return $this->hasMany(Project::class, 'class_group_id');
+}
 }

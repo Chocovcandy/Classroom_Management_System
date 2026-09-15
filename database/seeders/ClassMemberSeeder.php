@@ -13,23 +13,19 @@ class ClassMemberSeeder extends Seeder
      */
     public function run(): void
     {
-        // Get the student
-        $student = User::where('email', 'meii@gmail.com')->first();
+        // Get the students
+        $students = User::whereHas('roles', function ($query) {
+            $query->where('role_name', 'Student');
+        })->get();
 
-        if (!$student) {
-            return;
-        }
+        // Get all class groups
+        $classGroups = ClassGroup::all();
 
-        // Get the Web Development class group
-        $webDevelopmentGroup = ClassGroup::where(
-            'group_name',
-            'Web Development A'
-        )->first();
-
-        if ($webDevelopmentGroup) {
-            $webDevelopmentGroup->students()->syncWithoutDetaching([
-                $student->id
-            ]);
+        // Add all students to every class group
+        foreach ($classGroups as $classGroup) {
+            $classGroup->students()->syncWithoutDetaching(
+                $students->pluck('id')->toArray()
+            );
         }
     }
 }

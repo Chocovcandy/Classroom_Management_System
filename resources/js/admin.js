@@ -245,10 +245,10 @@ if (ctx) {
                     label: "Students",
 
                     data: [
-                        320,
+                        200,
                         280,
-                        240,
-                        190
+                        300,
+                        390
                     ],
 
                     borderWidth: 3,

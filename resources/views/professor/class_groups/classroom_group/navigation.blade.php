@@ -37,16 +37,19 @@
 
 
     {{-- MARKS --}}
-    <a
-        href="#"
-        class="classroom-nav-item"
-    >
-        <i class="bx bx-bar-chart-alt-2"></i>
+<a
+    href="{{ route(
+        'professor.class-groups.marks',
+        ['classGroup' => $classGroup->id]
+    ) }}"
+    class="classroom-nav-item {{ request()->routeIs('professor.class-groups.marks') ? 'active' : '' }}"
+>
+    <i class="bx bx-bar-chart-alt-2"></i>
 
-        <span>
-            Marks
-        </span>
-    </a>
+    <span>
+        Marks
+    </span>
+</a>
 
 
     {{-- STUDENTS --}}

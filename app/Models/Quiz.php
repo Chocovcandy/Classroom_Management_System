@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Quiz extends Model
 {
@@ -19,6 +21,9 @@ class Quiz extends Model
         'due_date',
         'due_time',
         'points',
+        'google_form_url',
+        'created_at',
+        'updated_at',
     ];
 
     protected $casts = [
@@ -57,4 +62,29 @@ class Quiz extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /*
+|--------------------------------------------------------------------------
+| Resources
+|--------------------------------------------------------------------------
+*/
+
+public function resources(): MorphMany
+{
+    return $this->morphMany(Resource::class, 'resourceable');
+}
+
+/*
+|--------------------------------------------------------------------------
+| Student Submissions
+|--------------------------------------------------------------------------
+*/
+
+public function submissions(): HasMany
+{
+    return $this->hasMany(
+        QuizSubmission::class,
+        'quiz_id'
+    );
+}
 }

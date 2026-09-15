@@ -12,7 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('schedules', function (Blueprint $table) {
+
+            // Primary key
             $table->id();
+
+            // Schedule grouping
+            $table->uuid('schedule_group_id')
+                ->nullable()
+                ->index();
 
             // Core relationships
             $table->foreignId('course_id')
@@ -27,18 +34,41 @@ return new class extends Migration
                 ->constrained('classrooms')
                 ->cascadeOnDelete();
 
-            // Time structure (flexible system)
-            $table->string('day_of_week'); // Mon, Tue, Wed...
+            // Time structure
+            $table->string('day_of_week');
 
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->foreignId('slot_id')
+                ->constrained('time_slots')
+                ->cascadeOnDelete();
 
-            // Academic term
+            // Academic information
             $table->string('semester');
 
+            $table->string('academic_year', 20);
+
+            $table->unsignedInteger('promotion');
+
+            // Academic dates
+            $table->date('starting_date')->nullable();
+
+            $table->date('finished_date')->nullable();
+
+            $table->date('midterm_exam_start')->nullable();
+
+            $table->date('midterm_exam_end')->nullable();
+
+            $table->date('final_exam_start')->nullable();
+
+            $table->date('final_exam_end')->nullable();
+
             // Approval workflow
-            $table->enum('status', ['pending', 'approved', 'rejected'])
-                ->default('pending');
+            $table->enum('status', [
+                'draft',
+                'pending',
+                'approved',
+                'rejected',
+                'published'
+            ])->default('draft');
 
             $table->foreignId('created_by')
                 ->constrained('users')
@@ -49,15 +79,12 @@ return new class extends Migration
                 ->constrained('users')
                 ->nullOnDelete();
 
-            // Optional note (VERY useful in real systems)
+            // Optional note
             $table->text('note')->nullable();
 
             $table->timestamps();
 
-            // Indexes for performance
-            //what is indexes doing here? it makes queries faster when we search by these columns.
-            //why? because we will often query schedules by professor, room, day, and course.
-            //it like a search engine for schedules, we want it to be fast.
+            // Indexes for common schedule queries
             $table->index(['professor_id', 'day_of_week']);
             $table->index(['room_id', 'day_of_week']);
             $table->index(['course_id']);

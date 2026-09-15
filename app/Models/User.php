@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 use App\Models\Role;
 use App\Models\Department;
 use App\Models\Schedule;
 use App\Models\Course;
 use App\Models\ClassGroup;
+
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -86,6 +89,7 @@ public function roles()
         return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
     }
 
+
         /**
      * ----------------------------------------
      * ROLE CHECK: Is Admin?
@@ -143,11 +147,30 @@ public function classGroups()
     )->withTimestamps();
 }
 
-
+// user can have many assignments and assignment submissions
 public function assignments(): HasMany
 {
     return $this->hasMany(Assignment::class);
 }
 
+public function assignmentSubmissions()
+{
+    return $this->hasMany(
+        AssignmentSubmission::class,
+        'student_id'
+    );
+}
 
+public function quizSubmissions()
+{
+    return $this->hasMany(
+        QuizSubmission::class,
+        'student_id'
+    );
+}
+
+public function projectGroupMembers(): HasMany
+{
+    return $this->hasMany(ProjectGroupMember::class);
+}
 }

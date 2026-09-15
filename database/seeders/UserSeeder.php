@@ -19,18 +19,19 @@ class UserSeeder extends Seeder
             $cs = Department::where('department_name', 'Computer Science')->first();
         $english = Department::where('department_name', 'English')->first();
         $management = Department::where('department_name', 'Management')->first();  
+
         // Create users
+
         $seed1 = User::create([
             'name' => 'Super Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678'),
-
         ]);
+
         // Assign Admin role to the first user
          $seed1->roles()->attach(
             Role::where('role_name', 'Admin')->value('id')
         );
-    
 
         // pich has 1 role 
         $seed2 = User::create([
@@ -39,6 +40,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
             // 'profile_image' => 'images/profile_images/pich.jpg', // Assuming you have a profile image for pich 
         ]);
+
         // assign Dean role to the second user
          $seed2->roles()->attach(
             Role::where('role_name', 'Professor')->value('id') // Assuming 2 is Dean
@@ -50,6 +52,7 @@ class UserSeeder extends Seeder
             $english->id,
             $management->id
         ]);
+
 
 
         // theary has 2 roles, HoD and Professor
@@ -73,12 +76,14 @@ class UserSeeder extends Seeder
         $cs->save();
 
 
+
         // chy has 1 role, Professor
          $seed4 = User::create([
             'name' => 'chy',
             'email' => 'chy@gmail.com',
             'password' => bcrypt('12345678'),
         ]);
+
         // assign Professor role to the fourth user
          $seed4->roles()->attach(
             Role::where('role_name', 'Professor')->value('id')
@@ -86,7 +91,7 @@ class UserSeeder extends Seeder
 
         // Professor belongs to one department
         $seed4->departments()->sync([$english->id]);
-    
+
 
 
         // meii has 1 role, Student
@@ -96,7 +101,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
 
-        //same same with the fifth user, assign both Student role
+        // same same with the fifth user, assign both Student role
             $seed5->roles()->attach(
                 Role::where('role_name', 'Student')->value('id')
             );
@@ -104,10 +109,115 @@ class UserSeeder extends Seeder
         // Student belongs to one department
         $seed5->departments()->sync([$english->id]);    
 
-        //note: this is the  id each role in the roles table after seeding the RoleSeeder to the database
-        // role_id = 2 for Dean
-        // role_id = 3 for HoD
-        // role_id = 4 for Professor
-        // role_id = 5 for Student
+        // Student 6
+        $seed6 = User::create([
+            'name' => 'student6',
+            'email' => 'student6@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        // assign Student role
+        $seed6->roles()->attach(
+            Role::where('role_name', 'Student')->value('id')
+        );
+
+        // Student belongs to one department
+        $seed6->departments()->sync([$cs->id]);
+
+        // Student 7
+        $seed7 = User::create([
+            'name' => 'student7',
+            'email' => 'student7@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        // assign Student role
+        $seed7->roles()->attach(
+            Role::where('role_name', 'Student')->value('id')
+        );
+
+        // Student belongs to one department
+        $seed7->departments()->sync([$cs->id]);
+
+        // Student 8
+        $seed8 = User::create([
+            'name' => 'student8',
+            'email' => 'student8@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        // assign Student role
+        $seed8->roles()->attach(
+            Role::where('role_name', 'Student')->value('id')
+        );
+
+        // Student belongs to one department
+        $seed8->departments()->sync([$english->id]);
+
+        // Student 9
+        $seed9 = User::create([
+            'name' => 'student9',
+            'email' => 'student9@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        // assign Student role
+        $seed9->roles()->attach(
+            Role::where('role_name', 'Student')->value('id')
+        );
+
+        // Student belongs to one department
+        $seed9->departments()->sync([$management->id]);
+
+        // Student 10
+        $seed10 = User::create([
+            'name' => 'student10',
+            'email' => 'student10@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        // assign Student role
+        $seed10->roles()->attach(
+            Role::where('role_name', 'Student')->value('id')
+        );
+
+        // Student belongs to one department
+        $seed10->departments()->sync([$management->id]);
+
+        // Student 11
+        $seed11 = User::create([
+            'name' => 'student11',
+            'email' => 'student11@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        // assign Student role
+        $seed11->roles()->attach(
+            Role::where('role_name', 'Student')->value('id')
+        );
+
+        // Student belongs to one department
+        $seed11->departments()->sync([$cs->id]);
+
+        // Student 12
+        $seed12 = User::create([
+            'name' => 'student12',
+            'email' => 'student12@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        // assign Student role
+        $seed12->roles()->attach(
+            Role::where('role_name', 'Student')->value('id')
+        );
+
+        // Student belongs to one department
+        $seed12->departments()->sync([$english->id]);    
+
+        //*note: this is the  id each role in the roles table after seeding the RoleSeeder to the database*
+        // *role_id = 2 for Dean*
+        // *role_id = 3 for HoD*
+        // *role_id = 4 for Professor*
+        // *role_id = 5 for Student*
     }
 }

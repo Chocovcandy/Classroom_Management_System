@@ -128,7 +128,9 @@
                             <p>{{ auth()->user()->email }}</p>
 
                             <span class="role-badge">
-                                {{ auth()->user()->roles()->first()->name ?? 'No Role' }}
+                                Student
+                            </span>
+        
 
                         </div>
 
@@ -188,7 +190,7 @@
                         </a>
                     </li>
 
-                    <li><a href=" " class="sidebar-link" id="sidebarlinks">
+                    <li><a href=" {{ route('student.schedules.index') }} " class="sidebar-link" id="sidebarlinks">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap-icon lucide-graduation-cap">
                                 <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
                                 <path d="M22 10v6" />
@@ -200,7 +202,7 @@
                         </a></li>
 
 
-                     <li><a href=" {{ route('student.class-groups.lists.index') }}" class="sidebar-link" id="sidebarlinks">
+                     <li><a href=" {{ route('student.class-groups.index') }}" class="sidebar-link" id="sidebarlinks">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-marked-icon lucide-book-marked"><path d="M10 2v8l3-3 3 3V2"/><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/>
                             </svg>        

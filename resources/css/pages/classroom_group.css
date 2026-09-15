@@ -1603,6 +1603,289 @@
 .stream-item-detail-link:hover .stream-item-title {
     opacity: 0.7;
 }
+
+/* ============================================================
+   STREAM CONTENT LINKS
+   Classwork title/topic links to the Show page.
+   Announcements intentionally do not use this link.
+   ============================================================ */
+
+.stream-item-content-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.stream-item-content-link .stream-item-title {
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.stream-item-content-link:hover .stream-item-title {
+    opacity: 0.72;
+}
+
+
+/* ============================================================
+   STREAM ANNOUNCEMENT
+   Announcements are fully readable in the Stream.
+   They do not have a Show page.
+   ============================================================ */
+
+.stream-announcement-content {
+    min-width: 0;
+}
+
+.stream-announcement-text {
+    margin: 9px 0 0;
+
+    color: var(--activity-description);
+
+    font-size: 13px;
+    line-height: 1.7;
+
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+
+/* ============================================================
+   THREE-DOT OPTIONS CONTAINER
+   ============================================================ */
+
+.stream-item-options {
+    position: relative;
+
+    flex-shrink: 0;
+
+    margin-left: auto;
+}
+
+
+/* ============================================================
+   THREE-DOT BUTTON
+   ============================================================ */
+
+.stream-item-options .stream-item-menu {
+    margin-top: -3px;
+}
+
+
+/* ============================================================
+   THREE-DOT DROPDOWN
+   ============================================================ */
+
+.stream-options-menu {
+    position: absolute;
+
+    top: calc(100% + 6px);
+    right: 0;
+
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 150px;
+
+    padding: 5px;
+
+    box-sizing: border-box;
+
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+
+    box-shadow:
+        0 10px 30px var(--shadow-color);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform:
+        translateY(-4px)
+        scale(0.98);
+
+    transform-origin: top right;
+
+    transition:
+        opacity 0.15s ease,
+        visibility 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+/* ============================================================
+   DROPDOWN OPEN
+   ============================================================ */
+
+.stream-item-options.show .stream-options-menu {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* ============================================================
+   DROPDOWN FORM
+   ============================================================ */
+
+.stream-options-form {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ============================================================
+   DROPDOWN ITEM
+   Shared by links and buttons.
+   ============================================================ */
+
+.stream-options-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    width: 100%;
+
+    min-height: 36px;
+
+    padding: 0 10px;
+
+    box-sizing: border-box;
+
+    color: var(--heading-color);
+
+    background-color: transparent;
+
+    border: none;
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 650;
+
+    text-decoration: none;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        color 0.15s ease,
+        background-color 0.15s ease;
+}
+
+
+/* ============================================================
+   DROPDOWN ICON
+   ============================================================ */
+
+.stream-options-item i {
+    width: 18px;
+
+    flex-shrink: 0;
+
+    color: var(--secondary-text-color);
+
+    font-size: 16px;
+
+    text-align: center;
+}
+
+
+/* ============================================================
+   DROPDOWN HOVER
+   ============================================================ */
+
+.stream-options-item:hover {
+    color: var(--heading-color);
+
+    background-color: var(--surface-hover);
+}
+
+.stream-options-item:hover i {
+    color: var(--heading-color);
+}
+
+
+/* ============================================================
+   DELETE ITEM
+   ============================================================ */
+
+.stream-options-item.stream-options-delete {
+    color: var(--danger-color);
+}
+
+.stream-options-item.stream-options-delete i {
+    color: var(--danger-color);
+}
+
+.stream-options-item.stream-options-delete:hover {
+    color: var(--danger-color);
+
+    background-color: var(--danger-soft);
+}
+
+
+/* ============================================================
+   ANNOUNCEMENT OPTIONS — ONLY OWNER
+   ============================================================ */
+
+.stream-item-announcement .stream-item-options {
+    margin-left: auto;
+}
+
+
+/* ============================================================
+   KEEP MENU ABOVE LONG ANNOUNCEMENTS
+   ============================================================ */
+
+.stream-item-announcement {
+    overflow: visible;
+}
+
+.stream-item-announcement .stream-item-content {
+    overflow: visible;
+}
+
+
+/* ============================================================
+   SMALL SCREEN — DROPDOWN
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .stream-announcement-text {
+        font-size: 12.5px;
+        line-height: 1.65;
+    }
+
+    .stream-options-menu {
+        min-width: 140px;
+    }
+
+    .stream-options-item {
+        min-height: 34px;
+
+        font-size: 11.5px;
+    }
+
+}
+
+
 /* ============================================================
    STREAM RESPONSIVE
    ============================================================ */

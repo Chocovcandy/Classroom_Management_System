@@ -188,114 +188,185 @@
 
             <!-- need an controller to show each records and a little js by the datataype -->
             <!-- ALL List combine in here but we only show thw 5 most recent  -->
-            <div class="activity-list" data-type="all">
+<div class="activity-list" data-type="all">
 
-                @foreach($recentActivities as $activity)
+    @foreach ($recentActivities as $activity)
 
-                <div class="activity-item">
+        <div class="activity-item">
 
-                    <div class="profile-image-container">
+            {{-- =====================================================
+                 ACTIVITY ICON
+            ====================================================== --}}
+            <div class="profile-image-container">
 
-                        {{-- Academic Staff --}}
-                        @if($activity['type'] === 'academic')
+                {{-- Academic Staff / User --}}
+                @if ($activity['type'] === 'academic')
 
-                        @if($activity['profile_image'])
+                    @if (!empty($activity['profile_image']))
 
                         <img
                             src="{{ asset('storage/' . $activity['profile_image']) }}"
                             alt="Profile Image"
-                            class="user-profile-image">
+                            class="user-profile-image"
+                        >
 
-                        @else
+                    @else
 
-                        {{-- Default profile icon --}}
-                        <svg xmlns="http://www.w3.org/2000/svg"
+                        {{-- Default User Icon --}}
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke-width="2.25"
                             stroke="currentColor"
-                            class="default-profile-icon">
-
-                            <path stroke-linecap="round"
+                            class="default-profile-icon"
+                            aria-hidden="true"
+                        >
+                            <path
+                                stroke-linecap="round"
                                 stroke-linejoin="round"
-                                d="M15.75 6a3.75 3.75 0 11-7.5 0
-                                   3.75 3.75 0 017.5 0z
-                                   M4.501 20.118a7.5 7.5 0 0114.998 0
-                                   A17.933 17.933 0 0112 21.75
-                                   c-2.676 0-5.216-.584-7.499-1.632z" />
+                                d="M15.75 6a3.75 3.75 0 1 1-7.5 0
+                                   3.75 3.75 0 0 1 7.5 0z
 
+                                   M4.501 20.118
+                                   a7.5 7.5 0 0 1 14.998 0
+
+                                   A17.933 17.933 0 0 1 12 21.75
+                                   c-2.676 0-5.216-.584-7.499-1.632z"
+                            />
                         </svg>
 
-                        @endif
+                    @endif
 
+                {{-- Department --}}
+                @elseif ($activity['type'] === 'department')
 
-                        {{-- Department icon is there any recent department was created --}}
-                        @elseif($activity['type'] === 'department')
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="activity-icon"
+                        aria-hidden="true"
+                    >
+                        <path d="M12 10h.01" />
+                        <path d="M12 14h.01" />
+                        <path d="M12 6h.01" />
 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building-icon lucide-building">
-                            <path d="M12 10h.01" />
-                            <path d="M12 14h.01" />
-                            <path d="M12 6h.01" />
-                            <path d="M16 10h.01" />
-                            <path d="M16 14h.01" />
-                            <path d="M16 6h.01" />
-                            <path d="M8 10h.01" />
-                            <path d="M8 14h.01" />
-                            <path d="M8 6h.01" />
-                            <path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
-                            <rect x="4" y="2" width="16" height="20" rx="2" />
-                        </svg>
+                        <path d="M16 10h.01" />
+                        <path d="M16 14h.01" />
+                        <path d="M16 6h.01" />
 
-                        {{-- Announcement icon is there any recent annoucement was created --}}
-                        @elseif($activity['type'] === 'announcement')
+                        <path d="M8 10h.01" />
+                        <path d="M8 14h.01" />
+                        <path d="M8 6h.01" />
 
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="2"
-                            stroke="currentColor"
-                            class="activity-icon">
+                        <path
+                            d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"
+                        />
 
-                            <path stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M10.5 6.75L15.75 3v18l-5.25-3.75
-                               M15.75 6.75h2.25a3 3 0 013 3v4.5
-                               a3 3 0 01-3 3h-2.25
+                        <rect
+                            x="4"
+                            y="2"
+                            width="16"
+                            height="20"
+                            rx="2"
+                        />
+                    </svg>
+
+                {{-- Announcement --}}
+                @elseif ($activity['type'] === 'announcement')
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        class="activity-icon"
+                        aria-hidden="true"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M10.5 6.75L15.75 3v18l-5.25-3.75
+
+                               M15.75 6.75h2.25
+                               a3 3 0 0 1 3 3v4.5
+                               a3 3 0 0 1-3 3h-2.25
+
                                M10.5 6.75H5.25
-                               A2.25 2.25 0 003 9v6
-                               a2.25 2.25 0 002.25 2.25h5.25
-                               M7.5 17.25l1.5 3h3l-1.5-3" />
+                               A2.25 2.25 0 0 0 3 9v6
+                               a2.25 2.25 0 0 0 2.25 2.25h5.25
 
-                        </svg>
+                               M7.5 17.25l1.5 3h3l-1.5-3"
+                        />
+                    </svg>
 
-                        @endif
-
-                    </div>
-
-
-                    <div class="activity-info">
-
-                        <span class="activity-title">
-                            {{ $activity['name'] }}
-                            {{ $activity['action'] }}
-                        </span>
-
-                        <span class="activity-subtitle">
-                            {{ $activity['created_at']->format('F j, Y, g:i a') }}
-                        </span>
-
-                    </div>
-
-
-                    <span class="activity-time">
-                        {{ $activity['created_at']->diffForHumans() }}
-                    </span>
-
-                </div>
-
-                @endforeach
+                @endif
 
             </div>
+
+
+            {{-- =====================================================
+                 ACTIVITY INFORMATION
+            ====================================================== --}}
+            <div class="activity-info">
+
+                <span class="activity-title">
+
+                    @if ($activity['type'] === 'academic')
+
+                        {{-- Do not show the admin name here --}}
+                        A new user account was created
+
+                    @elseif ($activity['type'] === 'department')
+
+                        {{ $activity['name'] ?? 'A department' }}
+                        created a new department
+
+                    @elseif ($activity['type'] === 'announcement')
+
+                        {{ $activity['name'] ?? 'A user' }}
+                        created a new announcement
+
+                    @else
+
+                        {{ $activity['action'] ?? 'New activity' }}
+
+                    @endif
+
+                </span>
+
+
+                <span class="activity-subtitle">
+
+                    {{ $activity['created_at']->format('F j, Y, g:i a') }}
+
+                </span>
+
+            </div>
+
+
+            {{-- =====================================================
+                 ACTIVITY TIME
+            ====================================================== --}}
+            <span class="activity-time">
+
+                {{ $activity['created_at']->diffForHumans() }}
+
+            </span>
+
+        </div>
+
+    @endforeach
+
+</div>
 
             <!-- academic staff list (DEAN, PROFESSOR , HOD) -->
             <div class="activity-list hidden" data-type="academics">
@@ -427,86 +498,152 @@
         <!-- =============================overview card ===========================-->
 <div class="overview-card">
 
-            <div class="overview-header">
-                <h2>Today's Summary</h2>
-                <span class="overview-eyebrow">{{ now()->format('M j') }}</span>
+    <div class="overview-header">
+        <h2>Today's Summary</h2>
+
+        <span class="overview-eyebrow">
+            {{ now()->format('M j') }}
+        </span>
+    </div>
+
+    <div class="overview-content">
+
+        {{-- New Users --}}
+        <div class="overview-item" data-stat="classes">
+
+            <div class="overview-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="2"
+                     stroke="currentColor">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M15 19.128a9.38 9.38 0 0 0 2.625.372
+                          9.337 9.337 0 0 0 4.121-.952
+                          4.125 4.125 0 0 0-7.533-2.493
+                          M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07
+                          M15 19.128v.106A12.318 12.318 0 0 1 8.624 21
+                          c-2.331 0-4.512-.645-6.374-1.766
+                          l-.001-.109a6.375 6.375 0 0 1 11.964-3.07
+                          M12 6.375a3.375 3.375 0 1 1-6.75 0
+                          3.375 3.375 0 0 1 6.75 0Zm8.25 2.25
+                          a2.625 2.625 0 1 1-5.25 0
+                          2.625 2.625 0 0 1 5.25 0Z" />
+                </svg>
             </div>
 
-            <div class="overview-content">
+            <div class="overview-item-text">
+                <span class="overview-item-name">
+                    New Users
+                </span>
 
-                <div class="overview-item" data-stat="classes">
-
-                    <div class="overview-item-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-                        </svg>
-                    </div>
-
-                    <div class="overview-item-text">
-                        <span class="overview-item-name">New Users</span>
-                        <span class="overview-item-description">Published today</span>
-                    </div>
-
-                    <span class="overview-item-value">
-                        <!-- add controller here to display new classes -->
-                        8
-                    </span>
-                </div>
-
-                <div class="overview-item" data-stat="students">
-
-                    <div class="overview-item-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
-                        </svg>
-                    </div>
-
-                    <div class="overview-item-text">
-                        <span class="overview-item-name">New Department</span>
-                        <span class="overview-item-description">Registered today</span>
-                    </div>
-
-                    <span class="overview-item-value">
-                        <!-- add controller here to display new students -->
-                        6
-                    </span>
-                </div>
-
-                <div class="overview-item" data-stat="announcements">
-
-                    <div class="overview-item-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M18.458 3.11A1 1 0 0 1 19 4v16a1 1 0 0 1-1.581.814L12 16.944V7.056l5.419-3.87a1 1 0 0 1 1.039-.076ZM22 12c0 1.48-.804 2.773-2 3.465v-6.93c1.196.692 2 1.984 2 3.465ZM10 8H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6V8Zm0 9H5v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3Z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-
-                    <div class="overview-item-text">
-                        <span class="overview-item-name">New Announcements</span>
-                        <span class="overview-item-description">Published today</span>
-                    </div>
-
-                    <span class="overview-item-value">
-                        <!-- add controller here to display new announcements -->
-                        8
-                    </span>
-                </div>
-
+                <span class="overview-item-description">
+                    Registered today
+                </span>
             </div>
 
-            <div class="quick-action">
-                <h2>Quick Actions</h2>
-
-                <div class="quick-action-buttons">
-                    <a href="{{ route('admin.users.index') }}" class="quick-action-button">
-                        + Materials
-                    </a>
-                    <a href="#" class="quick-action-button">
-                        + Announcements
-                    </a>
-                </div>
-            </div>
+            <span class="overview-item-value">
+                {{ $newUsersToday }}
+            </span>
 
         </div>
+
+        {{-- New Departments --}}
+        <div class="overview-item" data-stat="students">
+
+            <div class="overview-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="2"
+                     stroke="currentColor">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M6.75 2.994v2.25m10.5-2.25v2.25
+                          m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25
+                          h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251
+                          m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5
+                          a2.25 2.25 0 0 0 2.25-2.25
+                          m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25
+                          h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5
+                          m-6.75-6h2.25m-9 2.25h4.5" />
+                </svg>
+            </div>
+
+            <div class="overview-item-text">
+                <span class="overview-item-name">
+                    New Departments
+                </span>
+
+                <span class="overview-item-description">
+                    Registered today
+                </span>
+            </div>
+
+            <span class="overview-item-value">
+                {{ $newDepartmentsToday }}
+            </span>
+
+        </div>
+
+        {{-- Announcements --}}
+        <div class="overview-item" data-stat="announcements">
+
+            <div class="overview-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="currentColor"
+                     viewBox="0 0 24 24">
+                    <path fill-rule="evenodd"
+                          d="M18.458 3.11A1 1 0 0 1 19 4v16a1 1 0 0 1-1.581.814
+                          L12 16.944V7.056l5.419-3.87a1 1 0 0 1 1.039-.076ZM22 12
+                          c0 1.48-.804 2.773-2 3.465v-6.93c1.196.692 2 1.984 2 3.465ZM10 8H4
+                          a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6V8Zm0 9H5v3a1 1 0 0 0 1 1h3
+                          a1 1 0 0 0 1-1v-3Z"
+                          clip-rule="evenodd" />
+                </svg>
+            </div>
+
+            <div class="overview-item-text">
+                <span class="overview-item-name">
+                    New Announcements
+                </span>
+
+                <span class="overview-item-description">
+                    Announcement feature not available
+                </span>
+            </div>
+
+            <span class="overview-item-value">
+                {{ $newAnnouncementsToday }}
+            </span>
+
+        </div>
+
+    </div>
+
+    {{-- Quick Actions --}}
+    <div class="quick-action">
+
+        <h2>Quick Actions</h2>
+
+        <div class="quick-action-buttons">
+
+            <a href="{{ route('admin.users.index') }}"
+               class="quick-action-button">
+                + Add User
+            </a>
+
+            <a href="{{ route('admin.departments.create') }}"
+               class="quick-action-button">
+                + Add Department
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
 
 
         <!-- =============================chart card============================= -->

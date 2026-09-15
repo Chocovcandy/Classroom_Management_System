@@ -6,48 +6,54 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Department;
 use App\Models\Role;
+use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
-    // Show dashboard statistics and recent activities
+    /**
+     * Show admin dashboard.
+     */
     public function index()
     {
-        // Recent academic staff
+        $today = Carbon::today();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Recent Academic Staff
+        |--------------------------------------------------------------------------
+        */
+
         $recentAcademics = User::with('roles')
             ->whereHas('roles', function ($query) {
                 $query->whereIn('role_name', [
                     'Dean',
                     'HoD',
-                    'Professor'
+                    'Professor',
                 ]);
             })
             ->latest()
             ->take(5)
             ->get();
 
+        /*
+        |--------------------------------------------------------------------------
+        | Recent Departments
+        |--------------------------------------------------------------------------
+        */
 
-        // Recent departments
         $recentDepartments = Department::latest()
             ->take(5)
             ->get();
 
-
         /*
         |--------------------------------------------------------------------------
-        | All Recent Activities
+        | Recent Activities
         |--------------------------------------------------------------------------
-        |
-        | Combine academic staff and department records,
-        | then sort them together by created_at.
-        |
         */
 
         $recentActivities = collect();
 
-
-        // Add academic staff activities
         foreach ($recentAcademics as $user) {
-
             $recentActivities->push([
                 'type' => 'academic',
                 'name' => $user->name,
@@ -55,32 +61,45 @@ class DashboardController extends Controller
                 'created_at' => $user->created_at,
                 'profile_image' => $user->profile_image,
             ]);
-
         }
 
-
-        // Add department activities
         foreach ($recentDepartments as $department) {
-
             $recentActivities->push([
                 'type' => 'department',
                 'name' => $department->department_name,
                 'action' => 'department created',
                 'created_at' => $department->created_at,
             ]);
-
         }
 
-
-        // Sort everything from newest to oldest
         $recentActivities = $recentActivities
             ->sortByDesc('created_at')
             ->take(5)
             ->values();
 
+        /*
+        |--------------------------------------------------------------------------
+        | Today's Summary
+        |--------------------------------------------------------------------------
+        */
+
+        $newUsersToday = User::whereDate(
+            'created_at',
+            $today
+        )->count();
+
+        $newDepartmentsToday = Department::whereDate(
+            'created_at',
+            $today
+        )->count();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Dashboard Data
+        |--------------------------------------------------------------------------
+        */
 
         return view('admin.dashboard', [
-
             'totalUsers' => User::count(),
 
             'totalStudents' => User::whereHas('roles', function ($query) {
@@ -91,7 +110,7 @@ class DashboardController extends Controller
                 $query->whereIn('role_name', [
                     'Dean',
                     'HoD',
-                    'Professor'
+                    'Professor',
                 ]);
             })->count(),
 
@@ -105,6 +124,13 @@ class DashboardController extends Controller
 
             'recentActivities' => $recentActivities,
 
+            // Today's Summary
+            'newUsersToday' => $newUsersToday,
+
+            'newDepartmentsToday' => $newDepartmentsToday,
+
+            // No Announcement model yet
+            'newAnnouncementsToday' => 0,
         ]);
     }
 }

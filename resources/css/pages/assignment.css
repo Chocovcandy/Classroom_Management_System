@@ -326,6 +326,84 @@
     color: #475569;
 }
 
+/* ============================================================
+   SELECTED FILE LIST
+============================================================ */
+
+.assignment-file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.assignment-file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.assignment-file-item > i {
+    flex-shrink: 0;
+    font-size: 20px;
+    color: #2563eb;
+}
+
+.assignment-file-item span {
+    flex: 1;
+    min-width: 0;
+
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.assignment-file-item small {
+    flex-shrink: 0;
+    margin: 0;
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.assignment-file-remove {
+    flex-shrink: 0;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #fef2f2;
+    color: #dc2626;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.assignment-file-remove:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.assignment-file-remove i {
+    font-size: 17px;
+}
 
 /* ============================================================
    VALIDATION ERROR
@@ -511,4 +589,150 @@
         width: 100%;
     }
 
+}
+/* ============================================================
+   SELECTED FILE LIST
+============================================================ */
+
+.assignment-file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.assignment-file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.assignment-file-item i {
+    flex-shrink: 0;
+    font-size: 20px;
+    color: #2563eb;
+}
+
+.assignment-file-item span {
+    flex: 1;
+    min-width: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.assignment-file-item small {
+    flex-shrink: 0;
+    margin: 0;
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+/* =========================================================
+   GOOGLE FORM URL
+========================================================= */
+
+.assignment-form-group input[type="url"] {
+    width: 100%;
+    padding: 12px 14px;
+
+    background-color: var(--card-color, #fff);
+    border: 1px solid var(--border-color, #dcdfe4);
+    border-radius: 10px;
+
+    color: var(--text-color, #1f2937);
+    font-size: 14px;
+    font-family: inherit;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.assignment-form-group input[type="url"]::placeholder {
+    color: var(--text-muted, #9ca3af);
+}
+
+.assignment-form-group input[type="url"]:focus {
+    border-color: var(--primary-color, #4f46e5);
+
+    box-shadow:
+        0 0 0 3px rgba(79, 70, 229, 0.10);
+}
+
+
+/* =========================================================
+   GOOGLE FORM LABEL
+========================================================= */
+
+.assignment-form-group label[for="google_form_url"] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.assignment-form-group label[for="google_form_url"] small {
+    color: var(--text-muted, #9ca3af);
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   GOOGLE FORM HELP TEXT
+========================================================= */
+
+.assignment-form-group input[name="google_form_url"] + small {
+    display: block;
+
+    margin-top: 7px;
+
+    color: var(--text-muted, #9ca3af);
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   GOOGLE FORM ERROR
+========================================================= */
+
+.assignment-form-group .assignment-error {
+    margin-top: 7px;
+
+    color: #dc2626;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+[data-theme="dark"] .assignment-form-group input[type="url"] {
+    background-color: var(--card-color, #1f2937);
+    border-color: var(--border-color, #374151);
+    color: var(--text-color, #f9fafb);
+}
+
+[data-theme="dark"] .assignment-form-group input[type="url"]:focus {
+    border-color: var(--primary-color, #818cf8);
+
+    box-shadow:
+        0 0 0 3px rgba(129, 140, 248, 0.12);
 }

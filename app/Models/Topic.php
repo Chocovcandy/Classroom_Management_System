@@ -48,10 +48,14 @@ class Topic extends Model
     }
 
     /**
- * Topic has many exams.
- */
-public function exams(): HasMany
-{
-    return $this->hasMany(Exam::class);
-}
+     * Topic has many exams.
+     */
+    public function exams(): HasMany
+    {
+        return $this->hasMany(Exam::class);
+    }
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
 }

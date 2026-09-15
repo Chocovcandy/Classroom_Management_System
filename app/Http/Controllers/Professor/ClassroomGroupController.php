@@ -15,24 +15,26 @@ public function stream(ClassGroup $classGroup)
 {
     Gate::authorize('view', $classGroup);
 
-    $classGroup->load([
-        'course',
-        'students',
+$classGroup->load([
+    'course',
+    'students',
+    'announcements.user',
 
-        'announcements.user',
+    'materials.user',
+    'materials.topic',
 
-        'materials.user',
-        'materials.topic',
+    'assignments.user',
+    'assignments.topic',
 
-        'assignments.user',
-        'assignments.topic',
+    'quizzes.user',
+    'quizzes.topic',
 
-        'quizzes.user',
-        'quizzes.topic',
+    'exams.user',
+    'exams.topic',
 
-        'exams.user',
-        'exams.topic',
-    ]);
+    'projects.user',
+    'projects.topic',
+]);
 
 
     /*
@@ -152,6 +154,24 @@ public function stream(ClassGroup $classGroup)
             'item' => $exam,
         ]);
     }
+
+
+    /*
+|--------------------------------------------------------------------------
+| Projects
+|--------------------------------------------------------------------------
+*/
+
+foreach ($classGroup->projects as $project) {
+
+    $streamItems->push([
+        'type' => 'project',
+        'title' => $project->title,
+        'posted_by' => $project->user?->name ?? 'Professor',
+        'created_at' => $project->created_at,
+        'item' => $project,
+    ]);
+}
 
 
     /*

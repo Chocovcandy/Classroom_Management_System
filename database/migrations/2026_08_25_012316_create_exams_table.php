@@ -42,9 +42,6 @@ return new class extends Migration
             $table->decimal('points', 8, 2)
                 ->nullable();
 
-            $table->string('attachment')
-                ->nullable();
-
             $table->timestamps();
         });
     }

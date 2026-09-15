@@ -51,19 +51,7 @@ class ClassGroupAnnouncementController extends Controller
         ClassGroup $classGroup,
         ClassGroupAnnouncement $announcement
     ) {
-        /*
-        |--------------------------------------------------------------------------
-        | Authorize classroom management
-        |--------------------------------------------------------------------------
-        */
-
         Gate::authorize('manage', $classGroup);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Make sure announcement belongs to this class group
-        |--------------------------------------------------------------------------
-        */
 
         if ($announcement->class_group_id !== $classGroup->id) {
             abort(404);
@@ -86,19 +74,7 @@ class ClassGroupAnnouncementController extends Controller
         ClassGroup $classGroup,
         ClassGroupAnnouncement $announcement
     ) {
-        /*
-        |--------------------------------------------------------------------------
-        | Authorize classroom management
-        |--------------------------------------------------------------------------
-        */
-
         Gate::authorize('manage', $classGroup);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Make sure announcement belongs to this class group
-        |--------------------------------------------------------------------------
-        */
 
         if ($announcement->class_group_id !== $classGroup->id) {
             abort(404);
@@ -132,19 +108,7 @@ class ClassGroupAnnouncementController extends Controller
         ClassGroup $classGroup,
         ClassGroupAnnouncement $announcement
     ) {
-        /*
-        |--------------------------------------------------------------------------
-        | Authorize classroom management
-        |--------------------------------------------------------------------------
-        */
-
         Gate::authorize('manage', $classGroup);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Make sure announcement belongs to this class group
-        |--------------------------------------------------------------------------
-        */
 
         if ($announcement->class_group_id !== $classGroup->id) {
             abort(404);

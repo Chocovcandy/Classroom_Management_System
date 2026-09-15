@@ -185,7 +185,7 @@
 
                             <a
                                 href="{{ route(
-                                    'student.class-groups.classroom',
+                                    'student.class-groups.classroom-group',
                                     ['classGroup' => $classGroup->id]
                                 ) }}"
                                 class="view-course-btn"

@@ -8,12 +8,13 @@ class Course extends Model
 {
     protected $table = 'courses';
 
-    protected $fillable = [
-        'course_name',
-        'course_code',
-        'description',
-        'credits',
-    ];
+protected $fillable = [
+    'course_name',
+    'course_code',
+    'department_id',
+    'description',
+    'credits',
+];
     //student_course pivot table for many-to-many relationship between students and courses
     //One course can have many students, and one student can enroll in many courses.
     public function students()
