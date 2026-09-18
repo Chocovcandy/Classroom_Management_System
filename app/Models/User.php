@@ -75,10 +75,19 @@ class User extends Authenticatable
 
 //-> correct one 
 
-public function departments(){
-        return $this->belongsToMany(Department::class, 'user_department', 'user_id', 'department_id');
-}
+// USER - DEPARTMENT relationship
+// A user can belong to many departments through the user_department pivot table.
+// A department can have many users.
 
+public function departments(): BelongsToMany
+{
+    return $this->belongsToMany(
+        Department::class,
+        'user_department',
+        'user_id',
+        'department_id'
+    );
+}
 
     //one  Role has many Users. 
 //Use the user_role table to find out which users belong to this role. 

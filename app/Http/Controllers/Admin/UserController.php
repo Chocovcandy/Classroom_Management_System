@@ -30,28 +30,32 @@ class UserController extends Controller
             if ($request->role === 'academic_staff') {
 
                 /*
-                Academic Staff includes:
-                - HoD
-                - Professor
-
-                Dean has been removed from the system.
-                */
+                 * Academic Staff includes:
+                 * - HoD
+                 * - Professor
+                 * Dean has been removed from the system.
+                 */
 
                 $users->whereHas('roles', function ($query) {
+
                     $query->whereIn('role_name', [
                         'HoD',
                         'Professor',
                     ]);
+
                 });
 
             } else {
 
                 // Single role filter
+
                 $users->whereHas('roles', function ($query) use ($request) {
+
                     $query->where(
                         'role_name',
                         $request->role
                     );
+
                 });
             }
         }
@@ -63,10 +67,12 @@ class UserController extends Controller
         if ($request->filled('roles')) {
 
             $users->whereHas('roles', function ($query) use ($request) {
+
                 $query->whereIn(
                     'role_name',
                     $request->roles
                 );
+
             });
         }
 
@@ -83,12 +89,12 @@ class UserController extends Controller
                     'like',
                     '%' . $request->search . '%'
                 )
-
                 ->orWhere(
                     'email',
                     'like',
                     '%' . $request->search . '%'
                 );
+
             });
         }
 
@@ -110,15 +116,18 @@ class UserController extends Controller
 
                 break;
 
-            case 'newest':
-
-                $users->orderBy('created_at', 'desc');
-
-                break;
-
             case 'oldest':
 
                 $users->orderBy('created_at', 'asc');
+
+                break;
+
+            case 'newest':
+            default:
+
+                // Default: newest users first
+
+                $users->orderBy('created_at', 'desc');
 
                 break;
         }
@@ -136,6 +145,7 @@ class UserController extends Controller
         ]);
     }
 
+
     /**
      * CREATE
      * Show create user page.
@@ -145,9 +155,10 @@ class UserController extends Controller
         return view('admin.users.create', [
 
             /*
-            Student accounts are created through
-            the registration page.
-            */
+             * Student accounts are created through
+             * the registration page.
+             */
+
             'roles' => Role::where(
                 'role_name',
                 '!=',
@@ -155,11 +166,15 @@ class UserController extends Controller
             )->get(),
 
             /*
-            Kept for future use.
-            */
+             * Departments available for
+             * HoD and Professor accounts.
+             */
+
             'departments' => Department::all(),
+
         ]);
     }
+
 
     /**
      * STORE
@@ -167,20 +182,108 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // =========================================
+        // BASIC VALIDATION
+        // =========================================
 
-            'name' => 'required',
+$request->validate([
+    'name' => 'required|string|max:255',
 
-            'email' => 'required|email|unique:users',
+    'email' => [
+        'required',
+        'email',
+        'unique:users,email',
+        'ends_with:@lifeun.edu.kh',
+    ],
 
-            'password' => 'required',
+    'password' => 'required|string|min:6',
 
-            'role_ids' => 'required|array',
+    'role_ids' => 'required|array|min:1',
 
-            'role_ids.*' => 'exists:roles,id',
+    'role_ids.*' => 'exists:roles,id',
 
-            'profile_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
+    'profile_image' =>
+        'nullable|image|mimes:jpg,jpeg,png|max:2048',
+
+    'department_id' =>
+        'nullable|exists:departments,id',
+]);
+
+
+        // =========================================
+        // FIND ROLE IDS
+        // =========================================
+
+        $adminRoleId = Role::where(
+            'role_name',
+            'Admin'
+        )->value('id');
+
+        $hodRoleId = Role::where(
+            'role_name',
+            'HoD'
+        )->value('id');
+
+        $professorRoleId = Role::where(
+            'role_name',
+            'Professor'
+        )->value('id');
+
+
+        // =========================================
+        // CHECK SELECTED ROLES
+        // =========================================
+
+        $adminSelected = in_array(
+            $adminRoleId,
+            $request->role_ids
+        );
+
+        $hodSelected = in_array(
+            $hodRoleId,
+            $request->role_ids
+        );
+
+        $professorSelected = in_array(
+            $professorRoleId,
+            $request->role_ids
+        );
+
+
+        $academicRoleSelected =
+            $hodSelected || $professorSelected;
+
+
+        // =========================================
+        // ADMIN CANNOT COMBINE WITH ACADEMIC ROLE
+        // =========================================
+
+        if (
+            $adminSelected &&
+            $academicRoleSelected
+        ) {
+
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'role_ids' =>
+                        'Cannot create a user with the Admin role together with HoD or Professor because Admin does not have a department.'
+                ]);
+        }
+
+
+        // =========================================
+        // DEPARTMENT REQUIRED FOR HoD / PROFESSOR
+        // =========================================
+
+        if ($academicRoleSelected) {
+
+            $request->validate([
+                'department_id' =>
+                    'required|exists:departments,id',
+            ]);
+        }
+
 
         // =========================================
         // HANDLE PROFILE IMAGE
@@ -192,8 +295,12 @@ class UserController extends Controller
 
             $imagePath = $request
                 ->file('profile_image')
-                ->store('profile_images', 'public');
+                ->store(
+                    'profile_images',
+                    'public'
+                );
         }
+
 
         // =========================================
         // CREATE USER
@@ -205,21 +312,50 @@ class UserController extends Controller
 
             'email' => $request->email,
 
-            'password' => bcrypt($request->password),
+            'password' => bcrypt(
+                $request->password
+            ),
 
             'profile_image' => $imagePath,
+
         ]);
+
 
         // =========================================
         // ASSIGN ROLES
         // =========================================
 
-        $user->roles()->sync($request->role_ids);
+        $user->roles()->sync(
+            $request->role_ids
+        );
+
+
+        // =========================================
+        // ASSIGN DEPARTMENT
+        // =========================================
+
+        if ($academicRoleSelected) {
+
+            $user->departments()->sync([
+                $request->department_id
+            ]);
+        }
+
+
+        // =========================================
+        // REDIRECT TO NEWEST USERS
+        // =========================================
 
         return redirect()
-            ->route('admin.users.index')
-            ->with('success', 'User created successfully');
+            ->route('admin.users.index', [
+                'sort' => 'newest',
+            ])
+            ->with(
+                'success',
+                'User created successfully'
+            );
     }
+
 
     /**
      * EDIT
@@ -228,6 +364,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         // Block admin from editing student accounts
+
         if ($user->isStudent()) {
 
             return back()->with(
@@ -238,20 +375,35 @@ class UserController extends Controller
 
         return view('admin.users.edit', [
 
-            'user' => $user->load('roles', 'departments'),
+            'user' =>
+                $user->load(
+                    'roles',
+                    'departments'
+                ),
 
-            'roles' => Role::all(),
+            'roles' =>
+                Role::where(
+                    'role_name',
+                    '!=',
+                    'Student'
+                )->get(),
 
-            'departments' => Department::all(),
+            'departments' =>
+                Department::all(),
+
         ]);
     }
+
 
     /**
      * UPDATE
      * Update an existing user.
      */
-    public function update(Request $request, User $user)
-    {
+    public function update(
+        Request $request,
+        User $user
+    ) {
+
         // =========================================
         // BLOCK STUDENT UPDATE
         // =========================================
@@ -264,13 +416,15 @@ class UserController extends Controller
             );
         }
 
+
         // =========================================
         // PROTECT ADMIN ROLES
         // =========================================
 
         /*
-        Admin users must keep their existing roles.
-        */
+         * Admin users must keep their existing roles.
+         */
+
         if ($user->isAdmin()) {
 
             $request->merge([
@@ -279,8 +433,10 @@ class UserController extends Controller
                     ->roles
                     ->pluck('id')
                     ->toArray(),
+
             ]);
         }
+
 
         // =========================================
         // VALIDATION
@@ -290,14 +446,98 @@ class UserController extends Controller
 
             'name' => 'required',
 
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'email' =>
+                'required|email|unique:users,email,' . $user->id,
 
-            'password' => 'nullable|min:6|confirmed',
+            'password' =>
+                'nullable|min:6|confirmed',
 
-            'role_ids' => 'required|array',
+            'role_ids' =>
+                'required|array',
 
-            'role_ids.*' => 'exists:roles,id',
+            'role_ids.*' =>
+                'exists:roles,id',
+
+            'department_id' =>
+                'nullable|exists:departments,id',
+
         ]);
+
+
+        // =========================================
+        // FIND ROLE IDS
+        // =========================================
+
+        $adminRoleId = Role::where(
+            'role_name',
+            'Admin'
+        )->value('id');
+
+        $hodRoleId = Role::where(
+            'role_name',
+            'HoD'
+        )->value('id');
+
+        $professorRoleId = Role::where(
+            'role_name',
+            'Professor'
+        )->value('id');
+
+
+        // =========================================
+        // CHECK SELECTED ROLES
+        // =========================================
+
+        $adminSelected = in_array(
+            $adminRoleId,
+            $request->role_ids
+        );
+
+        $hodSelected = in_array(
+            $hodRoleId,
+            $request->role_ids
+        );
+
+        $professorSelected = in_array(
+            $professorRoleId,
+            $request->role_ids
+        );
+
+
+        $academicRoleSelected =
+            $hodSelected || $professorSelected;
+
+
+        // =========================================
+        // ADMIN CANNOT COMBINE WITH ACADEMIC ROLE
+        // =========================================
+
+        if (
+            $adminSelected &&
+            $academicRoleSelected
+        ) {
+
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'role_ids' =>
+                        'Cannot update a user with the Admin role together with HoD or Professor because Admin does not have a department.'
+                ]);
+        }
+
+
+        // =========================================
+        // DEPARTMENT REQUIRED FOR HoD / PROFESSOR
+        // =========================================
+
+        if ($academicRoleSelected) {
+
+            $request->validate([
+                'department_id' =>
+                    'required|exists:departments,id',
+            ]);
+        }
+
 
         // =========================================
         // UPDATE BASIC INFORMATION
@@ -310,31 +550,63 @@ class UserController extends Controller
             'email' => $request->email,
 
             /*
-            Only update password when a new password
-            has been entered.
-            */
-            'password' => $request->filled('password')
+             * Only update password when a new password
+             * has been entered.
+             */
 
-                ? Hash::make($request->password)
+            'password' =>
+                $request->filled('password')
+
+                ? Hash::make(
+                    $request->password
+                )
 
                 : $user->password,
+
         ]);
+
 
         // =========================================
         // UPDATE ROLES
         // =========================================
 
-        $user->roles()->sync($request->role_ids);
+        $user->roles()->sync(
+            $request->role_ids
+        );
 
-        /*
-        Department assignment has been removed because
-        Dean has been removed from the system.
-        */
+
+        // =========================================
+        // UPDATE DEPARTMENT
+        // =========================================
+
+        if ($academicRoleSelected) {
+
+            $user->departments()->sync([
+                $request->department_id
+            ]);
+
+        } else {
+
+            /*
+             * Admin accounts do not have a department.
+             */
+
+            $user->departments()->detach();
+        }
+
+
+        // =========================================
+        // REDIRECT
+        // =========================================
 
         return redirect()
             ->route('admin.users.index')
-            ->with('success', 'User updated successfully');
+            ->with(
+                'success',
+                'User updated successfully'
+            );
     }
+
 
     /**
      * DELETE
@@ -343,6 +615,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         // Prevent deleting your own account
+
         if ($user->id === Auth::id()) {
 
             return back()->with(
@@ -351,7 +624,9 @@ class UserController extends Controller
             );
         }
 
+
         // Prevent deleting an admin account
+
         if ($user->isAdmin()) {
 
             return back()->with(
@@ -360,7 +635,9 @@ class UserController extends Controller
             );
         }
 
+
         // Delete user
+
         $user->delete();
 
         return back()->with(
@@ -369,3 +646,4 @@ class UserController extends Controller
         );
     }
 }
+

@@ -273,44 +273,6 @@
 
 
                         <!-- ==================================================
-                             ACCOUNT SETTINGS
-                             KEEPING THIS BECAUSE YOU ONLY ASKED TO
-                             REMOVE SETTINGS FROM THE SIDEBAR
-                        ================================================== -->
-
-                        <a href="#">
-
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="lucide lucide-user-round-cog-icon lucide-user-round-cog"
-                            >
-                                <path d="m14.305 19.53.923-.382" />
-                                <path d="m15.228 16.852-.923-.383" />
-                                <path d="M16.852 15.228l-.383-.923" />
-                                <path d="M16.852 20.772l-.383.924" />
-                                <path d="M19.148 15.228l.383-.923" />
-                                <path d="M19.53 21.696l-.382-.924" />
-                                <path d="M2 21a8 8 0 0 1 10.434-7.62" />
-                                <path d="m20.772 16.852.924-.383" />
-                                <path d="m20.772 19.148.924.383" />
-                                <circle cx="10" cy="8" r="5" />
-                                <circle cx="18" cy="18" r="3" />
-                            </svg>
-
-                            Account Settings
-
-                        </a>
-
-
-                        <!-- ==================================================
                              LOGOUT
                         ================================================== -->
 
@@ -365,11 +327,22 @@
             <!-- ========================================================
                  SIDEBAR
             ======================================================== -->
+<aside
+    class="sidebar open"
+    id="sidebar"
+>
 
-            <aside
-                class="sidebar closed"
-                id="sidebar"
-            >
+    <!-- SIDEBAR TOGGLE BUTTON -->
+
+    <button
+        type="button"
+        id="sidebarToggle"
+        class="sidebar-toggle"
+        aria-label="Close sidebar"
+    >
+        <i class="bx bx-chevron-left"></i>
+    </button>
+
 
                 <ul class="sidebar-menu">
 
@@ -382,7 +355,7 @@
 
                         <a
                             href="{{ route('admin.dashboard') }}"
-                            class="sidebar-link"
+                             class="sidebar-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
                             id="sidebarlinks"
                         >
 
@@ -413,7 +386,7 @@
 
                         <a
                             href="{{ route('admin.users.index') }}"
-                            class="sidebar-link"
+                            class="sidebar-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
                             id="sidebarlinks"
                         >
 
@@ -444,7 +417,7 @@
 
                         <a
                             href="{{ route('admin.departments.index') }}"
-                            class="sidebar-link"
+                         class="sidebar-link {{ request()->routeIs('admin.departments.*') ? 'active' : '' }}"
                             id="sidebarlinks"
                         >
 
@@ -474,44 +447,14 @@
                     </li>
 
 
-                    <!-- ==================================================
-                         ANNOUNCEMENTS
-                    ================================================== -->
-
-                    <li>
-
-                        <a
-                            href="#"
-                            class="sidebar-link"
-                            id="sidebarlinks"
-                        >
-
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="2"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0 1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91 23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0 1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46"
-                                />
-                            </svg>
-
-                            <span class="sidebar-text">
-                                Announcements
-                            </span>
-
-                        </a>
-
-                    </li>
 
 
                 </ul>
 
-            </aside>
+
+</aside>
+
+
 
 
             <!-- ========================================================

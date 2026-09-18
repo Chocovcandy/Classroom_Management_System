@@ -629,6 +629,159 @@
 
 }
 
+/* ============================================================
+   STUDENT ACTIONS
+   ============================================================ */
+
+.student-actions {
+    position: relative;
+    flex-shrink: 0;
+}
+
+
+/* ============================================================
+   THREE DOT BUTTON
+   ============================================================ */
+
+.student-menu {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ============================================================
+   DROPDOWN MENU
+   ============================================================ */
+
+.student-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+
+    width: 190px;
+    padding: 6px;
+
+    background-color: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+
+    box-shadow:
+        0 8px 24px var(--shadow-color);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+
+    transition:
+        opacity 0.15s ease,
+        visibility 0.15s ease,
+        transform 0.15s ease;
+
+    z-index: 100;
+}
+
+
+/* OPEN STATE */
+
+.student-actions.open .student-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+
+/* ============================================================
+   DROPDOWN ITEM
+   ============================================================ */
+
+.student-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 10px 11px;
+
+    color: var(--text-color);
+    background: transparent;
+
+    border: none;
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+
+    text-decoration: none;
+    text-align: left;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.student-dropdown-item:hover {
+    background-color: var(--hover-color);
+}
+
+.student-dropdown-item i {
+    width: 18px;
+
+    color: var(--muted-text-color);
+
+    font-size: 17px;
+}
+
+
+/* ============================================================
+   REMOVE ACTION
+   ============================================================ */
+
+.student-dropdown-item.danger {
+    color: #dc3545;
+}
+
+.student-dropdown-item.danger i {
+    color: #dc3545;
+}
+
+.student-dropdown-item.danger:hover {
+    background-color: rgba(220, 53, 69, 0.08);
+}
+
+
+/* ============================================================
+   FORM RESET
+   ============================================================ */
+
+.student-dropdown form {
+    margin: 0;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+    .student-dropdown {
+        right: 0;
+        width: 175px;
+    }
+
+    .student-dropdown-item {
+        padding: 11px 10px;
+        font-size: 13px;
+    }
+
+}
+
+
 
 /* ============================================================
    RESPONSIVE
@@ -886,15 +1039,44 @@
 
                     {{-- MORE OPTIONS --}}
 
-                    <button
-                        type="button"
-                        class="student-menu"
-                        aria-label="More options"
-                    >
+{{-- MORE OPTIONS --}}
+<div class="student-actions">
 
-                        <i class="bx bx-dots-vertical-rounded"></i>
+    <button
+        type="button"
+        class="student-menu"
+        aria-label="More options"
+        onclick="toggleStudentMenu(this)"
+    >
+        <i class="bx bx-dots-vertical-rounded"></i>
+    </button>
 
-                    </button>
+    <div class="student-dropdown">
+
+
+        {{-- Remove Student --}}
+        <form
+            method="POST"
+            action="{{ route('professor.class-groups.students.remove', [$classGroup, $student]) }}"
+            onsubmit="return confirm('Are you sure you want to remove {{ $student->name }} from this class?');"
+        >
+            @csrf
+            @method('DELETE')
+
+            <button
+                type="submit"
+                class="student-dropdown-item danger"
+            >
+                <i class="bx bx-user-minus"></i>
+                <span>Remove from Class</span>
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
+
 
                 </article>
 
@@ -929,5 +1111,35 @@
     </section>
 
 </div>
+
+
+
+
+<script>
+    function toggleStudentMenu(button) {
+        const currentMenu = button.closest('.student-actions');
+
+        // Close all other menus
+        document.querySelectorAll('.student-actions.open').forEach(menu => {
+            if (menu !== currentMenu) {
+                menu.classList.remove('open');
+            }
+        });
+
+        // Open / close this menu
+        currentMenu.classList.toggle('open');
+    }
+
+    // Close the menu when clicking anywhere outside it
+    document.addEventListener('click', function (event) {
+        if (!event.target.closest('.student-actions')) {
+            document.querySelectorAll('.student-actions.open').forEach(menu => {
+                menu.classList.remove('open');
+            });
+        }
+    });
+</script>
+
+
 
 @endsection

@@ -81,10 +81,71 @@ class StudentScheduleController extends Controller
             ->take(4)
             ->get();
 
-        $departmentId = $request->query('department_id');
-        $yearLevel = $request->query('year_level');
-        $semester = $request->query('semester');
-        $academicYear = $request->query('academic_year');
+/*
+|--------------------------------------------------------------------------
+| REMEMBER STUDENT SCHEDULE SELECTION
+|--------------------------------------------------------------------------
+*/
+
+$sessionKey = 'student_schedule_selection';
+
+$departmentId = $request->query('department_id');
+$yearLevel = $request->query('year_level');
+$semester = $request->query('semester');
+$academicYear = $request->query('academic_year');
+
+/*
+|--------------------------------------------------------------------------
+| SAVE NEW SELECTION
+|--------------------------------------------------------------------------
+|
+| Save only when all four values are selected.
+| This prevents incomplete selections from overwriting
+| the student's previous valid schedule.
+|
+*/
+
+if (
+    filled($departmentId) &&
+    filled($yearLevel) &&
+    filled($semester) &&
+    filled($academicYear)
+) {
+    $request->session()->put($sessionKey, [
+        'department_id' => (int) $departmentId,
+        'year_level' => (int) $yearLevel,
+        'semester' => $semester,
+        'academic_year' => $academicYear,
+    ]);
+}
+
+/*
+|--------------------------------------------------------------------------
+| LOAD REMEMBERED SELECTION
+|--------------------------------------------------------------------------
+|
+| If the page is opened without query parameters,
+| use the student's previously selected schedule.
+|
+*/
+
+$savedSelection = $request->session()->get($sessionKey, []);
+
+$departmentId = filled($departmentId)
+    ? (int) $departmentId
+    : ($savedSelection['department_id'] ?? null);
+
+$yearLevel = filled($yearLevel)
+    ? (int) $yearLevel
+    : ($savedSelection['year_level'] ?? null);
+
+$semester = filled($semester)
+    ? $semester
+    : ($savedSelection['semester'] ?? null);
+
+$academicYear = filled($academicYear)
+    ? $academicYear
+    : ($savedSelection['academic_year'] ?? null);
 
         /*
         |--------------------------------------------------------------------------

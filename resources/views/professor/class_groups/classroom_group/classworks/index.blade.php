@@ -1,5 +1,145 @@
 <style>
+    /* ============================================================
+   ACTION SUCCESS MESSAGE
+   ============================================================ */
 
+.classwork-action-message {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 3000;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: min(400px, calc(100vw - 32px));
+    min-height: 64px;
+
+    padding: 11px 13px;
+
+    box-sizing: border-box;
+
+    color: var(--heading-color);
+    background-color: var(--card-color);
+
+    border: 1px solid rgba(34, 176, 125, 0.35);
+    border-radius: 12px;
+
+    box-shadow: 0 12px 35px var(--shadow-color);
+
+    animation:
+        classworkActionMessageIn 0.3s ease forwards;
+}
+
+.classwork-action-message-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    color: var(--assignment-color);
+    background-color: var(--assignment-soft);
+
+    border-radius: 9px;
+
+    font-size: 21px;
+}
+
+.classwork-action-message-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    min-width: 0;
+    flex: 1;
+}
+
+.classwork-action-message-content strong {
+    color: var(--heading-color);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.classwork-action-message-content span {
+    color: var(--secondary-text-color);
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.classwork-action-message-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+    padding: 0;
+
+    color: var(--secondary-text-color);
+    background-color: transparent;
+
+    border: 0;
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.classwork-action-message-close:hover {
+    color: var(--heading-color);
+    background-color: var(--surface-hover);
+}
+
+@keyframes classworkActionMessageIn {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes classworkActionMessageOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+}
+
+.classwork-action-message.hide {
+    animation:
+        classworkActionMessageOut 0.25s ease forwards;
+}
+
+@media (max-width: 600px) {
+    .classwork-action-message {
+        top: 15px;
+        right: 15px;
+        left: 15px;
+
+        width: auto;
+    }
+}
 /* ============================================================
    CLASSWORK PAGE
    ============================================================ */
@@ -75,10 +215,15 @@
     align-items: center;
     justify-content: space-between;
 
-    min-height: 170px;
-    padding: 22px 26px;
+    min-height: 180px;
+    padding: 25px 30px;
 
+    /*
+     * Keep hidden only for the header illustration.
+     * This does not affect the classwork dropdown menus.
+     */
     overflow: hidden;
+
     box-sizing: border-box;
 
     background-color: var(--card-color);
@@ -98,7 +243,7 @@
 
     color: var(--button-color);
 
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: 1.2px;
 }
@@ -108,7 +253,7 @@
 
     color: var(--heading-color);
 
-    font-size: 25px;
+    font-size: 28px;
     font-weight: 800;
     line-height: 1.25;
 }
@@ -119,7 +264,7 @@
 
     color: var(--secondary-text-color);
 
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
 }
 
@@ -135,8 +280,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 175px;
-    height: 125px;
+    width: 185px;
+    height: 135px;
 
     margin-left: 20px;
     flex-shrink: 0;
@@ -145,11 +290,10 @@
 .classwork-illustration-circle {
     position: absolute;
 
-    width: 105px;
-    height: 105px;
+    width: 115px;
+    height: 115px;
 
     background-color: var(--topic-soft);
-
     border: 1px solid var(--primary-border);
     border-radius: 50%;
 }
@@ -161,8 +305,8 @@
     display: flex;
     flex-direction: column;
 
-    width: 72px;
-    height: 88px;
+    width: 78px;
+    height: 94px;
 
     padding: 18px 13px;
 
@@ -226,8 +370,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
 
     background-color: var(--card-color);
     border: 1px solid var(--border-color);
@@ -235,7 +379,7 @@
 
     box-shadow: 0 5px 15px var(--shadow-color);
 
-    font-size: 17px;
+    font-size: 19px;
 }
 
 .illustration-book {
@@ -279,7 +423,8 @@
 }
 
 @keyframes classworkDocumentFloat {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0) rotate(2deg);
     }
 
@@ -289,7 +434,8 @@
 }
 
 @keyframes classworkBookFloat {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0) rotate(8deg);
     }
 
@@ -299,7 +445,8 @@
 }
 
 @keyframes classworkAssignmentFloat {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0) rotate(-7deg);
     }
 
@@ -309,7 +456,8 @@
 }
 
 @keyframes classworkPencilFloat {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0) rotate(-12deg);
     }
 
@@ -319,7 +467,8 @@
 }
 
 @keyframes classworkCheckFloat {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0) rotate(6deg);
     }
 
@@ -358,7 +507,7 @@
     border-radius: 12px;
 
     font-family: inherit;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
 
     text-align: left;
@@ -378,14 +527,14 @@
     align-items: center;
     justify-content: center;
 
-    width: 39px;
-    height: 39px;
+    width: 42px;
+    height: 42px;
 
     flex-shrink: 0;
 
     border-radius: 9px;
 
-    font-size: 19px;
+    font-size: 20px;
 }
 
 .classwork-header-action:nth-child(1) > i:first-child {
@@ -405,7 +554,8 @@
 
 .classwork-header-action .action-arrow {
     color: var(--secondary-text-color);
-    font-size: 17px;
+    font-size: 18px;
+
     transition: transform 0.2s ease;
 }
 
@@ -450,10 +600,10 @@
     justify-content: center;
     gap: 7px;
 
-    min-width: 88px;
-    height: 37px;
+    min-width: 96px;
+    height: 42px;
 
-    padding: 0 13px;
+    padding: 0 15px;
 
     flex-shrink: 0;
 
@@ -464,7 +614,7 @@
     border-radius: 9px;
 
     font-family: inherit;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 700;
 
     cursor: pointer;
@@ -476,7 +626,7 @@
 }
 
 .classwork-filter-item i {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .classwork-filter-item:hover {
@@ -499,12 +649,12 @@
 .classwork-content {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
 
     width: calc(100% - 10px);
 
-    margin-top: 10px;
-    padding-bottom: 30px;
+    margin-top: 12px;
+    padding-bottom: 50px;
 
     box-sizing: border-box;
 }
@@ -515,6 +665,9 @@
    ============================================================ */
 
 .classwork-topic {
+    position: relative;
+    z-index: 1;
+
     width: 100%;
 
     background-color: var(--card-color);
@@ -522,7 +675,12 @@
     border: 1px solid var(--border-color);
     border-radius: 13px;
 
-    overflow: hidden;
+    /*
+     * IMPORTANT:
+     * Do not use overflow: hidden here.
+     * It cuts off the Edit/Delete dropdown.
+     */
+    overflow: visible;
 
     transition:
         border-color 0.2s ease,
@@ -534,18 +692,36 @@
 }
 
 
+/*
+ * Keep rounded corners visually clean without clipping dropdowns.
+ */
+.classwork-topic::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    border-radius: 13px;
+
+    pointer-events: none;
+}
+
+
 /* ============================================================
    TOPIC HEADER
    ============================================================ */
 
 .classwork-topic-header {
+    position: relative;
+    z-index: 2;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    min-height: 68px;
+    min-height: 76px;
 
-    padding: 10px 12px 10px 15px;
+    padding: 12px 14px 12px 17px;
 
     box-sizing: border-box;
 
@@ -561,7 +737,7 @@
 .classwork-topic-info {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
 
     min-width: 0;
 }
@@ -571,8 +747,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 39px;
-    height: 39px;
+    width: 43px;
+    height: 43px;
 
     flex-shrink: 0;
 
@@ -582,7 +758,7 @@
     border: 1px solid var(--primary-border);
     border-radius: 10px;
 
-    font-size: 19px;
+    font-size: 21px;
 }
 
 .classwork-topic-icon.no-topic {
@@ -600,7 +776,7 @@
 
     color: var(--heading-color);
 
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 800;
     line-height: 1.3;
 
@@ -614,7 +790,7 @@
 
     color: var(--secondary-text-color);
 
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.4;
 
     white-space: nowrap;
@@ -628,6 +804,9 @@
    ============================================================ */
 
 .classwork-topic-actions {
+    position: relative;
+    z-index: 20;
+
     display: flex;
     align-items: center;
     gap: 3px;
@@ -642,8 +821,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
 
     padding: 0;
 
@@ -665,11 +844,11 @@
 }
 
 .classwork-topic-toggle i {
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .classwork-topic-menu i {
-    font-size: 19px;
+    font-size: 21px;
 }
 
 .classwork-topic-toggle:hover,
@@ -686,28 +865,40 @@
 
 .classwork-topic-options {
     position: relative;
+    z-index: 1000;
+
     flex-shrink: 0;
 }
 
 .classwork-topic-options-dropdown {
     position: absolute;
-    top: calc(100% + 5px);
+
+    top: calc(100% + 6px);
     right: 0;
-    z-index: 100;
 
-    min-width: 125px;
-    padding: 5px;
+    z-index: 9999;
 
+    width: max-content;
+    min-width: 165px;
+    max-width: 220px;
+
+    padding: 6px;
+
+    box-sizing: border-box;
+
+    color: var(--heading-color);
     background-color: var(--card-color);
+
     border: 1px solid var(--border-color);
     border-radius: 10px;
-    box-shadow: 0 10px 25px var(--shadow-color);
+
+    box-shadow: 0 12px 30px var(--shadow-color);
 
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
 
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 
     transition:
         opacity 0.15s ease,
@@ -715,7 +906,12 @@
         transform 0.15s ease;
 }
 
-.classwork-topic-options.show .classwork-topic-options-dropdown {
+.classwork-topic-options.show {
+    z-index: 10000;
+}
+
+.classwork-topic-options.show
+    .classwork-topic-options-dropdown {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -725,11 +921,14 @@
 .classwork-topic-option {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
 
     width: 100%;
-    min-height: 33px;
-    padding: 0 9px;
+    min-height: 40px;
+
+    padding: 0 11px;
+
+    box-sizing: border-box;
 
     color: var(--heading-color);
     background-color: transparent;
@@ -738,10 +937,12 @@
     border-radius: 7px;
 
     font-family: inherit;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
 
     text-align: left;
+    white-space: nowrap;
+
     cursor: pointer;
 }
 
@@ -750,7 +951,11 @@
 }
 
 .classwork-topic-option i {
-    font-size: 15px;
+    width: 16px;
+    flex-shrink: 0;
+
+    font-size: 17px;
+    text-align: center;
 }
 
 .classwork-topic-option.delete {
@@ -770,6 +975,7 @@
 .topic-delete-modal {
     position: fixed;
     inset: 0;
+
     z-index: 1300;
 
     display: flex;
@@ -797,6 +1003,7 @@
 .topic-delete-modal-overlay {
     position: absolute;
     inset: 0;
+
     background-color: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(3px);
 }
@@ -814,6 +1021,7 @@
     background-color: var(--card-color);
     border: 1px solid var(--border-color);
     border-radius: 17px;
+
     box-shadow: 0 20px 50px var(--shadow-color);
 
     transform: translateY(10px) scale(0.98);
@@ -831,6 +1039,7 @@
     gap: 18px;
 
     padding: 23px 24px 18px;
+
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -841,7 +1050,9 @@
 .topic-delete-eyebrow {
     display: block;
     margin-bottom: 5px;
+
     color: #dc5c5c;
+
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 1.3px;
@@ -849,14 +1060,18 @@
 
 .topic-delete-header h2 {
     margin: 0 0 5px;
+
     color: var(--heading-color);
+
     font-size: 19px;
     font-weight: 800;
 }
 
 .topic-delete-header p {
     margin: 0;
+
     color: var(--secondary-text-color);
+
     font-size: 11px;
     line-height: 1.5;
 }
@@ -868,13 +1083,16 @@
 
     width: 35px;
     height: 35px;
+
     flex-shrink: 0;
     padding: 0;
 
     color: var(--secondary-text-color);
     background-color: transparent;
+
     border: 1px solid var(--border-color);
     border-radius: 9px;
+
     cursor: pointer;
 }
 
@@ -890,6 +1108,7 @@
 .topic-delete-option {
     display: block;
     margin-bottom: 10px;
+
     cursor: pointer;
 }
 
@@ -905,8 +1124,10 @@
     gap: 11px;
 
     padding: 13px;
+
     border: 1px solid var(--border-color);
     border-radius: 11px;
+
     background-color: var(--surface-color);
 
     transition:
@@ -918,7 +1139,9 @@
     border-color: var(--primary-border);
 }
 
-.topic-delete-option input:checked + .topic-delete-option-content {
+.topic-delete-option
+    input:checked
+    + .topic-delete-option-content {
     border-color: var(--button-color);
     background-color: var(--topic-soft);
 }
@@ -930,15 +1153,19 @@
 
     width: 36px;
     height: 36px;
+
     flex-shrink: 0;
 
     color: var(--topic-color);
     background-color: var(--topic-soft);
+
     border-radius: 9px;
+
     font-size: 17px;
 }
 
-.topic-delete-option-danger .topic-delete-option-icon {
+.topic-delete-option-danger
+    .topic-delete-option-icon {
     color: #dc5c5c;
     background-color: rgba(220, 92, 92, 0.10);
 }
@@ -950,14 +1177,18 @@
 .topic-delete-option-text strong {
     display: block;
     margin-bottom: 3px;
+
     color: var(--heading-color);
+
     font-size: 12px;
     font-weight: 800;
 }
 
 .topic-delete-option-text span {
     display: block;
+
     color: var(--secondary-text-color);
+
     font-size: 10px;
     line-height: 1.5;
 }
@@ -966,18 +1197,22 @@
     display: flex;
     justify-content: flex-end;
     gap: 8px;
+
     padding: 14px 24px 21px;
 }
 
 .topic-delete-button {
     min-width: 90px;
     min-height: 36px;
+
     padding: 0 14px;
 
     border-radius: 9px;
+
     font-family: inherit;
     font-size: 11px;
     font-weight: 700;
+
     cursor: pointer;
 }
 
@@ -1002,42 +1237,33 @@
     border-color: #c84747;
 }
 
-@media (max-width: 600px) {
-    .topic-delete-modal {
-        padding: 12px;
-    }
-
-    .topic-delete-header {
-        padding: 20px;
-    }
-
-    .topic-delete-body {
-        padding: 18px 20px 6px;
-    }
-
-    .topic-delete-footer {
-        padding: 12px 20px 18px;
-    }
-}
-
 
 /* ============================================================
    CLASSWORK ITEMS
    ============================================================ */
 
 .classwork-topic-items {
+    position: relative;
+    z-index: 1;
+
     padding: 0 10px 10px;
+
+    /*
+     * Do not hide dropdowns inside this area.
+     */
+    overflow: visible;
 }
 
 .classwork-item {
     position: relative;
+    z-index: 1;
 
     display: flex;
     align-items: center;
 
-    min-height: 64px;
+    min-height: 72px;
 
-    padding: 8px 8px 8px 10px;
+    padding: 10px 10px 10px 12px;
 
     box-sizing: border-box;
 
@@ -1049,6 +1275,8 @@
 }
 
 .classwork-item:hover {
+    z-index: 10;
+
     background-color: var(--surface-color);
     padding-left: 13px;
 }
@@ -1063,16 +1291,16 @@
     align-items: center;
     justify-content: center;
 
-    width: 38px;
-    height: 38px;
+    width: 43px;
+    height: 43px;
 
-    margin-right: 12px;
+    margin-right: 14px;
 
     flex-shrink: 0;
 
     border-radius: 10px;
 
-    font-size: 18px;
+    font-size: 21px;
 }
 
 .classwork-item-icon.material {
@@ -1115,7 +1343,7 @@
 
     color: var(--heading-color);
 
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
     line-height: 1.35;
 
@@ -1131,7 +1359,7 @@
 
     margin: 4px 0 0;
 
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.3;
 }
 
@@ -1178,8 +1406,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
 
     margin-left: 8px;
     padding: 0;
@@ -1201,7 +1429,7 @@
 }
 
 .classwork-item-menu i {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .classwork-item-menu:hover {
@@ -1212,28 +1440,45 @@
 
 .classwork-item-options {
     position: relative;
+    z-index: 1000;
+
     flex-shrink: 0;
     margin-left: 8px;
 }
 
+.classwork-item-options.show {
+    z-index: 10000;
+}
+
 .classwork-item-options-dropdown {
     position: absolute;
-    top: calc(100% + 5px);
-    right: 0;
-    z-index: 100;
-    min-width: 125px;
-    padding: 5px;
 
+    top: calc(100% + 6px);
+    right: 0;
+
+    z-index: 9999;
+
+    width: max-content;
+    min-width: 165px;
+    max-width: 220px;
+
+    padding: 6px;
+
+    box-sizing: border-box;
+
+    color: var(--heading-color);
     background-color: var(--card-color);
+
     border: 1px solid var(--border-color);
     border-radius: 10px;
-    box-shadow: 0 10px 25px var(--shadow-color);
+
+    box-shadow: 0 12px 30px var(--shadow-color);
 
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
 
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 
     transition:
         opacity 0.15s ease,
@@ -1241,7 +1486,8 @@
         transform 0.15s ease;
 }
 
-.classwork-item-options.show .classwork-item-options-dropdown {
+.classwork-item-options.show
+    .classwork-item-options-dropdown {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -1251,11 +1497,14 @@
 .classwork-item-option {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
 
     width: 100%;
-    min-height: 33px;
-    padding: 0 9px;
+    min-height: 40px;
+
+    padding: 0 11px;
+
+    box-sizing: border-box;
 
     color: var(--heading-color);
     background-color: transparent;
@@ -1264,10 +1513,12 @@
     border-radius: 7px;
 
     font-family: inherit;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
 
     text-align: left;
+    white-space: nowrap;
+
     cursor: pointer;
 }
 
@@ -1276,7 +1527,11 @@
 }
 
 .classwork-item-option i {
-    font-size: 15px;
+    width: 16px;
+    flex-shrink: 0;
+
+    font-size: 17px;
+    text-align: center;
 }
 
 .classwork-item-option.delete {
@@ -1289,6 +1544,25 @@
 }
 
 
+/*
+ * For the final item in a topic:
+ * open the dropdown upward so it does not go outside
+ * the bottom of the page.
+ */
+.classwork-item:last-child
+    .classwork-item-options-dropdown {
+    top: auto;
+    bottom: calc(100% + 6px);
+
+    transform: translateY(5px);
+}
+
+.classwork-item:last-child
+    .classwork-item-options.show
+    .classwork-item-options-dropdown {
+    transform: translateY(0);
+}
+
 
 /* ============================================================
    EMPTY TOPIC
@@ -1299,18 +1573,18 @@
     align-items: center;
     gap: 8px;
 
-    min-height: 48px;
+    min-height: 54px;
 
     padding: 8px 10px;
 
     color: var(--secondary-text-color);
 
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .classwork-topic-empty i {
     color: var(--topic-color);
-    font-size: 17px;
+    font-size: 18px;
 }
 
 
@@ -1324,7 +1598,7 @@
     align-items: center;
     justify-content: center;
 
-    min-height: 260px;
+    min-height: 280px;
 
     padding: 30px;
 
@@ -1343,8 +1617,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 52px;
-    height: 52px;
+    width: 58px;
+    height: 58px;
 
     margin-bottom: 12px;
 
@@ -1353,7 +1627,7 @@
 
     border-radius: 13px;
 
-    font-size: 26px;
+    font-size: 29px;
 }
 
 .classwork-empty h2 {
@@ -1361,7 +1635,7 @@
 
     color: var(--heading-color);
 
-    font-size: 17px;
+    font-size: 19px;
     font-weight: 800;
 }
 
@@ -1372,7 +1646,7 @@
 
     color: var(--secondary-text-color);
 
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.6;
 }
 
@@ -1424,7 +1698,7 @@
     z-index: 2;
 
     width: 100%;
-    max-width: 620px;
+    max-width: 650px;
 
     max-height: calc(100vh - 40px);
 
@@ -1488,7 +1762,7 @@
 
     color: var(--heading-color);
 
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 800;
 }
 
@@ -1553,7 +1827,7 @@
     align-items: center;
     gap: 11px;
 
-    min-height: 100px;
+    min-height: 108px;
 
     padding: 13px;
 
@@ -1603,8 +1877,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 40px;
-    height: 40px;
+    width: 43px;
+    height: 43px;
 
     flex-shrink: 0;
 
@@ -1684,7 +1958,6 @@
    ============================================================ */
 
 @media (max-width: 800px) {
-
     .classwork-header-row {
         grid-template-columns: 1fr;
     }
@@ -1699,12 +1972,10 @@
     }
 }
 
-
 @media (max-width: 600px) {
-
     .classwork-header {
-        min-height: 145px;
-        padding: 20px;
+        min-height: 155px;
+        padding: 22px;
     }
 
     .classwork-header-illustration {
@@ -1719,11 +1990,11 @@
     }
 
     .classwork-header h1 {
-        font-size: 22px;
+        font-size: 24px;
     }
 
     .classwork-header p {
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .classwork-type-grid {
@@ -1745,11 +2016,14 @@
     .classwork-type-grid {
         padding: 17px 20px 20px;
     }
+
+    .classwork-item-options-dropdown,
+    .classwork-topic-options-dropdown {
+        min-width: 145px;
+    }
 }
 
-
 @media (max-width: 480px) {
-
     .classwork-header-illustration {
         display: none;
     }
@@ -1759,43 +2033,46 @@
     }
 
     .classwork-filter-item {
-        min-width: 78px;
-        padding: 0 10px;
+        min-width: 86px;
+        padding: 0 11px;
     }
 
     .classwork-topic-header {
-        min-height: 62px;
-        padding-left: 11px;
+        min-height: 68px;
+        padding-left: 13px;
     }
 
     .classwork-topic-icon {
-        width: 35px;
-        height: 35px;
+        width: 39px;
+        height: 39px;
     }
 
     .classwork-topic-text h2 {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .classwork-item {
-        min-height: 60px;
+        min-height: 66px;
     }
 
     .classwork-item-icon {
-        width: 35px;
-        height: 35px;
-        margin-right: 9px;
+        width: 39px;
+        height: 39px;
+        margin-right: 11px;
     }
 
     .classwork-item-content h3 {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .classwork-item-content p {
-        font-size: 9px;
+        font-size: 11px;
+    }
+
+    .classwork-item-options-dropdown {
+        right: -4px;
     }
 }
-
 </style>
 
 @extends('layouts.prof_layout')
@@ -1803,6 +2080,27 @@
 @section('title', 'Classwork')
 
 @section('content')
+@if (session('success'))
+    <div class="classwork-action-message" id="classworkActionMessage">
+        <div class="classwork-action-message-icon">
+            <i class="bx bx-check"></i>
+        </div>
+
+        <div class="classwork-action-message-content">
+            <strong>Success</strong>
+            <span>{{ session('success') }}</span>
+        </div>
+
+        <button
+            type="button"
+            class="classwork-action-message-close"
+            id="classworkActionMessageClose"
+            aria-label="Close message"
+        >
+            <i class="bx bx-x"></i>
+        </button>
+    </div>
+@endif
 
 <div class="classwork-page">
 
@@ -1871,8 +2169,7 @@
             <button
                 type="button"
                 class="classwork-header-action"
-                id="openClassworkModal"
-            >
+                id="openClassworkModal">
                 <i class="bx bx-plus-circle"></i>
 
                 <span>Create Classwork</span>
@@ -1886,8 +2183,7 @@
                     'professor.class-groups.classroom-group.classwork.topics.create',
                     ['classGroup' => $classGroup->id]
                 ) }}"
-                class="classwork-header-action"
-            >
+                class="classwork-header-action">
                 <i class="bx bx-folder-plus"></i>
 
                 <span>Create Topic</span>
@@ -1909,8 +2205,7 @@
         <button
             type="button"
             class="classwork-filter-item active"
-            data-filter="all"
-        >
+            data-filter="all">
             <i class="bx bx-grid-alt"></i>
             <span>All</span>
         </button>
@@ -1918,8 +2213,7 @@
         <button
             type="button"
             class="classwork-filter-item"
-            data-filter="materials"
-        >
+            data-filter="materials">
             <i class="bx bx-book-open"></i>
             <span>Materials</span>
         </button>
@@ -1927,8 +2221,7 @@
         <button
             type="button"
             class="classwork-filter-item"
-            data-filter="assignments"
-        >
+            data-filter="assignments">
             <i class="bx bx-task"></i>
             <span>Assignments</span>
         </button>
@@ -1936,8 +2229,7 @@
         <button
             type="button"
             class="classwork-filter-item"
-            data-filter="quiz"
-        >
+            data-filter="quiz">
             <i class="bx bx-help-circle"></i>
             <span>Quiz</span>
         </button>
@@ -1945,8 +2237,7 @@
         <button
             type="button"
             class="classwork-filter-item"
-            data-filter="exam"
-        >
+            data-filter="exam">
             <i class="bx bx-edit"></i>
             <span>Exam</span>
         </button>
@@ -1954,8 +2245,7 @@
         <button
             type="button"
             class="classwork-filter-item"
-            data-filter="project"
-        >
+            data-filter="project">
             <i class="bx bx-group"></i>
             <span>Project</span>
         </button>
@@ -1975,111 +2265,106 @@
 
         @foreach($classGroup->topics as $topic)
 
-            @php
-                $hasClasswork =
-                    $topic->materials->count() ||
-                    $topic->assignments->count() ||
-                    $topic->quizzes->count() ||
-                    $topic->exams->count() ||
-                    $topic->projects->count();
-            @endphp
+        @php
+        $hasClasswork =
+        $topic->materials->count() ||
+        $topic->assignments->count() ||
+        $topic->quizzes->count() ||
+        $topic->exams->count() ||
+        $topic->projects->count();
+        @endphp
 
-            <section class="classwork-topic">
+        <section class="classwork-topic">
 
-                {{-- TOPIC HEADER --}}
+            {{-- TOPIC HEADER --}}
 
-                <div
-                    class="classwork-topic-header"
-                    data-topic-toggle
-                >
+            <div
+                class="classwork-topic-header"
+                data-topic-toggle>
 
-                    <div class="classwork-topic-info">
+                <div class="classwork-topic-info">
 
-                        <div class="classwork-topic-icon">
-                            <i class="bx bx-folder"></i>
-                        </div>
+                    <div class="classwork-topic-icon">
+                        <i class="bx bx-folder"></i>
+                    </div>
 
-                        <div class="classwork-topic-text">
+                    <div class="classwork-topic-text">
 
-                            <h2>
-                                {{ $topic->topic_name }}
-                            </h2>
+                        <h2>
+                            {{ $topic->topic_name }}
+                        </h2>
 
-                            @if($topic->description)
-                                <p>
-                                    {{ $topic->description }}
-                                </p>
-                            @endif
-
-                        </div>
+                        @if($topic->description)
+                        <p>
+                            {{ $topic->description }}
+                        </p>
+                        @endif
 
                     </div>
 
+                </div>
 
-                    <div class="classwork-topic-actions">
+
+                <div class="classwork-topic-actions">
+
+                    <button
+                        type="button"
+                        class="classwork-topic-toggle"
+                        aria-label="Toggle topic"
+                        aria-expanded="true">
+                        <i class="bx bx-chevron-up"></i>
+                    </button>
+
+                    <span class="classwork-topic-options">
 
                         <button
                             type="button"
-                            class="classwork-topic-toggle"
-                            aria-label="Toggle topic"
-                            aria-expanded="true"
-                        >
-                            <i class="bx bx-chevron-up"></i>
-                        </button>
-
-                        <span class="classwork-topic-options">
-
-                            <button
-                                type="button"
-                                class="classwork-topic-menu classwork-topic-options-button"
-                                aria-label="Topic options"
-                                data-edit-url="{{ route(
+                            class="classwork-topic-menu classwork-topic-options-button"
+                            aria-label="Topic options"
+                            data-edit-url="{{ route(
                                     'professor.class-groups.classroom-group.classwork.topics.edit',
                                     [
                                         'classGroup' => $classGroup->id,
                                         'topic' => $topic->id,
                                     ]
                                 ) }}"
-                                data-delete-url="{{ route(
+                            data-delete-url="{{ route(
                                     'professor.class-groups.classroom-group.classwork.topics.destroy',
                                     [
                                         'classGroup' => $classGroup->id,
                                         'topic' => $topic->id,
                                     ]
                                 ) }}"
-                                data-topic-name="{{ $topic->topic_name }}"
-                                data-classwork-count="{{ $topic->materials->count() + $topic->assignments->count() + $topic->quizzes->count() + $topic->exams->count() + $topic->projects->count() }}"
-                            >
-                                <i class="bx bx-dots-vertical-rounded"></i>
+                            data-topic-name="{{ $topic->topic_name }}"
+                            data-classwork-count="{{ $topic->materials->count() + $topic->assignments->count() + $topic->quizzes->count() + $topic->exams->count() + $topic->projects->count() }}">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+
+                        <span class="classwork-topic-options-dropdown">
+
+                            <button
+                                type="button"
+                                class="classwork-topic-option"
+                                data-action="edit">
+                                <i class="bx bx-edit"></i>
+                                <span>Edit</span>
                             </button>
 
-                            <span class="classwork-topic-options-dropdown">
-
-                                <button
-                                    type="button"
-                                    class="classwork-topic-option"
-                                    data-action="edit"
-                                >
-                                    <i class="bx bx-edit"></i>
-                                    <span>Edit</span>
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="classwork-topic-option delete"
-                                    data-action="delete"
-                                >
-                                    <i class="bx bx-trash"></i>
-                                    <span>Delete</span>
-                                </button>
-
-                            </span>
+                            <button
+                                type="button"
+                                class="classwork-topic-option delete"
+                                data-action="delete">
+                                <i class="bx bx-trash"></i>
+                                <span>Delete</span>
+                            </button>
 
                         </span>
 
-                    </div>
+                    </span>
 
                 </div>
+
+            </div>
 
 
             {{-- CLASSWORK INSIDE TOPIC --}}
@@ -2097,43 +2382,41 @@
                         ]
                     ) }}"
                     class="classwork-item material"
-                    data-classwork-type="materials"
-                >
+                    data-classwork-type="materials">
 
-                        <div class="classwork-item-icon material">
-                            <i class="bx bx-book-open"></i>
-                        </div>
+                    <div class="classwork-item-icon material">
+                        <i class="bx bx-book-open"></i>
+                    </div>
 
-                        <div class="classwork-item-content">
+                    <div class="classwork-item-content">
 
-                            <h3>
-                                {{ $material->title }}
-                            </h3>
+                        <h3>
+                            {{ $material->title }}
+                        </h3>
 
-                            <p>
-                                <span class="classwork-item-type material">
-                                    Material
-                                </span>
+                        <p>
+                            <span class="classwork-item-type material">
+                                Material
+                            </span>
 
-                                <span class="classwork-item-separator">
-                                    •
-                                </span>
+                            <span class="classwork-item-separator">
+                                •
+                            </span>
 
-                                <span class="classwork-item-date">
-                                    {{ $material->created_at->format('M d, Y') }}
-                                </span>
-                            </p>
+                            <span class="classwork-item-date">
+                                {{ $material->created_at->format('M d, Y') }}
+                            </span>
+                        </p>
 
-                        </div>
+                    </div>
 
-                        <span
-                            class="classwork-item-options"
-                        >
-                            <button
-                                type="button"
-                                class="classwork-item-menu classwork-item-options-button"
-                                aria-label="Material options"
-                                data-edit-url="{{ route(
+                    <span
+                        class="classwork-item-options">
+                        <button
+                            type="button"
+                            class="classwork-item-menu classwork-item-options-button"
+                            aria-label="Material options"
+                            data-edit-url="{{ route(
                                     'professor.class-groups.materials.edit',
                                     [
                                         'classGroup' => $classGroup,
@@ -2141,41 +2424,38 @@
                                         'return_to' => 'classwork',
                                     ]
                                 ) }}"
-                                data-delete-url="{{ route(
+                            data-delete-url="{{ route(
                                     'professor.class-groups.materials.destroy',
                                     [
                                         'classGroup' => $classGroup,
                                         'material' => $material,
                                     ]
-                                ) }}"
-                            >
-                                <i class="bx bx-dots-vertical-rounded"></i>
+                                ) }}">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+
+                        <span class="classwork-item-options-dropdown">
+
+                            <button
+                                type="button"
+                                class="classwork-item-option"
+                                data-action="edit">
+                                <i class="bx bx-edit"></i>
+                                <span>Edit</span>
                             </button>
 
-                            <span class="classwork-item-options-dropdown">
+                            <button
+                                type="button"
+                                class="classwork-item-option delete"
+                                data-action="delete">
+                                <i class="bx bx-trash"></i>
+                                <span>Delete</span>
+                            </button>
 
-                                <button
-                                    type="button"
-                                    class="classwork-item-option"
-                                    data-action="edit"
-                                >
-                                    <i class="bx bx-edit"></i>
-                                    <span>Edit</span>
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="classwork-item-option delete"
-                                    data-action="delete"
-                                >
-                                    <i class="bx bx-trash"></i>
-                                    <span>Delete</span>
-                                </button>
-
-                            </span>
                         </span>
+                    </span>
 
-                    </a>
+                </a>
 
                 @endforeach
 
@@ -2184,7 +2464,7 @@
                 @foreach($topic->assignments as $assignment)
 
 
-                                        <a
+                <a
                     href="{{ route(
                         'professor.class-groups.assignments.show',
                         [
@@ -2194,43 +2474,41 @@
                         ]
                     ) }}"
                     class="classwork-item assignment"
-                    data-classwork-type="assignments"
-                >
+                    data-classwork-type="assignments">
 
-                        <div class="classwork-item-icon assignment">
-                            <i class="bx bx-task"></i>
-                        </div>
+                    <div class="classwork-item-icon assignment">
+                        <i class="bx bx-task"></i>
+                    </div>
 
-                        <div class="classwork-item-content">
+                    <div class="classwork-item-content">
 
-                            <h3>
-                                {{ $assignment->title }}
-                            </h3>
+                        <h3>
+                            {{ $assignment->title }}
+                        </h3>
 
-                            <p>
-                                <span class="classwork-item-type assignment">
-                                    Assignment
-                                </span>
+                        <p>
+                            <span class="classwork-item-type assignment">
+                                Assignment
+                            </span>
 
-                                <span class="classwork-item-separator">
-                                    •
-                                </span>
+                            <span class="classwork-item-separator">
+                                •
+                            </span>
 
-                                <span class="classwork-item-date">
-                                    {{ $assignment->created_at->format('M d, Y') }}
-                                </span>
-                            </p>
+                            <span class="classwork-item-date">
+                                {{ $assignment->created_at->format('M d, Y') }}
+                            </span>
+                        </p>
 
-                        </div>
+                    </div>
 
-                        <span
-                            class="classwork-item-options"
-                        >
-                            <button
-                                type="button"
-                                class="classwork-item-menu classwork-item-options-button"
-                                aria-label="Assignment options"
-                                data-edit-url="{{ route(
+                    <span
+                        class="classwork-item-options">
+                        <button
+                            type="button"
+                            class="classwork-item-menu classwork-item-options-button"
+                            aria-label="Assignment options"
+                            data-edit-url="{{ route(
                                     'professor.class-groups.assignments.edit',
                                     [
                                         'classGroup' => $classGroup,
@@ -2238,41 +2516,38 @@
                                         'return_to' => 'classwork',
                                     ]
                                 ) }}"
-                                data-delete-url="{{ route(
+                            data-delete-url="{{ route(
                                     'professor.class-groups.assignments.destroy',
                                     [
                                         'classGroup' => $classGroup,
                                         'assignment' => $assignment,
                                     ]
-                                ) }}"
-                            >
-                                <i class="bx bx-dots-vertical-rounded"></i>
+                                ) }}">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+
+                        <span class="classwork-item-options-dropdown">
+
+                            <button
+                                type="button"
+                                class="classwork-item-option"
+                                data-action="edit">
+                                <i class="bx bx-edit"></i>
+                                <span>Edit</span>
                             </button>
 
-                            <span class="classwork-item-options-dropdown">
+                            <button
+                                type="button"
+                                class="classwork-item-option delete"
+                                data-action="delete">
+                                <i class="bx bx-trash"></i>
+                                <span>Delete</span>
+                            </button>
 
-                                <button
-                                    type="button"
-                                    class="classwork-item-option"
-                                    data-action="edit"
-                                >
-                                    <i class="bx bx-edit"></i>
-                                    <span>Edit</span>
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="classwork-item-option delete"
-                                    data-action="delete"
-                                >
-                                    <i class="bx bx-trash"></i>
-                                    <span>Delete</span>
-                                </button>
-
-                            </span>
                         </span>
+                    </span>
 
-                    </a>
+                </a>
 
                 @endforeach
 
@@ -2281,8 +2556,8 @@
 
                 @foreach($topic->quizzes as $quiz)
 
-                    <a
-                        href="{{ route(
+                <a
+                    href="{{ route(
                             'professor.class-groups.quizzes.show',
                             [
                                 'classGroup' => $classGroup->id,
@@ -2290,50 +2565,49 @@
                                 'return_to' => 'classwork',
                             ]
                         ) }}"
-                        class="classwork-item quiz"
-                        data-classwork-type="quiz"
-                    >
+                    class="classwork-item quiz"
+                    data-classwork-type="quiz">
 
-                        <div class="classwork-item-icon quiz">
+                    <div class="classwork-item-icon quiz">
 
-                            <i class="bx bx-help-circle"></i>
+                        <i class="bx bx-help-circle"></i>
 
-                        </div>
-
-
-                        <div class="classwork-item-content">
-
-                            <h3>
-                                {{ $quiz->title }}
-                            </h3>
-
-                            <p>
-
-                                <span class="classwork-item-type quiz">
-                                    Quiz
-                                </span>
-
-                                <span class="classwork-item-separator">
-                                    •
-                                </span>
-
-                                <span class="classwork-item-date">
-                                    {{ $quiz->created_at->format('M d, Y') }}
-                                </span>
-
-                            </p>
-
-                        </div>
+                    </div>
 
 
-                        <span class="classwork-item-options">
+                    <div class="classwork-item-content">
 
-                            <button
-                                type="button"
-                                class="classwork-item-menu classwork-item-options-button"
-                                aria-label="Quiz options"
+                        <h3>
+                            {{ $quiz->title }}
+                        </h3>
 
-                                data-edit-url="{{ route(
+                        <p>
+
+                            <span class="classwork-item-type quiz">
+                                Quiz
+                            </span>
+
+                            <span class="classwork-item-separator">
+                                •
+                            </span>
+
+                            <span class="classwork-item-date">
+                                {{ $quiz->created_at->format('M d, Y') }}
+                            </span>
+
+                        </p>
+
+                    </div>
+
+
+                    <span class="classwork-item-options">
+
+                        <button
+                            type="button"
+                            class="classwork-item-menu classwork-item-options-button"
+                            aria-label="Quiz options"
+
+                            data-edit-url="{{ route(
                                     'professor.class-groups.quizzes.edit',
                                     [
                                         'classGroup' => $classGroup,
@@ -2342,56 +2616,53 @@
                                     ]
                                 ) }}"
 
-                                data-delete-url="{{ route(
+                            data-delete-url="{{ route(
                                     'professor.class-groups.quizzes.destroy',
                                     [
                                         'classGroup' => $classGroup,
                                         'quiz' => $quiz,
                                     ]
-                                ) }}"
-                            >
+                                ) }}">
 
-                                <i class="bx bx-dots-vertical-rounded"></i>
+                            <i class="bx bx-dots-vertical-rounded"></i>
+
+                        </button>
+
+
+                        <span class="classwork-item-options-dropdown">
+
+                            <button
+                                type="button"
+                                class="classwork-item-option"
+                                data-action="edit">
+
+                                <i class="bx bx-edit"></i>
+
+                                <span>
+                                    Edit
+                                </span>
 
                             </button>
 
 
-                            <span class="classwork-item-options-dropdown">
+                            <button
+                                type="button"
+                                class="classwork-item-option delete"
+                                data-action="delete">
 
-                                <button
-                                    type="button"
-                                    class="classwork-item-option"
-                                    data-action="edit"
-                                >
+                                <i class="bx bx-trash"></i>
 
-                                    <i class="bx bx-edit"></i>
+                                <span>
+                                    Delete
+                                </span>
 
-                                    <span>
-                                        Edit
-                                    </span>
-
-                                </button>
-
-
-                                <button
-                                    type="button"
-                                    class="classwork-item-option delete"
-                                    data-action="delete"
-                                >
-
-                                    <i class="bx bx-trash"></i>
-
-                                    <span>
-                                        Delete
-                                    </span>
-
-                                </button>
-
-                            </span>
+                            </button>
 
                         </span>
 
-                    </a>
+                    </span>
+
+                </a>
 
                 @endforeach
 
@@ -2409,43 +2680,42 @@
                         ]
                     ) }}"
                     class="classwork-item exam"
-                    data-classwork-type="exam"
-                >
+                    data-classwork-type="exam">
 
-                        <div class="classwork-item-icon exam">
-                            <i class="bx bx-edit-alt"></i>
-                        </div>
+                    <div class="classwork-item-icon exam">
+                        <i class="bx bx-edit-alt"></i>
+                    </div>
 
-                        <div class="classwork-item-content">
+                    <div class="classwork-item-content">
 
-                            <h3>
-                                {{ $exam->title }}
-                            </h3>
+                        <h3>
+                            {{ $exam->title }}
+                        </h3>
 
-                            <p>
-                                <span class="classwork-item-type exam">
-                                    Exam
-                                </span>
+                        <p>
+                            <span class="classwork-item-type exam">
+                                Exam
+                            </span>
 
-                                <span class="classwork-item-separator">
-                                    •
-                                </span>
+                            <span class="classwork-item-separator">
+                                •
+                            </span>
 
-                                <span class="classwork-item-date">
-                                    {{ $exam->created_at->format('M d, Y') }}
-                                </span>
-                            </p>
+                            <span class="classwork-item-date">
+                                {{ $exam->created_at->format('M d, Y') }}
+                            </span>
+                        </p>
 
-                        </div>
+                    </div>
 
-                        <span class="classwork-item-options">
+                    <span class="classwork-item-options">
 
-                            <button
-                                type="button"
-                                class="classwork-item-menu classwork-item-options-button"
-                                aria-label="Exam options"
+                        <button
+                            type="button"
+                            class="classwork-item-menu classwork-item-options-button"
+                            aria-label="Exam options"
 
-                                data-edit-url="{{ route(
+                            data-edit-url="{{ route(
                                     'professor.class-groups.exams.edit',
                                     [
                                         'classGroup' => $classGroup,
@@ -2454,56 +2724,53 @@
                                     ]
                                 ) }}"
 
-                                data-delete-url="{{ route(
+                            data-delete-url="{{ route(
                                     'professor.class-groups.exams.destroy',
                                     [
                                         'classGroup' => $classGroup,
                                         'exam' => $exam,
                                     ]
-                                ) }}"
-                            >
+                                ) }}">
 
-                                <i class="bx bx-dots-vertical-rounded"></i>
+                            <i class="bx bx-dots-vertical-rounded"></i>
+
+                        </button>
+
+
+                        <span class="classwork-item-options-dropdown">
+
+                            <button
+                                type="button"
+                                class="classwork-item-option"
+                                data-action="edit">
+
+                                <i class="bx bx-edit"></i>
+
+                                <span>
+                                    Edit
+                                </span>
 
                             </button>
 
 
-                            <span class="classwork-item-options-dropdown">
+                            <button
+                                type="button"
+                                class="classwork-item-option delete"
+                                data-action="delete">
 
-                                <button
-                                    type="button"
-                                    class="classwork-item-option"
-                                    data-action="edit"
-                                >
+                                <i class="bx bx-trash"></i>
 
-                                    <i class="bx bx-edit"></i>
+                                <span>
+                                    Delete
+                                </span>
 
-                                    <span>
-                                        Edit
-                                    </span>
-
-                                </button>
-
-
-                                <button
-                                    type="button"
-                                    class="classwork-item-option delete"
-                                    data-action="delete"
-                                >
-
-                                    <i class="bx bx-trash"></i>
-
-                                    <span>
-                                        Delete
-                                    </span>
-
-                                </button>
-
-                            </span>
+                            </button>
 
                         </span>
 
-                    </a>
+                    </span>
+
+                </a>
 
                 @endforeach
 
@@ -2511,8 +2778,8 @@
                 {{-- PROJECTS --}}
                 @foreach($topic->projects as $project)
 
-                        <a
-                            href="{{ route(
+                <a
+                    href="{{ route(
                                 'professor.classworks.projects.show',
                                 [
                                     'classGroupId' => $classGroup->id,
@@ -2520,44 +2787,43 @@
                                     'return_to' => 'classwork',
                                 ]
                             ) }}"
-                            class="classwork-item project"
-                            data-classwork-type="project"
-                        >
+                    class="classwork-item project"
+                    data-classwork-type="project">
 
-                        <div class="classwork-item-icon project">
-                            <i class="bx bx-group"></i>
-                        </div>
+                    <div class="classwork-item-icon project">
+                        <i class="bx bx-group"></i>
+                    </div>
 
-                        <div class="classwork-item-content">
+                    <div class="classwork-item-content">
 
-                            <h3>
-                                {{ $project->title }}
-                            </h3>
+                        <h3>
+                            {{ $project->title }}
+                        </h3>
 
-                            <p>
-                                <span class="classwork-item-type project">
-                                    Project
-                                </span>
+                        <p>
+                            <span class="classwork-item-type project">
+                                Project
+                            </span>
 
-                                <span class="classwork-item-separator">
-                                    •
-                                </span>
+                            <span class="classwork-item-separator">
+                                •
+                            </span>
 
-                                <span class="classwork-item-date">
-                                    {{ $project->created_at->format('M d, Y') }}
-                                </span>
-                            </p>
+                            <span class="classwork-item-date">
+                                {{ $project->created_at->format('M d, Y') }}
+                            </span>
+                        </p>
 
-                        </div>
+                    </div>
 
-                        <span class="classwork-item-options">
+                    <span class="classwork-item-options">
 
-                            <button
-                                type="button"
-                                class="classwork-item-menu classwork-item-options-button"
-                                aria-label="Project options"
+                        <button
+                            type="button"
+                            class="classwork-item-menu classwork-item-options-button"
+                            aria-label="Project options"
 
-                                data-edit-url="{{ route(
+                            data-edit-url="{{ route(
                                     'professor.classworks.projects.edit',
                                     [
                                         'classGroupId' => $classGroup->id,
@@ -2567,75 +2833,72 @@
                                     ]
                                 ) }}"
 
-                                data-delete-url="{{ route(
+                            data-delete-url="{{ route(
                                     'professor.classworks.projects.destroy',
                                     [
                                         'classGroupId' => $classGroup->id,
                                         'projectId' => $project->id,
                                     ]
-                                ) }}"
-                            >
+                                ) }}">
 
-                                <i class="bx bx-dots-vertical-rounded"></i>
+                            <i class="bx bx-dots-vertical-rounded"></i>
+
+                        </button>
+
+                        <span class="classwork-item-options-dropdown">
+
+                            <button
+                                type="button"
+                                class="classwork-item-option"
+                                data-action="edit">
+
+                                <i class="bx bx-edit"></i>
+
+                                <span>
+                                    Edit
+                                </span>
 
                             </button>
 
-                            <span class="classwork-item-options-dropdown">
+                            <button
+                                type="button"
+                                class="classwork-item-option delete"
+                                data-action="delete">
 
-                                <button
-                                    type="button"
-                                    class="classwork-item-option"
-                                    data-action="edit"
-                                >
+                                <i class="bx bx-trash"></i>
 
-                                    <i class="bx bx-edit"></i>
+                                <span>
+                                    Delete
+                                </span>
 
-                                    <span>
-                                        Edit
-                                    </span>
-
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="classwork-item-option delete"
-                                    data-action="delete"
-                                >
-
-                                    <i class="bx bx-trash"></i>
-
-                                    <span>
-                                        Delete
-                                    </span>
-
-                                </button>
-
-                            </span>
+                            </button>
 
                         </span>
 
-                    </a>
+                    </span>
+
+                </a>
 
                 @endforeach
 
 
                 @if(!$hasClasswork)
 
-                    <div class="classwork-topic-empty">
+                <div class="classwork-topic-empty">
 
-                        <i class="bx bx-folder-open"></i>
+                    <i class="bx bx-folder-open"></i>
 
-                        <span>
-                            No classwork in this topic yet.
-                        </span>
+                    <span>
+                        No classwork in this topic yet.
+                    </span>
 
-                    </div>
+                </div>
 
                 @endif
 
             </div>
 
-            </section>
+        </section>
 
         @endforeach
 
@@ -2647,90 +2910,88 @@
 
         @php
 
-            $noTopicMaterials = $classGroup->materials
-                ->whereNull('topic_id');
+        $noTopicMaterials = $classGroup->materials
+        ->whereNull('topic_id');
 
-            $noTopicAssignments = $classGroup->assignments
-                ->whereNull('topic_id');
+        $noTopicAssignments = $classGroup->assignments
+        ->whereNull('topic_id');
 
-            $noTopicQuizzes = $classGroup->quizzes
-                ->whereNull('topic_id');
+        $noTopicQuizzes = $classGroup->quizzes
+        ->whereNull('topic_id');
 
-            $noTopicExams = $classGroup->exams
-                ->whereNull('topic_id');
+        $noTopicExams = $classGroup->exams
+        ->whereNull('topic_id');
 
-            /*
-             * Projects are loaded separately so the existing
-             * Classwork controller does not need to be changed.
-             */
-            $noTopicProjects = \App\Models\Project::where(
-                'class_group_id',
-                $classGroup->id
-            )
-                ->whereNull('topic_id')
-                ->latest()
-                ->get();
+        /*
+        * Projects are loaded separately so the existing
+        * Classwork controller does not need to be changed.
+        */
+        $noTopicProjects = \App\Models\Project::where(
+        'class_group_id',
+        $classGroup->id
+        )
+        ->whereNull('topic_id')
+        ->latest()
+        ->get();
 
-            $hasNoTopicClasswork =
-                $noTopicMaterials->count() ||
-                $noTopicAssignments->count() ||
-                $noTopicQuizzes->count() ||
-                $noTopicExams->count() ||
-                $noTopicProjects->count();
+        $hasNoTopicClasswork =
+        $noTopicMaterials->count() ||
+        $noTopicAssignments->count() ||
+        $noTopicQuizzes->count() ||
+        $noTopicExams->count() ||
+        $noTopicProjects->count();
 
         @endphp
 
 
         @if($hasNoTopicClasswork)
 
-            <section class="classwork-topic classwork-no-topic">
+        <section class="classwork-topic classwork-no-topic">
 
-                <div
-                    class="classwork-topic-header"
-                    data-topic-toggle
-                >
+            <div
+                class="classwork-topic-header"
+                data-topic-toggle>
 
-                    <div class="classwork-topic-info">
+                <div class="classwork-topic-info">
 
-                        <div class="classwork-topic-icon no-topic">
-                            <i class="bx bx-folder-minus"></i>
-                        </div>
-
-                        <div class="classwork-topic-text">
-
-                            <h2>No topic</h2>
-
-                            <p>
-                                Classwork not assigned to a topic
-                            </p>
-
-                        </div>
-
+                    <div class="classwork-topic-icon no-topic">
+                        <i class="bx bx-folder-minus"></i>
                     </div>
 
-                    <div class="classwork-topic-actions">
+                    <div class="classwork-topic-text">
 
-                        <button
-                            type="button"
-                            class="classwork-topic-toggle"
-                            aria-label="Toggle no topic"
-                            aria-expanded="true"
-                        >
-                            <i class="bx bx-chevron-up"></i>
-                        </button>
+                        <h2>No topic</h2>
+
+                        <p>
+                            Classwork not assigned to a topic
+                        </p>
 
                     </div>
 
                 </div>
 
+                <div class="classwork-topic-actions">
 
-                <div class="classwork-topic-items">
+                    <button
+                        type="button"
+                        class="classwork-topic-toggle"
+                        aria-label="Toggle no topic"
+                        aria-expanded="true">
+                        <i class="bx bx-chevron-up"></i>
+                    </button>
 
-                    {{-- MATERIALS --}}
-                    @foreach($noTopicMaterials as $material)
+                </div>
 
-                        <a
-                            href="{{ route(
+            </div>
+
+
+            <div class="classwork-topic-items">
+
+                {{-- MATERIALS --}}
+                @foreach($noTopicMaterials as $material)
+
+                <a
+                    href="{{ route(
                                 'professor.class-groups.materials.show',
                                 [
                                     'classGroup' => $classGroup->id,
@@ -2738,46 +2999,44 @@
                                     'return_to' => 'classwork',
                                 ]
                             ) }}"
-                            class="classwork-item material"
-                            data-classwork-type="materials"
-                        >
+                    class="classwork-item material"
+                    data-classwork-type="materials">
 
-                            <div class="classwork-item-icon material">
-                                <i class="bx bx-book-open"></i>
-                            </div>
+                    <div class="classwork-item-icon material">
+                        <i class="bx bx-book-open"></i>
+                    </div>
 
-                            <div class="classwork-item-content">
+                    <div class="classwork-item-content">
 
-                                <h3>
-                                    {{ $material->title }}
-                                </h3>
+                        <h3>
+                            {{ $material->title }}
+                        </h3>
 
-                                <p>
+                        <p>
 
-                                    <span class="classwork-item-type material">
-                                        Material
-                                    </span>
+                            <span class="classwork-item-type material">
+                                Material
+                            </span>
 
-                                    <span class="classwork-item-separator">
-                                        •
-                                    </span>
+                            <span class="classwork-item-separator">
+                                •
+                            </span>
 
-                                    <span class="classwork-item-date">
-                                        {{ $material->created_at->format('M d, Y') }}
-                                    </span>
+                            <span class="classwork-item-date">
+                                {{ $material->created_at->format('M d, Y') }}
+                            </span>
 
-                                </p>
+                        </p>
 
-                            </div>
+                    </div>
 
-                            <span
-                            class="classwork-item-options"
-                        >
-                            <button
-                                type="button"
-                                class="classwork-item-menu classwork-item-options-button"
-                                aria-label="Material options"
-                                data-edit-url="{{ route(
+                    <span
+                        class="classwork-item-options">
+                        <button
+                            type="button"
+                            class="classwork-item-menu classwork-item-options-button"
+                            aria-label="Material options"
+                            data-edit-url="{{ route(
                                     'professor.class-groups.materials.edit',
                                     [
                                         'classGroup' => $classGroup,
@@ -2785,50 +3044,47 @@
                                         'return_to' => 'classwork',
                                     ]
                                 ) }}"
-                                data-delete-url="{{ route(
+                            data-delete-url="{{ route(
                                     'professor.class-groups.materials.destroy',
                                     [
                                         'classGroup' => $classGroup,
                                         'material' => $material,
                                     ]
-                                ) }}"
-                            >
-                                <i class="bx bx-dots-vertical-rounded"></i>
+                                ) }}">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+
+                        <span class="classwork-item-options-dropdown">
+
+                            <button
+                                type="button"
+                                class="classwork-item-option"
+                                data-action="edit">
+                                <i class="bx bx-edit"></i>
+                                <span>Edit</span>
                             </button>
 
-                            <span class="classwork-item-options-dropdown">
+                            <button
+                                type="button"
+                                class="classwork-item-option delete"
+                                data-action="delete">
+                                <i class="bx bx-trash"></i>
+                                <span>Delete</span>
+                            </button>
 
-                                <button
-                                    type="button"
-                                    class="classwork-item-option"
-                                    data-action="edit"
-                                >
-                                    <i class="bx bx-edit"></i>
-                                    <span>Edit</span>
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="classwork-item-option delete"
-                                    data-action="delete"
-                                >
-                                    <i class="bx bx-trash"></i>
-                                    <span>Delete</span>
-                                </button>
-
-                            </span>
                         </span>
+                    </span>
 
-                        </a>
+                </a>
 
-                    @endforeach
+                @endforeach
 
 
-                    {{-- ASSIGNMENTS --}}
-                    @foreach($noTopicAssignments as $assignment)
+                {{-- ASSIGNMENTS --}}
+                @foreach($noTopicAssignments as $assignment)
 
-                        <a
-                            href="{{ route(
+                <a
+                    href="{{ route(
                                 'professor.class-groups.assignments.show',
                                 [
                                     'classGroup' => $classGroup->id,
@@ -2836,46 +3092,44 @@
                                     'return_to' => 'classwork',
                                 ]
                             ) }}"
-                            class="classwork-item assignment"
-                            data-classwork-type="assignments"
-                        >
+                    class="classwork-item assignment"
+                    data-classwork-type="assignments">
 
-                            <div class="classwork-item-icon assignment">
-                                <i class="bx bx-task"></i>
-                            </div>
+                    <div class="classwork-item-icon assignment">
+                        <i class="bx bx-task"></i>
+                    </div>
 
-                            <div class="classwork-item-content">
+                    <div class="classwork-item-content">
 
-                                <h3>
-                                    {{ $assignment->title }}
-                                </h3>
+                        <h3>
+                            {{ $assignment->title }}
+                        </h3>
 
-                                <p>
+                        <p>
 
-                                    <span class="classwork-item-type assignment">
-                                        Assignment
-                                    </span>
+                            <span class="classwork-item-type assignment">
+                                Assignment
+                            </span>
 
-                                    <span class="classwork-item-separator">
-                                        •
-                                    </span>
+                            <span class="classwork-item-separator">
+                                •
+                            </span>
 
-                                    <span class="classwork-item-date">
-                                        {{ $assignment->created_at->format('M d, Y') }}
-                                    </span>
+                            <span class="classwork-item-date">
+                                {{ $assignment->created_at->format('M d, Y') }}
+                            </span>
 
-                                </p>
+                        </p>
 
-                            </div>
+                    </div>
 
-                            <span
-                            class="classwork-item-options"
-                        >
-                            <button
-                                type="button"
-                                class="classwork-item-menu classwork-item-options-button"
-                                aria-label="Assignment options"
-                                data-edit-url="{{ route(
+                    <span
+                        class="classwork-item-options">
+                        <button
+                            type="button"
+                            class="classwork-item-menu classwork-item-options-button"
+                            aria-label="Assignment options"
+                            data-edit-url="{{ route(
                                     'professor.class-groups.assignments.edit',
                                     [
                                         'classGroup' => $classGroup,
@@ -2883,50 +3137,47 @@
                                         'return_to' => 'classwork',
                                     ]
                                 ) }}"
-                                data-delete-url="{{ route(
+                            data-delete-url="{{ route(
                                     'professor.class-groups.assignments.destroy',
                                     [
                                         'classGroup' => $classGroup,
                                         'assignment' => $assignment,
                                     ]
-                                ) }}"
-                            >
-                                <i class="bx bx-dots-vertical-rounded"></i>
+                                ) }}">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+
+                        <span class="classwork-item-options-dropdown">
+
+                            <button
+                                type="button"
+                                class="classwork-item-option"
+                                data-action="edit">
+                                <i class="bx bx-edit"></i>
+                                <span>Edit</span>
                             </button>
 
-                            <span class="classwork-item-options-dropdown">
+                            <button
+                                type="button"
+                                class="classwork-item-option delete"
+                                data-action="delete">
+                                <i class="bx bx-trash"></i>
+                                <span>Delete</span>
+                            </button>
 
-                                <button
-                                    type="button"
-                                    class="classwork-item-option"
-                                    data-action="edit"
-                                >
-                                    <i class="bx bx-edit"></i>
-                                    <span>Edit</span>
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="classwork-item-option delete"
-                                    data-action="delete"
-                                >
-                                    <i class="bx bx-trash"></i>
-                                    <span>Delete</span>
-                                </button>
-
-                            </span>
                         </span>
+                    </span>
 
-                        </a>
+                </a>
 
-                    @endforeach
+                @endforeach
 
-                    {{-- QUIZZES --}}
+                {{-- QUIZZES --}}
 
-                    @foreach($noTopicQuizzes as $quiz)
+                @foreach($noTopicQuizzes as $quiz)
 
-                        <a
-                            href="{{ route(
+                <a
+                    href="{{ route(
                                 'professor.class-groups.quizzes.show',
                                 [
                                     'classGroup' => $classGroup->id,
@@ -2934,52 +3185,51 @@
                                     'return_to' => 'classwork',
                                 ]
                             ) }}"
-                            class="classwork-item quiz"
-                            data-classwork-type="quiz"
-                        >
+                    class="classwork-item quiz"
+                    data-classwork-type="quiz">
 
-                            <div class="classwork-item-icon quiz">
-                                <i class="bx bx-help-circle"></i>
-                            </div>
-
-
-                            <div class="classwork-item-content">
-
-                                <h3>
-                                    {{ $quiz->title }}
-                                </h3>
-
-                                <p>
-
-                                    <span class="classwork-item-type quiz">
-                                        Quiz
-                                    </span>
-
-                                    <span class="classwork-item-separator">
-                                        •
-                                    </span>
-
-                                    <span class="classwork-item-date">
-                                        {{ $quiz->created_at->format('M d, Y') }}
-                                    </span>
-
-                                </p>
-
-                            </div>
+                    <div class="classwork-item-icon quiz">
+                        <i class="bx bx-help-circle"></i>
+                    </div>
 
 
-                            {{-- ====================================================
+                    <div class="classwork-item-content">
+
+                        <h3>
+                            {{ $quiz->title }}
+                        </h3>
+
+                        <p>
+
+                            <span class="classwork-item-type quiz">
+                                Quiz
+                            </span>
+
+                            <span class="classwork-item-separator">
+                                •
+                            </span>
+
+                            <span class="classwork-item-date">
+                                {{ $quiz->created_at->format('M d, Y') }}
+                            </span>
+
+                        </p>
+
+                    </div>
+
+
+                    {{-- ====================================================
                                 QUIZ OPTIONS
                             ===================================================== --}}
 
-                            <span class="classwork-item-options">
+                    <span class="classwork-item-options">
 
-                                <button
-                                    type="button"
-                                    class="classwork-item-menu classwork-item-options-button"
-                                    aria-label="Quiz options"
+                        <button
+                            type="button"
+                            class="classwork-item-menu classwork-item-options-button"
+                            aria-label="Quiz options"
 
-                                    data-edit-url="{{ route(
+                            data-edit-url="{{ route(
                                         'professor.class-groups.quizzes.edit',
                                         [
                                             'classGroup' => $classGroup,
@@ -2988,69 +3238,66 @@
                                         ]
                                     ) }}"
 
-                                    data-delete-url="{{ route(
+                            data-delete-url="{{ route(
                                         'professor.class-groups.quizzes.destroy',
                                         [
                                             'classGroup' => $classGroup,
                                             'quiz' => $quiz,
                                         ]
-                                    ) }}"
-                                >
+                                    ) }}">
 
-                                    <i class="bx bx-dots-vertical-rounded"></i>
+                            <i class="bx bx-dots-vertical-rounded"></i>
 
-                                </button>
-
-
-                                <span class="classwork-item-options-dropdown">
-
-                                    {{-- EDIT --}}
-
-                                    <button
-                                        type="button"
-                                        class="classwork-item-option"
-                                        data-action="edit"
-                                    >
-
-                                        <i class="bx bx-edit"></i>
-
-                                        <span>
-                                            Edit
-                                        </span>
-
-                                    </button>
+                        </button>
 
 
-                                    {{-- DELETE --}}
+                        <span class="classwork-item-options-dropdown">
 
-                                    <button
-                                        type="button"
-                                        class="classwork-item-option delete"
-                                        data-action="delete"
-                                    >
+                            {{-- EDIT --}}
 
-                                        <i class="bx bx-trash"></i>
+                            <button
+                                type="button"
+                                class="classwork-item-option"
+                                data-action="edit">
 
-                                        <span>
-                                            Delete
-                                        </span>
+                                <i class="bx bx-edit"></i>
 
-                                    </button>
-
+                                <span>
+                                    Edit
                                 </span>
 
-                            </span>
-
-                        </a>
-
-                    @endforeach
+                            </button>
 
 
-                    {{-- EXAMS --}}
-                    @foreach($noTopicExams as $exam)
+                            {{-- DELETE --}}
 
-                        <a
-                            href="{{ route(
+                            <button
+                                type="button"
+                                class="classwork-item-option delete"
+                                data-action="delete">
+
+                                <i class="bx bx-trash"></i>
+
+                                <span>
+                                    Delete
+                                </span>
+
+                            </button>
+
+                        </span>
+
+                    </span>
+
+                </a>
+
+                @endforeach
+
+
+                {{-- EXAMS --}}
+                @foreach($noTopicExams as $exam)
+
+                <a
+                    href="{{ route(
                                 'professor.class-groups.exams.show',
                                 [
                                     'classGroup' => $classGroup->id,
@@ -3058,46 +3305,45 @@
                                     'return_to' => 'classwork',
                                 ]
                             ) }}"
-                            class="classwork-item exam"
-                            data-classwork-type="exam"
-                        >
+                    class="classwork-item exam"
+                    data-classwork-type="exam">
 
-                            <div class="classwork-item-icon exam">
-                                <i class="bx bx-edit-alt"></i>
-                            </div>
+                    <div class="classwork-item-icon exam">
+                        <i class="bx bx-edit-alt"></i>
+                    </div>
 
-                            <div class="classwork-item-content">
+                    <div class="classwork-item-content">
 
-                                <h3>
-                                    {{ $exam->title }}
-                                </h3>
+                        <h3>
+                            {{ $exam->title }}
+                        </h3>
 
-                                <p>
+                        <p>
 
-                                    <span class="classwork-item-type exam">
-                                        Exam
-                                    </span>
+                            <span class="classwork-item-type exam">
+                                Exam
+                            </span>
 
-                                    <span class="classwork-item-separator">
-                                        •
-                                    </span>
+                            <span class="classwork-item-separator">
+                                •
+                            </span>
 
-                                    <span class="classwork-item-date">
-                                        {{ $exam->created_at->format('M d, Y') }}
-                                    </span>
+                            <span class="classwork-item-date">
+                                {{ $exam->created_at->format('M d, Y') }}
+                            </span>
 
-                                </p>
+                        </p>
 
-                            </div>
+                    </div>
 
-                            <span class="classwork-item-options">
+                    <span class="classwork-item-options">
 
-                                <button
-                                    type="button"
-                                    class="classwork-item-menu classwork-item-options-button"
-                                    aria-label="Exam options"
+                        <button
+                            type="button"
+                            class="classwork-item-menu classwork-item-options-button"
+                            aria-label="Exam options"
 
-                                    data-edit-url="{{ route(
+                            data-edit-url="{{ route(
                                         'professor.class-groups.exams.edit',
                                         [
                                             'classGroup' => $classGroup,
@@ -3106,65 +3352,62 @@
                                         ]
                                     ) }}"
 
-                                    data-delete-url="{{ route(
+                            data-delete-url="{{ route(
                                         'professor.class-groups.exams.destroy',
                                         [
                                             'classGroup' => $classGroup,
                                             'exam' => $exam,
                                         ]
-                                    ) }}"
-                                >
+                                    ) }}">
 
-                                    <i class="bx bx-dots-vertical-rounded"></i>
+                            <i class="bx bx-dots-vertical-rounded"></i>
 
-                                </button>
-
-
-                                <span class="classwork-item-options-dropdown">
-
-                                    <button
-                                        type="button"
-                                        class="classwork-item-option"
-                                        data-action="edit"
-                                    >
-
-                                        <i class="bx bx-edit"></i>
-
-                                        <span>
-                                            Edit
-                                        </span>
-
-                                    </button>
+                        </button>
 
 
-                                    <button
-                                        type="button"
-                                        class="classwork-item-option delete"
-                                        data-action="delete"
-                                    >
+                        <span class="classwork-item-options-dropdown">
 
-                                        <i class="bx bx-trash"></i>
+                            <button
+                                type="button"
+                                class="classwork-item-option"
+                                data-action="edit">
 
-                                        <span>
-                                            Delete
-                                        </span>
+                                <i class="bx bx-edit"></i>
 
-                                    </button>
-
+                                <span>
+                                    Edit
                                 </span>
 
-                            </span>
-
-                        </a>
-
-                    @endforeach
+                            </button>
 
 
-                    {{-- PROJECTS --}}
-                    @foreach($noTopicProjects as $project)
+                            <button
+                                type="button"
+                                class="classwork-item-option delete"
+                                data-action="delete">
 
-                        <a
-                            href="{{ route(
+                                <i class="bx bx-trash"></i>
+
+                                <span>
+                                    Delete
+                                </span>
+
+                            </button>
+
+                        </span>
+
+                    </span>
+
+                </a>
+
+                @endforeach
+
+
+                {{-- PROJECTS --}}
+                @foreach($noTopicProjects as $project)
+
+                <a
+                    href="{{ route(
                                 'professor.classworks.projects.show',
                                 [
                                     'classGroupId' => $classGroup->id,
@@ -3172,44 +3415,43 @@
                                     'return_to' => 'classwork',
                                 ]
                             ) }}"
-                            class="classwork-item project"
-                            data-classwork-type="project"
-                        >
+                    class="classwork-item project"
+                    data-classwork-type="project">
 
-                            <div class="classwork-item-icon project">
-                                <i class="bx bx-group"></i>
-                            </div>
+                    <div class="classwork-item-icon project">
+                        <i class="bx bx-group"></i>
+                    </div>
 
-                            <div class="classwork-item-content">
+                    <div class="classwork-item-content">
 
-                                <h3>
-                                    {{ $project->title }}
-                                </h3>
+                        <h3>
+                            {{ $project->title }}
+                        </h3>
 
-                                <p>
-                                    <span class="classwork-item-type project">
-                                        Project
-                                    </span>
+                        <p>
+                            <span class="classwork-item-type project">
+                                Project
+                            </span>
 
-                                    <span class="classwork-item-separator">
-                                        •
-                                    </span>
+                            <span class="classwork-item-separator">
+                                •
+                            </span>
 
-                                    <span class="classwork-item-date">
-                                        {{ $project->created_at->format('M d, Y') }}
-                                    </span>
-                                </p>
+                            <span class="classwork-item-date">
+                                {{ $project->created_at->format('M d, Y') }}
+                            </span>
+                        </p>
 
-                            </div>
+                    </div>
 
-                            <span class="classwork-item-options">
+                    <span class="classwork-item-options">
 
-                                <button
-                                    type="button"
-                                    class="classwork-item-menu classwork-item-options-button"
-                                    aria-label="Project options"
+                        <button
+                            type="button"
+                            class="classwork-item-menu classwork-item-options-button"
+                            aria-label="Project options"
 
-                                    data-edit-url="{{ route(
+                            data-edit-url="{{ route(
                                         'professor.classworks.projects.edit',
                                         [
                                             'classGroupId' => $classGroup->id,
@@ -3219,60 +3461,57 @@
                                         ]
                                     ) }}"
 
-                                    data-delete-url="{{ route(
+                            data-delete-url="{{ route(
                                         'professor.classworks.projects.destroy',
                                         [
                                             'classGroupId' => $classGroup->id,
                                             'projectId' => $project->id,
                                         ]
-                                    ) }}"
-                                >
+                                    ) }}">
 
-                                    <i class="bx bx-dots-vertical-rounded"></i>
+                            <i class="bx bx-dots-vertical-rounded"></i>
 
-                                </button>
+                        </button>
 
-                                <span class="classwork-item-options-dropdown">
+                        <span class="classwork-item-options-dropdown">
 
-                                    <button
-                                        type="button"
-                                        class="classwork-item-option"
-                                        data-action="edit"
-                                    >
+                            <button
+                                type="button"
+                                class="classwork-item-option"
+                                data-action="edit">
 
-                                        <i class="bx bx-edit"></i>
+                                <i class="bx bx-edit"></i>
 
-                                        <span>
-                                            Edit
-                                        </span>
-
-                                    </button>
-
-                                    <button
-                                        type="button"
-                                        class="classwork-item-option delete"
-                                        data-action="delete"
-                                    >
-
-                                        <i class="bx bx-trash"></i>
-
-                                        <span>
-                                            Delete
-                                        </span>
-
-                                    </button>
-
+                                <span>
+                                    Edit
                                 </span>
 
-                            </span>
+                            </button>
 
-                        </a>
+                            <button
+                                type="button"
+                                class="classwork-item-option delete"
+                                data-action="delete">
 
-                    @endforeach
+                                <i class="bx bx-trash"></i>
 
-                </div>
+                                <span>
+                                    Delete
+                                </span>
 
-            </section>
+                            </button>
+
+                        </span>
+
+                    </span>
+
+                </a>
+
+                @endforeach
+
+            </div>
+
+        </section>
 
         @endif
 
@@ -3282,24 +3521,24 @@
              ======================================================== --}}
 
         @if(
-            $classGroup->topics->count() === 0 &&
-            !$hasNoTopicClasswork
+        $classGroup->topics->count() === 0 &&
+        !$hasNoTopicClasswork
         )
 
-            <div class="classwork-empty">
+        <div class="classwork-empty">
 
-                <div class="classwork-empty-icon">
-                    <i class="bx bx-book-open"></i>
-                </div>
-
-                <h2>No classwork yet</h2>
-
-                <p>
-                    Create an assignment, material, quiz, or exam
-                    to start building your classwork.
-                </p>
-
+            <div class="classwork-empty-icon">
+                <i class="bx bx-book-open"></i>
             </div>
+
+            <h2>No classwork yet</h2>
+
+            <p>
+                Create an assignment, material, quiz, or exam
+                to start building your classwork.
+            </p>
+
+        </div>
 
         @endif
 
@@ -3313,20 +3552,17 @@
     <div
         class="topic-delete-modal"
         id="topicDeleteModal"
-        aria-hidden="true"
-    >
+        aria-hidden="true">
 
         <div
             class="topic-delete-modal-overlay"
-            id="topicDeleteModalOverlay"
-        ></div>
+            id="topicDeleteModalOverlay"></div>
 
         <div
             class="topic-delete-dialog"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="topicDeleteModalTitle"
-        >
+            aria-labelledby="topicDeleteModalTitle">
 
             <div class="topic-delete-header">
 
@@ -3350,8 +3586,7 @@
                     type="button"
                     class="topic-delete-close"
                     id="topicDeleteClose"
-                    aria-label="Close delete topic modal"
-                >
+                    aria-label="Close delete topic modal">
                     <i class="bx bx-x"></i>
                 </button>
 
@@ -3359,8 +3594,7 @@
 
             <form
                 id="topicDeleteForm"
-                method="POST"
-            >
+                method="POST">
 
                 @csrf
                 @method('DELETE')
@@ -3373,8 +3607,7 @@
                             type="radio"
                             name="delete_option"
                             value="topic_only"
-                            checked
-                        >
+                            checked>
 
                         <span class="topic-delete-option-content">
 
@@ -3401,8 +3634,7 @@
                         <input
                             type="radio"
                             name="delete_option"
-                            value="topic_and_classwork"
-                        >
+                            value="topic_and_classwork">
 
                         <span class="topic-delete-option-content">
 
@@ -3431,15 +3663,13 @@
                     <button
                         type="button"
                         class="topic-delete-button cancel"
-                        id="topicDeleteCancel"
-                    >
+                        id="topicDeleteCancel">
                         Cancel
                     </button>
 
                     <button
                         type="submit"
-                        class="topic-delete-button confirm"
-                    >
+                        class="topic-delete-button confirm">
                         Delete
                     </button>
 
@@ -3459,20 +3689,17 @@
     <div
         class="classwork-modal"
         id="classworkModal"
-        aria-hidden="true"
-    >
+        aria-hidden="true">
 
         <div
             class="classwork-modal-overlay"
-            id="classworkModalOverlay"
-        ></div>
+            id="classworkModalOverlay"></div>
 
         <div
             class="classwork-modal-dialog"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="classworkModalTitle"
-        >
+            aria-labelledby="classworkModalTitle">
 
             <div class="classwork-modal-header">
 
@@ -3497,8 +3724,7 @@
                     type="button"
                     class="classwork-modal-close"
                     id="closeClassworkModal"
-                    aria-label="Close"
-                >
+                    aria-label="Close">
                     <i class="bx bx-x"></i>
                 </button>
 
@@ -3514,8 +3740,7 @@
                         'professor.class-groups.materials.create',
                         ['classGroup' => $classGroup->id]
                     ) }}"
-                    class="classwork-type-card material"
-                >
+                    class="classwork-type-card material">
 
                     <span class="classwork-type-icon material">
                         <i class="bx bx-book-open"></i>
@@ -3544,8 +3769,7 @@
                         'professor.class-groups.assignments.create',
                         ['classGroup' => $classGroup->id]
                     ) }}"
-                    class="classwork-type-card assignment"
-                >
+                    class="classwork-type-card assignment">
 
                     <span class="classwork-type-icon assignment">
                         <i class="bx bx-task"></i>
@@ -3574,8 +3798,7 @@
                         'professor.class-groups.quizzes.create',
                         ['classGroup' => $classGroup->id]
                     ) }}"
-                    class="classwork-type-card quiz"
-                >
+                    class="classwork-type-card quiz">
 
                     <span class="classwork-type-icon quiz">
                         <i class="bx bx-help-circle"></i>
@@ -3604,8 +3827,7 @@
                         'professor.class-groups.exams.create',
                         ['classGroup' => $classGroup->id]
                     ) }}"
-                    class="classwork-type-card exam"
-                >
+                    class="classwork-type-card exam">
 
                     <span class="classwork-type-icon exam">
                         <i class="bx bx-edit"></i>
@@ -3634,8 +3856,7 @@
                         'professor.classworks.projects.create',
                         ['classGroupId' => $classGroup->id]
                     ) }}"
-                    class="classwork-type-card project"
-                >
+                    class="classwork-type-card project">
 
                     <span class="classwork-type-icon project">
                         <i class="bx bx-group"></i>
@@ -3669,776 +3890,776 @@
      ============================================================ --}}
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
 
-    /* ============================================================
-       CLASSWORK FILTER
-       ============================================================ */
+        /* ============================================================
+           CLASSWORK FILTER
+           ============================================================ */
 
-    const filterButtons = document.querySelectorAll(
-        '.classwork-filter-item'
-    );
+        const filterButtons = document.querySelectorAll(
+            '.classwork-filter-item'
+        );
 
-    const classworkItems = document.querySelectorAll(
-        '.classwork-item'
-    );
-
-
-    filterButtons.forEach(function (button) {
-
-        button.addEventListener('click', function () {
-
-            const filter = this.dataset.filter;
+        const classworkItems = document.querySelectorAll(
+            '.classwork-item'
+        );
 
 
-            filterButtons.forEach(function (item) {
-                item.classList.remove('active');
-            });
+        filterButtons.forEach(function(button) {
 
-            this.classList.add('active');
+            button.addEventListener('click', function() {
 
-
-            classworkItems.forEach(function (item) {
-
-                const type = item.dataset.classworkType;
-
-                if (
-                    filter === 'all' ||
-                    filter === type
-                ) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-
-            });
+                const filter = this.dataset.filter;
 
 
-            document.querySelectorAll(
-                '.classwork-topic'
-            ).forEach(function (topic) {
+                filterButtons.forEach(function(item) {
+                    item.classList.remove('active');
+                });
 
-                const items = topic.querySelectorAll(
-                    '.classwork-item'
-                );
+                this.classList.add('active');
 
-                let hasVisibleItem = false;
 
-                items.forEach(function (item) {
+                classworkItems.forEach(function(item) {
+
+                    const type = item.dataset.classworkType;
 
                     if (
-                        item.style.display !== 'none'
+                        filter === 'all' ||
+                        filter === type
                     ) {
-                        hasVisibleItem = true;
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
                     }
 
                 });
 
 
-                if (hasVisibleItem) {
-                    topic.style.display = '';
+                document.querySelectorAll(
+                    '.classwork-topic'
+                ).forEach(function(topic) {
+
+                    const items = topic.querySelectorAll(
+                        '.classwork-item'
+                    );
+
+                    let hasVisibleItem = false;
+
+                    items.forEach(function(item) {
+
+                        if (
+                            item.style.display !== 'none'
+                        ) {
+                            hasVisibleItem = true;
+                        }
+
+                    });
+
+
+                    if (hasVisibleItem) {
+                        topic.style.display = '';
+                    } else {
+                        topic.style.display = 'none';
+                    }
+
+                });
+
+            });
+
+        });
+
+
+        /* ============================================================
+           TOPIC COLLAPSE / EXPAND
+           ============================================================ */
+
+        document.querySelectorAll(
+            '[data-topic-toggle]'
+        ).forEach(function(header) {
+
+            header.addEventListener('click', function(event) {
+
+                if (
+                    event.target.closest(
+                        '.classwork-topic-menu'
+                    )
+                ) {
+                    return;
+                }
+
+
+                const topic = this.closest(
+                    '.classwork-topic'
+                );
+
+                const items = topic.querySelector(
+                    '.classwork-topic-items'
+                );
+
+                const toggle = topic.querySelector(
+                    '.classwork-topic-toggle'
+                );
+
+                const icon = toggle.querySelector('i');
+
+
+                const isOpen =
+                    toggle.getAttribute(
+                        'aria-expanded'
+                    ) === 'true';
+
+
+                if (isOpen) {
+
+                    items.style.display = 'none';
+
+                    toggle.setAttribute(
+                        'aria-expanded',
+                        'false'
+                    );
+
+                    icon.classList.remove(
+                        'bx-chevron-up'
+                    );
+
+                    icon.classList.add(
+                        'bx-chevron-down'
+                    );
+
                 } else {
-                    topic.style.display = 'none';
+
+                    items.style.display = '';
+
+                    toggle.setAttribute(
+                        'aria-expanded',
+                        'true'
+                    );
+
+                    icon.classList.remove(
+                        'bx-chevron-down'
+                    );
+
+                    icon.classList.add(
+                        'bx-chevron-up'
+                    );
+
                 }
 
             });
 
         });
 
-    });
+        /* ============================================================
+           CLASSWORK ITEM THREE DOT MENUS
+           ============================================================ */
 
+        const classworkItemOptions =
+            document.querySelectorAll(
+                '.classwork-item-options'
+            );
 
-    /* ============================================================
-       TOPIC COLLAPSE / EXPAND
-       ============================================================ */
+        classworkItemOptions.forEach(function(container) {
 
-    document.querySelectorAll(
-        '[data-topic-toggle]'
-    ).forEach(function (header) {
+            const menuButton =
+                container.querySelector(
+                    '.classwork-item-options-button'
+                );
 
-        header.addEventListener('click', function (event) {
+            const editButton =
+                container.querySelector(
+                    '[data-action="edit"]'
+                );
 
-            if (
-                event.target.closest(
-                    '.classwork-topic-menu'
-                )
-            ) {
+            const deleteButton =
+                container.querySelector(
+                    '[data-action="delete"]'
+                );
+
+            if (!menuButton) {
                 return;
             }
 
+            /*
+            |--------------------------------------------------------------------------
+            | OPEN / CLOSE MENU
+            |--------------------------------------------------------------------------
+            */
+            menuButton.addEventListener(
+                'click',
+                function(event) {
 
-            const topic = this.closest(
-                '.classwork-topic'
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    classworkItemOptions.forEach(
+                        function(otherContainer) {
+
+                            if (
+                                otherContainer !== container
+                            ) {
+                                otherContainer.classList.remove(
+                                    'show'
+                                );
+                            }
+
+                        }
+                    );
+
+                    container.classList.toggle(
+                        'show'
+                    );
+                }
             );
 
-            const items = topic.querySelector(
-                '.classwork-topic-items'
-            );
 
-            const toggle = topic.querySelector(
-                '.classwork-topic-toggle'
-            );
+            /*
+            |--------------------------------------------------------------------------
+            | EDIT
+            |--------------------------------------------------------------------------
+            */
+            if (editButton) {
 
-            const icon = toggle.querySelector('i');
+                editButton.addEventListener(
+                    'click',
+                    function(event) {
 
+                        event.preventDefault();
+                        event.stopPropagation();
 
-            const isOpen =
-                toggle.getAttribute(
-                    'aria-expanded'
-                ) === 'true';
+                        const editUrl =
+                            menuButton.dataset.editUrl;
 
+                        if (!editUrl) {
+                            return;
+                        }
 
-            if (isOpen) {
-
-                items.style.display = 'none';
-
-                toggle.setAttribute(
-                    'aria-expanded',
-                    'false'
+                        /*
+                        | Go directly to Edit.
+                        | Do NOT follow the parent Show link.
+                        */
+                        window.location.assign(
+                            editUrl
+                        );
+                    }
                 );
 
-                icon.classList.remove(
-                    'bx-chevron-up'
-                );
+            }
 
-                icon.classList.add(
-                    'bx-chevron-down'
-                );
 
-            } else {
+            /*
+            |--------------------------------------------------------------------------
+            | DELETE
+            |--------------------------------------------------------------------------
+            */
+            if (deleteButton) {
 
-                items.style.display = '';
+                deleteButton.addEventListener(
+                    'click',
+                    function(event) {
 
-                toggle.setAttribute(
-                    'aria-expanded',
-                    'true'
-                );
+                        event.preventDefault();
+                        event.stopPropagation();
 
-                icon.classList.remove(
-                    'bx-chevron-down'
-                );
+                        const deleteUrl =
+                            menuButton.dataset.deleteUrl;
 
-                icon.classList.add(
-                    'bx-chevron-up'
+                        if (!deleteUrl) {
+                            return;
+                        }
+
+                        const confirmed =
+                            confirm(
+                                'Are you sure you want to delete this item?'
+                            );
+
+                        if (!confirmed) {
+                            return;
+                        }
+
+                        const form =
+                            document.createElement(
+                                'form'
+                            );
+
+                        form.method = 'POST';
+                        form.action = deleteUrl;
+                        form.style.display = 'none';
+
+
+                        /*
+                        | CSRF
+                        */
+                        const token =
+                            document.createElement(
+                                'input'
+                            );
+
+                        token.type = 'hidden';
+                        token.name = '_token';
+                        token.value =
+                            '{{ csrf_token() }}';
+
+
+                        /*
+                        | DELETE method
+                        */
+                        const method =
+                            document.createElement(
+                                'input'
+                            );
+
+                        method.type = 'hidden';
+                        method.name = '_method';
+                        method.value = 'DELETE';
+
+
+                        /*
+                        | Return to Classwork
+                        */
+                        const returnTo =
+                            document.createElement(
+                                'input'
+                            );
+
+                        returnTo.type = 'hidden';
+                        returnTo.name = 'return_to';
+                        returnTo.value = 'classwork';
+
+
+                        form.appendChild(token);
+                        form.appendChild(method);
+                        form.appendChild(returnTo);
+
+                        document.body.appendChild(
+                            form
+                        );
+
+                        form.submit();
+                    }
                 );
 
             }
 
         });
 
-    });
 
-/* ============================================================
-   CLASSWORK ITEM THREE DOT MENUS
-   ============================================================ */
+        /*
+        |--------------------------------------------------------------------------
+        | CLOSE ALL MENUS WHEN CLICKING OUTSIDE
+        |--------------------------------------------------------------------------
+        */
 
-const classworkItemOptions =
-    document.querySelectorAll(
-        '.classwork-item-options'
-    );
+        document.addEventListener(
+            'click',
+            function() {
 
-classworkItemOptions.forEach(function (container) {
+                classworkItemOptions.forEach(
+                    function(container) {
 
-    const menuButton =
-        container.querySelector(
-            '.classwork-item-options-button'
+                        container.classList.remove(
+                            'show'
+                        );
+
+                    }
+                );
+
+            }
         );
 
-    const editButton =
-        container.querySelector(
-            '[data-action="edit"]'
+
+        /*
+        |--------------------------------------------------------------------------
+        | PREVENT DROPDOWN CLICKS FROM CLOSING MENU
+        |--------------------------------------------------------------------------
+        */
+
+        classworkItemOptions.forEach(
+            function(container) {
+
+                const dropdown =
+                    container.querySelector(
+                        '.classwork-item-options-dropdown'
+                    );
+
+                if (!dropdown) {
+                    return;
+                }
+
+                dropdown.addEventListener(
+                    'click',
+                    function(event) {
+
+                        event.stopPropagation();
+
+                    }
+                );
+
+            }
         );
 
-    const deleteButton =
-        container.querySelector(
-            '[data-action="delete"]'
+
+        /* ============================================================
+           CREATE CLASSWORK MODAL
+           ============================================================ */
+
+        const modal = document.getElementById(
+            'classworkModal'
         );
 
-    if (!menuButton) {
-        return;
-    }
+        const openButton = document.getElementById(
+            'openClassworkModal'
+        );
 
-    /*
-    |--------------------------------------------------------------------------
-    | OPEN / CLOSE MENU
-    |--------------------------------------------------------------------------
-    */
-    menuButton.addEventListener(
-        'click',
-        function (event) {
+        const closeButton = document.getElementById(
+            'closeClassworkModal'
+        );
 
-            event.preventDefault();
-            event.stopPropagation();
+        const overlay = document.getElementById(
+            'classworkModalOverlay'
+        );
 
-            classworkItemOptions.forEach(
-                function (otherContainer) {
 
-                    if (
-                        otherContainer !== container
-                    ) {
-                        otherContainer.classList.remove(
+        function openClassworkModal() {
+
+            modal.classList.add('show');
+
+            modal.setAttribute(
+                'aria-hidden',
+                'false'
+            );
+
+            document.body.style.overflow = 'hidden';
+
+        }
+
+
+        function closeClassworkModal() {
+
+            modal.classList.remove('show');
+
+            modal.setAttribute(
+                'aria-hidden',
+                'true'
+            );
+
+            document.body.style.overflow = '';
+
+        }
+
+
+        if (openButton) {
+            openButton.addEventListener(
+                'click',
+                openClassworkModal
+            );
+        }
+
+
+        if (closeButton) {
+            closeButton.addEventListener(
+                'click',
+                closeClassworkModal
+            );
+        }
+
+
+        if (overlay) {
+            overlay.addEventListener(
+                'click',
+                closeClassworkModal
+            );
+        }
+
+
+        document.addEventListener(
+            'keydown',
+            function(event) {
+
+                if (
+                    event.key === 'Escape' &&
+                    modal.classList.contains('show')
+                ) {
+                    closeClassworkModal();
+                }
+
+            }
+        );
+
+
+        /* ============================================================
+           TOPIC THREE DOT MENUS
+           ============================================================ */
+
+        const topicOptions =
+            document.querySelectorAll(
+                '.classwork-topic-options'
+            );
+
+        const topicDeleteModal =
+            document.getElementById(
+                'topicDeleteModal'
+            );
+
+        const topicDeleteForm =
+            document.getElementById(
+                'topicDeleteForm'
+            );
+
+        const topicDeleteClose =
+            document.getElementById(
+                'topicDeleteClose'
+            );
+
+        const topicDeleteCancel =
+            document.getElementById(
+                'topicDeleteCancel'
+            );
+
+        const topicDeleteOverlay =
+            document.getElementById(
+                'topicDeleteModalOverlay'
+            );
+
+        const topicDeleteDescription =
+            document.getElementById(
+                'topicDeleteDescription'
+            );
+
+
+        function closeTopicDeleteModal() {
+
+            if (!topicDeleteModal) {
+                return;
+            }
+
+            topicDeleteModal.classList.remove(
+                'show'
+            );
+
+            topicDeleteModal.setAttribute(
+                'aria-hidden',
+                'true'
+            );
+
+            document.body.style.overflow = '';
+
+        }
+
+
+        topicOptions.forEach(function(container) {
+
+            const menuButton =
+                container.querySelector(
+                    '.classwork-topic-options-button'
+                );
+
+            const editButton =
+                container.querySelector(
+                    '[data-action="edit"]'
+                );
+
+            const deleteButton =
+                container.querySelector(
+                    '[data-action="delete"]'
+                );
+
+            if (!menuButton) {
+                return;
+            }
+
+
+            menuButton.addEventListener(
+                'click',
+                function(event) {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    topicOptions.forEach(
+                        function(otherContainer) {
+
+                            if (
+                                otherContainer !== container
+                            ) {
+                                otherContainer.classList.remove(
+                                    'show'
+                                );
+                            }
+
+                        }
+                    );
+
+                    container.classList.toggle(
+                        'show'
+                    );
+
+                }
+            );
+
+
+            if (editButton) {
+
+                editButton.addEventListener(
+                    'click',
+                    function(event) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        const editUrl =
+                            menuButton.dataset.editUrl;
+
+                        if (!editUrl) {
+                            return;
+                        }
+
+                        window.location.assign(
+                            editUrl
+                        );
+
+                    }
+                );
+
+            }
+
+
+            if (deleteButton) {
+
+                deleteButton.addEventListener(
+                    'click',
+                    function(event) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        const deleteUrl =
+                            menuButton.dataset.deleteUrl;
+
+                        const topicName =
+                            menuButton.dataset.topicName ||
+                            'this topic';
+
+                        const classworkCount =
+                            Number(
+                                menuButton.dataset.classworkCount || 0
+                            );
+
+                        if (
+                            !deleteUrl ||
+                            !topicDeleteModal ||
+                            !topicDeleteForm
+                        ) {
+                            return;
+                        }
+
+                        topicDeleteForm.action = deleteUrl;
+
+                        topicDeleteDescription.textContent =
+                            classworkCount > 0 ?
+                            `"${topicName}" contains ${classworkCount} classwork item${classworkCount === 1 ? '' : 's'}. Choose what should happen next.` :
+                            `"${topicName}" has no classwork items. Choose what should happen next.`;
+
+                        const topicOnlyOption =
+                            topicDeleteForm.querySelector(
+                                'input[name="delete_option"][value="topic_only"]'
+                            );
+
+                        if (topicOnlyOption) {
+                            topicOnlyOption.checked = true;
+                        }
+
+                        topicDeleteModal.classList.add(
+                            'show'
+                        );
+
+                        topicDeleteModal.setAttribute(
+                            'aria-hidden',
+                            'false'
+                        );
+
+                        container.classList.remove(
+                            'show'
+                        );
+
+                        document.body.style.overflow = 'hidden';
+
+                    }
+                );
+
+            }
+
+
+            const dropdown =
+                container.querySelector(
+                    '.classwork-topic-options-dropdown'
+                );
+
+            if (dropdown) {
+
+                dropdown.addEventListener(
+                    'click',
+                    function(event) {
+                        event.stopPropagation();
+                    }
+                );
+
+            }
+
+        });
+
+
+        document.addEventListener(
+            'click',
+            function() {
+
+                topicOptions.forEach(
+                    function(container) {
+                        container.classList.remove(
                             'show'
                         );
                     }
-
-                }
-            );
-
-            container.classList.toggle(
-                'show'
-            );
-        }
-    );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | EDIT
-    |--------------------------------------------------------------------------
-    */
-    if (editButton) {
-
-        editButton.addEventListener(
-            'click',
-            function (event) {
-
-                event.preventDefault();
-                event.stopPropagation();
-
-                const editUrl =
-                    menuButton.dataset.editUrl;
-
-                if (!editUrl) {
-                    return;
-                }
-
-                /*
-                | Go directly to Edit.
-                | Do NOT follow the parent Show link.
-                */
-                window.location.assign(
-                    editUrl
-                );
-            }
-        );
-
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | DELETE
-    |--------------------------------------------------------------------------
-    */
-    if (deleteButton) {
-
-        deleteButton.addEventListener(
-            'click',
-            function (event) {
-
-                event.preventDefault();
-                event.stopPropagation();
-
-                const deleteUrl =
-                    menuButton.dataset.deleteUrl;
-
-                if (!deleteUrl) {
-                    return;
-                }
-
-                const confirmed =
-                    confirm(
-                        'Are you sure you want to delete this item?'
-                    );
-
-                if (!confirmed) {
-                    return;
-                }
-
-                const form =
-                    document.createElement(
-                        'form'
-                    );
-
-                form.method = 'POST';
-                form.action = deleteUrl;
-                form.style.display = 'none';
-
-
-                /*
-                | CSRF
-                */
-                const token =
-                    document.createElement(
-                        'input'
-                    );
-
-                token.type = 'hidden';
-                token.name = '_token';
-                token.value =
-                    '{{ csrf_token() }}';
-
-
-                /*
-                | DELETE method
-                */
-                const method =
-                    document.createElement(
-                        'input'
-                    );
-
-                method.type = 'hidden';
-                method.name = '_method';
-                method.value = 'DELETE';
-
-
-                /*
-                | Return to Classwork
-                */
-                const returnTo =
-                    document.createElement(
-                        'input'
-                    );
-
-                returnTo.type = 'hidden';
-                returnTo.name = 'return_to';
-                returnTo.value = 'classwork';
-
-
-                form.appendChild(token);
-                form.appendChild(method);
-                form.appendChild(returnTo);
-
-                document.body.appendChild(
-                    form
-                );
-
-                form.submit();
-            }
-        );
-
-    }
-
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| CLOSE ALL MENUS WHEN CLICKING OUTSIDE
-|--------------------------------------------------------------------------
-*/
-
-document.addEventListener(
-    'click',
-    function () {
-
-        classworkItemOptions.forEach(
-            function (container) {
-
-                container.classList.remove(
-                    'show'
-                );
-
-            }
-        );
-
-    }
-);
-
-
-/*
-|--------------------------------------------------------------------------
-| PREVENT DROPDOWN CLICKS FROM CLOSING MENU
-|--------------------------------------------------------------------------
-*/
-
-classworkItemOptions.forEach(
-    function (container) {
-
-        const dropdown =
-            container.querySelector(
-                '.classwork-item-options-dropdown'
-            );
-
-        if (!dropdown) {
-            return;
-        }
-
-        dropdown.addEventListener(
-            'click',
-            function (event) {
-
-                event.stopPropagation();
-
-            }
-        );
-
-    }
-);
-
-    
-    /* ============================================================
-       CREATE CLASSWORK MODAL
-       ============================================================ */
-
-    const modal = document.getElementById(
-        'classworkModal'
-    );
-
-    const openButton = document.getElementById(
-        'openClassworkModal'
-    );
-
-    const closeButton = document.getElementById(
-        'closeClassworkModal'
-    );
-
-    const overlay = document.getElementById(
-        'classworkModalOverlay'
-    );
-
-
-    function openClassworkModal() {
-
-        modal.classList.add('show');
-
-        modal.setAttribute(
-            'aria-hidden',
-            'false'
-        );
-
-        document.body.style.overflow = 'hidden';
-
-    }
-
-
-    function closeClassworkModal() {
-
-        modal.classList.remove('show');
-
-        modal.setAttribute(
-            'aria-hidden',
-            'true'
-        );
-
-        document.body.style.overflow = '';
-
-    }
-
-
-    if (openButton) {
-        openButton.addEventListener(
-            'click',
-            openClassworkModal
-        );
-    }
-
-
-    if (closeButton) {
-        closeButton.addEventListener(
-            'click',
-            closeClassworkModal
-        );
-    }
-
-
-    if (overlay) {
-        overlay.addEventListener(
-            'click',
-            closeClassworkModal
-        );
-    }
-
-
-    document.addEventListener(
-        'keydown',
-        function (event) {
-
-            if (
-                event.key === 'Escape' &&
-                modal.classList.contains('show')
-            ) {
-                closeClassworkModal();
-            }
-
-        }
-    );
-
-
-    /* ============================================================
-       TOPIC THREE DOT MENUS
-       ============================================================ */
-
-    const topicOptions =
-        document.querySelectorAll(
-            '.classwork-topic-options'
-        );
-
-    const topicDeleteModal =
-        document.getElementById(
-            'topicDeleteModal'
-        );
-
-    const topicDeleteForm =
-        document.getElementById(
-            'topicDeleteForm'
-        );
-
-    const topicDeleteClose =
-        document.getElementById(
-            'topicDeleteClose'
-        );
-
-    const topicDeleteCancel =
-        document.getElementById(
-            'topicDeleteCancel'
-        );
-
-    const topicDeleteOverlay =
-        document.getElementById(
-            'topicDeleteModalOverlay'
-        );
-
-    const topicDeleteDescription =
-        document.getElementById(
-            'topicDeleteDescription'
-        );
-
-
-    function closeTopicDeleteModal() {
-
-        if (!topicDeleteModal) {
-            return;
-        }
-
-        topicDeleteModal.classList.remove(
-            'show'
-        );
-
-        topicDeleteModal.setAttribute(
-            'aria-hidden',
-            'true'
-        );
-
-        document.body.style.overflow = '';
-
-    }
-
-
-    topicOptions.forEach(function (container) {
-
-        const menuButton =
-            container.querySelector(
-                '.classwork-topic-options-button'
-            );
-
-        const editButton =
-            container.querySelector(
-                '[data-action="edit"]'
-            );
-
-        const deleteButton =
-            container.querySelector(
-                '[data-action="delete"]'
-            );
-
-        if (!menuButton) {
-            return;
-        }
-
-
-        menuButton.addEventListener(
-            'click',
-            function (event) {
-
-                event.preventDefault();
-                event.stopPropagation();
-
-                topicOptions.forEach(
-                    function (otherContainer) {
-
-                        if (
-                            otherContainer !== container
-                        ) {
-                            otherContainer.classList.remove(
-                                'show'
-                            );
-                        }
-
-                    }
-                );
-
-                container.classList.toggle(
-                    'show'
                 );
 
             }
         );
 
 
-        if (editButton) {
-
-            editButton.addEventListener(
+        if (topicDeleteClose) {
+            topicDeleteClose.addEventListener(
                 'click',
-                function (event) {
-
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    const editUrl =
-                        menuButton.dataset.editUrl;
-
-                    if (!editUrl) {
-                        return;
-                    }
-
-                    window.location.assign(
-                        editUrl
-                    );
-
-                }
+                closeTopicDeleteModal
             );
-
         }
 
-
-        if (deleteButton) {
-
-            deleteButton.addEventListener(
+        if (topicDeleteCancel) {
+            topicDeleteCancel.addEventListener(
                 'click',
-                function (event) {
-
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    const deleteUrl =
-                        menuButton.dataset.deleteUrl;
-
-                    const topicName =
-                        menuButton.dataset.topicName ||
-                        'this topic';
-
-                    const classworkCount =
-                        Number(
-                            menuButton.dataset.classworkCount || 0
-                        );
-
-                    if (
-                        !deleteUrl ||
-                        !topicDeleteModal ||
-                        !topicDeleteForm
-                    ) {
-                        return;
-                    }
-
-                    topicDeleteForm.action = deleteUrl;
-
-                    topicDeleteDescription.textContent =
-                        classworkCount > 0
-                            ? `"${topicName}" contains ${classworkCount} classwork item${classworkCount === 1 ? '' : 's'}. Choose what should happen next.`
-                            : `"${topicName}" has no classwork items. Choose what should happen next.`;
-
-                    const topicOnlyOption =
-                        topicDeleteForm.querySelector(
-                            'input[name="delete_option"][value="topic_only"]'
-                        );
-
-                    if (topicOnlyOption) {
-                        topicOnlyOption.checked = true;
-                    }
-
-                    topicDeleteModal.classList.add(
-                        'show'
-                    );
-
-                    topicDeleteModal.setAttribute(
-                        'aria-hidden',
-                        'false'
-                    );
-
-                    container.classList.remove(
-                        'show'
-                    );
-
-                    document.body.style.overflow = 'hidden';
-
-                }
+                closeTopicDeleteModal
             );
-
         }
 
-
-        const dropdown =
-            container.querySelector(
-                '.classwork-topic-options-dropdown'
-            );
-
-        if (dropdown) {
-
-            dropdown.addEventListener(
+        if (topicDeleteOverlay) {
+            topicDeleteOverlay.addEventListener(
                 'click',
-                function (event) {
-                    event.stopPropagation();
-                }
+                closeTopicDeleteModal
             );
-
         }
 
+        document.addEventListener(
+            'keydown',
+            function(event) {
+
+                if (
+                    event.key === 'Escape' &&
+                    topicDeleteModal &&
+                    topicDeleteModal.classList.contains('show')
+                ) {
+                    closeTopicDeleteModal();
+                }
+
+            }
+        );
     });
-
-
-    document.addEventListener(
-        'click',
-        function () {
-
-            topicOptions.forEach(
-                function (container) {
-                    container.classList.remove(
-                        'show'
-                    );
-                }
-            );
-
-        }
-    );
-
-
-    if (topicDeleteClose) {
-        topicDeleteClose.addEventListener(
-            'click',
-            closeTopicDeleteModal
-        );
-    }
-
-    if (topicDeleteCancel) {
-        topicDeleteCancel.addEventListener(
-            'click',
-            closeTopicDeleteModal
-        );
-    }
-
-    if (topicDeleteOverlay) {
-        topicDeleteOverlay.addEventListener(
-            'click',
-            closeTopicDeleteModal
-        );
-    }
-
-    document.addEventListener(
-        'keydown',
-        function (event) {
-
-            if (
-                event.key === 'Escape' &&
-                topicDeleteModal &&
-                topicDeleteModal.classList.contains('show')
-            ) {
-                closeTopicDeleteModal();
-            }
-
-        }
-    );
-});
 </script>
 
 @endsection

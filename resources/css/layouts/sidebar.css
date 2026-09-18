@@ -1,22 +1,22 @@
-/**-------------- SIDEBAR--------------*/
+
+/* ============================================================
+   SIDEBAR
+============================================================ */
 
 .sidebar {
-
-    flex: 0 0 85px;
-
-    transition: flex-basis 0.3s ease;
+    flex: 0 0 90px;
 
     min-height: 0;
 
-    background-color: var(--sidebar-color);
+    width: auto;
 
-    border-radius: 15px;
+    background: var(--sidebar-color);
 
     border: 1px solid var(--border-color);
 
-    padding-top: 30px;
+    border-radius: 20px;
 
-    padding-left: 10px;
+    padding: 24px 10px 20px;
 
     margin: 5px;
 
@@ -30,71 +30,167 @@
 
     z-index: 10;
 
-    box-shadow: 0 4px 12px var(--shadow-color);
+    box-shadow:
+        0 4px 18px var(--shadow-color);
+
+    transition:
+        flex-basis 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 
-/* closed sidebar */
+/* ============================================================
+   SIDEBAR WIDTH
+============================================================ */
 
 .sidebar.closed {
     flex-basis: 80px;
 }
 
-
-/* opened sidebar */
-
 .sidebar.open {
-    flex-basis: 245px;
+    flex-basis: 275px;
 }
 
 
-.sidebar-text {
+/* ============================================================
+   SIDEBAR TOGGLE BUTTON
+============================================================ */
 
-    opacity: 0;
+/* ============================================================
+   SIDEBAR TOGGLE BUTTON
+============================================================ */
 
-    transition: opacity 0.3s ease;
+.sidebar-toggle {
+    position: absolute;
+    top: 22px;
+    right: 14px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+
+    background: var(--surface-color);
+    color: var(--icon-color);
+
+    font-size: 24px;
+    cursor: pointer;
+
+    z-index: 20;
+    flex-shrink: 0;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
 }
 
 
-.sidebar.open .sidebar-text {
+/* ============================================================
+   ARROW ICON
+============================================================ */
 
-    opacity: 1;
+.sidebar-toggle i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    font-size: 28px;
+    line-height: 1;
+
+    transition: transform 0.3s ease;
 }
 
 
-/**.      SIDEBAR navigation      */
+/* ============================================================
+   CLOSED SIDEBAR
+   Arrow points LEFT <
+============================================================ */
+
+.sidebar.closed .sidebar-toggle i {
+    transform: rotate(0deg);
+}
+
+
+/* ============================================================
+   OPEN SIDEBAR
+   Arrow points RIGHT >
+============================================================ */
+
+.sidebar.open .sidebar-toggle i {
+    transform: rotate(180deg);
+}
+
+
+/* ============================================================
+   HOVER
+============================================================ */
+
+.sidebar-toggle:hover {
+    background: var(--surface-hover);
+    color: var(--icon-hover-color);
+    border-color: var(--primary-border);
+}
+
+
+/* ============================================================
+   FOCUS
+============================================================ */
+
+.sidebar-toggle:focus-visible {
+    outline: 3px solid var(--primary-border);
+    outline-offset: 3px;
+}
+
+
+
+/* ============================================================
+   SIDEBAR NAVIGATION
+============================================================ */
 
 .sidebar-menu {
-
     list-style: none;
 
     padding: 0;
 
-    margin: 10;
-
+    margin: 72px 0 0;
 }
-
 
 .sidebar-menu li {
-
-    margin-bottom: 15px;
-
+    margin-bottom: 12px;
 }
 
 
-.sidebar-link {
+/* ============================================================
+   SIDEBAR LINKS
+============================================================ */
 
+.sidebar-link {
     display: flex;
 
     align-items: center;
 
-    gap: 12px;
+    gap: 14px;
 
-    padding: 12px 8px;
+    width: 100%;
 
-    margin: 0 6px;
+    min-height: 58px;
+
+    padding: 12px 14px;
+
+    margin: 0;
+
+    box-sizing: border-box;
 
     white-space: nowrap;
 
@@ -104,77 +200,267 @@
 
     font-size: 18px;
 
-    border-radius: 13px;
+    font-weight: 400;
+
+    border-radius: 14px;
 
     position: relative;
 
     overflow: hidden;
 
     transition:
-
         background-color 0.25s ease,
-
+        color 0.25s ease,
         transform 0.25s ease,
-
-        color 0.25s ease;
-
+        box-shadow 0.25s ease;
 }
 
+
+
+/* ============================================================
+   SIDEBAR HOVER
+============================================================ */
 
 .sidebar-link:hover {
+    background: transparent;
 
-    background-color: var(--hover-color);
+    color: var(--sidebar-hover-color);
 
-    transform: translateX(5px);
-
-    color: var(--icon-hover-color);
-
+    transform: translateX(3px);
 }
 
+
+/* ============================================================
+   ACTIVE MENU
+============================================================ */
 
 .sidebar-link.active {
+    background: transparent;
 
-    background-color: var(--hover-color);
+    color: var(--sidebar-active-color);
 
-    color: var(--icon-hover-color);
+    font-weight: 500;
 
-    box-shadow:
-
-        0 4px 12px rgba(0,0,0,0.08);
-
+    box-shadow: none;
 }
 
 
-.sidebar-link svg {
+/* Active indicator */
 
-    width: auto;
+.sidebar-link.active::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 4px;
+
+    height: 28px;
+
+    border-radius: 10px;
+
+    background: var(--sidebar-active-color);
+}
+
+
+/* Active menu hover */
+
+.sidebar-link.active:hover {
+    background: transparent;
+
+    color: var(--sidebar-active-color);
+
+    transform: translateX(3px);
+}
+
+/* ============================================================
+   SIDEBAR ICONS
+============================================================ */
+
+/* Boxicons */
+
+.sidebar-link i {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 30px;
+
+    min-width: 30px;
 
     height: 30px;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+    text-align: center;
+
+    color: inherit;
 
     flex-shrink: 0;
 
     transition:
-
         transform 0.25s ease,
-
         color 0.25s ease;
-
 }
 
 
+/* SVG icons */
+
+.sidebar-link svg {
+    width: 30px;
+
+    height: 30px;
+
+    min-width: 30px;
+
+    flex-shrink: 0;
+
+    color: inherit;
+
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+
+/* Icon hover */
+
+.sidebar-link:hover i,
 .sidebar-link:hover svg {
-
-    transform: scale(1.12);
-
+    transform: scale(1.06);
 }
 
+
+/* Active icon */
+
+.sidebar-link.active i,
+.sidebar-link.active svg {
+    color: inherit;
+}
+
+
+/* ============================================================
+   SIDEBAR TEXT
+============================================================ */
+
+.sidebar-text {
+    display: inline-block;
+
+    opacity: 1;
+
+    white-space: nowrap;
+
+    transition:
+        opacity 0.25s ease,
+        color 0.25s ease;
+}
+
+
+/* ============================================================
+   CLOSED SIDEBAR
+============================================================ */
+
+.sidebar.closed .sidebar-menu {
+    margin-top: 72px;
+}
+
+.sidebar.closed .sidebar-link {
+    justify-content: center;
+
+    gap: 0;
+
+    padding-left: 8px;
+
+    padding-right: 8px;
+
+    margin-left: 0;
+
+    margin-right: 0;
+
+    width: 100%;
+}
+
+
+/* Hide text completely when closed */
+
+.sidebar.closed .sidebar-text {
+    display: none;
+
+    opacity: 0;
+}
+
+
+/* Center icons */
+
+.sidebar.closed .sidebar-link i,
+.sidebar.closed .sidebar-link svg {
+    margin: 0;
+
+    transform: none;
+}
+
+
+/* Active menu stays centered */
+
+.sidebar.closed .sidebar-link.active {
+    justify-content: center;
+
+    background: var(--sidebar-active-bg, var(--primary-light));
+
+    color: var(--sidebar-active-color, var(--primary-color));
+}
+
+
+/* No movement when closed */
+
+.sidebar.closed .sidebar-link:hover {
+    transform: none;
+}
+
+
+/* ============================================================
+   BOTTOM SIDEBAR
+============================================================ */
 
 .bottom-sidebar {
-
-    padding: 11px 0px;
+    padding: 11px 0;
 
     margin-top: 380px;
 
     border-top: 1px solid var(--border-color);
+}
+
+
+/* ============================================================
+   SIDEBAR COLORS - LIGHT MODE
+============================================================ */
+
+:root {
+
+    --sidebar-active-bg: #eef2ff;
+
+    --sidebar-active-color: #5665f5;
+
+}
+
+
+/* ============================================================
+   SIDEBAR COLORS - DARK MODE
+============================================================ */
+
+.dark-mode {
+
+    --sidebar-active-bg: #292e52;
+
+    --sidebar-active-color: #aeb4ff;
 
 }

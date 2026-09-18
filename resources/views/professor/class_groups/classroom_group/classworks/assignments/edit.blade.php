@@ -1119,12 +1119,11 @@
                                 You can select multiple files. Maximum 10 files, 100 MB per file.
                             </span>
 
-                            <input
-                                id="assignment-files"
-                                type="file"
-                                name="files[]"
-                                multiple>
-
+  <input
+    id="assignment-files"
+    type="file"
+    name="attachments[]"
+    multiple>
                         </div>
 
                         <div id="assignment-selected-files"

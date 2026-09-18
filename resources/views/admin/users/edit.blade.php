@@ -1,3 +1,4 @@
+
 @extends('layouts.admin_layout')
 
 @section('title', 'Edit User')
@@ -35,9 +36,9 @@
 
                 <div class="user-title-row">
 
-<div class="user-title-icon">
-    <i class='bx bx-edit-alt'></i>
-</div>
+                    <div class="user-title-icon">
+                        <i class='bx bx-edit-alt'></i>
+                    </div>
 
                     <div>
 
@@ -57,6 +58,7 @@
 
 
                 {{-- Top Actions --}}
+
                 <div class="user-header-actions">
 
                     <a
@@ -156,6 +158,7 @@
 
 
                 {{-- Full Name --}}
+
                 <div class="field-group">
 
                     <label for="name">
@@ -190,6 +193,7 @@
 
 
                 {{-- Email --}}
+
                 <div class="field-group">
 
                     <label for="email">
@@ -278,6 +282,7 @@
                                     type="checkbox"
                                     name="role_ids[]"
                                     value="{{ $role->id }}"
+                                    data-role-name="{{ $role->role_name }}"
                                     {{ $user->roles->contains($role->id) ? 'checked' : '' }}
                                 >
 
@@ -329,6 +334,96 @@
 
                     @enderror
 
+
+                    {{-- =====================================================
+                         ADMIN ROLE WARNING
+                    ====================================================== --}}
+
+                    <div
+                        id="adminRoleWarning"
+                        class="role-warning"
+                        style="display: none;"
+                    >
+
+                        <div class="role-warning-icon">
+                            <i class='bx bx-error-circle'></i>
+                        </div>
+
+                        <div class="role-warning-content">
+
+                            <strong>
+                                Invalid role combination
+                            </strong>
+
+                            <p>
+                                Cannot update a user with the Admin role together
+                                with HoD or Professor because Admin does not have a department.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                {{-- =====================================================
+                     DEPARTMENT
+                ====================================================== --}}
+
+                <div
+                    class="field-group department-field-group"
+                    id="departmentField"
+                    style="display: none;"
+                >
+
+                    <label for="department_id">
+                        Department <span>*</span>
+                    </label>
+
+                    <div class="field-shell">
+
+                        <i class='bx bx-buildings'></i>
+
+                        <select
+                            id="department_id"
+                            name="department_id"
+                        >
+
+                            <option value="">
+                                Select department
+                            </option>
+
+                            @foreach ($departments as $department)
+
+                                <option
+                                    value="{{ $department->id }}"
+                                    {{ old(
+                                        'department_id',
+                                        optional($user->departments->first())->id
+                                    ) == $department->id ? 'selected' : '' }}
+                                >
+                                    {{ $department->department_name }}
+                                </option>
+
+                            @endforeach
+
+                        </select>
+
+                    </div>
+
+                    <small class="department-help-text">
+                        Admin assigns the department for HoD and Professor accounts.
+                    </small>
+
+                    @error('department_id')
+
+                        <small class="field-error">
+                            {{ $message }}
+                        </small>
+
+                    @enderror
+
                 </div>
 
             </div>
@@ -373,6 +468,7 @@
 
 
                 {{-- Old Password --}}
+
                 <div class="field-group full-width">
 
                     <label for="old_password">
@@ -396,10 +492,12 @@
                             onclick="togglePassword('old_password', 'oldPasswordIcon')"
                             aria-label="Show or hide current password"
                         >
+
                             <i
                                 class='bx bx-show'
                                 id="oldPasswordIcon"
                             ></i>
+
                         </button>
 
                     </div>
@@ -417,6 +515,7 @@
 
 
                 {{-- New Password --}}
+
                 <div class="field-group">
 
                     <label for="password">
@@ -440,10 +539,12 @@
                             onclick="togglePassword('password', 'passwordIcon')"
                             aria-label="Show or hide new password"
                         >
+
                             <i
                                 class='bx bx-show'
                                 id="passwordIcon"
                             ></i>
+
                         </button>
 
                     </div>
@@ -461,6 +562,7 @@
 
 
                 {{-- Confirm Password --}}
+
                 <div class="field-group">
 
                     <label for="password_confirmation">
@@ -484,10 +586,12 @@
                             onclick="togglePassword('password_confirmation', 'confirmationIcon')"
                             aria-label="Show or hide password confirmation"
                         >
+
                             <i
                                 class='bx bx-show'
                                 id="confirmationIcon"
                             ></i>
+
                         </button>
 
                     </div>
@@ -690,6 +794,13 @@
 .submit-button:hover {
     transform: translateY(-1px);
     box-shadow: 0 10px 21px rgba(37, 99, 235, 0.24);
+}
+
+.submit-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 .cancel-button i,
@@ -921,7 +1032,7 @@
 
 
 /* =========================================================
-   ROLES - ONE ROW
+   ROLES
 ========================================================= */
 
 .roles-grid {
@@ -1027,6 +1138,90 @@
 
 .role-check i {
     font-size: 14px;
+}
+
+
+/* =========================================================
+   ROLE WARNING
+========================================================= */
+
+.role-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin-top: 14px;
+    padding: 13px 15px;
+    border: 1px solid #f8d18a;
+    border-radius: 12px;
+    background: #fff8e8;
+}
+
+.role-warning-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.role-warning-icon i {
+    font-size: 18px;
+}
+
+.role-warning-content {
+    min-width: 0;
+}
+
+.role-warning-content strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #92400e;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.role-warning-content p {
+    margin: 0;
+    color: #a16207;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   DEPARTMENT
+========================================================= */
+
+.department-field-group {
+    margin-top: 20px;
+}
+
+.department-field-group .field-shell select {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px 0 12px;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: #172033;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.department-field-group .field-shell select:invalid {
+    color: #94a3b8;
+}
+
+.department-help-text {
+    display: block;
+    margin-top: 6px;
+    color: #94a3b8;
+    font-size: 11px;
 }
 
 
@@ -1160,6 +1355,342 @@
 
 }
 
+
+/* =========================================================
+   EDIT USER - COMPLETE DARK MODE
+========================================================= */
+
+.dark-mode .admin-user-edit-page {
+    color: var(--text-color);
+}
+
+
+/* Back link */
+
+.dark-mode .back-link {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .back-link:hover {
+    color: var(--primary-color);
+}
+
+
+/* Page heading */
+
+.dark-mode .page-eyebrow {
+    color: var(--primary-color);
+}
+
+.dark-mode .user-title-row h1 {
+    color: var(--heading-color);
+}
+
+.dark-mode .user-title-row p {
+    color: var(--secondary-text-color);
+}
+
+
+/* Header icon */
+
+.dark-mode .user-title-icon {
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--primary-hover)
+    );
+    color: var(--button-text-color);
+    box-shadow: 0 10px 22px rgba(109, 118, 255, 0.18);
+}
+
+
+/* Header buttons */
+
+.dark-mode .cancel-button {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.dark-mode .cancel-button:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--primary-color);
+    color: var(--heading-color);
+}
+
+.dark-mode .submit-button {
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--primary-hover)
+    );
+    color: var(--button-text-color);
+}
+
+.dark-mode .submit-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+
+/* Validation alert */
+
+.dark-mode .user-form-alert {
+    background-color: rgba(255, 141, 141, 0.10);
+    border-color: rgba(255, 141, 141, 0.35);
+    color: var(--text-color);
+}
+
+.dark-mode .alert-icon {
+    background-color: rgba(255, 141, 141, 0.16);
+    color: var(--danger-color);
+}
+
+.dark-mode .user-form-alert strong {
+    color: var(--heading-color);
+}
+
+.dark-mode .user-form-alert li {
+    color: var(--secondary-text-color);
+}
+
+
+/* Main cards */
+
+.dark-mode .user-form-card {
+    background-color: var(--card-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+
+/* Card headings */
+
+.dark-mode .form-card-heading {
+    border-bottom-color: var(--border-color);
+}
+
+.dark-mode .form-card-heading h2 {
+    color: var(--heading-color);
+}
+
+.dark-mode .form-card-heading p {
+    color: var(--secondary-text-color);
+}
+
+
+/* Section icons */
+
+.dark-mode .section-icon {
+    background-color: var(--surface-hover);
+    color: var(--primary-color);
+}
+
+.dark-mode .section-icon.blue {
+    background-color: rgba(109, 118, 255, 0.16);
+    color: var(--primary-color);
+}
+
+.dark-mode .section-icon.purple {
+    background-color: rgba(196, 181, 253, 0.14);
+    color: #c4b5fd;
+}
+
+.dark-mode .section-icon.green {
+    background-color: rgba(52, 211, 153, 0.13);
+    color: #34d399;
+}
+
+
+/* Labels */
+
+.dark-mode .field-group label {
+    color: var(--text-color);
+}
+
+.dark-mode .field-group label > span {
+    color: var(--danger-color);
+}
+
+
+/* Input shells */
+
+.dark-mode .field-shell {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+}
+
+.dark-mode .field-shell:focus-within {
+    background-color: var(--surface-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+
+/* Input icons */
+
+.dark-mode .field-shell > i {
+    color: var(--icon-color);
+}
+
+
+/* Inputs */
+
+.dark-mode .field-shell input {
+    background: transparent;
+    color: var(--text-color);
+}
+
+.dark-mode .field-shell input::placeholder {
+    color: var(--placeholder-color);
+}
+
+
+/* Select */
+
+.dark-mode .department-field-group .field-shell select {
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+.dark-mode .department-field-group .field-shell select option {
+    background-color: var(--card-color);
+    color: var(--text-color);
+}
+
+
+/* Password toggle */
+
+.dark-mode .password-toggle {
+    color: var(--icon-color);
+}
+
+.dark-mode .password-toggle:hover {
+    background-color: var(--surface-hover);
+    color: var(--primary-color);
+}
+
+
+/* Errors */
+
+.dark-mode .field-error {
+    color: var(--danger-color);
+}
+
+
+/* Roles */
+
+.dark-mode .role-option-content {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.dark-mode .role-option-content:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--primary-color);
+}
+
+.dark-mode .role-option input:checked + .role-option-content {
+    background-color: var(--primary-light);
+    border-color: var(--primary-color);
+}
+
+.dark-mode .role-option-icon {
+    background-color: var(--surface-hover);
+    color: var(--icon-color);
+}
+
+.dark-mode .role-option input:checked + .role-option-content .role-option-icon {
+    background-color: rgba(109, 118, 255, 0.20);
+    color: var(--primary-color);
+}
+
+.dark-mode .role-option-text strong {
+    color: var(--text-color);
+}
+
+.dark-mode .role-option-text small {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .role-check {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+}
+
+.dark-mode .role-option input:checked + .role-option-content .role-check {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--button-text-color);
+}
+
+
+/* Role warning */
+
+.dark-mode .role-warning {
+    background: rgba(251, 191, 36, 0.10);
+    border-color: rgba(251, 191, 36, 0.30);
+}
+
+.dark-mode .role-warning-icon {
+    background: rgba(251, 191, 36, 0.16);
+    color: #fbbf24;
+}
+
+.dark-mode .role-warning-content strong {
+    color: var(--heading-color);
+}
+
+.dark-mode .role-warning-content p {
+    color: var(--secondary-text-color);
+}
+
+
+/* Department */
+
+.dark-mode .department-help-text {
+    color: var(--secondary-text-color);
+}
+
+
+/* Summary */
+
+.dark-mode .user-summary-card {
+    background-color: rgba(109, 118, 255, 0.10);
+    border-color: rgba(109, 118, 255, 0.30);
+}
+
+.dark-mode .summary-icon {
+    background-color: rgba(109, 118, 255, 0.18);
+    color: var(--primary-color);
+}
+
+.dark-mode .user-summary-card strong {
+    color: var(--heading-color);
+}
+
+.dark-mode .user-summary-card p {
+    color: var(--secondary-text-color);
+}
+
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    .dark-mode .user-header-actions {
+        width: 100%;
+    }
+
+    .dark-mode .cancel-button,
+    .dark-mode .submit-button {
+        flex: 1;
+    }
+
+}
+
 </style>
 
 
@@ -1168,12 +1699,16 @@
 
 function togglePassword(inputId, iconId) {
 
-    const passwordInput = document.getElementById(inputId);
-    const passwordIcon = document.getElementById(iconId);
+    const passwordInput =
+        document.getElementById(inputId);
+
+    const passwordIcon =
+        document.getElementById(iconId);
 
     if (!passwordInput || !passwordIcon) {
         return;
     }
+
 
     if (passwordInput.type === 'password') {
 
@@ -1193,6 +1728,164 @@ function togglePassword(inputId, iconId) {
 
 }
 
+
+
+function updateRoleState() {
+
+    const roleInputs =
+        document.querySelectorAll(
+            'input[name="role_ids[]"]'
+        );
+
+    const departmentField =
+        document.getElementById(
+            'departmentField'
+        );
+
+    const departmentSelect =
+        document.getElementById(
+            'department_id'
+        );
+
+    const adminRoleWarning =
+        document.getElementById(
+            'adminRoleWarning'
+        );
+
+    const submitButton =
+        document.querySelector(
+            '.submit-button'
+        );
+
+
+    /*
+     * If this is an Admin account,
+     * the role controls are not shown.
+     */
+
+    if (
+        !departmentField ||
+        !departmentSelect ||
+        !adminRoleWarning ||
+        !submitButton
+    ) {
+        return;
+    }
+
+
+    let adminSelected = false;
+    let hodSelected = false;
+    let professorSelected = false;
+
+
+    roleInputs.forEach(function (input) {
+
+        if (!input.checked) {
+            return;
+        }
+
+        const roleName =
+            input.dataset.roleName;
+
+
+        if (roleName === 'Admin') {
+            adminSelected = true;
+        }
+
+
+        if (roleName === 'HoD') {
+            hodSelected = true;
+        }
+
+
+        if (roleName === 'Professor') {
+            professorSelected = true;
+        }
+
+    });
+
+
+    const academicRoleSelected =
+        hodSelected || professorSelected;
+
+
+    // =========================================
+    // SHOW / HIDE DEPARTMENT
+    // =========================================
+
+    if (academicRoleSelected) {
+
+        departmentField.style.display = 'block';
+
+        departmentSelect.required = true;
+
+    } else {
+
+        departmentField.style.display = 'none';
+
+        departmentSelect.required = false;
+
+        departmentSelect.value = '';
+
+    }
+
+
+    // =========================================
+    // ADMIN + ACADEMIC ROLE WARNING
+    // =========================================
+
+    if (
+        adminSelected &&
+        academicRoleSelected
+    ) {
+
+        adminRoleWarning.style.display = 'flex';
+
+        submitButton.disabled = true;
+
+        submitButton.title =
+            'Cannot update a user with the Admin role together with HoD or Professor because Admin does not have a department.';
+
+    } else {
+
+        adminRoleWarning.style.display = 'none';
+
+        submitButton.disabled = false;
+
+        submitButton.title = '';
+
+    }
+
+}
+
+
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        const roleInputs =
+            document.querySelectorAll(
+                'input[name="role_ids[]"]'
+            );
+
+
+        roleInputs.forEach(function (input) {
+
+            input.addEventListener(
+                'change',
+                updateRoleState
+            );
+
+        });
+
+
+        updateRoleState();
+
+    }
+);
+
 </script>
 
 @endsection
+

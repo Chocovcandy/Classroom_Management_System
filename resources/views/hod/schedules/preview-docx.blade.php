@@ -12,7 +12,7 @@
 
     <div class="preview-back-row">
         <a
-            href="{{ route('hod.schedules.index', ['year' => $year, 'day' => $schedule->day_of_week]) }}"
+            href="{{ route('hod.schedules.index') }}"
             class="preview-back-card">
             <span class="preview-back-icon">
                 <i class='bx bx-arrow-back'></i>

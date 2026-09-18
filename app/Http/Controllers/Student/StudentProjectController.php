@@ -456,171 +456,221 @@ class StudentProjectController extends Controller
     }
 
 
-    /**
-     * ============================================================
-     * CANCEL SUBMISSION
-     * ============================================================
-     *
-     * Delete the student's current project submission.
-     *
-     * Individual:
-     * - Deletes the student's submission.
-     *
-     * Team:
-     * - Deletes the team's submission.
-     */
-    public function cancel(
-        ClassGroup $classGroup,
-        Project $project
-    ) {
-        $student = Auth::user();
+/**
+ * ============================================================
+ * CANCEL SUBMISSION
+ * ============================================================
+ *
+ * Individual:
+ * - A student can cancel their own submission.
+ *
+ * Team:
+ * - Only the student who uploaded the current submission
+ *   can cancel it.
+ * - Leader can submit and cancel their own submission.
+ * - Backup can submit and cancel their own submission.
+ * - Member cannot submit or cancel.
+ */
+public function cancel(
+    ClassGroup $classGroup,
+    Project $project
+) {
+    $student = Auth::user();
 
-        /*
-        |--------------------------------------------------------------------------
-        | 1. Make sure student is enrolled
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | 1. Make sure the student is enrolled
+    |--------------------------------------------------------------------------
+    */
 
-        $isStudent = $classGroup->students()
-            ->where('users.id', $student->id)
-            ->exists();
+    $isStudent = $classGroup->students()
+        ->where('users.id', $student->id)
+        ->exists();
 
-        if (!$isStudent) {
-            abort(403, 'You are not enrolled in this class.');
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | 2. Make sure project belongs to class
-        |--------------------------------------------------------------------------
-        */
-
-        if ($project->class_group_id !== $classGroup->id) {
-            abort(404);
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | 3. Find student's submission
-        |--------------------------------------------------------------------------
-        */
-
-        $submission = null;
-
-        if ($project->project_type === 'team') {
-
-            $projectGroup = $project->groups()
-                ->whereHas('members', function ($query) use ($student) {
-                    $query->where('user_id', $student->id);
-                })
-                ->with('members')
-                ->first();
-
-            if (!$projectGroup) {
-                return back()->with(
-                    'error',
-                    'You are not assigned to a team for this project.'
-                );
-            }
-
-            $studentRole = $projectGroup->members
-                ->firstWhere('user_id', $student->id)
-                ?->role;
-
-            if (!in_array($studentRole, ['leader', 'backup'], true)) {
-                return back()->with(
-                    'error',
-                    'Only the Team Leader or Backup Submitter can manage the team submission.'
-                );
-            }
-
-            $submission = $project->submissions()
-                ->where('project_group_id', $projectGroup->id)
-                ->first();
-
-        } else {
-
-            $submission = $project->submissions()
-                ->where('student_id', $student->id)
-                ->whereNull('project_group_id')
-                ->first();
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | 4. Nothing to cancel
-        |--------------------------------------------------------------------------
-        */
-
-        if (!$submission) {
-            return back()->with(
-                'error',
-                'You do not have a project submission.'
-            );
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | 5. Prevent cancellation after grading
-        |--------------------------------------------------------------------------
-        */
-
-        if ($submission->graded_at) {
-            return back()->with(
-                'error',
-                'This submission has already been graded and cannot be cancelled.'
-            );
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | 6. Delete submitted resource files
-        |--------------------------------------------------------------------------
-        */
-
-        $submission->load('resources');
-
-        foreach ($submission->resources as $resource) {
-
-            if (
-                $resource->file_path &&
-                Storage::disk('public')->exists(
-                    $resource->file_path
-                )
-            ) {
-                Storage::disk('public')->delete(
-                    $resource->file_path
-                );
-            }
-
-            $resource->delete();
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | 7. Delete submission
-        |--------------------------------------------------------------------------
-        */
-
-        $submission->delete();
-
-        /*
-        |--------------------------------------------------------------------------
-        | 8. Return to project
-        |--------------------------------------------------------------------------
-        */
-
-        return redirect()
-            ->route(
-                'student.class-groups.projects.show',
-                [
-                    'classGroup' => $classGroup,
-                    'project' => $project,
-                ]
-            )
-            ->with(
-                'success',
-                'Project submission cancelled successfully.'
-            );
+    if (!$isStudent) {
+        abort(403, 'You are not enrolled in this class.');
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 2. Make sure project belongs to this class
+    |--------------------------------------------------------------------------
+    */
+
+    if ($project->class_group_id !== $classGroup->id) {
+        abort(404);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 3. Find the correct submission
+    |--------------------------------------------------------------------------
+    */
+
+    $submission = null;
+
+    if ($project->project_type === 'team') {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Find the student's team
+        |--------------------------------------------------------------------------
+        */
+
+        $projectGroup = $project->groups()
+            ->whereHas('members', function ($query) use ($student) {
+                $query->where('user_id', $student->id);
+            })
+            ->with('members')
+            ->first();
+
+        if (!$projectGroup) {
+            return back()->with(
+                'error',
+                'You are not assigned to a team for this project.'
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Check the student's team role
+        |--------------------------------------------------------------------------
+        */
+
+        $studentRole = $projectGroup->members
+            ->firstWhere('user_id', $student->id)
+            ?->role;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Members cannot cancel
+        |--------------------------------------------------------------------------
+        */
+
+        if (!in_array($studentRole, ['leader', 'backup'], true)) {
+            return back()->with(
+                'error',
+                'Only the Team Leader or Backup Submitter can cancel the team submission.'
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Find the team's submission
+        |--------------------------------------------------------------------------
+        */
+
+        $submission = ProjectSubmission::query()
+            ->where('project_id', $project->id)
+            ->where('project_group_id', $projectGroup->id)
+            ->first();
+
+    } else {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Individual project
+        |--------------------------------------------------------------------------
+        */
+
+        $submission = ProjectSubmission::query()
+            ->where('project_id', $project->id)
+            ->where('student_id', $student->id)
+            ->whereNull('project_group_id')
+            ->first();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 4. Make sure a submission exists
+    |--------------------------------------------------------------------------
+    */
+
+    if (!$submission) {
+        return back()->with(
+            'error',
+            'You do not have a project submission.'
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 5. Only the actual uploader can cancel
+    |--------------------------------------------------------------------------
+    |
+    | Example:
+    | - Leader submits  -> only leader can cancel.
+    | - Backup submits  -> only backup can cancel.
+    |
+    */
+
+    if ((int) $submission->student_id !== (int) $student->id) {
+        return back()->with(
+            'error',
+            'Only the student who submitted this project can cancel it.'
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 6. Prevent cancellation after grading
+    |--------------------------------------------------------------------------
+    */
+
+    if ($submission->graded_at) {
+        return back()->with(
+            'error',
+            'This submission has already been graded and cannot be cancelled.'
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 7. Delete submitted resource files
+    |--------------------------------------------------------------------------
+    */
+
+    $submission->load('resources');
+
+    foreach ($submission->resources as $resource) {
+
+        if (
+            $resource->file_path &&
+            Storage::disk('public')->exists($resource->file_path)
+        ) {
+            Storage::disk('public')->delete(
+                $resource->file_path
+            );
+        }
+
+        $resource->delete();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 8. Delete submission
+    |--------------------------------------------------------------------------
+    */
+
+    $submission->delete();
+
+    /*
+    |--------------------------------------------------------------------------
+    | 9. Return to project page
+    |--------------------------------------------------------------------------
+    */
+
+    return redirect()
+        ->route(
+            'student.class-groups.projects.show',
+            [
+                'classGroup' => $classGroup,
+                'project' => $project,
+            ]
+        )
+        ->with(
+            'success',
+            'Project submission cancelled successfully.'
+        );
+}
 }

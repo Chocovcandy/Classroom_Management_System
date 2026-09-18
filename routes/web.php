@@ -28,8 +28,14 @@ use App\Http\Controllers\HoD\SchedulePublicationController;
 // PROFESSOR CONTROLLERS
 // ============================================================
 
-   use App\Http\Controllers\Professor\ProfessorScheduleController;
-
+use App\Http\Controllers\Professor\ProfessorScheduleController;
+use App\Models\User;
+use App\Models\Course;
+use App\Models\Schedule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\ClassGroup;
+use Carbon\Carbon;
 use App\Http\Controllers\Professor\ClassGroupController;
 use App\Http\Controllers\Professor\ClassroomGroupController;
 use App\Http\Controllers\Professor\ProfessorDashboardController;
@@ -184,12 +190,69 @@ Route::prefix('hod')
     ->middleware(['role:HoD'])
     ->group(function () {
 
-        Route::view(
-            '/dashboard',
-            'hod.dashboard'
-        )->name('dashboard');
+Route::get('/dashboard', function () {
+    $currentUser = User::findOrFail(Auth::id());
 
-              // Courses
+    $departmentId = $currentUser
+        ->departments()
+        ->value('departments.id');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Total Statistics
+    |--------------------------------------------------------------------------
+    */
+
+    $totalProfessors = User::whereHas('roles', function ($query) {
+        $query->where('role_name', 'Professor');
+    })
+        ->whereHas('departments', function ($query) use ($departmentId) {
+            $query->where('departments.id', $departmentId);
+        })
+        ->count();
+
+    $totalCourses = Course::where('department_id', $departmentId)
+        ->count();
+
+    $totalSchedules = Schedule::whereNotNull('schedule_group_id')
+        ->distinct()
+        ->count('schedule_group_id');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Today's Summary
+    |--------------------------------------------------------------------------
+    */
+
+    // New courses created today
+    $newCoursesToday = Course::where('department_id', $departmentId)
+        ->whereDate('created_at', today())
+        ->count();
+
+    // New schedules created today
+$newSchedulesToday = Schedule::whereNotNull('schedule_group_id')
+    ->whereDate('created_at', today())
+    ->distinct()
+    ->count('schedule_group_id');
+
+
+
+    return view('hod.dashboard', compact(
+        'currentUser',
+        'totalProfessors',
+        'totalCourses',
+        'totalSchedules',
+        'newCoursesToday',
+        'newSchedulesToday',
+    ));
+})->name('dashboard');
+
+        Route::get('/professors', [
+            \App\Http\Controllers\Hod\ProfessorController::class,
+            'index'
+        ])->name('professors.index');
+
+        // Courses
         Route::resource('courses', CourseController::class)
             ->except(['show']);
 
@@ -256,10 +319,41 @@ Route::prefix('hod')
             // DASHBOARD
             // ========================================================
 
-            Route::get(
-                '/dashboard',
-                [ProfessorDashboardController::class, 'index']
-            )->name('dashboard');
+// ============================================================
+// DASHBOARD
+// ============================================================
+
+Route::get('/dashboard', function () {
+
+    $today = now()->startOfDay();
+
+    // Count classes created today
+    $newClasses = \App\Models\ClassGroup::where(
+        'created_at',
+        '>=',
+        $today
+    )->count();
+
+    // Count students registered today
+    $newStudents = \App\Models\User::where(
+        'created_at',
+        '>=',
+        $today
+    )->count();
+
+    // Get all class groups for dashboard cards
+    $classGroups = \App\Models\ClassGroup::with([
+        'course',
+        'professor',
+    ])->latest()->get();
+
+    return view('professor.dashboard', compact(
+        'newClasses',
+        'newStudents',
+        'classGroups'
+    ));
+
+})->name('dashboard');
 
             // ========================================================
             // SCHEDULE
@@ -275,7 +369,7 @@ Route::prefix('hod')
                 [ProfessorScheduleController::class, 'show']
             )->name('schedule.show');
 
-             Route::get(
+            Route::get(
                 '/schedules/{schedule}/download-docx',
                 [ProfessorScheduleController::class, 'downloadDocx']
             )->name('schedule.downloadDocx');
@@ -985,6 +1079,10 @@ Route::prefix('hod')
                 [ProjectSubmissionController::class, 'downloadResource']
             )->name('classworks.projects.submissions.resources.download');
 
+            Route::delete(
+    '/professor/class-groups/{classGroup}/classroom-group/students/{student}',
+    [ClassroomStudentController::class, 'remove']
+)->name('class-groups.students.remove');
 
             // ============================================================
             // CLASSWORK — MARKS
@@ -1017,16 +1115,16 @@ Route::prefix('hod')
                 ->name('dashboard');
 
 
-                Route::get('/schedules', [StudentScheduleController::class, 'index'])
-                    ->name('schedules.index');
+            Route::get('/schedules', [StudentScheduleController::class, 'index'])
+                ->name('schedules.index');
 
-                Route::get(
-    '/schedules/download-docx',
-    [StudentScheduleController::class, 'downloadDocx']
-)->name('schedule.downloadDocx');
+            Route::get(
+                '/schedules/download-docx',
+                [StudentScheduleController::class, 'downloadDocx']
+            )->name('schedule.downloadDocx');
 
-                
-                
+
+
 
 
             // ============================================================

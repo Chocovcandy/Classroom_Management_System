@@ -597,7 +597,7 @@
                             'exam' => $exam->id,
                             'return_to' => 'marks',
                         ]) }}"
-                        class="view-details-btn"
+                        class="mark-view-details"
                     >
                         <i class="bx bx-right-arrow-alt"></i>
                         View Details
@@ -840,26 +840,29 @@
     CSS
 ================================================================ --}}
 <style>
-/* ============================================================
+    /* ============================================================
    STUDENT MARKS — REDESIGNED
    Clean academic dashboard / gradebook
    ============================================================ */
 
 .student-marks-page {
-    --marks-primary: #4f46e5;
-    --marks-primary-soft: #eef2ff;
+    --marks-primary: #2563eb;
+    --marks-primary-soft: #eff6ff;
+
     --marks-text: #172033;
-    --marks-muted: #7b8495;
-    --marks-border: #e8ebf1;
+    --marks-muted: #6f7889;
+    --marks-border: #e4e8ef;
+
     --marks-surface: #ffffff;
-    --marks-page: #f7f8fb;
+    --marks-page: #f6f8fc;
 
     width: 100%;
-    max-width: 1180px;
+    max-width: 1350px;
     margin: 0 auto;
-    padding: 32px 32px 56px;
+    padding: 0 28px 45px;
     box-sizing: border-box;
 }
+
 
 /* ============================================================
    PAGE HEADER
@@ -869,48 +872,58 @@
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-    gap: 28px;
 
-    padding: 28px 30px;
+    gap: 35px;
+
+    padding: 32px 36px;
 
     background: var(--marks-surface);
+
     border: 1px solid var(--marks-border);
-    border-radius: 20px;
+    border-radius: 22px;
 
     box-shadow:
-        0 8px 28px rgba(25, 35, 60, .045);
+        0 8px 30px rgba(25, 35, 60, .045);
 }
+
+
+/* ============================================================
+   STUDENT
+   ============================================================ */
 
 .marks-student {
     min-width: 0;
 
     display: flex;
     align-items: center;
-    gap: 18px;
+
+    gap: 20px;
 }
 
 .marks-avatar {
-    width: 68px;
-    height: 68px;
-    min-width: 68px;
+    width: 76px;
+    height: 76px;
+    min-width: 76px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     overflow: hidden;
-    border-radius: 18px;
+
+    border-radius: 19px;
 
     background: var(--marks-primary-soft);
     color: var(--marks-primary);
 
-    font-size: 24px;
+    font-size: 27px;
     font-weight: 750;
 }
 
 .marks-avatar img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
 }
 
@@ -920,18 +933,21 @@
 
 .marks-label {
     display: block;
-    margin-bottom: 7px;
+
+    margin-bottom: 8px;
 
     color: var(--marks-primary);
 
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
+
     letter-spacing: 1.2px;
     text-transform: uppercase;
 }
 
 .marks-student-info h1 {
-    max-width: 560px;
+    max-width: 700px;
+
     margin: 0;
 
     overflow: hidden;
@@ -940,31 +956,33 @@
 
     color: var(--marks-text);
 
-    font-size: 24px;
+    font-size: 27px;
     font-weight: 750;
     line-height: 1.25;
 }
 
 .marks-student-info p {
-    margin: 6px 0 0;
+    margin: 7px 0 0;
 
     color: var(--marks-muted);
 
-    font-size: 13px;
+    font-size: 15px;
+    line-height: 1.5;
 }
+
 
 /* ============================================================
    OVERALL GRADE
    ============================================================ */
 
 .overall-grade {
-    min-width: 215px;
+    min-width: 250px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    padding-left: 30px;
+    padding-left: 34px;
 
     border-left: 1px solid var(--marks-border);
 }
@@ -972,18 +990,20 @@
 .overall-label {
     color: var(--marks-muted);
 
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 650;
 }
 
 .overall-value {
     display: block;
+
     margin-top: 7px;
 
     color: var(--marks-primary);
 
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 800;
+
     line-height: 1.1;
     letter-spacing: -.5px;
 }
@@ -994,12 +1014,14 @@
 
 .overall-points {
     display: block;
-    margin-top: 7px;
+
+    margin-top: 8px;
 
     color: var(--marks-muted);
 
-    font-size: 11px;
+    font-size: 13px;
 }
+
 
 /* ============================================================
    TOOLBAR
@@ -1007,11 +1029,12 @@
 
 .marks-toolbar {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
-    gap: 18px;
 
-    margin: 28px 0 14px;
+    gap: 22px;
+
+    margin: 30px 0 16px;
 }
 
 .marks-filter-wrap {
@@ -1020,34 +1043,38 @@
 
 .marks-filter-label {
     display: block;
-    margin: 0 0 8px 2px;
 
-    color: #697386;
+    margin: 0 0 9px 2px;
 
-    font-size: 11px;
+    color: #626d80;
+
+    font-size: 13px;
     font-weight: 700;
 }
 
 .marks-filter-buttons {
     display: flex;
     align-items: center;
+
     flex-wrap: wrap;
-    gap: 7px;
+
+    gap: 8px;
 }
 
 .marks-filter-button {
-    height: 36px;
+    height: 40px;
 
-    padding: 0 13px;
+    padding: 0 16px;
 
     border: 1px solid var(--marks-border);
-    border-radius: 10px;
+    border-radius: 11px;
 
     background: var(--marks-surface);
-    color: #737c8d;
+    color: #6d7687;
 
     font-family: inherit;
-    font-size: 11px;
+
+    font-size: 13px;
     font-weight: 650;
 
     outline: none;
@@ -1063,17 +1090,21 @@
 
 .marks-filter-button:hover {
     color: var(--marks-primary);
-    border-color: #dfe1ff;
-    background: #fafaff;
+
+    border-color: #cbdafe;
+
+    background: #fafcff;
 }
 
 .marks-filter-button.active {
     color: var(--marks-primary);
+
     background: var(--marks-primary-soft);
-    border-color: #dfe1ff;
+
+    border-color: #cbdafe;
 
     box-shadow:
-        0 2px 8px rgba(79, 70, 229, .08);
+        0 2px 9px rgba(37, 99, 235, .08);
 }
 
 .marks-filter-button:active {
@@ -1081,30 +1112,40 @@
 }
 
 .marks-filter-button:focus-visible {
-    border-color: rgba(79, 70, 229, .45);
+    border-color: rgba(37, 99, 235, .45);
 
     box-shadow:
-        0 0 0 4px rgba(79, 70, 229, .08);
+        0 0 0 4px rgba(37, 99, 235, .08);
 }
+
+
+/* ============================================================
+   BACK CLASSROOM
+   ============================================================ */
 
 .back-classroom {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
 
-    height: 42px;
-    padding: 0 14px;
+    gap: 9px;
+
+    height: 44px;
+
+    padding: 0 17px;
 
     border: 1px solid var(--marks-border);
     border-radius: 11px;
 
-    color: #626c7d;
+    color: #5f697b;
     background: var(--marks-surface);
 
     text-decoration: none;
 
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 650;
+
+    white-space: nowrap;
 
     transition:
         border-color .2s ease,
@@ -1114,18 +1155,21 @@
 }
 
 .back-classroom i {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .back-classroom:hover {
     color: var(--marks-primary);
-    background: #fafaff;
-    border-color: #dfe1ff;
+
+    background: #fafcff;
+
+    border-color: #cbdafe;
 }
 
 .back-classroom:active {
     transform: scale(.98);
 }
+
 
 /* ============================================================
    MARK LIST
@@ -1137,25 +1181,32 @@
     background: var(--marks-surface);
 
     border: 1px solid var(--marks-border);
-    border-radius: 16px;
+    border-radius: 18px;
 
     box-shadow:
-        0 6px 24px rgba(25, 35, 60, .035);
+        0 7px 26px rgba(25, 35, 60, .035);
 }
+
+
+/* ============================================================
+   MARK ITEM
+   ============================================================ */
 
 .mark-item {
     position: relative;
 
-    min-height: 82px;
+    min-height: 92px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
 
-    padding: 15px 20px;
+    gap: 28px;
+
+    padding: 18px 24px;
 
     background: var(--marks-surface);
+
     border-bottom: 1px solid var(--marks-border);
 
     transition:
@@ -1168,50 +1219,90 @@
 }
 
 .mark-item:hover {
-    background: #fbfbfd;
+    background: #fbfcff;
 }
+
+
+/* ============================================================
+   MARK MAIN
+   ============================================================ */
 
 .mark-item-main {
     min-width: 0;
 
     display: flex;
     align-items: center;
-    gap: 14px;
+
+    gap: 17px;
 }
 
+
+/* ============================================================
+   TYPE ICON
+   ============================================================ */
+
 .mark-type-icon {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
-    font-size: 19px;
+    font-size: 22px;
 }
+
+
+/* ASSIGNMENT — GREEN */
 
 .mark-type-icon.assignment {
     color: #15803d;
+
     background: #eefbf2;
+
+    border: 1px solid #d8f2df;
 }
+
+
+/* QUIZ — PURPLE */
 
 .mark-type-icon.quiz {
     color: #7c3aed;
+
     background: #f5efff;
+
+    border: 1px solid #e9dcff;
 }
+
+
+/* EXAM — RED */
 
 .mark-type-icon.exam {
-    color: #b45309;
-    background: #fff7e6;
+    color: #dc4037;
+
+    background: #fff0ef;
+
+    border: 1px solid #ffd9d6;
 }
 
+
+/* PROJECT — YELLOW */
+
 .mark-type-icon.project {
-     color: #ca8a04;
-     background: #fef9c3;
+    color: #b77900;
+
+    background: #fffbea;
+
+    border: 1px solid #f7e7a9;
 }
+
+
+/* ============================================================
+   MARK CONTENT
+   ============================================================ */
 
 .mark-item-content {
     min-width: 0;
@@ -1220,64 +1311,85 @@
 .mark-item-title-row {
     display: flex;
     align-items: center;
+
     flex-wrap: wrap;
-    gap: 8px;
+
+    gap: 9px;
 }
 
 .mark-item-title-row h2 {
-    max-width: min(620px, 55vw);
+    max-width: min(760px, 60vw);
 
     margin: 0;
 
     overflow: hidden;
+
     text-overflow: ellipsis;
     white-space: nowrap;
 
     color: #293246;
 
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 700;
+
     line-height: 1.4;
 }
+
+
+/* ============================================================
+   TYPE BADGE
+   ============================================================ */
 
 .mark-type {
     display: inline-flex;
     align-items: center;
 
-    padding: 4px 8px;
+    padding: 5px 9px;
 
-    border: 1px solid #eceef3;
+    border: 1px solid #e7eaf0;
+
     border-radius: 999px;
 
     background: #fafbfc;
-    color: #8a93a3;
+    color: #7e8797;
 
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 750;
-    letter-spacing: .2px;
+
+    letter-spacing: .25px;
 }
+
+
+/* ============================================================
+   META
+   ============================================================ */
 
 .mark-item-meta {
     display: flex;
     align-items: center;
-    gap: 12px;
 
-    margin-top: 5px;
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+    margin-top: 7px;
 }
 
 .mark-item-meta span {
     display: inline-flex;
     align-items: center;
+
     gap: 5px;
 
-    color: #9aa2b0;
+    color: #929aaa;
 
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .mark-item-meta i {
-    font-size: 13px;
+    font-size: 14px;
 }
+
 
 /* ============================================================
    CLICKABLE CLASSWORK / DETAILS
@@ -1295,64 +1407,89 @@
 
 .mark-item-details {
     width: 100%;
+
     flex-basis: 100%;
-    padding: 14px 0 2px 58px;
-    border-top: 1px solid #f0f1f5;
+
+    padding: 16px 0 3px 67px;
+
+    border-top: 1px solid #eef0f4;
 }
 
 .mark-detail-summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+
+    gap: 18px;
 }
 
 .mark-detail-info {
     min-width: 0;
+
     display: flex;
     flex-direction: column;
-    gap: 3px;
+
+    gap: 4px;
 }
 
 .mark-detail-label {
-    color: #4f46e5;
-    font-size: 10px;
+    color: var(--marks-primary);
+
+    font-size: 12px;
     font-weight: 750;
 }
 
 .mark-detail-text {
-    color: #929aaa;
-    font-size: 10px;
-    line-height: 1.5;
+    color: #8b94a4;
+
+    font-size: 12px;
+    line-height: 1.55;
 }
+
+
+/* ============================================================
+   VIEW DETAILS BUTTON
+   ============================================================ */
 
 .mark-view-details {
     flex: 0 0 auto;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    min-height: 34px;
-    padding: 0 11px;
-    border: 1px solid #e1e4eb;
-    border-radius: 9px;
+
+    gap: 6px;
+
+    min-height: 38px;
+
+    padding: 0 14px;
+
+    border: 1px solid #dfe3eb;
+    border-radius: 10px;
+
     background: #ffffff;
-    color: #596274;
+    color: #566174;
+
     text-decoration: none;
-    font-size: 10px;
+
+    font-size: 12px;
     font-weight: 700;
+
     transition: all .18s ease;
 }
 
 .mark-view-details i {
-    font-size: 15px;
+    font-size: 16px;
+
     transition: transform .18s ease;
 }
 
 .mark-view-details:hover {
     color: var(--marks-primary);
-    border-color: #dfe1ff;
-    background: #fafaff;
+
+    border-color: #cbdafe;
+
+    background: #fafcff;
 }
 
 .mark-view-details:hover i {
@@ -1360,7 +1497,7 @@
 }
 
 .mark-item.is-open {
-    background: #fcfcff;
+    background: #fcfdff;
 }
 
 .mark-item.is-open .mark-item-details {
@@ -1372,18 +1509,20 @@
         opacity: 0;
         transform: translateY(-3px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
+
 /* ============================================================
    RESULT
    ============================================================ */
 
 .mark-result {
-    min-width: 120px;
+    min-width: 145px;
 
     display: flex;
     flex-direction: column;
@@ -1395,8 +1534,9 @@
 .mark-score {
     color: #273044;
 
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 800;
+
     line-height: 1.3;
 }
 
@@ -1404,20 +1544,21 @@
     display: inline-flex;
     align-items: center;
 
-    margin-top: 4px;
-    padding: 3px 7px;
+    margin-top: 5px;
+
+    padding: 4px 9px;
 
     border-radius: 999px;
 
     background: var(--marks-primary-soft);
     color: var(--marks-primary);
 
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 750;
 }
 
 .mark-status {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
 }
 
@@ -1430,12 +1571,13 @@
 }
 
 .mark-status-sub {
-    margin-top: 3px;
+    margin-top: 4px;
 
-    color: #a5acb8;
+    color: #9ba3b1;
 
-    font-size: 9px;
+    font-size: 10px;
 }
+
 
 /* ============================================================
    EMPTY STATES
@@ -1447,98 +1589,158 @@
 
 .marks-empty,
 .marks-filter-empty {
-    min-height: 230px;
+    min-height: 260px;
 
     display: flex;
     flex-direction: column;
+
     align-items: center;
     justify-content: center;
 
-    padding: 38px 20px;
+    padding: 42px 24px;
 
     text-align: center;
+
     background: var(--marks-surface);
 }
 
 .marks-empty {
     border: 1px solid var(--marks-border);
-    border-radius: 16px;
+
+    border-radius: 18px;
 }
 
 .filter-empty-icon,
 .marks-empty-icon {
-    width: 52px;
-    height: 52px;
+    width: 58px;
+    height: 58px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    margin-bottom: 13px;
+    margin-bottom: 15px;
 
     border: 1px solid var(--marks-border);
-    border-radius: 15px;
+
+    border-radius: 16px;
 
     background: #fafbfc;
     color: #9ca5b4;
 
-    font-size: 22px;
+    font-size: 24px;
 }
 
 .marks-empty h3,
 .marks-filter-empty h3 {
-    margin: 0 0 5px;
+    margin: 0 0 6px;
 
     color: #606a7b;
 
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
 }
 
 .marks-empty p,
 .marks-filter-empty p {
-    max-width: 400px;
+    max-width: 450px;
 
     margin: 0;
 
     color: #9aa2af;
 
-    font-size: 11px;
+    font-size: 12px;
+
     line-height: 1.65;
 }
 
+
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET
    ============================================================ */
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
+
     .student-marks-page {
-        padding: 25px 22px 45px;
+        max-width: 100%;
+
+        padding: 25px 24px 45px;
     }
 
     .marks-top {
-        padding: 24px;
+        padding: 28px;
     }
 
     .overall-grade {
-        min-width: 185px;
-        padding-left: 22px;
+        min-width: 220px;
+
+        padding-left: 28px;
     }
 
     .overall-value {
-        font-size: 29px;
+        font-size: 33px;
+    }
+
+    .mark-item-title-row h2 {
+        max-width: 52vw;
+    }
+}
+
+
+/* ============================================================
+   RESPONSIVE — SMALL TABLET
+   ============================================================ */
+
+@media (max-width: 850px) {
+
+    .marks-top {
+        gap: 25px;
+    }
+
+    .overall-grade {
+        min-width: 195px;
+    }
+
+    .mark-item {
+        gap: 18px;
+
+        padding: 17px 20px;
+    }
+
+    .mark-result {
+        min-width: 120px;
     }
 
     .mark-item-title-row h2 {
         max-width: 45vw;
+
+        font-size: 15px;
     }
 }
 
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+
 @media (max-width: 760px) {
+
+    .student-marks-page {
+        padding: 20px 16px 35px;
+    }
+
     .marks-top {
         align-items: flex-start;
+
         flex-direction: column;
+
         gap: 22px;
+
+        padding: 24px;
+    }
+
+    .marks-student {
+        width: 100%;
     }
 
     .overall-grade {
@@ -1548,12 +1750,16 @@
         padding: 18px 0 0;
 
         border-left: 0;
+
         border-top: 1px solid var(--marks-border);
     }
 
     .marks-toolbar {
         align-items: stretch;
+
         flex-direction: column;
+
+        gap: 15px;
     }
 
     .marks-filter-wrap {
@@ -1573,95 +1779,105 @@
     }
 }
 
+
+/* ============================================================
+   RESPONSIVE — PHONE
+   ============================================================ */
+
 @media (max-width: 600px) {
-    .mark-item-details {
-        padding-left: 48px;
-    }
-
-    .mark-detail-summary {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 9px;
-    }
-
-    .mark-view-details {
-        width: 100%;
-    }
 
     .student-marks-page {
-        padding: 17px 13px 32px;
+        padding: 16px 12px 30px;
     }
 
     .marks-top {
         padding: 20px;
-        border-radius: 16px;
+
+        border-radius: 17px;
     }
 
     .marks-student {
-        gap: 13px;
+        gap: 14px;
     }
 
     .marks-avatar {
-        width: 56px;
-        height: 56px;
-        min-width: 56px;
+        width: 58px;
+        height: 58px;
+        min-width: 58px;
 
-        border-radius: 15px;
+        border-radius: 14px;
+
         font-size: 21px;
+    }
+
+    .marks-label {
+        font-size: 10px;
     }
 
     .marks-student-info h1 {
         max-width: 65vw;
-        font-size: 19px;
+
+        font-size: 20px;
     }
 
     .marks-student-info p {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .overall-value {
-        font-size: 27px;
+        font-size: 29px;
     }
 
     .mark-item {
         align-items: flex-start;
-        gap: 12px;
-        padding: 14px;
+
+        gap: 13px;
+
+        padding: 15px;
     }
 
     .mark-item-main {
-        gap: 10px;
+        gap: 11px;
     }
 
     .mark-type-icon {
-        width: 38px;
-        height: 38px;
-        min-width: 38px;
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
 
         border-radius: 10px;
-        font-size: 17px;
+
+        font-size: 18px;
     }
 
     .mark-item-title-row h2 {
-        max-width: 48vw;
-        font-size: 12px;
+        max-width: 45vw;
+
+        font-size: 13px;
     }
 
     .mark-type {
-        padding: 3px 6px;
+        padding: 4px 7px;
+
         font-size: 8px;
     }
 
+    .mark-item-meta {
+        gap: 9px;
+
+        margin-top: 5px;
+    }
+
     .mark-item-meta span {
-        font-size: 9px;
+        font-size: 10px;
     }
 
     .mark-result {
-        min-width: 76px;
+        min-width: 82px;
     }
 
     .mark-score {
-        font-size: 11px;
+        font-size: 13px;
     }
 
     .mark-percentage {
@@ -1675,9 +1891,313 @@
     .mark-status-sub {
         font-size: 8px;
     }
+
+    .mark-item-details {
+        padding-left: 51px;
+    }
+
+    .mark-detail-summary {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .mark-view-details {
+        width: 100%;
+    }
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES
+   ============================================================ */
+
+@media (max-width: 420px) {
+
+    .student-marks-page {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .marks-top {
+        padding: 17px;
+    }
+
+    .marks-avatar {
+        width: 52px;
+        height: 52px;
+        min-width: 52px;
+    }
+
+    .marks-student-info h1 {
+        font-size: 18px;
+    }
+
+    .marks-student-info p {
+        font-size: 11px;
+    }
+
+    .marks-filter-buttons {
+        gap: 6px;
+    }
+
+    .marks-filter-button {
+        height: 37px;
+
+        padding: 0 11px;
+
+        font-size: 11px;
+    }
+
+    .mark-item {
+        padding: 13px 12px;
+    }
+
+    .mark-type-icon {
+        width: 37px;
+        height: 37px;
+        min-width: 37px;
+
+        font-size: 16px;
+    }
+
+    .mark-item-title-row h2 {
+        max-width: 42vw;
+
+        font-size: 12px;
+    }
+
+    .mark-result {
+        min-width: 70px;
+    }
+
+    .mark-score {
+        font-size: 12px;
+    }
+}
+/* ============================================================
+   DARK MODE — MATCH SIDEBAR CARD COLOR
+   ============================================================ */
+
+html.dark .marks-top,
+body.dark .marks-top,
+.dark-mode .marks-top {
+    background: #111329;
+    border-color: #292d4d;
+}
+
+/* Marks list */
+html.dark .marks-list,
+body.dark .marks-list,
+.dark-mode .marks-list {
+    background: #111329;
+    border-color: #292d4d;
+}
+
+/* Every mark card */
+html.dark .mark-item,
+body.dark .mark-item,
+.dark-mode .mark-item {
+    background: #111329;
+    border-bottom-color: #292d4d;
+}
+
+/* Card hover */
+html.dark .mark-item:hover,
+body.dark .mark-item:hover,
+.dark-mode .mark-item:hover {
+    background: #171a35;
+}
+
+/* Open card */
+html.dark .mark-item.is-open,
+body.dark .mark-item.is-open,
+.dark-mode .mark-item.is-open {
+    background: #171a35;
+}
+
+/* Details separator */
+html.dark .mark-item-details,
+body.dark .mark-item-details,
+.dark-mode .mark-item-details {
+    border-top-color: #292d4d;
+}
+
+/* Type badge */
+html.dark .mark-type,
+body.dark .mark-type,
+.dark-mode .mark-type {
+    background: #1b1e38;
+    border-color: #34385a;
+    color: #aeb4ce;
+}
+
+/* View Details button */
+html.dark .mark-view-details,
+body.dark .mark-view-details,
+.dark-mode .mark-view-details {
+    background: #191c35;
+    border-color: #34385a;
+    color: #b5bad0;
+}
+
+html.dark .mark-view-details:hover,
+body.dark .mark-view-details:hover,
+.dark-mode .mark-view-details:hover {
+    background: #222642;
+    border-color: #4a5080;
+}
+
+/* Filter buttons */
+html.dark .marks-filter-button,
+body.dark .marks-filter-button,
+.dark-mode .marks-filter-button {
+    background: #111329;
+    border-color: #292d4d;
+    color: #adb2c8;
+}
+
+html.dark .marks-filter-button:hover,
+body.dark .marks-filter-button:hover,
+.dark-mode .marks-filter-button:hover {
+    background: #171a35;
+    border-color: #3b4164;
+}
+
+html.dark .marks-filter-button.active,
+body.dark .marks-filter-button.active,
+.dark-mode .marks-filter-button.active {
+    background: #202758;
+    border-color: #3f4d9a;
+    color: #7c8cff;
+}
+
+/* Back to classroom */
+html.dark .back-classroom,
+body.dark .back-classroom,
+.dark-mode .back-classroom {
+    background: #111329;
+    border-color: #292d4d;
+    color: #adb2c8;
+}
+
+html.dark .back-classroom:hover,
+body.dark .back-classroom:hover,
+.dark-mode .back-classroom:hover {
+    background: #171a35;
+    border-color: #3b4164;
+    color: #8290ff;
+}
+
+/* Empty states */
+html.dark .marks-empty,
+html.dark .marks-filter-empty,
+body.dark .marks-empty,
+body.dark .marks-filter-empty,
+.dark-mode .marks-empty,
+.dark-mode .marks-filter-empty {
+    background: #111329;
+    border-color: #292d4d;
+}
+/* ============================================================
+   DARK MODE — WHITE TEXT
+   ============================================================ */
+
+html.dark .marks-top,
+body.dark .marks-top,
+.dark-mode .marks-top {
+    color: #ffffff;
+}
+
+html.dark .marks-student-info h1,
+body.dark .marks-student-info h1,
+.dark-mode .marks-student-info h1 {
+    color: #ffffff;
+}
+
+html.dark .overall-label,
+body.dark .overall-label,
+.dark-mode .overall-label {
+    color: #ffffff;
+}
+
+html.dark .mark-item-title-row h2,
+body.dark .mark-item-title-row h2,
+.dark-mode .mark-item-title-row h2 {
+    color: #ffffff;
+}
+
+html.dark .mark-score,
+body.dark .mark-score,
+.dark-mode .mark-score {
+    color: #ffffff;
+}
+
+html.dark .mark-type,
+body.dark .mark-type,
+.dark-mode .mark-type {
+    color: #ffffff;
+}
+
+html.dark .mark-item-meta span,
+body.dark .mark-item-meta span,
+.dark-mode .mark-item-meta span {
+    color: #d5d9e5;
+}
+
+html.dark .overall-points,
+body.dark .overall-points,
+.dark-mode .overall-points {
+    color: #d5d9e5;
+}
+
+html.dark .marks-filter-label,
+body.dark .marks-filter-label,
+.dark-mode .marks-filter-label {
+    color: #ffffff;
+}
+
+html.dark .marks-filter-button,
+body.dark .marks-filter-button,
+.dark-mode .marks-filter-button {
+    color: #ffffff;
+}
+
+html.dark .back-classroom,
+body.dark .back-classroom,
+.dark-mode .back-classroom {
+    color: #ffffff;
+}
+
+html.dark .mark-detail-label,
+body.dark .mark-detail-label,
+.dark-mode .mark-detail-label {
+    color: #ffffff;
+}
+
+html.dark .mark-detail-text,
+body.dark .mark-detail-text,
+.dark-mode .mark-detail-text {
+    color: #d5d9e5;
+}
+
+html.dark .mark-view-details,
+body.dark .mark-view-details,
+.dark-mode .mark-view-details {
+    color: #ffffff;
+}
+
+html.dark .marks-empty h3,
+html.dark .marks-filter-empty h3,
+body.dark .marks-empty h3,
+body.dark .marks-filter-empty h3,
+.dark-mode .marks-empty h3,
+.dark-mode .marks-filter-empty h3 {
+    color: #ffffff;
 }
 </style>
-
 
 {{-- ================================================================
     FILTER SCRIPT

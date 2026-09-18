@@ -1,0 +1,485 @@
+===== MODELS AND CONTROLLERS =====
+app/Http/Controllers/Professor/AssignmentController.php
+app/Http/Controllers/Professor/AssignmentSubmissionController.php
+app/Http/Controllers/Professor/ClassworkController.php
+app/Http/Controllers/Professor/ExamController.php
+app/Http/Controllers/Professor/ExamSubmissionController.php
+app/Http/Controllers/Professor/ProjectController.php
+app/Http/Controllers/Professor/ProjectSubmissionController.php
+app/Http/Controllers/Professor/QuizController.php
+app/Http/Controllers/Professor/QuizSubmissionController.php
+app/Http/Controllers/Student/StudentAssignmentController.php
+app/Http/Controllers/Student/StudentClassworkController.php
+app/Http/Controllers/Student/StudentExamController.php
+app/Http/Controllers/Student/StudentProjectController.php
+app/Http/Controllers/Student/StudentQuizController.php
+app/Models/Assignment.php
+app/Models/AssignmentSubmission.php
+app/Models/Exam.php
+app/Models/ExamSubmission.php
+app/Models/Project.php
+app/Models/ProjectGroup.php
+app/Models/ProjectGroupMember.php
+app/Models/ProjectSubmission.php
+app/Models/ProjectSubmissionGrade.php
+app/Models/Quiz.php
+app/Models/QuizSubmission.php
+
+===== ROUTES =====
+routes/web.php:50:use App\Http\Controllers\Professor\QuizSubmissionController;
+routes/web.php:52:use App\Http\Controllers\Professor\ExamSubmissionController;
+routes/web.php:54:use App\Http\Controllers\Professor\AssignmentSubmissionController;
+routes/web.php:59:use App\Http\Controllers\Professor\ProjectSubmissionController;
+routes/web.php:560:            // CLASSWORK — ASSIGNMENTS
+routes/web.php:565:                '/class-groups/{classGroup}/assignments/create',
+routes/web.php:567:            )->name('class-groups.assignments.create');
+routes/web.php:571:                '/class-groups/{classGroup}/assignments',
+routes/web.php:573:            )->name('class-groups.assignments.store');
+routes/web.php:577:                '/class-groups/{classGroup}/assignments/{assignment}/edit',
+routes/web.php:579:            )->name('class-groups.assignments.edit');
+routes/web.php:583:                '/class-groups/{classGroup}/assignments/{assignment}',
+routes/web.php:585:            )->name('class-groups.assignments.update');
+routes/web.php:589:                '/class-groups/{classGroup}/assignments/{assignment}/points',
+routes/web.php:591:            )->name('class-groups.assignments.points.update');
+routes/web.php:595:                '/class-groups/{classGroup}/assignments/{assignment}/resources/{resource}',
+routes/web.php:597:            )->name('class-groups.assignments.resources.destroy');
+routes/web.php:601:                '/class-groups/{classGroup}/assignments/{assignment}',
+routes/web.php:603:            )->name('class-groups.assignments.show');
+routes/web.php:607:                '/class-groups/{classGroup}/assignments/{assignment}',
+routes/web.php:609:            )->name('class-groups.assignments.destroy');
+routes/web.php:613:            // ASSIGNMENT — STUDENT SUBMISSIONS
+routes/web.php:616:            // View one student's submission
+routes/web.php:618:                '/class-groups/{classGroup}/assignments/{assignment}/submissions/{submission}',
+routes/web.php:619:                [AssignmentSubmissionController::class, 'show']
+routes/web.php:620:            )->name('class-groups.assignments.submissions.show');
+routes/web.php:622:            // View submitted file
+routes/web.php:624:                '/class-groups/{classGroup}/assignments/{assignment}/submissions/{submission}/resources/{resource}/view',
+routes/web.php:625:                [AssignmentSubmissionController::class, 'viewResource']
+routes/web.php:626:            )->name('class-groups.assignments.submissions.resources.view');
+routes/web.php:628:            // Download submitted file
+routes/web.php:630:                '/class-groups/{classGroup}/assignments/{assignment}/submissions/{submission}/resources/{resource}/download',
+routes/web.php:631:                [AssignmentSubmissionController::class, 'downloadResource']
+routes/web.php:632:            )->name('class-groups.assignments.submissions.resources.download');
+routes/web.php:634:            // Grade student's assignment submission
+routes/web.php:636:                '/class-groups/{classGroup}/assignments/{assignment}/submissions/{submission}/grade',
+routes/web.php:637:                [AssignmentSubmissionController::class, 'grade']
+routes/web.php:638:            )->name('class-groups.assignments.submissions.grade');
+routes/web.php:647:                '/class-groups/{classGroup}/assignments/{assignment}/grade-all',
+routes/web.php:648:                [AssignmentSubmissionController::class, 'gradeAll']
+routes/web.php:649:            )->name('class-groups.assignments.grade-all');
+routes/web.php:652:                '/class-groups/{classGroup}/assignments/{assignment}/grade-complete',
+routes/web.php:653:                [AssignmentSubmissionController::class, 'gradeAsComplete']
+routes/web.php:654:            )->name('class-groups.assignments.grade-complete');
+routes/web.php:657:            // QUIZZES
+routes/web.php:661:                '/class-groups/{classGroup}/quizzes',
+routes/web.php:663:            )->name('class-groups.quizzes.store');
+routes/web.php:666:                '/class-groups/{classGroup}/quizzes/create',
+routes/web.php:668:            )->name('class-groups.quizzes.create');
+routes/web.php:671:                '/class-groups/{classGroup}/quizzes/{quiz}',
+routes/web.php:673:            )->name('class-groups.quizzes.show');
+routes/web.php:676:                '/class-groups/{classGroup}/quizzes/{quiz}/edit',
+routes/web.php:678:            )->name('class-groups.quizzes.edit');
+routes/web.php:681:                '/class-groups/{classGroup}/quizzes/{quiz}',
+routes/web.php:683:            )->name('class-groups.quizzes.update');
+routes/web.php:687:                '/class-groups/{classGroup}/quizzes/{quiz}/points',
+routes/web.php:689:            )->name('class-groups.quizzes.points.update');
+routes/web.php:693:                '/class-groups/{classGroup}/quizzes/{quiz}',
+routes/web.php:695:            )->name('class-groups.quizzes.destroy');
+routes/web.php:699:                '/class-groups/{classGroup}/quizzes/{quiz}/resources/{resource}',
+routes/web.php:701:            )->name('class-groups.quizzes.resources.destroy');
+routes/web.php:704:            // QUIZ SUBMISSIONS
+routes/web.php:707:                '/class-groups/{classGroup}/quizzes/{quiz}/submissions/{submission}',
+routes/web.php:708:                [QuizSubmissionController::class, 'show']
+routes/web.php:710:                'class-groups.quizzes.submissions.show'
+routes/web.php:714:                '/class-groups/{classGroup}/quizzes/{quiz}/submissions/{submission}/resources/{resource}/view',
+routes/web.php:715:                [QuizSubmissionController::class, 'viewResource']
+routes/web.php:717:                'class-groups.quizzes.submissions.resources.view'
+routes/web.php:721:                '/class-groups/{classGroup}/quizzes/{quiz}/submissions/{submission}/resources/{resource}/download',
+routes/web.php:722:                [QuizSubmissionController::class, 'downloadResource']
+routes/web.php:724:                'class-groups.quizzes.submissions.resources.download'
+routes/web.php:727:            // Grade quiz submission*
+routes/web.php:730:                '/class-groups/{classGroup}/quizzes/{quiz}/submissions/{submission}/grade',
+routes/web.php:731:                [QuizSubmissionController::class, 'grade']
+routes/web.php:733:                'class-groups.quizzes.submissions.grade'
+routes/web.php:741:                '/class-groups/{classGroup}/quizzes/{quiz}/grade-all',
+routes/web.php:742:                [QuizSubmissionController::class, 'gradeAll']
+routes/web.php:743:            )->name('class-groups.quizzes.grade-all');
+routes/web.php:746:                '/class-groups/{classGroup}/quizzes/{quiz}/grade-complete',
+routes/web.php:747:                [QuizSubmissionController::class, 'gradeAsComplete']
+routes/web.php:748:            )->name('class-groups.quizzes.grade-complete');
+routes/web.php:751:            // CLASSWORK — EXAMS
+routes/web.php:756:                '/class-groups/{classGroup}/exams/create',
+routes/web.php:758:            )->name('class-groups.exams.create');
+routes/web.php:763:                '/class-groups/{classGroup}/exams',
+routes/web.php:765:            )->name('class-groups.exams.store');
+routes/web.php:770:                '/class-groups/{classGroup}/exams/{exam}/edit',
+routes/web.php:772:            )->name('class-groups.exams.edit');
+routes/web.php:777:                '/class-groups/{classGroup}/exams/{exam}',
+routes/web.php:779:            )->name('class-groups.exams.update');
+routes/web.php:783:                '/class-groups/{classGroup}/exams/{exam}/points',
+routes/web.php:785:            )->name('class-groups.exams.points.update');
+routes/web.php:790:                '/class-groups/{classGroup}/exams/{exam}',
+routes/web.php:792:            )->name('class-groups.exams.show');
+routes/web.php:797:                '/class-groups/{classGroup}/exams/{exam}',
+routes/web.php:799:            )->name('class-groups.exams.destroy');
+routes/web.php:808:            // EXAM — STUDENT SUBMISSIONS
+routes/web.php:812:                '/class-groups/{classGroup}/exams/{exam}/submissions/{submission}',
+routes/web.php:813:                [ExamSubmissionController::class, 'show']
+routes/web.php:814:            )->name('class-groups.exams.submissions.show');
+routes/web.php:818:                '/class-groups/{classGroup}/exams/{exam}/submissions/{submission}/resources/{resource}/view',
+routes/web.php:819:                [ExamSubmissionController::class, 'viewResource']
+routes/web.php:820:            )->name('class-groups.exams.submissions.resources.view');
+routes/web.php:824:                '/class-groups/{classGroup}/exams/{exam}/submissions/{submission}/resources/{resource}/download',
+routes/web.php:825:                [ExamSubmissionController::class, 'downloadResource']
+routes/web.php:826:            )->name('class-groups.exams.submissions.resources.download');
+routes/web.php:829:                '/class-groups/{classGroup}/exams/{exam}/submissions/{submission}/grade',
+routes/web.php:830:                [ExamSubmissionController::class, 'grade']
+routes/web.php:831:            )->name('class-groups.exams.submissions.grade');
+routes/web.php:839:                '/class-groups/{classGroup}/exams/{exam}/grade-all',
+routes/web.php:840:                [ExamSubmissionController::class, 'gradeAll']
+routes/web.php:841:            )->name('class-groups.exams.grade-all');
+routes/web.php:844:                '/class-groups/{classGroup}/exams/{exam}/grade-complete',
+routes/web.php:845:                [ExamSubmissionController::class, 'gradeAsComplete']
+routes/web.php:846:            )->name('class-groups.exams.grade-complete');
+routes/web.php:857:                '/{classGroupId}/classworks/projects/create',
+routes/web.php:859:            )->name('classworks.projects.create');
+routes/web.php:865:                '/{classGroupId}/classworks/projects/generate-groups',
+routes/web.php:867:            )->name('classworks.projects.generate-groups');
+routes/web.php:873:                '/{classGroupId}/classworks/projects',
+routes/web.php:875:            )->name('classworks.projects.store');
+routes/web.php:880:                '/{classGroupId}/classworks/projects/{projectId}',
+routes/web.php:882:            )->name('classworks.projects.show');
+routes/web.php:889:                '/{classGroupId}/classworks/projects/{projectId}/groups/manage',
+routes/web.php:891:            )->name('classworks.projects.groups.manage');
+routes/web.php:897:                '/{classGroupId}/classworks/projects/{projectId}/groups/{groupId}',
+routes/web.php:899:            )->name('classworks.projects.groups.show');
+routes/web.php:905:                '/{classGroupId}/classworks/projects/{projectId}/edit',
+routes/web.php:907:            )->name('classworks.projects.edit');
+routes/web.php:913:                '/{classGroupId}/classworks/projects/{projectId}',
+routes/web.php:915:            )->name('classworks.projects.update');
+routes/web.php:921:                '/{classGroup}/classworks/projects/{project}/resources/{resource}',
+routes/web.php:923:            )->name('classworks.projects.resources.destroy');
+routes/web.php:929:                '/{classGroupId}/classworks/projects/{projectId}',
+routes/web.php:931:            )->name('classworks.projects.destroy');
+routes/web.php:939:                '/{classGroupId}/classworks/projects/{projectId}/groups/manage',
+routes/web.php:941:            )->name('classworks.projects.groups.manage');
+routes/web.php:949:                '/{classGroupId}/classworks/projects/{projectId}/groups',
+routes/web.php:951:            )->name('classworks.projects.groups.create');
+routes/web.php:959:                '/{classGroupId}/classworks/projects/{projectId}/groups/{groupId}',
+routes/web.php:961:            )->name('classworks.projects.groups.rename');
+routes/web.php:969:                '/{classGroupId}/classworks/projects/{projectId}/groups/{groupId}',
+routes/web.php:971:            )->name('classworks.projects.groups.delete');
+routes/web.php:979:                '/{classGroupId}/classworks/projects/{projectId}/groups/{groupId}/members',
+routes/web.php:981:            )->name('classworks.projects.groups.members.add');
+routes/web.php:989:                '/{classGroupId}/classworks/projects/{projectId}/groups/{groupId}/members/{memberId}',
+routes/web.php:991:            )->name('classworks.projects.groups.members.remove');
+routes/web.php:999:                '/{classGroupId}/classworks/projects/{projectId}/groups/{groupId}/members/{memberId}/role',
+routes/web.php:1001:            )->name('classworks.projects.groups.members.role');
+routes/web.php:1009:                '/{classGroupId}/classworks/projects/{projectId}/groups/{groupId}/members/{memberId}/move',
+routes/web.php:1011:            )->name('classworks.projects.groups.members.move');
+routes/web.php:1020:                '/{classGroupId}/classworks/projects/{projectId}/groups/{groupId}',
+routes/web.php:1022:            )->name('classworks.projects.groups.show');
+routes/web.php:1024:            // PROJECT SUBMISSION ROUTES
+routes/web.php:1027:            // SHOW SUBMISSION
+routes/web.php:1029:                '/{classGroupId}/classworks/projects/{projectId}/submissions/{submissionId}',
+routes/web.php:1030:                [ProjectSubmissionController::class, 'show']
+routes/web.php:1031:            )->name('classworks.projects.submissions.show');
+routes/web.php:1034:            // GRADE INDIVIDUAL PROJECT SUBMISSION
+routes/web.php:1036:                '/{classGroupId}/classworks/projects/{projectId}/submissions/{submissionId}/grade',
+routes/web.php:1037:                [ProjectSubmissionController::class, 'grade']
+routes/web.php:1038:            )->name('classworks.projects.submissions.grade');
+routes/web.php:1043:                '/{classGroup}/classworks/projects/{project}/submissions/grade-all-teams',
+routes/web.php:1044:                [ProjectSubmissionController::class, 'gradeAllTeams']
+routes/web.php:1045:            )->name('classworks.projects.submissions.grade-all-teams');
+routes/web.php:1050:                '/{classGroupId}/classworks/projects/{projectId}/submissions/grade-as-complete',
+routes/web.php:1051:                [ProjectSubmissionController::class, 'gradeAsComplete']
+routes/web.php:1052:            )->name('classworks.projects.submissions.grade-as-complete');
+routes/web.php:1057:                '/{classGroupId}/classworks/projects/{projectId}/submissions/{submissionId}/grade-team',
+routes/web.php:1058:                [ProjectSubmissionController::class, 'gradeTeam']
+routes/web.php:1059:            )->name('classworks.projects.submissions.grade-team');
+routes/web.php:1064:                '/{classGroupId}/classworks/projects/{projectId}/submissions/{submissionId}/grade-members',
+routes/web.php:1065:                [ProjectSubmissionController::class, 'gradeTeamMembers']
+routes/web.php:1066:            )->name('classworks.projects.submissions.grade-members');
+routes/web.php:1069:            // VIEW SUBMITTED FILE
+routes/web.php:1071:                '/{classGroupId}/classworks/projects/{projectId}/submissions/{submissionId}/resources/{resourceId}/view',
+routes/web.php:1072:                [ProjectSubmissionController::class, 'viewResource']
+routes/web.php:1073:            )->name('classworks.projects.submissions.resources.view');
+routes/web.php:1076:            // DOWNLOAD SUBMITTED FILE
+routes/web.php:1078:                '/{classGroupId}/classworks/projects/{projectId}/submissions/{submissionId}/resources/{resourceId}/download',
+routes/web.php:1079:                [ProjectSubmissionController::class, 'downloadResource']
+routes/web.php:1080:            )->name('classworks.projects.submissions.resources.download');
+routes/web.php:1192:            // ASSIGNMENTS
+routes/web.php:1196:                '/class-groups/{classGroup}/assignments/{assignment}',
+routes/web.php:1198:            )->name('class-groups.assignments.show');
+routes/web.php:1201:                '/class-groups/{classGroup}/assignments/{assignment}/resources/{resource}/download',
+routes/web.php:1203:            )->name('class-groups.assignments.download');
+routes/web.php:1206:                '/class-groups/{classGroup}/assignments/{assignment}/submit',
+routes/web.php:1207:                [StudentAssignmentController::class, 'submit']
+routes/web.php:1208:            )->name('class-groups.assignments.submit');
+routes/web.php:1211:            // ASSIGNMENT SUBMISSIONS
+routes/web.php:1215:                '/class-groups/{classGroup}/assignments/{assignment}/submissions/{submission}',
+routes/web.php:1216:                [AssignmentSubmissionController::class, 'show']
+routes/web.php:1217:            )->name('class-groups.assignments.submissions.show');
+routes/web.php:1220:                '/class-groups/{classGroup}/assignments/{assignment}/submissions/{submission}/resources/{resource}/view',
+routes/web.php:1221:                [AssignmentSubmissionController::class, 'viewResource']
+routes/web.php:1222:            )->name('class-groups.assignments.submissions.resources.view');
+routes/web.php:1225:                '/class-groups/{classGroup}/assignments/{assignment}/submissions/{submission}/resources/{resource}/download',
+routes/web.php:1226:                [AssignmentSubmissionController::class, 'downloadResource']
+routes/web.php:1227:            )->name('class-groups.assignments.submissions.resources.download');
+routes/web.php:1230:                '/class-groups/{classGroup}/assignments/{assignment}/submission',
+routes/web.php:1231:                [StudentAssignmentController::class, 'cancel']
+routes/web.php:1232:            )->name('class-groups.assignments.cancel');
+routes/web.php:1236:            // QUIZZES
+routes/web.php:1240:                '/class-groups/{classGroup}/quizzes',
+routes/web.php:1242:            )->name('class-groups.quizzes.index');
+routes/web.php:1245:                '/class-groups/{classGroup}/quizzes/{quiz}',
+routes/web.php:1247:            )->name('class-groups.quizzes.show');
+routes/web.php:1250:                '/class-groups/{classGroup}/quizzes/{quiz}/submit',
+routes/web.php:1251:                [StudentQuizController::class, 'submit']
+routes/web.php:1252:            )->name('class-groups.quizzes.submit');
+routes/web.php:1255:                '/class-groups/{classGroup}/quizzes/{quiz}/submission',
+routes/web.php:1256:                [StudentQuizController::class, 'cancel']
+routes/web.php:1257:            )->name('class-groups.quizzes.cancel');
+routes/web.php:1260:            // STUDENT EXAMS
+routes/web.php:1264:                '/class-groups/{classGroup}/exams/{exam}',
+routes/web.php:1266:            )->name('class-groups.exams.show');
+routes/web.php:1270:                '/class-groups/{classGroup}/exams/{exam}/submit',
+routes/web.php:1271:                [StudentExamController::class, 'submit']
+routes/web.php:1272:            )->name('class-groups.exams.submit');
+routes/web.php:1276:                '/class-groups/{classGroup}/exams/{exam}/submission',
+routes/web.php:1277:                [StudentExamController::class, 'cancel']
+routes/web.php:1278:            )->name('class-groups.exams.cancel');
+routes/web.php:1281:            // PROJECTS
+routes/web.php:1285:                '/class-groups/{classGroup}/projects/{project}',
+routes/web.php:1287:            )->name('class-groups.projects.show');
+routes/web.php:1290:                '/class-groups/{classGroup}/projects/{project}/resources/{resource}/download',
+routes/web.php:1292:            )->name('class-groups.projects.download');
+routes/web.php:1295:                '/class-groups/{classGroup}/projects/{project}/submit',
+routes/web.php:1296:                [StudentProjectController::class, 'submit']
+routes/web.php:1297:            )->name('class-groups.projects.submit');
+routes/web.php:1300:                '/class-groups/{classGroup}/projects/{project}/submission',
+routes/web.php:1301:                [StudentProjectController::class, 'cancel']
+routes/web.php:1302:            )->name('class-groups.projects.cancel');
+
+===== DEADLINE FIELDS =====
+app/Models/Material.php:13:        'user_id',
+app/Models/ExamSubmission.php:16:        'student_id',
+app/Models/ExamSubmission.php:18:        'submitted_at',
+app/Models/ExamSubmission.php:26:        'submitted_at' => 'datetime',
+app/Models/ExamSubmission.php:38:        return $this->belongsTo(User::class, 'student_id');
+app/Models/ExamSubmission.php:53:    return $this->hasMany(ExamSubmission::class, 'student_id');
+app/Models/QuizSubmission.php:16:        'student_id',
+app/Models/QuizSubmission.php:18:        'submitted_at',
+app/Models/QuizSubmission.php:26:        'submitted_at' => 'datetime',
+app/Models/QuizSubmission.php:38:        return $this->belongsTo(User::class, 'student_id');
+app/Models/ProjectSubmissionGrade.php:15:        'student_id',
+app/Models/ProjectSubmissionGrade.php:44:            'student_id'
+app/Models/ClassGroupAnnouncement.php:11:        'user_id',
+app/Models/ClassGroupAnnouncement.php:31:        return $this->belongsTo(User::class, 'user_id');
+app/Models/User.php:87:        'user_id',
+app/Models/User.php:94://The column role_id points to this role, and user_id points to the users.
+app/Models/User.php:98:        return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
+app/Models/User.php:154:        'user_id',
+app/Models/User.php:169:        'student_id'
+app/Models/User.php:177:        'student_id'
+app/Models/Role.php:22:        return $this->belongsToMany(User::class, 'user_role', 'role_id', 'user_id');
+app/Models/Project.php:18:        'user_id',
+app/Models/Project.php:21:        'due_date',
+app/Models/Project.php:22:        'due_time',
+app/Models/Project.php:28:        'due_date' => 'date',
+app/Models/ProjectGroupMember.php:17:        'user_id',
+app/Models/ProjectGroupMember.php:43:        'student_id',
+app/Models/ProjectGroupMember.php:44:        'user_id'
+app/Models/Department.php:31:        'user_id'
+app/Models/ProjectSubmission.php:17:        'student_id',
+app/Models/ProjectSubmission.php:19:        'submitted_at',
+app/Models/ProjectSubmission.php:27:        'submitted_at' => 'datetime',
+app/Models/ProjectSubmission.php:45:        return $this->belongsTo(User::class, 'student_id');
+app/Models/Assignment.php:18:    'user_id',
+app/Models/Assignment.php:21:    'due_date',
+app/Models/Assignment.php:22:    'due_time',
+app/Models/Assignment.php:30:        'due_date' => 'date',
+app/Models/ClassGroup.php:47:            'user_id'
+app/Models/Exam.php:17:        'user_id',
+app/Models/Exam.php:21:        'due_date',
+app/Models/Exam.php:22:        'due_time',
+app/Models/Exam.php:30:        'due_date' => 'date',
+app/Models/AssignmentSubmission.php:16:    'student_id',
+app/Models/AssignmentSubmission.php:17:    'submitted_at',
+app/Models/AssignmentSubmission.php:24:    'submitted_at' => 'datetime',
+app/Models/AssignmentSubmission.php:42:        return $this->belongsTo(User::class, 'student_id');
+app/Models/ScheduleComment.php:13:        'user_id',
+app/Models/Quiz.php:18:        'user_id',
+app/Models/Quiz.php:21:        'due_date',
+app/Models/Quiz.php:22:        'due_time',
+app/Models/Quiz.php:30:        'due_date' => 'date',
+app/Http/Controllers/Student/StudentAssignmentController.php:46:                $query->where('student_id', $student->id)
+app/Http/Controllers/Student/StudentAssignmentController.php:157:         * Because assignment_id + student_id is unique,
+app/Http/Controllers/Student/StudentAssignmentController.php:163:                'student_id' => $student->id,
+app/Http/Controllers/Student/StudentAssignmentController.php:188:            'submitted_at' => now(),
+app/Http/Controllers/Student/StudentAssignmentController.php:229:            'student_id',
+app/Http/Controllers/Student/StudentProjectController.php:85:                    $query->where('user_id', $student->id);
+app/Http/Controllers/Student/StudentProjectController.php:99:        |   project_id + student_id
+app/Http/Controllers/Student/StudentProjectController.php:125:                ->where('student_id', $student->id)
+app/Http/Controllers/Student/StudentProjectController.php:245:     * - The student submitting is recorded in student_id.
+app/Http/Controllers/Student/StudentProjectController.php:315:                    $query->where('user_id', $student->id);
+app/Http/Controllers/Student/StudentProjectController.php:348:                ->firstWhere('user_id', $student->id)
+app/Http/Controllers/Student/StudentProjectController.php:376:                ->where('student_id', $student->id)
+app/Http/Controllers/Student/StudentProjectController.php:387:        if ($submission && $submission->submitted_at) {
+app/Http/Controllers/Student/StudentProjectController.php:399:                'student_id' => $student->id,
+app/Http/Controllers/Student/StudentProjectController.php:401:                'submitted_at' => now(),
+app/Http/Controllers/Student/StudentProjectController.php:408:                'student_id' => $student->id,
+app/Http/Controllers/Student/StudentProjectController.php:409:                'submitted_at' => now(),
+app/Http/Controllers/Student/StudentProjectController.php:514:                    $query->where('user_id', $student->id);
+app/Http/Controllers/Student/StudentProjectController.php:527:                ->firstWhere('user_id', $student->id)
+app/Http/Controllers/Student/StudentProjectController.php:544:                ->where('student_id', $student->id)
+app/Http/Controllers/Student/StudentClassGroupController.php:227:                                                'user_id',
+app/Http/Controllers/Student/StudentMarksController.php:63:                    $query->where('student_id', $student->id);
+app/Http/Controllers/Student/StudentMarksController.php:83:                    $query->where('student_id', $student->id);
+app/Http/Controllers/Student/StudentMarksController.php:103:                    $query->where('student_id', $student->id);
+app/Http/Controllers/Student/StudentMarksController.php:139:                                    ->where('student_id', $student->id);
+app/Http/Controllers/Student/StudentMarksController.php:156:                                        'user_id',
+app/Http/Controllers/Student/StudentMarksController.php:175:                                    'student_id',
+app/Http/Controllers/Student/StudentQuizController.php:76:            ->where('student_id', $student->id)
+app/Http/Controllers/Student/StudentQuizController.php:174:                'student_id' => $student->id,
+app/Http/Controllers/Student/StudentQuizController.php:228:            'submitted_at' => now(),
+app/Http/Controllers/Student/StudentQuizController.php:305:            ->where('student_id', $student->id)
+app/Http/Controllers/Student/StudentQuizController.php:338:        if ($quiz->due_date) {
+app/Http/Controllers/Student/StudentQuizController.php:341:                $quiz->due_date
+app/Http/Controllers/Student/StudentQuizController.php:344:            if ($quiz->due_time) {
+app/Http/Controllers/Student/StudentQuizController.php:347:                    $quiz->due_time
+app/Http/Controllers/Student/StudentExamController.php:70:            ->where('student_id', $student->id)
+app/Http/Controllers/Student/StudentExamController.php:159:                'student_id' => $student->id,
+app/Http/Controllers/Student/StudentExamController.php:182:                    'user_id' => $student->id,
+app/Http/Controllers/Student/StudentExamController.php:200:            'submitted_at' => now(),
+app/Http/Controllers/Student/StudentExamController.php:268:        if ($exam->due_date) {
+app/Http/Controllers/Student/StudentExamController.php:271:                $exam->due_date
+app/Http/Controllers/Student/StudentExamController.php:274:            if ($exam->due_time) {
+app/Http/Controllers/Student/StudentExamController.php:277:                    $exam->due_time
+app/Http/Controllers/Student/StudentExamController.php:288:        | Prevent cancellation after deadline
+app/Http/Controllers/Student/StudentExamController.php:318:            ->where('student_id', $student->id)
+app/Http/Controllers/Professor/ProjectSubmissionController.php:189:            ->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/ProjectSubmissionController.php:204:                        'student_id' => $member->user_id,
+app/Http/Controllers/Professor/ProjectSubmissionController.php:257:            ->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/ProjectSubmissionController.php:272:                        'student_id' => $member->user_id,
+app/Http/Controllers/Professor/ProjectSubmissionController.php:352:                    'student_id' => $member->user_id,
+app/Http/Controllers/Professor/ProjectSubmissionController.php:421:         * grades[student_id][score]
+app/Http/Controllers/Professor/ProjectSubmissionController.php:422:         * grades[student_id][feedback]
+app/Http/Controllers/Professor/ProjectSubmissionController.php:449:            ->pluck('user_id')
+app/Http/Controllers/Professor/ProjectSubmissionController.php:464:                    'student_id' => $studentId,
+app/Http/Controllers/Professor/QuizSubmissionController.php:237:        ->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/QuizSubmissionController.php:272:        ->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/ProjectController.php:378:                        'user_id' => $student->id,
+app/Http/Controllers/Professor/ProjectController.php:562:                        'student_id',
+app/Http/Controllers/Professor/ProjectController.php:597:                        'student_id',
+app/Http/Controllers/Professor/ProjectController.php:632:                        'student_id',
+app/Http/Controllers/Professor/ProjectController.php:726:            'due_date' => [
+app/Http/Controllers/Professor/ProjectController.php:731:            'due_time' => [
+app/Http/Controllers/Professor/ProjectController.php:778:            'groups.*.members.*.user_id' => [
+app/Http/Controllers/Professor/ProjectController.php:858:            'user_id' =>
+app/Http/Controllers/Professor/ProjectController.php:867:            'due_date' =>
+app/Http/Controllers/Professor/ProjectController.php:868:                $validated['due_date'],
+app/Http/Controllers/Professor/ProjectController.php:870:            'due_time' =>
+app/Http/Controllers/Professor/ProjectController.php:871:                $validated['due_time'] ?? null,
+app/Http/Controllers/Professor/ProjectController.php:1038:                    (int) $member['user_id'];
+app/Http/Controllers/Professor/ProjectController.php:1222:                            'user_id' =>
+app/Http/Controllers/Professor/ProjectController.php:1223:                                (int) $memberData['user_id'],
+app/Http/Controllers/Professor/ProjectController.php:1261:        $query->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/ProjectController.php:1268:            ->latest('submitted_at');
+app/Http/Controllers/Professor/ProjectController.php:1501:            'due_date' => [
+app/Http/Controllers/Professor/ProjectController.php:1506:            'due_time' => [
+app/Http/Controllers/Professor/ProjectController.php:1691:        $project->due_date =
+app/Http/Controllers/Professor/ProjectController.php:1692:            $validated['due_date'];
+app/Http/Controllers/Professor/ProjectController.php:1695:        $project->due_time =
+app/Http/Controllers/Professor/ProjectController.php:1696:            $validated['due_time']
+app/Http/Controllers/Professor/ProjectController.php:2074:            return $group->members->pluck('user_id');
+app/Http/Controllers/Professor/ProjectController.php:2121:        'user_id' => [
+app/Http/Controllers/Professor/ProjectController.php:2138:        ->where('users.id', $validated['user_id'])
+app/Http/Controllers/Professor/ProjectController.php:2143:            'user_id' => 'This student is not enrolled in this class.',
+app/Http/Controllers/Professor/ProjectController.php:2157:            'user_id',
+app/Http/Controllers/Professor/ProjectController.php:2158:            $validated['user_id']
+app/Http/Controllers/Professor/ProjectController.php:2164:            'user_id' => 'This student is already assigned to a team.',
+app/Http/Controllers/Professor/ProjectController.php:2200:        'user_id' => $validated['user_id'],
+app/Http/Controllers/Professor/ExamSubmissionController.php:239:        ->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/ExamSubmissionController.php:273:            ->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/ClassGroupAnnouncementController.php:31:            'user_id' => $user->id,
+app/Http/Controllers/Professor/MaterialController.php:59:        $material->user_id = Auth::id();
+app/Http/Controllers/Professor/AssignmentController.php:75:            'due_date' => [
+app/Http/Controllers/Professor/AssignmentController.php:80:            'due_time' => [
+app/Http/Controllers/Professor/AssignmentController.php:142:            'user_id' => Auth::id(),
+app/Http/Controllers/Professor/AssignmentController.php:150:            'due_date' => $validated['due_date'],
+app/Http/Controllers/Professor/AssignmentController.php:152:            'due_time' => $validated['due_time'] ?? null,
+app/Http/Controllers/Professor/AssignmentController.php:243:                    ->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/AssignmentController.php:248:                    ->orderByDesc('submitted_at');
+app/Http/Controllers/Professor/AssignmentController.php:386:            'due_date' => [
+app/Http/Controllers/Professor/AssignmentController.php:391:            'due_time' => [
+app/Http/Controllers/Professor/AssignmentController.php:561:        $assignment->due_date =
+app/Http/Controllers/Professor/AssignmentController.php:562:            $validated['due_date'];
+app/Http/Controllers/Professor/AssignmentController.php:564:        $assignment->due_time =
+app/Http/Controllers/Professor/AssignmentController.php:565:            $validated['due_time'] ?? null;
+app/Http/Controllers/Professor/AssignmentSubmissionController.php:228:        ->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/AssignmentSubmissionController.php:261:        ->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/QuizController.php:49:            'due_date' => 'nullable|date',
+app/Http/Controllers/Professor/QuizController.php:50:            'due_time' => 'nullable',
+app/Http/Controllers/Professor/QuizController.php:71:        $quiz->user_id = Auth::id();
+app/Http/Controllers/Professor/QuizController.php:75:        $quiz->due_date = $validated['due_date'] ?? null;
+app/Http/Controllers/Professor/QuizController.php:76:        $quiz->due_time = $validated['due_time'] ?? null;
+app/Http/Controllers/Professor/QuizController.php:137:                    ->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/QuizController.php:139:                    ->orderByDesc('submitted_at');
+app/Http/Controllers/Professor/QuizController.php:219:            'due_date' => 'nullable|date',
+app/Http/Controllers/Professor/QuizController.php:220:            'due_time' => 'nullable',
+app/Http/Controllers/Professor/QuizController.php:245:        $quiz->due_date = $validated['due_date'] ?? null;
+app/Http/Controllers/Professor/QuizController.php:246:        $quiz->due_time = $validated['due_time'] ?? null;
+app/Http/Controllers/Professor/ExamController.php:74:            'due_date' => [
+app/Http/Controllers/Professor/ExamController.php:79:            'due_time' => [
+app/Http/Controllers/Professor/ExamController.php:136:            'user_id' => Auth::id(),
+app/Http/Controllers/Professor/ExamController.php:146:            'due_date' =>
+app/Http/Controllers/Professor/ExamController.php:147:                $validated['due_date'] ?? null,
+app/Http/Controllers/Professor/ExamController.php:149:            'due_time' =>
+app/Http/Controllers/Professor/ExamController.php:150:                $validated['due_time'] ?? null,
+app/Http/Controllers/Professor/ExamController.php:259:            ->whereNotNull('submitted_at')
+app/Http/Controllers/Professor/ExamController.php:261:            ->orderByDesc('submitted_at');
+app/Http/Controllers/Professor/ExamController.php:422:            'due_date' => [
+app/Http/Controllers/Professor/ExamController.php:427:            'due_time' => [
+app/Http/Controllers/Professor/ExamController.php:595:        $exam->due_date =
+app/Http/Controllers/Professor/ExamController.php:596:            $validated['due_date'] ?? null;
+app/Http/Controllers/Professor/ExamController.php:598:        $exam->due_time =
+app/Http/Controllers/Professor/ExamController.php:599:            $validated['due_time'] ?? null;
+database/migrations/2026_08_15_104310_create_class_member_table.php:19:            $table->foreignId('user_id')
+database/migrations/2026_08_15_104310_create_class_member_table.php:29:                'user_id'
+database/migrations/2026_08_16_154324_create_materials_table.php:18:            $table->foreignId('user_id')
+database/migrations/2026_09_09_040853_create_projects_table.php:29:            $table->foreignId('user_id')
+database/migrations/2026_09_09_040853_create_projects_table.php:37:            $table->date('due_date')->nullable();
+database/migrations/2026_09_09_040853_create_projects_table.php:39:            $table->time('due_time')->nullable();
+database/migrations/2026_08_23_155724_create_quizzes_table.php:27:            $table->foreignId('user_id')
+database/migrations/2026_08_23_155724_create_quizzes_table.php:35:            $table->date('due_date')->nullable();
+database/migrations/2026_08_23_155724_create_quizzes_table.php:37:            $table->time('due_time')->nullable();
+database/migrations/2026_09_06_072929_create_exam_submissions_table.php:19:            $table->foreignId('student_id')
+database/migrations/2026_09_06_072929_create_exam_submissions_table.php:25:            $table->timestamp('submitted_at')->nullable();
+database/migrations/2026_09_06_072929_create_exam_submissions_table.php:40:                'student_id'
+database/migrations/2026_04_05_065929_create_users_table.php:36:            $table->foreignId('user_id')->nullable()->index();
+database/migrations/2026_09_05_152946_create_assignment_submissions_table.php:22:            $table->foreignId('student_id')
+database/migrations/2026_09_05_152946_create_assignment_submissions_table.php:26:            $table->timestamp('submitted_at')->nullable();
+database/migrations/2026_09_05_152946_create_assignment_submissions_table.php:39:                'student_id',
+database/migrations/2026_09_10_074307_create_project_submission_grades_table.php:21:            $table->foreignId('student_id')
+database/migrations/2026_09_10_074307_create_project_submission_grades_table.php:36:                ['project_submission_id', 'student_id'],
+database/migrations/2026_09_10_011804_create_project_group_members_table.php:22:            $table->foreignId('user_id')
+database/migrations/2026_09_10_011804_create_project_group_members_table.php:32:                'user_id',
+database/migrations/2026_09_05_170622_create_quiz_submissions_table.php:20:    $table->foreignId('student_id')
+database/migrations/2026_09_05_170622_create_quiz_submissions_table.php:26:    $table->timestamp('submitted_at')->nullable();
+database/migrations/2026_09_05_170622_create_quiz_submissions_table.php:38:        'student_id',
+database/migrations/2026_04_05_070953_create_user_role_table.php:16:            $table->foreignId('user_id')
+database/migrations/2026_04_23_031853_create_student_course_table.php:17:        $table->foreignId('student_id')
+database/migrations/2026_04_23_031853_create_student_course_table.php:26:        $table->unique(['student_id', 'course_id']);
+database/migrations/2026_08_16_114028_create_class_group_announcements_table.php:18:            $table->foreignId('user_id')
+database/migrations/2026_04_22_020118_create_user_department_table.php:17:            $table->foreignId('user_id')
+database/migrations/2026_04_22_020118_create_user_department_table.php:27:            $table->unique(['user_id', 'department_id']);
+database/migrations/2026_08_25_012316_create_exams_table.php:22:            $table->foreignId('user_id')
+database/migrations/2026_08_25_012316_create_exams_table.php:36:            $table->date('due_date')
+database/migrations/2026_08_25_012316_create_exams_table.php:39:            $table->time('due_time')
+database/migrations/2026_08_14_120735_create_schedule_comments_table.php:20:            $table->foreignId('user_id')
+database/migrations/2026_09_10_074250_create_project_submissions_table.php:21:            $table->foreignId('student_id')
+database/migrations/2026_09_10_074250_create_project_submissions_table.php:32:            $table->timestamp('submitted_at')->nullable();
+database/migrations/2026_08_16_162338_create_assignments_table.php:20:            $table->foreignId('user_id')
+database/migrations/2026_08_16_162338_create_assignments_table.php:28:            $table->date('due_date')->nullable();
+database/migrations/2026_08_16_162338_create_assignments_table.php:30:            $table->time('due_time')->nullable();

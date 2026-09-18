@@ -85,54 +85,66 @@
                         </div>
 
                         {{-- Email --}}
-                        <div class="register-field">
+{{-- Email --}}
+<div class="register-field">
 
-                            <label for="email">
-                                Email Address
-                            </label>
+    <label for="email">
+        University Email Address
+    </label>
 
-                            <div class="register-input-wrapper">
+    <div class="register-input-wrapper">
 
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="1.8"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="register-input-icon"
-                                >
-                                    <rect
-                                        x="3"
-                                        y="5"
-                                        width="18"
-                                        height="14"
-                                        rx="2"
-                                    />
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="register-input-icon"
+        >
+            <rect
+                x="3"
+                y="5"
+                width="18"
+                height="14"
+                rx="2"
+            />
 
-                                    <polyline points="3 7 12 13 21 7"/>
-                                </svg>
+            <polyline points="3 7 12 13 21 7"/>
+        </svg>
 
-                                <input
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    value="{{ old('email') }}"
-                                    placeholder="Enter your email address"
-                                    required
-                                    autocomplete="username"
-                                >
+        <input
+            id="email"
+            type="email"
+            name="email"
+            value="{{ old('email') }}"
+            placeholder="Enter your university email"
+            required
+            autocomplete="username"
+        >
 
-                            </div>
+    </div>
 
-                            @error('email')
-                                <span class="register-error">
-                                    {{ $message }}
-                                </span>
-                            @enderror
+    <button
+        type="button"
+        id="universityEmailSuggestion"
+        class="university-email-suggestion"
+        hidden
+    ></button>
 
-                        </div>
+    <p class="register-input-hint">
+        Only emails ending with @lifeun.edu.kh are allowed.
+    </p>
+
+    @error('email')
+        <span class="register-error">
+            {{ $message }}
+        </span>
+    @enderror
+
+</div>
 
                         {{-- Password --}}
                         <div class="register-field">
@@ -439,19 +451,206 @@
            Logo
         ======================================== */
 
-        .register-logo-wrapper {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
+/* ========================================
+   Logo
+======================================== */
 
-        .register-logo {
-            display: block;
-            width: 190px;
-            max-width: 100%;
-            height: auto;
-            object-fit: contain;
-        }
+.register-logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.register-logo-wrapper img {
+    width: 350px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+.register-input-hint {
+    display: block;
+    margin-top: 7px;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.register-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.register-input-wrapper input {
+    width: 100%;
+    padding-right: 125px;
+}
+
+.email-domain {
+    position: absolute;
+    right: 16px;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 600;
+    pointer-events: none;
+    white-space: nowrap;
+}
+.email-autocomplete-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Keep the ghost text aligned with the input */
+.email-ghost-text {
+    position: absolute;
+    top: 50%;
+    left: 52px;
+    transform: translateY(-50%);
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+
+    color: #9ca3af;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: pre;
+
+    pointer-events: none;
+}
+
+/* The actual input stays above the ghost text */
+.email-autocomplete-wrapper input {
+    position: relative;
+    z-index: 2;
+
+    background: transparent;
+}
+
+/* Hide the suggestion when the user has not typed anything */
+.email-domain-suggestion {
+    color: #9ca3af;
+}
+
+/* Prevent the input background from hiding the ghost text */
+.email-autocomplete-wrapper input:focus {
+    background: transparent;
+}
+/* ========================================
+   University Email Domain
+======================================== */
+
+.university-email-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.university-email-wrapper input {
+    width: 100%;
+    padding-right: 145px !important;
+}
+
+.university-email-domain {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+
+    color: #8a9ab4;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .university-email-wrapper input {
+        padding-right: 125px !important;
+    }
+
+    .university-email-domain {
+        right: 13px;
+        font-size: 11px;
+    }
+}
+@media (max-width: 600px) {
+    .email-ghost-text {
+        left: 48px;
+        font-size: 14px;
+    }
+}
+@media (max-width: 480px) {
+    .register-input-wrapper input {
+        padding-right: 110px;
+    }
+
+    .email-domain {
+        right: 12px;
+        font-size: 12px;
+    }
+}
+
+
+/* ========================================
+   University Email Suggestion
+======================================== */
+
+.university-email-suggestion {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 8px;
+    padding: 8px 12px;
+
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: left;
+
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.university-email-suggestion:hover {
+    background: #dbeafe;
+    border-color: #93c5fd;
+    transform: translateY(-1px);
+}
+
+.university-email-suggestion:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.25);
+    outline-offset: 2px;
+}
+
+.university-email-suggestion[hidden] {
+    display: none;
+}
+
+.register-input-hint {
+    display: block;
+    margin: 7px 0 0;
+
+    color: #7183a1;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+}
 
         /* ========================================
            Heading
@@ -972,66 +1171,146 @@
         }
     </style>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
 
-            function setupPasswordToggle(
-                inputId,
-                toggleId,
-                iconId
+        /*
+        |--------------------------------------------------------------------------
+        | Password Toggle
+        |--------------------------------------------------------------------------
+        */
+
+        function setupPasswordToggle(
+            inputId,
+            toggleId,
+            iconId
+        ) {
+            const input = document.getElementById(inputId);
+            const toggle = document.getElementById(toggleId);
+            const icon = document.getElementById(iconId);
+
+            if (!input || !toggle || !icon) {
+                return;
+            }
+
+            toggle.addEventListener("click", function () {
+
+                const isPassword = input.type === "password";
+
+                input.type = isPassword
+                    ? "text"
+                    : "password";
+
+                toggle.setAttribute(
+                    "aria-label",
+                    isPassword
+                        ? "Hide password"
+                        : "Show password"
+                );
+
+                icon.innerHTML = isPassword
+                    ? `
+                        <path d="M3 3l18 18"/>
+                        <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/>
+                        <path d="M9.9 4.2A10.8 10.8 0 0 1 12 4c7 0 10 8 10 8a18.5 18.5 0 0 1-3.1 4.4"/>
+                        <path d="M6.6 6.6C3.7 8.5 2 12 2 12s3 8 10 8a10.8 10.8 0 0 0 4.1-.8"/>
+                    `
+                    : `
+                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    `;
+            });
+        }
+
+        setupPasswordToggle(
+            "password",
+            "passwordToggle",
+            "passwordEyeIcon"
+        );
+
+        setupPasswordToggle(
+            "password_confirmation",
+            "confirmPasswordToggle",
+            "confirmPasswordEyeIcon"
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | University Email Suggestion
+        |--------------------------------------------------------------------------
+        */
+
+        const emailInput = document.getElementById("email");
+        const emailSuggestion = document.getElementById(
+            "universityEmailSuggestion"
+        );
+
+        const universityDomain = "@life.edu.kh";
+
+        if (!emailInput || !emailSuggestion) {
+            return;
+        }
+
+        function updateEmailSuggestion() {
+
+            const value = emailInput.value.trim();
+
+            /*
+             * Do not change the user's input.
+             * Only display a suggestion when:
+             * - The field is not empty
+             * - The user has not typed @
+             */
+            if (
+                value.length > 0 &&
+                !value.includes("@")
             ) {
-                const input = document.getElementById(inputId);
-                const toggle = document.getElementById(toggleId);
-                const icon = document.getElementById(iconId);
+                emailSuggestion.textContent =
+                    "Use " + value + universityDomain;
 
-                if (!input || !toggle || !icon) {
+                emailSuggestion.hidden = false;
+            } else {
+                emailSuggestion.textContent = "";
+                emailSuggestion.hidden = true;
+            }
+        }
+
+        emailInput.addEventListener(
+            "input",
+            updateEmailSuggestion
+        );
+
+        emailInput.addEventListener(
+            "blur",
+            updateEmailSuggestion
+        );
+
+        emailSuggestion.addEventListener(
+            "click",
+            function () {
+
+                const username = emailInput.value.trim();
+
+                if (!username || username.includes("@")) {
                     return;
                 }
 
-                toggle.addEventListener("click", function () {
+                emailInput.value =
+                    username + universityDomain;
 
-                    const isPassword =
-                        input.type === "password";
+                emailSuggestion.hidden = true;
 
-                    input.type = isPassword
-                        ? "text"
-                        : "password";
-
-                    toggle.setAttribute(
-                        "aria-label",
-                        isPassword
-                            ? "Hide password"
-                            : "Show password"
-                    );
-
-                    icon.innerHTML = isPassword
-                        ? `
-                            <path d="M3 3l18 18"/>
-                            <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/>
-                            <path d="M9.9 4.2A10.8 10.8 0 0 1 12 4c7 0 10 8 10 8a18.5 18.5 0 0 1-3.1 4.4"/>
-                            <path d="M6.6 6.6C3.7 8.5 2 12 2 12s3 8 10 8a10.8 10.8 0 0 0 4.1-.8"/>
-                        `
-                        : `
-                            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
-                            <circle cx="12" cy="12" r="3"/>
-                        `;
-
-                });
+                emailInput.focus();
             }
+        );
 
-            setupPasswordToggle(
-                "password",
-                "passwordToggle",
-                "passwordEyeIcon"
-            );
+        updateEmailSuggestion();
 
-            setupPasswordToggle(
-                "password_confirmation",
-                "confirmPasswordToggle",
-                "confirmPasswordEyeIcon"
-            );
+    });
+</script>
 
-        });
-    </script>
+
+
 
 </x-guest-layout>

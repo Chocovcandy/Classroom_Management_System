@@ -7,7 +7,7 @@
         width: 100%;
         max-width: 1500px;
         margin: 0 auto;
-        padding: 0 20px;
+        padding: 0 15px;
         box-sizing: border-box;
     }
 
@@ -20,8 +20,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 24px;
-        margin-bottom: 28px;
+        gap: 25px;
+        margin-bottom: 20px;
+        margin-top: 15px;
     }
 
     .marks-header-left {
@@ -406,7 +407,7 @@
 
         height: 108px;
 
-        padding: 12px;
+        padding: 10px;
 
         background: var(--card-color);
 
@@ -414,15 +415,15 @@
     }
 
     .classwork-column.assignment {
-        border-top: 4px solid rgba(99, 102, 241, 0.75);
+        border-top: 4px solid #22c55e;
     }
 
     .classwork-column.quiz {
-        border-top: 4px solid rgba(245, 158, 11, 0.75);
+        border-top: 4px solid #8b5cf6;
     }
 
     .classwork-column.exam {
-        border-top: 4px solid rgba(239, 68, 68, 0.75);
+        border-top: 4px solid #ef4444;
     }
 
     .classwork-header {
@@ -457,35 +458,35 @@
     }
 
     .classwork-icon.assignment {
-        background: rgba(99, 102, 241, 0.09);
-        color: #6366f1;
+        background: #eefbf2;
+        color: #15803d;
     }
 
     .classwork-icon.quiz {
-        background: rgba(245, 158, 11, 0.09);
-        color: #d97706;
+        background: #f5efff;
+        color: #7c3aed;
     }
 
     .classwork-icon.exam {
-        background: rgba(239, 68, 68, 0.09);
-        color: #dc2626;
+        background: #fcebeb;
+        color: #e0443a;
     }
 
     .classwork-column.project {
-        border-top: 4px solid rgba(245, 158, 11, 0.85);
+        border-top: 4px solid #eab308;
     }
 
     .classwork-icon.project {
-        background: rgba(245, 158, 11, 0.10);
-        color: #d97706;
+        background: #fef9c3;
+        color: #ca8a04;
     }
 
     .marks-cell.project {
-        background: rgba(245, 158, 11, 0.012);
+        background: rgba(234, 179, 8, 0.025);
     }
 
     .marks-cell.project .mark-edit-trigger:hover {
-        background: rgba(245, 158, 11, 0.07);
+        background: rgba(234, 179, 8, 0.10);
     }
 
     .marks-cell.project .mark-score {
@@ -493,64 +494,145 @@
     }
 
     .marks-cell.project .mark-edit-trigger:hover .mark-score {
-        color: #d97706;
+        color: #ca8a04;
     }
 
 
     /* ============================================================
+   PROJECT TEAM BADGE
+============================================================ */
+
+    .project-team-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        flex: 0 0 auto;
+        width: fit-content;
+        margin: 0;
+        padding: 6px 10px;
+        border: 1px solid rgba(234, 179, 8, 0.32);
+        border-radius: 8px;
+        background: #fff9d9;
+        color: #a16207;
+        font-size: 13px;
+        font-weight: 800;
+        line-height: 1;
+        white-space: nowrap;
+    }
+
+    .project-team-badge i {
+        font-size: 15px;
+    }
+
+    .project-team-missing {
+        margin: 0;
+    }
+
+    /* Team + grade/status stay on ONE row */
+    .marks-cell.project .mark-edit-trigger {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    .marks-cell.project .mark-edit-trigger .project-team-badge {
+        flex-shrink: 0;
+    }
+
+    .marks-cell.project .mark-edit-trigger .cell-status {
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .marks-cell.project .mark-edit-trigger .mark-score-display {
+        margin: 0;
+        flex: 0 0 auto;
+    }
+
+    .marks-cell.project > .project-team-missing + .cell-status {
+        display: inline-flex;
+        vertical-align: middle;
+        margin-left: 8px;
+    }
+
+    .project-team-status-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    .project-team-status-row .cell-status {
+        margin: 0;
+        white-space: nowrap;
+    }
+
+
+/* ============================================================
    CLASSWORK TEXT
 ============================================================ */
 
-    .classwork-header-text {
-        min-width: 0;
+.classwork-header-text {
+    min-width: 0;
+    flex: 1;
+    padding-right: 20px;
+}
 
-        flex: 1;
+.classwork-header-text .classwork-type {
+    display: block;
 
-        padding-right: 25px;
-    }
+    margin-bottom: 10px; /* increased gap */
 
-    .classwork-header-text strong {
-        display: block;
+    overflow: hidden;
 
-        overflow: hidden;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.5;
 
-        color: var(--text-color);
+    letter-spacing: .06em;
+    text-transform: uppercase;
 
-        font-size: 13px;
-        font-weight: 720;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
-        line-height: 1.4;
+.classwork-header-text .classwork-type.assignment {
+    color: #16a34a;
+}
 
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
+.classwork-header-text .classwork-type.quiz {
+    color: #7c3aed;
+}
 
-    .classwork-header-text span {
-        display: block;
+.classwork-header-text .classwork-type.exam {
+    color: #dc2626;
+}
 
-        overflow: hidden;
+.classwork-header-text .classwork-type.project {
+    color: #ca8a04;
+}
 
-        margin-top: 5px;
+.classwork-header-text strong {
+    display: block;
 
-        color: var(--text-secondary);
+    overflow: hidden;
 
-        font-size: 11px;
+    color: var(--text-color);
 
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
+    font-size: 13px;
+    font-weight: 720;
 
-    .classwork-header-text small {
-        display: block;
+    line-height: 1.35;
 
-        margin-top: 5px;
-
-        color: var(--text-secondary);
-
-        font-size: 11px;
-        font-weight: 600;
-    }
-
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
     /* ============================================================
    THREE DOT BUTTON
@@ -735,15 +817,15 @@
     }
 
     .marks-cell.assignment {
-        background: rgba(99, 102, 241, 0.012);
+        background: rgba(34, 197, 94, 0.018);
     }
 
     .marks-cell.quiz {
-        background: rgba(245, 158, 11, 0.012);
+        background: rgba(139, 92, 246, 0.018);
     }
 
     .marks-cell.exam {
-        background: rgba(239, 68, 68, 0.012);
+        background: rgba(239, 68, 68, 0.018);
     }
 
     .mark-edit-trigger {
@@ -763,6 +845,30 @@
 
     .mark-edit-trigger:hover {
         background: rgba(99, 102, 241, .055);
+    }
+
+    .marks-cell.assignment .mark-edit-trigger:hover {
+        background: rgba(34, 197, 94, .07);
+    }
+
+    .marks-cell.quiz .mark-edit-trigger:hover {
+        background: rgba(139, 92, 246, .07);
+    }
+
+    .marks-cell.exam .mark-edit-trigger:hover {
+        background: rgba(239, 68, 68, .07);
+    }
+
+    .marks-cell.assignment .mark-edit-trigger:hover .mark-score {
+        color: #15803d;
+    }
+
+    .marks-cell.quiz .mark-edit-trigger:hover .mark-score {
+        color: #7c3aed;
+    }
+
+    .marks-cell.exam .mark-edit-trigger:hover .mark-score {
+        color: #e0443a;
     }
 
     .mark-edit-trigger:active {
@@ -1297,28 +1403,27 @@
     .grade-all-overlay {
         position: absolute;
         inset: 0;
-        background: rgba(15, 23, 42, 0.45);
-        backdrop-filter: blur(4px);
+        background: rgba(15, 23, 42, .48);
+        backdrop-filter: blur(5px);
     }
 
     .grade-all-dialog {
         position: relative;
-        width: min(680px, 100%);
-        max-height: min(760px, calc(100vh - 40px));
-        display: flex;
-        flex-direction: column;
+        z-index: 1;
+        width: min(560px, 100%);
+        max-height: calc(100vh - 40px);
         overflow: hidden;
         border: 1px solid var(--border-color);
-        border-radius: 18px;
+        border-radius: 20px;
         background: var(--card-color);
-        box-shadow: 0 25px 70px rgba(15, 23, 42, 0.22);
-        animation: gradeAllModalIn 0.18s ease;
+        box-shadow: 0 28px 80px rgba(15, 23, 42, .24);
+        animation: gradeAllModalIn .2s ease;
     }
 
     @keyframes gradeAllModalIn {
         from {
             opacity: 0;
-            transform: translateY(8px) scale(0.98);
+            transform: translateY(10px) scale(.98);
         }
 
         to {
@@ -1329,10 +1434,10 @@
 
     .grade-all-header {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: space-between;
         gap: 16px;
-        padding: 20px 21px 17px;
+        padding: 20px 22px;
         border-bottom: 1px solid var(--border-color);
     }
 
@@ -1344,16 +1449,16 @@
     }
 
     .grade-all-icon {
-        width: 43px;
-        height: 43px;
+        width: 46px;
+        height: 46px;
+        flex: 0 0 46px;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-shrink: 0;
-        border-radius: 11px;
-        background: rgba(99, 102, 241, 0.10);
-        color: #6366f1;
-        font-size: 21px;
+        border-radius: 13px;
+        background: #eefbf2;
+        color: #15803d;
+        font-size: 22px;
     }
 
     .grade-all-kicker {
@@ -1361,16 +1466,17 @@
         margin-bottom: 3px;
         color: var(--primary-color);
         font-size: 10px;
-        font-weight: 750;
+        font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.07em;
+        letter-spacing: .08em;
     }
 
     .grade-all-header h2 {
         margin: 0;
         color: var(--text-color);
-        font-size: 20px;
+        font-size: 21px;
         font-weight: 750;
+        line-height: 1.2;
     }
 
     .grade-all-header p {
@@ -1380,14 +1486,14 @@
     }
 
     .grade-all-close {
-        width: 34px;
-        height: 34px;
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-shrink: 0;
         border: 0;
-        border-radius: 9px;
+        border-radius: 10px;
         background: transparent;
         color: var(--text-secondary);
         cursor: pointer;
@@ -1395,29 +1501,37 @@
     }
 
     .grade-all-close:hover {
-        background: rgba(99, 102, 241, 0.08);
+        background: #f1f5f9;
         color: var(--text-color);
     }
 
     .grade-all-info {
         display: grid;
-        grid-template-columns: 1.4fr 1fr 0.8fr;
-        gap: 10px;
-        padding: 13px 21px;
-        border-bottom: 1px solid var(--border-color);
-        background: rgba(99, 102, 241, 0.025);
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 0;
+        margin: 16px 22px 0;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        border-radius: 13px;
+        background: var(--card-color);
     }
 
     .grade-all-info-item {
         min-width: 0;
+        padding: 13px 14px;
+        border-right: 1px solid var(--border-color);
+    }
+
+    .grade-all-info-item:last-child {
+        border-right: 0;
     }
 
     .grade-all-info-item span {
         display: block;
-        margin-bottom: 4px;
+        margin-bottom: 5px;
         color: var(--text-secondary);
         font-size: 10px;
-        font-weight: 600;
+        font-weight: 650;
     }
 
     .grade-all-info-item strong {
@@ -1425,205 +1539,219 @@
         overflow: hidden;
         color: var(--text-color);
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 750;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
     #gradeAllForm {
-        min-height: 0;
         display: flex;
         flex-direction: column;
     }
 
+    .grade-all-content {
+        padding: 25px 22px 20px;
+    }
+
+    .grade-all-main-icon {
+        width: 54px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 13px;
+        border-radius: 15px;
+        background: #f1f5f9;
+        color: var(--primary-color);
+        font-size: 26px;
+    }
+
+    .grade-all-content h3 {
+        margin: 0 0 6px;
+        color: var(--text-color);
+        text-align: center;
+        font-size: 17px;
+        font-weight: 750;
+    }
+
+    .grade-all-content > p {
+        max-width: 410px;
+        margin: 0 auto 22px;
+        color: var(--text-secondary);
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .grade-all-single-score {
+        max-width: 330px;
+        margin: 0 auto;
+    }
+
+    .grade-all-single-score label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--text-color);
+        text-align: left;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
     /* ============================================================
-   GRADE ALL - SINGLE SCORE
-============================================================ */
+       GRADE ALL SCORE INPUT
+    ============================================================ */
 
-.grade-all-content {
-    padding: 38px 25px 32px;
-    text-align: center;
-}
+    .grade-all-score-input-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+    }
 
-.grade-all-main-icon {
-    width: 58px;
-    height: 58px;
+    .grade-all-score-input {
+        flex: 1 1 auto;
+        min-width: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        width: auto;
+        height: 54px;
 
-    margin: 0 auto 16px;
+        padding: 0 16px;
+        box-sizing: border-box;
 
-    border-radius: 15px;
+        border: 1.5px solid var(--border-color);
+        border-radius: 12px;
 
-    background: rgba(99, 102, 241, 0.10);
-    color: #6366f1;
+        background: var(--card-color);
+        color: var(--text-color);
 
-    font-size: 28px;
-}
+        outline: none;
 
-.grade-all-content h3 {
-    margin: 0 0 7px;
+        text-align: left;
+        font-family: inherit;
+        font-size: 20px;
+        font-weight: 700;
 
-    color: var(--text-color);
+        transition:
+            border-color .18s ease,
+            box-shadow .18s ease,
+            background .18s ease;
+    }
 
-    font-size: 17px;
-    font-weight: 720;
-}
+    .grade-all-score-input::placeholder {
+        color: var(--text-secondary);
+        opacity: .6;
+        font-weight: 500;
+    }
 
-.grade-all-content > p {
-    max-width: 420px;
+    .grade-all-score-input:hover {
+        border-color: rgba(99, 102, 241, .45);
+    }
 
-    margin: 0 auto 25px;
+    .grade-all-score-input:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, .10);
+    }
 
-    color: var(--text-secondary);
+    .grade-all-score-input::-webkit-inner-spin-button,
+    .grade-all-score-input::-webkit-outer-spin-button {
+        opacity: 1;
+    }
 
-    font-size: 12px;
-    line-height: 1.6;
-}
+    .grade-all-score-input-wrap > span {
+        flex: 0 0 auto;
 
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
 
-/* SCORE FIELD */
+        color: var(--text-secondary);
 
-.grade-all-single-score {
-    width: 100%;
-    max-width: 300px;
+        font-size: 18px;
+        font-weight: 600;
 
-    margin: 0 auto;
-}
+        white-space: nowrap;
+    }
 
-.grade-all-single-score label {
-    display: block;
+    .grade-all-score-input-wrap > span strong {
+        color: var(--text-color);
 
-    margin-bottom: 8px;
+        font-size: 18px;
+        font-weight: 750;
+    }
 
-    color: var(--text-color);
+    .grade-all-notice {
+        max-width: 430px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 18px auto 0;
+        padding: 10px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        background: var(--card-color);
+        color: var(--text-secondary);
+        font-size: 11px;
+        line-height: 1.5;
+    }
 
-    font-size: 12px;
-    font-weight: 650;
-}
+    .grade-all-notice i {
+        flex-shrink: 0;
+        color: var(--primary-color);
+        font-size: 16px;
+    }
 
-.grade-all-score-input-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    .grade-all-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 9px;
+        padding: 15px 22px 20px;
+        border-top: 1px solid var(--border-color);
+    }
 
-    gap: 8px;
-}
+    .grade-all-cancel,
+    .grade-all-save {
+        min-height: 40px;
+        padding: 0 15px;
+        border-radius: 9px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+    }
 
-/* ============================================================
-   GRADE ALL - SCORE INPUT
-============================================================ */
+    .grade-all-cancel {
+        border: 1px solid var(--border-color);
+        background: transparent;
+        color: var(--text-secondary);
+    }
 
-.grade-all-score-input {
-    width: 190px;
-    height: 52px;
+    .grade-all-cancel:hover {
+        background: #f8fafc;
+        color: var(--text-color);
+    }
 
-    padding: 0 42px 0 14px;
+    .grade-all-save {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: 0;
+        background: var(--primary-color);
+        color: #fff;
+        transition: opacity .18s ease, transform .18s ease;
+    }
 
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
+    .grade-all-save:hover:not(:disabled) {
+        opacity: .92;
+        transform: translateY(-1px);
+    }
 
-    outline: none;
-
-    background: var(--card-color);
-    color: var(--text-color);
-
-    text-align: center;
-
-    font-size: 18px;
-    font-weight: 700;
-
-    box-sizing: border-box;
-
-    transition:
-        border-color 0.18s ease,
-        box-shadow 0.18s ease;
-}
-
-.grade-all-score-input:focus {
-    border-color: rgba(99, 102, 241, 0.45);
-
-    box-shadow:
-        0 0 0 4px rgba(99, 102, 241, 0.07);
-}
-
-/* Number input spinner */
-.grade-all-score-input::-webkit-inner-spin-button,
-.grade-all-score-input::-webkit-outer-spin-button {
-    opacity: 0.7;
-}
-
-.grade-all-score-input:focus {
-    border-color: rgba(99, 102, 241, 0.45);
-
-    box-shadow:
-        0 0 0 4px rgba(99, 102, 241, 0.07);
-}
-
-.grade-all-score-input-wrap > span {
-    color: var(--text-secondary);
-
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.grade-all-score-input-wrap > span strong {
-    color: var(--text-color);
-
-    font-weight: 700;
-}
-
-
-/* NOTICE */
-
-.grade-all-notice {
-    max-width: 430px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    margin: 22px auto 0;
-    padding: 10px 13px;
-
-    border-radius: 9px;
-
-    background: rgba(99, 102, 241, 0.06);
-
-    color: var(--text-secondary);
-
-    font-size: 11px;
-    line-height: 1.5;
-}
-
-.grade-all-notice i {
-    flex-shrink: 0;
-
-    color: var(--primary-color);
-
-    font-size: 16px;
-}
-
-
-/* DISABLED */
-
-.grade-all-score-input:disabled {
-    opacity: 0.55;
-
-    cursor: not-allowed;
-}
+    .grade-all-save:disabled {
+        opacity: .45;
+        cursor: not-allowed;
+    }
 
     body.grade-all-modal-open {
         overflow: hidden;
     }
-
-    /* ============================================================
-   RESPONSIVE
-============================================================ */
 
     @media (max-width: 800px) {
 
@@ -1728,7 +1856,6 @@
     }
 </style>
 
-
 @extends('layouts.prof_layout')
 
 @section('title', 'Marks')
@@ -1779,9 +1906,6 @@ rtrim(number_format((float) $number, 2), '0'),
 
             <div class="marks-header-content">
 
-                <span class="marks-kicker">
-                    Gradebook
-                </span>
 
                 <h1>Marks</h1>
 
@@ -1941,19 +2065,14 @@ rtrim(number_format((float) $number, 2), '0'),
 
                                     <div class="classwork-header-text">
 
+                                        <span class="classwork-type assignment">
+                                            Assignment
+                                        </span>
+
                                         <strong
                                             title="{{ $assignment->title }}">
                                             {{ $assignment->title }}
                                         </strong>
-
-                                        <span>
-                                            {{ $assignment->topic->topic_name ?? 'No Topic' }}
-                                        </span>
-
-                                        <small>
-                                            {{ $formatNumber($assignment->points ?? 0) }}
-                                            pts
-                                        </small>
 
                                     </div>
                                     {{-- THREE DOT MENU --}}
@@ -2081,19 +2200,14 @@ rtrim(number_format((float) $number, 2), '0'),
 
                                     <div class="classwork-header-text">
 
+                                        <span class="classwork-type quiz">
+                                            Quiz
+                                        </span>
+
                                         <strong
                                             title="{{ $quiz->title }}">
                                             {{ $quiz->title }}
                                         </strong>
-
-                                        <span>
-                                            {{ $quiz->topic->topic_name ?? 'No Topic' }}
-                                        </span>
-
-                                        <small>
-                                            {{ $formatNumber($quiz->points ?? 0) }}
-                                            pts
-                                        </small>
 
                                     </div>
 
@@ -2224,19 +2338,14 @@ rtrim(number_format((float) $number, 2), '0'),
 
                                     <div class="classwork-header-text">
 
+                                        <span class="classwork-type exam">
+                                            Exam
+                                        </span>
+
                                         <strong
                                             title="{{ $exam->title }}">
                                             {{ $exam->title }}
                                         </strong>
-
-                                        <span>
-                                            {{ $exam->topic->topic_name ?? 'No Topic' }}
-                                        </span>
-
-                                        <small>
-                                            {{ $formatNumber($exam->points ?? 0) }}
-                                            pts
-                                        </small>
 
                                     </div>
 
@@ -2365,19 +2474,14 @@ rtrim(number_format((float) $number, 2), '0'),
 
                                     <div class="classwork-header-text">
 
+                                        <span class="classwork-type project">
+                                            Project
+                                        </span>
+
                                         <strong
                                             title="{{ $project->title }}">
                                             {{ $project->title }}
                                         </strong>
-
-                                        <span>
-                                            {{ $project->topic->topic_name ?? 'No Topic' }}
-                                        </span>
-
-                                        <small>
-                                            {{ $formatNumber($project->points ?? 0) }}
-                                            pts
-                                        </small>
 
                                     </div>
 
@@ -2837,6 +2941,26 @@ rtrim(number_format((float) $number, 2), '0'),
                             $points =
                                 (float) ($project->points ?? 0);
 
+                            // For team projects, find the team this student belongs to
+                            // even when the student has not submitted yet.
+                            $studentProjectGroup = null;
+
+                            if ($project->project_type === 'team') {
+                                $studentProjectGroup = $project->groups()
+                                    ->whereHas('members', function ($query) use ($student) {
+                                        $query->where('user_id', $student->id);
+                                    })
+                                    ->first();
+                            }
+
+                            $teamName = null;
+
+                            if ($studentProjectGroup) {
+                                $teamName = $studentProjectGroup->group_name
+                                    ?? $studentProjectGroup->name
+                                    ?? ('Team ' . $studentProjectGroup->id);
+                            }
+
                             $grade = null;
 
                             if ($submission) {
@@ -2861,22 +2985,6 @@ rtrim(number_format((float) $number, 2), '0'),
 
                                 @if($submission)
 
-                                    @if($project->project_type === 'team')
-
-                                    <a
-                                        href="{{ route(
-                                            'professor.classworks.projects.submissions.show',
-                                            [
-                                                'classGroupId' => $classGroup->id,
-                                                'projectId' => $project->id,
-                                                'submissionId' => $submission->id
-                                            ]
-                                        ) }}"
-                                        class="mark-edit-trigger"
-                                        style="text-decoration: none;">
-
-                                    @else
-
                                     <button
                                         type="button"
                                         class="mark-edit-trigger"
@@ -2886,7 +2994,7 @@ rtrim(number_format((float) $number, 2), '0'),
                                         data-grade-student="{{ $student->name }}"
                                         data-grade-points="{{ $points }}"
                                         data-grade-score="{{ $score ?? '' }}"
-                                        data-grade-feedback="{{ $submission->feedback ?? '' }}"
+                                        data-grade-feedback="{{ $grade->feedback ?? $submission->feedback ?? '' }}"
                                         data-grade-url="{{ route(
                                             'professor.classworks.projects.submissions.grade',
                                             [
@@ -2896,9 +3004,14 @@ rtrim(number_format((float) $number, 2), '0'),
                                             ]
                                         ) }}">
 
-                                    @endif
-
                                         @if($graded)
+
+                                        @if($teamName)
+                                            <div class="project-team-badge">
+                                                <i class="bx bx-group"></i>
+                                                <span>{{ $teamName }}</span>
+                                            </div>
+                                        @endif
 
                                         <div class="mark-score-display">
 
@@ -2930,23 +3043,35 @@ rtrim(number_format((float) $number, 2), '0'),
 
                                         @else
 
+                                        @if($teamName)
+                                            <div class="project-team-badge">
+                                                <i class="bx bx-group"></i>
+                                                <span>{{ $teamName }}</span>
+                                            </div>
+                                        @endif
+
                                         <span class="cell-status pending">
                                             Not Graded
                                         </span>
 
                                         @endif
 
-                                    @if($project->project_type === 'team')
-                                    </a>
-                                    @else
                                     </button>
-                                    @endif
 
                                 @else
 
-                                    <span class="cell-status missing">
-                                        Missing
-                                    </span>
+                                    <div class="project-team-status-row">
+                                        @if($teamName)
+                                            <div class="project-team-badge project-team-missing">
+                                                <i class="bx bx-group"></i>
+                                                <span>{{ $teamName }}</span>
+                                            </div>
+                                        @endif
+
+                                        <span class="cell-status missing">
+                                            Missing
+                                        </span>
+                                    </div>
 
                                 @endif
 
@@ -3044,48 +3169,68 @@ rtrim(number_format((float) $number, 2), '0'),
    GRADE ALL DATA
 ============================================================ --}}
 
+{{-- ASSIGNMENTS --}}
 @foreach($assignments as $assignment)
-@php
-$submittedCount = $assignment->submissions
-->whereNotNull('submitted_at')
-->count();
-@endphp
+    @php
+        $submittedCount = $assignment->submissions
+            ->whereNotNull('submitted_at')
+            ->count();
+    @endphp
 
-<script
-    type="application/json"
-    id="assignment-submissions-{{ $assignment->id }}">
-    @json(['count' => $submittedCount])
-</script>
+    <script
+        type="application/json"
+        id="assignment-submissions-{{ $assignment->id }}">
+        @json(['count' => $submittedCount])
+    </script>
 @endforeach
 
+
+{{-- QUIZZES --}}
 @foreach($quizzes as $quiz)
-@php
-$submittedCount = $quiz->submissions
-->whereNotNull('submitted_at')
-->count();
-@endphp
+    @php
+        $submittedCount = $quiz->submissions
+            ->whereNotNull('submitted_at')
+            ->count();
+    @endphp
 
-<script
-    type="application/json"
-    id="quiz-submissions-{{ $quiz->id }}">
-    @json(['count' => $submittedCount])
-</script>
+    <script
+        type="application/json"
+        id="quiz-submissions-{{ $quiz->id }}">
+        @json(['count' => $submittedCount])
+    </script>
 @endforeach
 
+
+{{-- EXAMS --}}
 @foreach($exams as $exam)
-@php
-$submittedCount = $exam->submissions
-->whereNotNull('submitted_at')
-->count();
-@endphp
+    @php
+        $submittedCount = $exam->submissions
+            ->whereNotNull('submitted_at')
+            ->count();
+    @endphp
 
-<script
-    type="application/json"
-    id="exam-submissions-{{ $exam->id }}">
-    @json(['count' => $submittedCount])
-</script>
+    <script
+        type="application/json"
+        id="exam-submissions-{{ $exam->id }}">
+        @json(['count' => $submittedCount])
+    </script>
 @endforeach
 
+
+{{-- PROJECTS --}}
+@foreach($projects as $project)
+    @php
+        $submittedCount = $project->submissions
+            ->whereNotNull('submitted_at')
+            ->count();
+    @endphp
+
+    <script
+        type="application/json"
+        id="project-submissions-{{ $project->id }}">
+        @json(['count' => $submittedCount])
+    </script>
+@endforeach
 
 {{-- ============================================================
    GRADE ALL MODAL
@@ -3168,7 +3313,7 @@ $submittedCount = $exam->submissions
 
                 <strong>
                     <span id="gradeAllStudentCount">0</span>
-                    students
+                    <span id="gradeAllRecipientLabel">students</span>
                 </strong>
             </div>
 
@@ -3189,45 +3334,95 @@ $submittedCount = $exam->submissions
                     <i class="bx bx-check-double"></i>
                 </div>
 
-                <h3>
+                <h3 id="gradeAllContentTitle">
                     Give the same mark to all submitted students
                 </h3>
 
-                <p>
+                <p id="gradeAllContentDescription">
                     This score will be applied to every student
                     who submitted this classwork.
                 </p>
 
 
-                {{-- SINGLE SCORE INPUT --}}
-                <div class="grade-all-single-score">
+{{-- SINGLE SCORE INPUT --}}
 
-                    <label for="gradeAllScore">
-                        Score for all students
-                    </label>
+<div class="grade-all-single-score">
 
-                    <div class="grade-all-score-input-wrap">
+    <label
+        for="gradeAllScore"
+        style="
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            text-align: left;
+            font-size: 12px;
+            font-weight: 700;
+        ">
+        Score for all students
+    </label>
 
-                        <input
-                            type="number"
-                            id="gradeAllScore"
-                            name="score"
-                            min="0"
-                            step="0.01"
-                            inputmode="decimal"
-                            placeholder="0"
-                            required>
+    <div
+        class="grade-all-score-input-wrap"
+        style="
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        ">
 
-                        <span>
-                            /
-                            <strong id="gradeAllScoreMax">
-                                0
-                            </strong>
-                        </span>
+        <input
+            type="number"
+            id="gradeAllScore"
+            name="score"
+            min="0"
+            step="0.01"
+            inputmode="decimal"
+            placeholder="Enter score"
+            required
+            style="
+                flex: 1 1 auto;
+                min-width: 0;
+                width: auto;
+                height: 54px;
+                padding: 0 16px;
+                box-sizing: border-box;
+                border: 1.5px solid var(--border-color);
+                border-radius: 12px;
+                background: var(--card-color);
+                color: var(--text-color);
+                outline: none;
+                text-align: left;
+                font-family: inherit;
+                font-size: 20px;
+                font-weight: 700;
+            ">
 
-                    </div>
+        <span
+            style="
+                flex: 0 0 auto;
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                color: var(--text-secondary);
+                font-size: 18px;
+                font-weight: 600;
+                white-space: nowrap;
+            ">
+            /
+            <strong
+                id="gradeAllScoreMax"
+                style="
+                    color: var(--text-color);
+                    font-size: 18px;
+                    font-weight: 750;
+                ">
+                0
+            </strong>
+        </span>
 
-                </div>
+    </div>
+
+</div>
 
 
                 {{-- WARNING / DESCRIPTION --}}
@@ -3645,6 +3840,15 @@ $submittedCount = $exam->submissions
         const gradeAllStudentCount =
             document.getElementById('gradeAllStudentCount');
 
+        const gradeAllRecipientLabel =
+            document.getElementById('gradeAllRecipientLabel');
+
+        const gradeAllContentTitle =
+            document.getElementById('gradeAllContentTitle');
+
+        const gradeAllContentDescription =
+            document.getElementById('gradeAllContentDescription');
+
         const gradeAllDescription =
             document.getElementById('gradeAllModalDescription');
 
@@ -3787,8 +3991,23 @@ $submittedCount = $exam->submissions
                 type.charAt(0).toUpperCase() +
                 type.slice(1);
 
+            const isProject =
+                type.toLowerCase() === 'project';
+
+            const recipientLabel =
+                isProject ? 'teams' : 'students';
+
+            gradeAllRecipientLabel.textContent =
+                recipientLabel;
+
             gradeAllDescription.textContent =
-                `Give the same mark to all submitted students in this ${typeLabel.toLowerCase()}.`;
+                `Give the same mark to all submitted ${recipientLabel} in this ${typeLabel.toLowerCase()}.`;
+
+            gradeAllContentTitle.textContent =
+                `Give the same mark to all submitted ${recipientLabel}`;
+
+            gradeAllContentDescription.textContent =
+                `This score will be applied to every ${recipientLabel.slice(0, -1)} who submitted this classwork.`;
 
 
             /*
@@ -3807,29 +4026,20 @@ $submittedCount = $exam->submissions
 
             /*
             |--------------------------------------------------------------------------
-            | NO SUBMISSIONS
+            | SCORE INPUT
+            |--------------------------------------------------------------------------
+            |
+            | IMPORTANT:
+            | Do not disable the score field when submittedCount is 0.
+            | The backend decides which submitted records can be graded.
+            | The professor should always be able to enter a score.
+            |
             |--------------------------------------------------------------------------
             */
 
-            if (submittedCount === 0) {
-
-                gradeAllScore.disabled = true;
-
-                gradeAllSaveButton.disabled = true;
-
-                gradeAllScore.placeholder =
-                    'No submissions';
-
-            } else {
-
-                gradeAllScore.disabled = false;
-
-                gradeAllSaveButton.disabled = false;
-
-                gradeAllScore.placeholder =
-                    'Enter score';
-
-            }
+            gradeAllScore.disabled = false;
+            gradeAllSaveButton.disabled = false;
+            gradeAllScore.placeholder = 'Enter score';
 
 
             /*
@@ -3854,15 +4064,11 @@ $submittedCount = $exam->submissions
             |--------------------------------------------------------------------------
             */
 
-            if (
-                submittedCount > 0 &&
-                gradeAllScore
-            ) {
+            if (gradeAllScore) {
 
                 window.setTimeout(function() {
 
                     gradeAllScore.focus();
-
                     gradeAllScore.select();
 
                 }, 50);

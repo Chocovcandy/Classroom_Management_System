@@ -87,48 +87,25 @@ if (profile && dropdown) {
 
 
 
-// ============================================================
-// SIDEBAR TOGGLE
-// ============================================================
+/* ============================================================
+   SIDEBAR TOGGLE
+============================================================ */
 
 const sidebar = document.getElementById("sidebar");
 
-let openTimer;
-let closeTimer;
+const sidebarToggle = document.getElementById("sidebarToggle");
 
+if (sidebar && sidebarToggle) {
 
-if (sidebar) {
+    sidebarToggle.addEventListener("click", () => {
 
-    sidebar.addEventListener("mouseenter", () => {
+        sidebar.classList.toggle("open");
 
-        clearTimeout(closeTimer);
-
-        openTimer = setTimeout(() => {
-
-            sidebar.classList.remove("closed");
-            sidebar.classList.add("open");
-
-        }, 200);
-
-    });
-
-
-    sidebar.addEventListener("mouseleave", () => {
-
-        clearTimeout(openTimer);
-
-        closeTimer = setTimeout(() => {
-
-            sidebar.classList.remove("open");
-            sidebar.classList.add("closed");
-
-        }, 500);
+        sidebar.classList.toggle("closed");
 
     });
 
 }
-
-
 // ============================================================
 // Dropdown Toggle for Table Controls
 // Filter and Sort are optional

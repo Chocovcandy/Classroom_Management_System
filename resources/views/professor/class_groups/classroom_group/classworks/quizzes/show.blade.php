@@ -525,13 +525,28 @@
         border-color: #10b981;
         color: #10b981;
     }
-
-    .classwork-action-btn.quiz:hover {
-        border-color: #8b5cf6;
-        color: #8b5cf6;
+    /* Quiz action button - purple */
+    .classwork-action-btn.quiz {
+        background: #f5f3ff;
+        border-color: #ddd6fe;
+        color: #6d28d9;
     }
 
-    .classwork-action-btn.exam:hover {
+    .classwork-action-btn.quiz i {
+        color: #7c3aed;
+    }
+
+    .classwork-action-btn.quiz:hover {
+        background: #ede9fe;
+        border-color: #c4b5fd;
+        color: #5b21b6;
+    }
+
+    .classwork-action-btn.quiz:hover i {
+        color: #6d28d9;
+    }
+
+.classwork-action-btn.exam:hover {
         border-color: #ef4444;
         color: #ef4444;
     }
@@ -1345,56 +1360,42 @@
 /* ============================================================
    VIEW SUBMISSION
 ============================================================ */
+    /* View submission - blue */
+    .submission-view-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        flex-shrink: 0;
+        min-height: 40px;
+        padding: 0 15px;
+        border-radius: 9px;
 
-.submission-view-btn {
+        border: 1px solid #bfdbfe;
+        color: #2563eb;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+        transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease,
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
 
-    display: inline-flex;
+    .submission-view-btn i {
+        font-size: 16px;
+    }
 
-    align-items: center;
-    justify-content: center;
-
-    gap: 7px;
-
-    flex-shrink: 0;
-
-    padding: 9px 14px;
-
-    border-radius: 8px;
-
-    background: var(--background-color);
-
-    border: 1px solid var(--border-color);
-
-    color: var(--text-color);
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.submission-view-btn i {
-
-    font-size: 16px;
-}
-
-.submission-view-btn:hover {
-
-    background: #8b5cf6;
-
-    border-color: #8b5cf6;
-
-    color: #fff;
-
-    transform: translateY(-1px);
-}
+    .submission-view-btn:hover {
+        background: #dbeafe;
+        border-color: #93c5fd;
+        color: #1d4ed8;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(37, 99, 235, 0.12);
+    }
 /* ============================================================
    MOBILE
 ============================================================ */
@@ -1563,6 +1564,9 @@
 @extends('layouts.prof_layout')
 
 @section('content')
+@php
+    $returnTo = request('origin', request('return_to', 'stream'));
+@endphp
 
 <div class="classwork-show-page">
 
@@ -1696,133 +1700,94 @@
             {{-- ============================================================
                 ATTACHED MATERIAL
             ============================================================ --}}
+{{-- ============================================================
+    ATTACHED MATERIAL
+============================================================ --}}
 
-            <section class="classwork-detail-card">
+@if($quiz->attachment || $quiz->resources->isNotEmpty())
 
-                <div class="classwork-detail-card-header">
+<section class="classwork-detail-card">
 
-                    <h2>
-                        Attached Material
-                    </h2>
+    <div class="classwork-detail-card-header">
+        <h2>
+            Attached Material
+        </h2>
+    </div>
 
-                </div>
+    {{-- LEGACY SINGLE ATTACHMENT --}}
+    @if($quiz->attachment)
 
+        <div class="classwork-file">
 
-                {{-- ========================================================
-                    LEGACY SINGLE ATTACHMENT
-                ========================================================= --}}
+            <div class="classwork-file-icon">
+                <i class="bx bx-file"></i>
+            </div>
 
-                @if($quiz->attachment)
+            <div class="classwork-file-info">
+                <strong>
+                    {{ basename($quiz->attachment) }}
+                </strong>
 
-                <div class="classwork-file">
+                <span>
+                    Quiz attachment
+                </span>
+            </div>
 
-                    <div class="classwork-file-icon">
+            <button
+                type="button"
+                class="classwork-file-open"
+                data-file-url="{{ asset('storage/' . $quiz->attachment) }}"
+                data-file-title="{{ basename($quiz->attachment) }}">
+                <i class="bx bx-show"></i>
+                Open
+            </button>
 
-                        <i class="bx bx-file"></i>
+        </div>
 
-                    </div>
-
-
-                    <div class="classwork-file-info">
-
-                        <strong>
-                            {{ basename($quiz->attachment) }}
-                        </strong>
-
-                        <span>
-                            Quiz attachment
-                        </span>
-
-                    </div>
-
-
-                    <button
-                        type="button"
-                        class="classwork-file-open"
-                        data-file-url="{{ asset('storage/' . $quiz->attachment) }}"
-                        data-file-title="{{ basename($quiz->attachment) }}">
-                        <i class="bx bx-show"></i>
-                        Open
-                    </button>
-
-                </div>
-
-                @endif
+    @endif
 
 
-                {{-- ========================================================
-                    RESOURCE FILES
-                ========================================================= --}}
+    {{-- RESOURCE FILES --}}
+    @foreach($quiz->resources as $resource)
 
-                @forelse($quiz->resources as $resource)
+        <div class="classwork-file">
 
-                <div class="classwork-file">
+            <div class="classwork-file-icon">
+                <i class="bx bx-file"></i>
+            </div>
 
-                    <div class="classwork-file-icon">
+            <div class="classwork-file-info">
+                <strong>
+                    {{ $resource->file_name ?? $resource->title }}
+                </strong>
 
-                        <i class="bx bx-file"></i>
-
-                    </div>
-
-
-                    <div class="classwork-file-info">
-
-                        <strong>
-                            {{ $resource->file_name ?? $resource->title }}
-                        </strong>
-
-                        <span>
-
-                            @if($resource->file_size)
-
-                            {{ number_format($resource->file_size / 1024, 1) }}
-                            KB
-
-                            @else
-
-                            Quiz attachment
-
-                            @endif
-
-                        </span>
-
-                    </div>
-
-
-                    @if($resource->file_path)
-
-                    <button
-                        type="button"
-                        class="classwork-file-open"
-                        data-file-url="{{ asset('storage/' . $resource->file_path) }}"
-                        data-file-title="{{ $resource->file_name ?? $resource->title }}">
-                        <i class="bx bx-show"></i>
-                        Open
-                    </button>
-
+                <span>
+                    @if($resource->file_size)
+                        {{ number_format($resource->file_size / 1024, 1) }} KB
+                    @else
+                        Quiz attachment
                     @endif
+                </span>
+            </div>
 
-                </div>
+            @if($resource->file_path)
+                <button
+                    type="button"
+                    class="classwork-file-open"
+                    data-file-url="{{ asset('storage/' . $resource->file_path) }}"
+                    data-file-title="{{ $resource->file_name ?? $resource->title }}">
+                    <i class="bx bx-show"></i>
+                    Open
+                </button>
+            @endif
 
-                @empty
+        </div>
 
-                @if(!$quiz->attachment)
+    @endforeach
 
-                <div class="submission-placeholder">
+</section>
 
-                    <i class="bx bx-file-blank"></i>
-
-                    <p>
-                        No attached material.
-                    </p>
-
-                </div>
-
-                @endif
-
-                @endforelse
-
-            </section>
+@endif
 
 
 {{-- ============================================================
@@ -1989,23 +1954,17 @@
                         VIEW SUBMISSION
                     =================================================== --}}
 
-                    <a
-                        href="{{ route(
-                            'professor.class-groups.quizzes.submissions.show',
-                            [
-                                'classGroup' => $classGroup->id,
-                                'quiz' => $quiz->id,
-                                'submission' => $submission->id,
-                            ]
-                        ) }}"
-                        class="submission-view-btn"
-                    >
-
-                        <i class="bx bx-show"></i>
-
-                        View Submission
-
-                    </a>
+<a
+    href="{{ route('professor.class-groups.quizzes.submissions.show', [
+        'classGroup' => $classGroup->id,
+        'quiz' => $quiz->id,
+        'submission' => $submission->id,
+        'origin' => request('return_to', 'stream'),
+    ]) }}"
+    class="submission-view-btn">
+    <i class="bx bx-show"></i>
+    View Submission
+</a>
 
                 </div>
 

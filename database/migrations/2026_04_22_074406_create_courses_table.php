@@ -22,7 +22,8 @@ return new class extends Migration
                 ->constrained('departments')
                 ->onDelete('cascade');
 
-            $table->string('description');
+            // Optional course description.
+            $table->string('description')->nullable();
             
             $table->integer('credits')->nullable();
             $table->timestamps();

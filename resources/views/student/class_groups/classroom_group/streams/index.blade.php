@@ -21,8 +21,9 @@
     display: flex;
     flex-direction: column;
 
-    width: 100%;
+    width: 90%;
     min-height: 100%;
+
 
 
 }
@@ -2551,6 +2552,326 @@
 
 @section('content')
 
+
+<style>
+/* ============================================================
+   STUDENT STREAM — REFERENCE DESIGN
+   ============================================================ */
+
+.stream-content-redesign {
+    width: 100%;
+}
+
+.stream-content-redesign .stream-section-header {
+    margin-bottom: 16px;
+}
+
+.stream-content-redesign .stream-section-header h2 {
+    margin: 0;
+    color: var(--heading-color);
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.stream-content-redesign .stream-section-header p {
+    margin: 6px 0 0;
+    color: var(--secondary-text-color);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.stream-content-redesign .classroom-stream-card {
+    overflow: hidden;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    background: var(--card-color);
+    box-shadow: 0 4px 16px var(--shadow-color);
+}
+
+.stream-content-redesign .stream-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    min-height: 86px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--card-color);
+    transition: background-color .18s ease;
+}
+
+.stream-content-redesign .stream-item:last-child {
+    border-bottom: 0;
+}
+
+.stream-content-redesign .stream-item:hover {
+    background: var(--hover-color);
+}
+
+.stream-content-redesign .stream-item::before {
+    position: absolute;
+    top: 15px;
+    bottom: 15px;
+    left: 0;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--border-color);
+    content: "";
+}
+
+.stream-content-redesign .stream-item-announcement::before {
+    background: #f97316;
+}
+
+.stream-content-redesign .stream-item-material::before {
+    background: #3b82f6;
+}
+
+.stream-content-redesign .stream-item-assignment::before {
+    background: #6366f1;
+}
+
+.stream-content-redesign .stream-item-quiz::before {
+    background: #f59e0b;
+}
+
+.stream-content-redesign .stream-item-exam::before {
+    background: #ef4444;
+}
+
+.stream-content-redesign .stream-item-project::before {
+    background: #eab308;
+}
+
+.stream-content-redesign .stream-item-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    margin-top: 1px;
+    border-radius: 12px;
+    background: var(--hover-color);
+    color: var(--secondary-text-color);
+    font-size: 20px;
+}
+
+.stream-content-redesign .stream-item-announcement .stream-item-icon {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.stream-content-redesign .stream-item-material .stream-item-icon {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.stream-content-redesign .stream-item-assignment .stream-item-icon {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.stream-content-redesign .stream-item-quiz .stream-item-icon {
+    background: #fff8e8;
+    color: #d97706;
+}
+
+.stream-content-redesign .stream-item-exam .stream-item-icon {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.stream-content-redesign .stream-item-project .stream-item-icon {
+    background: #fff8d6;
+    color: #a16207;
+}
+
+.stream-content-redesign .stream-item-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.stream-content-redesign .stream-item-posted {
+    margin: 0 0 5px;
+    color: var(--secondary-text-color);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.stream-content-redesign .stream-item-posted strong {
+    color: var(--heading-color);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.stream-content-redesign .stream-item-time {
+    color: var(--secondary-text-color);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.stream-content-redesign .stream-item-title {
+    margin: 0;
+    color: var(--heading-color);
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.stream-content-redesign .stream-item-content-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.stream-content-redesign .stream-item-content-link:hover .stream-item-title {
+    color: var(--button-color);
+}
+
+.stream-content-redesign .stream-item-project .stream-item-content-link:hover .stream-item-title {
+    color: #a16207;
+}
+
+.stream-content-redesign .stream-item-topic {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    padding: 4px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    background: var(--hover-color);
+    color: var(--secondary-text-color);
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.stream-content-redesign .stream-item-topic i {
+    font-size: 12px;
+}
+
+.stream-content-redesign .stream-project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+    margin-top: 8px;
+}
+
+.stream-content-redesign .stream-project-badge,
+.stream-content-redesign .stream-project-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.stream-content-redesign .stream-project-badge {
+    background: #fff8d6;
+    color: #946f00;
+}
+
+.stream-content-redesign .stream-project-type {
+    border: 1px solid var(--border-color);
+    background: var(--hover-color);
+    color: var(--secondary-text-color);
+}
+
+.stream-content-redesign .stream-announcement-text {
+    max-width: 760px;
+    margin: 6px 0 0;
+    color: var(--secondary-text-color);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.7;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.stream-content-redesign .classroom-stream-empty {
+    padding: 55px 24px;
+    text-align: center;
+    background: var(--card-color);
+}
+
+.stream-content-redesign .classroom-stream-empty-icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 12px;
+    border-radius: 12px;
+    background: var(--hover-color);
+    color: var(--secondary-text-color);
+    font-size: 21px;
+}
+
+.stream-content-redesign .classroom-stream-empty h3 {
+    margin: 0;
+    color: var(--heading-color);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.stream-content-redesign .classroom-stream-empty p {
+    max-width: 460px;
+    margin: 6px auto 0;
+    color: var(--secondary-text-color);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+    .stream-content-redesign .stream-item {
+        gap: 11px;
+        min-height: 0;
+        padding: 15px 13px;
+    }
+
+    .stream-content-redesign .stream-item::before {
+        top: 13px;
+        bottom: 13px;
+    }
+
+    .stream-content-redesign .stream-item-icon {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+        border-radius: 10px;
+        font-size: 18px;
+    }
+
+    .stream-content-redesign .stream-item-posted,
+    .stream-content-redesign .stream-item-posted strong {
+        font-size: 13px;
+    }
+
+    .stream-content-redesign .stream-item-title {
+        font-size: 14px;
+    }
+
+    .stream-content-redesign .stream-announcement-text {
+        font-size: 13px;
+    }
+
+    .stream-content-redesign .stream-item-topic,
+    .stream-content-redesign .stream-project-type {
+        font-size: 11px;
+    }
+}
+</style>
+
+
 <div class="classroom-page">
 
     {{-- ============================================================
@@ -2690,264 +3011,213 @@
 
             <section class="classroom-stream">
 
+                <div class="stream-content-redesign">
 
-                {{-- ====================================================
-                     STREAM HEADER
-                ===================================================== --}}
-                <div class="classroom-section-header">
+                    {{-- STREAM HEADER --}}
+                    <div class="stream-section-header">
+                        <h2>Stream</h2>
+                        <p>Latest announcements, materials, assignments, and activities</p>
+                    </div>
 
-                    <div>
+                    <div class="classroom-stream-card">
 
-                        <span class="classroom-section-label">
-                            CLASSROOM
-                        </span>
+                        @forelse ($streamItems as $streamItem)
 
-                        <h2>
-                            Stream
-                        </h2>
+                            @php
+                                $type = $streamItem['type'];
+                                $item = $streamItem['item'] ?? null;
+
+                                $icon = match ($type) {
+                                    'announcement' => 'bx-bell',
+                                    'material' => 'bx-file',
+                                    'assignment' => 'bx-task',
+                                    'quiz' => 'bx-help-circle',
+                                    'exam' => 'bx-edit-alt',
+                                    'project' => 'bx-briefcase-alt-2',
+                                    default => 'bx-news',
+                                };
+
+                                $action = match ($type) {
+                                    'announcement' => 'posted an announcement',
+                                    'material' => 'posted a material',
+                                    'assignment' => 'posted an assignment',
+                                    'quiz' => 'posted a quiz',
+                                    'exam' => 'posted an exam',
+                                    'project' => 'posted a project',
+                                    default => 'posted an activity',
+                                };
+
+                                $topic = null;
+
+                                if ($item && isset($item->topic)) {
+                                    $topic = $item->topic;
+                                }
+
+                                $detailRoute = match ($type) {
+                                    'material' => route(
+                                        'student.class-groups.materials.show',
+                                        [
+                                            'classGroup' => $classGroup->id,
+                                            'material' => $item->id,
+                                            'return_to' => 'stream',
+                                        ]
+                                    ),
+
+                                    'assignment' => route(
+                                        'student.class-groups.assignments.show',
+                                        [
+                                            'classGroup' => $classGroup->id,
+                                            'assignment' => $item->id,
+                                            'return_to' => 'stream',
+                                        ]
+                                    ),
+
+                                    'quiz' => route(
+                                        'student.class-groups.quizzes.show',
+                                        [
+                                            'classGroup' => $classGroup->id,
+                                            'quiz' => $item->id,
+                                            'return_to' => 'stream',
+                                        ]
+                                    ),
+
+                                    'exam' => route(
+                                        'student.class-groups.exams.show',
+                                        [
+                                            'classGroup' => $classGroup->id,
+                                            'exam' => $item->id,
+                                            'return_to' => 'stream',
+                                        ]
+                                    ),
+
+                                    'project' => route(
+                                        'student.class-groups.projects.show',
+                                        [
+                                            'classGroup' => $classGroup->id,
+                                            'project' => $item->id,
+                                            'return_to' => 'stream',
+                                        ]
+                                    ),
+
+                                    default => null,
+                                };
+                            @endphp
+
+                            <article
+                                class="stream-item stream-item-{{ $type }}"
+                                data-type="{{ $type }}"
+                            >
+
+                                {{-- TYPE ICON --}}
+                                <div class="stream-item-icon">
+                                    <i class="bx {{ $icon }}"></i>
+                                </div>
+
+                                {{-- CONTENT --}}
+                                <div class="stream-item-content">
+
+                                    <p class="stream-item-posted">
+                                        <strong>{{ $streamItem['posted_by'] }}</strong>
+                                        {{ $action }}
+                                        <span class="stream-item-time">
+                                            · {{ $streamItem['created_at']->diffForHumans() }}
+                                        </span>
+                                    </p>
+
+                                    @if ($type === 'announcement')
+
+                                        <div class="stream-modern-body">
+
+                                            <h3 class="stream-item-title">
+                                                {{ $streamItem['title'] }}
+                                            </h3>
+
+                                            @if (!empty($item->content))
+                                                <p class="stream-announcement-text">
+                                                    {{ $item->content }}
+                                                </p>
+                                            @endif
+
+                                        </div>
+
+                                    @else
+
+                                        @if ($detailRoute)
+
+                                            <a
+                                                href="{{ $detailRoute }}"
+                                                class="stream-item-content-link"
+                                            >
+
+                                                <h3 class="stream-item-title">
+                                                    {{ $streamItem['title'] }}
+                                                </h3>
+
+                                                @if ($topic)
+                                                    <div class="stream-item-topic">
+                                                        <i class="bx bx-folder"></i>
+                                                        <span>{{ $topic->topic_name }}</span>
+                                                    </div>
+                                                @endif
+
+                                                @if ($type === 'project')
+                                                    <div class="stream-project-meta">
+
+                                                        <span class="stream-project-badge">
+                                                            <i class="bx bx-briefcase-alt-2"></i>
+                                                            Project
+                                                        </span>
+
+                                                        <span class="stream-project-type">
+                                                            <i class="bx bx-group"></i>
+                                                            {{ ucfirst($item->project_type ?? 'individual') }}
+                                                        </span>
+
+                                                    </div>
+                                                @endif
+
+                                            </a>
+
+                                        @else
+
+                                            <h3 class="stream-item-title">
+                                                {{ $streamItem['title'] }}
+                                            </h3>
+
+                                        @endif
+
+                                    @endif
+
+                                </div>
+
+                            </article>
+
+                        @empty
+
+                            <div class="classroom-stream-empty">
+
+                                <div class="classroom-stream-empty-icon">
+                                    <i class="bx bx-news"></i>
+                                </div>
+
+                                <h3>No activity yet</h3>
+
+                                <p>
+                                    Announcements, materials, assignments, quizzes,
+                                    exams, and projects will appear here.
+                                </p>
+
+                            </div>
+
+                        @endforelse
 
                     </div>
 
                 </div>
 
-
-{{-- ====================================================
-     STREAM CONTENT
-===================================================== --}}
-<div class="stream-content-redesign">
-
-    <div class="classroom-stream-card">
-
-        @forelse ($streamItems as $streamItem)
-
-            @php
-
-                $type = $streamItem['type'];
-                $item = $streamItem['item'] ?? null;
-
-                $icon = match ($type) {
-                    'announcement' => 'bx-bell',
-                    'material' => 'bx-file',
-                    'assignment' => 'bx-task',
-                    'quiz' => 'bx-help-circle',
-                    'exam' => 'bx-edit-alt',
-                    'project' => 'bx-briefcase-alt-2',
-                    default => 'bx-news',
-                };
-
-                $action = match ($type) {
-                    'announcement' => 'posted an announcement',
-                    'material' => 'posted a material',
-                    'assignment' => 'posted an assignment',
-                    'quiz' => 'posted a quiz',
-                    'exam' => 'posted an exam',
-                    'project' => 'posted a project',
-                    default => 'posted an activity',
-                };
-
-                $topic = null;
-
-                if ($item && isset($item->topic)) {
-                    $topic = $item->topic;
-                }
-
-                $detailRoute = match ($type) {
-
-                    'material' => route(
-                        'student.class-groups.materials.show',
-                        [
-                            'classGroup' => $classGroup->id,
-                            'material' => $item->id,
-                            'return_to' => 'stream',
-                        ]
-                    ),
-
-                    'assignment' => route(
-                        'student.class-groups.assignments.show',
-                        [
-                            'classGroup' => $classGroup->id,
-                            'assignment' => $item->id,
-                            'return_to' => 'stream',
-                        ]
-                    ),
-
-                    'quiz' => route(
-                        'student.class-groups.quizzes.show',
-                        [
-                            'classGroup' => $classGroup->id,
-                            'quiz' => $item->id,
-                            'return_to' => 'stream',
-                        ]
-                    ),
-
-                    'exam' => route(
-                        'student.class-groups.exams.show',
-                        [
-                            'classGroup' => $classGroup->id,
-                            'exam' => $item->id,
-                            'return_to' => 'stream',
-                        ]
-                    ),
-
-                    'project' => route(
-                        'student.class-groups.projects.show',
-                        [
-                            'classGroup' => $classGroup->id,
-                            'project' => $item->id,
-                            'return_to' => 'stream',
-                        ]
-                    ),
-
-                    default => null,
-                };
-
-            @endphp
-
-
-            <article
-                class="stream-item stream-item-{{ $type }}"
-                data-type="{{ $type }}"
-            >
-
-                {{-- TYPE ICON --}}
-                <div class="stream-item-icon">
-                    <i class="bx {{ $icon }}"></i>
-                </div>
-
-
-                {{-- CONTENT --}}
-                <div class="stream-item-content">
-
-                    <p class="stream-item-posted">
-
-                        <strong>
-                            {{ $streamItem['posted_by'] }}
-                        </strong>
-
-                        {{ $action }}
-
-                        <span class="stream-item-time">
-                            · {{ $streamItem['created_at']->diffForHumans() }}
-                        </span>
-
-                    </p>
-
-
-                    {{-- ANNOUNCEMENT --}}
-                    @if ($type === 'announcement')
-
-                        <div class="stream-modern-body">
-
-                            <h3 class="stream-item-title">
-                                {{ $streamItem['title'] }}
-                            </h3>
-
-                            @if (!empty($item->content))
-
-                                <p class="stream-announcement-text">
-                                    {{ $item->content }}
-                                </p>
-
-                            @endif
-
-                        </div>
-
-                    {{-- CLASSWORK --}}
-                    @else
-
-                        @if ($detailRoute)
-
-                            <a
-                                href="{{ $detailRoute }}"
-                                class="stream-item-content-link stream-modern-link"
-                            >
-
-                                <div class="stream-modern-title-row">
-
-                                    <h3 class="stream-item-title">
-                                        {{ $streamItem['title'] }}
-                                    </h3>
-
-                                </div>
-
-
-                                @if ($topic)
-
-                                    <span class="stream-item-topic">
-
-                                        <i class="bx bx-folder"></i>
-
-                                        {{ $topic->topic_name }}
-
-                                    </span>
-
-                                @endif
-
-
-                                @if ($type === 'project')
-
-                                    <div class="stream-project-meta">
-
-                                        <span class="stream-project-badge">
-                                            <i class="bx bx-briefcase-alt-2"></i>
-                                            Project
-                                        </span>
-
-                                        <span class="stream-project-type">
-                                            <i class="bx bx-group"></i>
-                                            {{ ucfirst($item->project_type ?? 'individual') }}
-                                        </span>
-
-                                    </div>
-
-                                @endif
-
-                            </a>
-
-                        @else
-
-                            <h3 class="stream-item-title">
-                                {{ $streamItem['title'] }}
-                            </h3>
-
-                        @endif
-
-                    @endif
-
-                </div>
-
-            </article>
-
-        @empty
-
-            <div class="classroom-stream-empty">
-
-                <div class="classroom-stream-empty-icon">
-                    <i class="bx bx-news"></i>
-                </div>
-
-                <h3>
-                    No activity yet
-                </h3>
-
-                <p>
-                    Announcements, materials, assignments,
-                    quizzes, exams, and projects will appear here.
-                </p>
-
-            </div>
-
-        @endforelse
-
-    </div>
-
-</div>
-
             </section>
 
         </div>
-
-    </main>
 
 
     {{-- ============================================================

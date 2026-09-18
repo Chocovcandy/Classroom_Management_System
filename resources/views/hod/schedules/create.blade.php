@@ -310,29 +310,7 @@
                     </div>
                 </div>
 
-                {{-- Live Review Sidebar --}}
-                <aside id="weeklyReviewSection" class="weekly-review-sidebar" aria-label="Weekly schedule review">
-                    <div class="review-sidebar-header">
-                        <div>
-                            <span class="section-kicker">Live Review</span>
-                            <h3>Schedule Overview</h3>
-                        </div>
-                        <span class="live-badge"><span></span> Live</span>
-                    </div>
 
-                    <div id="weeklyReviewGrid" class="weekly-review-grid"></div>
-
-                    <div class="review-sidebar-footer">
-                        <div class="review-total">
-                            <span>Total sessions</span>
-                            <strong id="reviewTotalSessions">0</strong>
-                        </div>
-                        <div class="review-sidebar-note">
-                            <i class='bx bx-info-circle'></i>
-                            <span>Updates as you configure sessions.</span>
-                        </div>
-                    </div>
-                </aside>
             </div>
         </section>
 
@@ -752,13 +730,17 @@
    WEEKLY BUILDER
 ============================================================ */
 .weekly-layout {
-    display:grid;
-    grid-template-columns:minmax(0, 1fr) 255px;
-    gap:14px;
-    align-items:start;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    gap: 14px;
+    align-items: start;
 }
 
-.weekly-main { min-width:0; }
+.weekly-main {
+    width: 100%;
+    min-width: 0;
+}
 
 .weekly-section .day-selector-card {
     padding: 15px;
@@ -1103,77 +1085,6 @@
 .day-empty-message p { margin:0; color:#64748b; font-size:8px; }
 .workspace-bottom-hint { display:flex; justify-content:center; align-items:center; gap:4px; margin-top:9px; color:#94a3b8; font-size:8px; }
 
-/* ============================================================
-   LIVE REVIEW SIDEBAR
-============================================================ */
-.weekly-review-sidebar {
-    position:sticky;
-    top:18px;
-    align-self:start;
-    padding:16px;
-    border:1px solid #dfe8e4;
-    border-radius:14px;
-    background:#fcfffd;
-    box-shadow:0 7px 20px rgba(16,185,129,.045);
-}
-
-.review-sidebar-header {
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:8px;
-    padding-bottom:10px;
-    margin-bottom:9px;
-    border-bottom:1px solid #e7eee9;
-}
-
-.review-sidebar-header h3 { font-size:15px; }
-
-.live-badge {
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    padding:5px 7px;
-    border-radius:999px;
-    background:#ecfdf5;
-    color:#059669;
-    font-size:8px;
-    font-weight:900;
-}
-.live-badge span { width:6px; height:6px; border-radius:50%; background:#10b981; }
-
-.weekly-review-grid { display:grid; gap:6px; }
-
-.review-day-card {
-    padding:8px;
-    border:1px solid #e6ebee;
-    border-radius:9px;
-    background:#fff;
-}
-
-.review-day-card.active-review { border-color:#a7f3d0; background:#f7fffb; }
-.review-day-top { display:flex; justify-content:space-between; align-items:center; gap:7px; }
-.review-day-name { color:#1e293b; font-size:9px; font-weight:900; }
-.review-status { display:inline-flex; align-items:center; gap:3px; padding:4px 5px; border-radius:999px; font-size:7px; font-weight:850; }
-.review-status.ready { background:#d1fae5; color:#047857; }
-.review-status.empty { background:#f1f5f9; color:#64748b; }
-.review-day-details { margin-top:5px; color:#64748b; font-size:7.5px; line-height:1.45; }
-.review-day-details div { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.review-day-details strong { color:#334155; }
-
-.review-total {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:10px;
-    padding:9px;
-    border-radius:9px;
-    background:#f0fdf4;
-}
-.review-total span { color:#64748b; font-size:8px; font-weight:800; }
-.review-total strong { color:#047857; font-size:16px; }
-.review-sidebar-note { display:flex; gap:5px; align-items:flex-start; margin-top:8px; color:#64748b; font-size:7px; line-height:1.45; }
-.review-sidebar-note i { color:#2563eb; font-size:12px; flex:0 0 auto; }
 
 /* ============================================================
    APPROVAL
@@ -1197,9 +1108,9 @@
 .save-action:disabled { opacity:.5; cursor:not-allowed; }
 
 @media (max-width: 1100px) {
-    .weekly-layout { grid-template-columns:1fr; }
-    .weekly-review-sidebar { position:relative; top:auto; }
-    .details-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .details-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 760px) {
@@ -2340,11 +2251,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const continueDayBtn =
         document.getElementById('continueDayBtn');
 
-    const weeklyReviewSection =
-        document.getElementById('weeklyReviewSection');
 
-    const weeklyReviewGrid =
-        document.getElementById('weeklyReviewGrid');
 
     const saveWeeklyScheduleBtn =
         document.getElementById('saveWeeklyScheduleBtn');
@@ -2712,7 +2619,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         continueDayBtn.innerHTML =
             currentDayIndex === days.length - 1
-                ? 'Review Schedule <i class="bx bx-right-arrow-alt"></i>'
+                ? 'Done! <i class="bx bx-check"></i>'
                 : 'Continue <i class="bx bx-right-arrow-alt"></i>';
 
         renderSessionCards(day);
@@ -2961,38 +2868,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     Chapel
                                 </option>
 
-                                <option
-                                    value="break"
-                                    ${
-                                        activityType === 'break'
-                                            ? 'selected'
-                                            : ''
-                                    }
-                                >
-                                    Break
-                                </option>
-
-                                <option
-                                    value="free"
-                                    ${
-                                        activityType === 'free'
-                                            ? 'selected'
-                                            : ''
-                                    }
-                                >
-                                    Free Time
-                                </option>
-
-                                <option
-                                    value="other"
-                                    ${
-                                        activityType === 'other'
-                                            ? 'selected'
-                                            : ''
-                                    }
-                                >
-                                    Other
-                                </option>
+                               
 
                             </select>
 
@@ -3197,7 +3073,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     syncEmptyDayMessage(day);
                     updateDayStatusUI();
-                    renderWeeklyReview();
+                 
 
                     checkSessionConflict(
                         day,
@@ -3258,7 +3134,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     syncEmptyDayMessage(day);
                     updateDayStatusUI();
-                    renderWeeklyReview();
+            
 
                     checkAllConflicts();
                 }
@@ -3272,7 +3148,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         courseSelect.value;
 
                     getDayState(day)[index] = session;
-                    renderWeeklyReview();
+   
 
                     checkAllConflicts();
                 }
@@ -3286,7 +3162,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         professorSelect.value;
 
                     getDayState(day)[index] = session;
-                    renderWeeklyReview();
+ 
 
                     checkAllConflicts();
                 }
@@ -3300,7 +3176,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         classroomSelect.value;
 
                     getDayState(day)[index] = session;
-                    renderWeeklyReview();
+
 
                     checkSessionConflict(
                         day,
@@ -3322,7 +3198,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         getDayState(day)[index] =
                             session;
 
-                        renderWeeklyReview();
+
                     }
                 );
             }
@@ -3773,12 +3649,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            renderWeeklyReview();
 
-            weeklyReviewSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+
         }
     );
 
@@ -4395,172 +4267,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    /* ============================================================
-       REVIEW
-    ============================================================ */
-
-    function renderWeeklyReview() {
-
-        saveCurrentVisibleSessionValues();
-
-        weeklyReviewGrid.innerHTML = '';
-
-        let totalReviewSessions = 0;
-
-        days.forEach(function (day) {
-
-            const state =
-                getDayState(day);
-
-            const configuredCount =
-                configuredSessionCount(day);
-
-            totalReviewSessions += configuredCount;
-
-            const statusHtml =
-                configuredCount > 0
-                    ? `
-                        <span class="review-status ready">
-                            <i class='bx bx-check-circle'></i>
-                            ${configuredCount} session${configuredCount === 1 ? '' : 's'}
-                        </span>
-                    `
-                    : `
-                        <span class="review-status empty">
-                            <i class='bx bx-minus-circle'></i>
-                            Not configured
-                        </span>
-                    `;
-
-            let details = '';
-
-            if (configuredCount > 0) {
-
-                const sessionLines = [];
-
-                Object.values(state)
-                    .forEach(function (session) {
-
-                        if (
-                            !session ||
-                            !session.enabled
-                        ) {
-                            return;
-                        }
-
-                        const slotIndex =
-                            findSlotIndex(
-                                session.slot_id
-                            );
-
-                        const slot =
-                            getSlot(slotIndex);
-
-                        sessionLines.push(
-                            `
-                                <div>
-                                    <strong>
-                                        ${escapeHtml(
-                                            'S' +
-                                            (
-                                                slotIndex +
-                                                1
-                                            )
-                                        )}
-                                    </strong>
-
-                                    ·
-
-                                    ${escapeHtml(
-                                        formatTime(
-                                            slot.start_time
-                                        )
-                                    )}
-
-                                    –
-
-                                    ${escapeHtml(
-                                        formatTime(
-                                            slot.end_time
-                                        )
-                                    )}
-
-                                    ·
-
-                                    ${escapeHtml(
-                                        getSessionActivitySummary(
-                                            session
-                                        )
-                                    )}
-                                </div>
-                            `
-                        );
-                    });
-
-                details =
-                    sessionLines.join('');
-
-            } else {
-
-                details =
-                    'This day is empty and can be completed later.';
-            }
-
-            weeklyReviewGrid.insertAdjacentHTML(
-                'beforeend',
-                `
-                    <div class="review-day-card">
-
-                        <div class="review-day-top">
-
-                            <span class="review-day-name">
-                                ${escapeHtml(day)}
-                            </span>
-
-                            ${statusHtml}
-
-                        </div>
-
-                        <div class="review-day-details">
-                            ${details}
-                        </div>
-
-                    </div>
-                `
-            );
-        });
-
-        const reviewTotalSessions =
-            document.getElementById('reviewTotalSessions');
-
-        if (reviewTotalSessions) {
-            reviewTotalSessions.textContent = totalReviewSessions;
-        }
-
-        /*
-         * The save button only needs one configured session
-         * somewhere in the week.
-         */
-        saveWeeklyScheduleBtn.disabled =
-            !hasAnyConfiguredSessions();
-    }
-
-    function findSlotIndex(
-        slotId
-    ) {
-
-        const index =
-            timeSlots.findIndex(
-                function (slot) {
-                    return String(slot.id) ===
-                        String(slotId);
-                }
-            );
-
-        return index >= 0
-            ? index
-            : 0;
-    }
 
     function hasAnyConfiguredSessions() {
 
@@ -4821,10 +4527,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 !hasAnyConfiguredSessions()
             ) {
 
-                weeklyReviewSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
 
                 alert(
                     'Please configure at least one schedule session before saving.'
@@ -5275,7 +4977,7 @@ document.addEventListener('DOMContentLoaded', function () {
     renderCurrentDay();
 
     updateDayStatusUI();
-    renderWeeklyReview();
+
 
     setTimeout(
         function () {

@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -28,31 +26,48 @@ class RegisteredUserController extends Controller
      *
      * @throws ValidationException
      */
-   public function store(Request $request): RedirectResponse
-{
-    $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
-        'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
-    ]);
+    public function store(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
 
-    // 1. Create user
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-    ]);
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'ends_with:@lifeun.edu.kh',
+                'unique:users',
+            ],
 
-    // 2. Assign Student role (DB)
-    $user->assignStudentRole();
+            'password' => [
+                'required',
+                'confirmed',
+                \Illuminate\Validation\Rules\Password::defaults(),
+            ],
+        ], [
+            'email.ends_with' => 'You must use your university email ending with @life.edu.kh.',
+        ]);
 
-    // 3. Login user
-    Auth::login($user);
+        // 1. Create user
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-    // 4. Set session role so middleware can work without forcing role selection and redirect to student dashboard.
-    session(['current_role' => 'student']);
+        // 2. Assign Student role
+        $user->assignStudentRole();
 
-    // 5. Redirect
-    return redirect()->route('student.dashboard');
-}
+        // 3. Login user
+        Auth::login($user);
+
+        // 4. Set current session role
+        session([
+            'current_role' => 'student',
+        ]);
+
+        // 5. Redirect to student dashboard
+        return redirect()->route('student.dashboard');
+    }
 }

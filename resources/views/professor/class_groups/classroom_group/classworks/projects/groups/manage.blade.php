@@ -90,7 +90,7 @@
 
     #projectTeamManager .pt-page {
         width: 100%;
-        max-width: 1480px;
+        max-width: 1500px;
         margin: 0 auto;
     }
 
@@ -116,7 +116,7 @@
         gap: 6px;
         margin-bottom: 10px;
         color: var(--pt-muted);
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 700;
         text-decoration: none;
     }
@@ -130,7 +130,7 @@
         align-items: center;
         gap: 6px;
         color: #68758a;
-        font-size: 17px;
+        font-size: 19px;
         font-weight: 800;
         letter-spacing: .1em;
         text-transform: uppercase;
@@ -147,7 +147,7 @@
     #projectTeamManager .pt-title {
         margin: 4px 0 0;
         color: var(--pt-heading);
-        font-size: 32px;
+        font-size: 34px;
         line-height: 1.18;
         font-weight: 800;
         letter-spacing: -.025em;
@@ -157,7 +157,7 @@
         max-width: 720px;
         margin: 7px 0 0;
         color: var(--pt-muted);
-        font-size: 15px;
+        font-size: 17px;
         line-height: 1.6;
     }
 
@@ -178,13 +178,13 @@
         border-radius: 9px;
         background: #fff;
         color: #5c6777;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 750;
     }
 
     #projectTeamManager .pt-course i {
         color: var(--pt-blue);
-        font-size: 15px;
+        font-size: 17px;
     }
 
     #projectTeamManager .pt-primary-action {
@@ -199,7 +199,7 @@
         background: var(--pt-blue) !important;
         color: #fff !important;
         font-family: inherit !important;
-        font-size: 13px !important;
+        font-size: 15px !important;
         font-weight: 800 !important;
         opacity: 1 !important;
         visibility: visible !important;
@@ -260,7 +260,7 @@
         border-radius: 10px;
         background: var(--pt-yellow-soft);
         color: var(--pt-yellow);
-        font-size: 22px;
+        font-size: 24px;
     }
 
     #projectTeamManager .pt-project-copy {
@@ -271,7 +271,7 @@
         display: block;
         margin-bottom: 3px;
         color: #9aa2ae;
-        font-size: 11px;
+        font-size: 13px;
         font-weight: 800;
         letter-spacing: .08em;
         text-transform: uppercase;
@@ -281,7 +281,7 @@
         display: block;
         overflow: hidden;
         color: var(--pt-heading);
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 800;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -297,7 +297,7 @@
         border-radius: 999px;
         background: var(--pt-yellow-soft);
         color: #997300;
-        font-size: 9px;
+        font-size: 11px;
         font-weight: 800;
     }
 
@@ -333,7 +333,7 @@
         border-radius: 9px;
         background: #f3f5f8;
         color: #667180;
-        font-size: 19px;
+        font-size: 21px;
     }
 
     #projectTeamManager .pt-summary-icon.blue {
@@ -355,14 +355,14 @@
         display: block;
         margin-bottom: 3px;
         color: var(--pt-muted);
-        font-size: 11px;
+        font-size: 13px;
         font-weight: 700;
     }
 
     #projectTeamManager .pt-summary-value {
         display: block;
         color: var(--pt-heading);
-        font-size: 24px;
+        font-size: 26px;
         line-height: 1;
         font-weight: 800;
     }
@@ -405,20 +405,20 @@
         border-radius: 8px;
         background: #f3f5f8;
         color: #606c7b;
-        font-size: 16px;
+        font-size: 18px;
     }
 
     #projectTeamManager .pt-panel-heading h2 {
         margin: 0;
         color: var(--pt-heading);
-        font-size: 19px;
+        font-size: 21px;
         font-weight: 800;
     }
 
     #projectTeamManager .pt-panel-heading p {
         margin: 3px 0 0;
         color: #98a1ae;
-        font-size: 11px;
+        font-size: 13px;
     }
 
     #projectTeamManager .pt-panel-count {
@@ -431,7 +431,7 @@
         border-radius: 999px;
         background: #fafbfc;
         color: #687383;
-        font-size: 9px;
+        font-size: 11px;
         font-weight: 800;
     }
 
@@ -488,7 +488,7 @@
         border-radius: 8px;
         background: #f6f8ff;
         color: var(--pt-blue);
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 900;
     }
 
@@ -500,7 +500,7 @@
         display: block;
         overflow: hidden;
         color: #343a47;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 800;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -510,7 +510,7 @@
         display: block;
         margin-top: 2px;
         color: #9aa2ae;
-        font-size: 10px;
+        font-size: 12px;
     }
 
     /* Team menu */
@@ -529,7 +529,7 @@
         border-radius: 7px !important;
         background: transparent !important;
         color: #818a98 !important;
-        font-size: 19px !important;
+        font-size: 21px !important;
         cursor: pointer !important;
     }
 
@@ -572,7 +572,7 @@
         background: transparent !important;
         color: #596474 !important;
         font-family: inherit !important;
-        font-size: 9px !important;
+        font-size: 11px !important;
         font-weight: 700 !important;
         text-align: left !important;
         text-decoration: none !important;
@@ -594,7 +594,7 @@
     #projectTeamManager .pt-menu i {
         width: 15px;
         text-align: center;
-        font-size: 13px;
+        font-size: 15px;
     }
 
     /* ============================================================
@@ -629,7 +629,7 @@
         border-radius: 50%;
         background: #f3f5f7;
         color: #697382;
-        font-size: 9px;
+        font-size: 11px;
         font-weight: 800;
     }
 
@@ -648,7 +648,7 @@
         display: block;
         overflow: hidden;
         color: #424955;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 700;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -659,7 +659,7 @@
         align-items: center;
         gap: 4px;
         margin-top: 2px;
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 750;
     }
 
@@ -690,7 +690,7 @@
         border-radius: 6px !important;
         background: transparent !important;
         color: #9aa2ad !important;
-        font-size: 17px !important;
+        font-size: 19px !important;
         cursor: pointer !important;
     }
 
@@ -731,7 +731,7 @@
         background: transparent !important;
         color: #596474 !important;
         font-family: inherit !important;
-        font-size: 11px !important;
+        font-size: 13px !important;
         font-weight: 700 !important;
         text-align: left !important;
         cursor: pointer !important;
@@ -750,7 +750,7 @@
     #projectTeamManager .pt-member-menu i {
         width: 15px;
         text-align: center;
-        font-size: 13px;
+        font-size: 15px;
     }
 
     /* ============================================================
@@ -774,12 +774,12 @@
         align-items: center;
         gap: 4px;
         color: var(--pt-green);
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 800;
     }
 
     #projectTeamManager .pt-ready i {
-        font-size: 11px;
+        font-size: 13px;
     }
 
     #projectTeamManager .pt-view {
@@ -787,7 +787,7 @@
         align-items: center;
         gap: 4px;
         color: var(--pt-blue);
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 800;
         text-decoration: none;
     }
@@ -811,13 +811,13 @@
         border-radius: 13px;
         background: #f7f8fa;
         color: #a0a8b3;
-        font-size: 21px;
+        font-size: 23px;
     }
 
     #projectTeamManager .pt-empty h3 {
         margin: 0;
         color: #4b5360;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 800;
     }
 
@@ -825,7 +825,7 @@
         max-width: 430px;
         margin: 5px auto 0;
         color: #99a1ad;
-        font-size: 10px;
+        font-size: 12px;
         line-height: 1.55;
     }
 
@@ -842,7 +842,7 @@
         background: #fff !important;
         color: var(--pt-blue) !important;
         font-family: inherit !important;
-        font-size: 9px !important;
+        font-size: 11px !important;
         font-weight: 800 !important;
         cursor: pointer !important;
     }
@@ -853,11 +853,13 @@
 
     #projectTeamManager .pt-unassigned {
         overflow: hidden;
-        margin-top: 13px;
+        margin-top: 10px;
         border: 1px solid var(--pt-border);
         border-radius: 13px;
         background: #fff;
         box-shadow: 0 2px 12px rgba(25, 35, 55, .025);
+
+      
     }
 
     #projectTeamManager .pt-unassigned-header {
@@ -883,20 +885,20 @@
         border-radius: 8px;
         background: #f3f5f7;
         color: #687382;
-        font-size: 15px;
+        font-size: 17px;
     }
 
     #projectTeamManager .pt-unassigned-title h2 {
         margin: 0;
         color: var(--pt-heading);
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 800;
     }
 
     #projectTeamManager .pt-unassigned-title p {
         margin: 2px 0 0;
         color: #9aa2ae;
-        font-size: 10px;
+        font-size: 12px;
     }
 
     #projectTeamManager .pt-unassigned-count {
@@ -907,7 +909,7 @@
         border-radius: 50%;
         background: #f2f4f7;
         color: #687383;
-        font-size: 9px;
+        font-size: 11px;
         font-weight: 800;
     }
 
@@ -916,6 +918,7 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 0 20px;
         padding: 2px 16px 5px;
+        margin-bottom: 10px
     }
 
     #projectTeamManager .pt-unassigned-row {
@@ -939,7 +942,7 @@
         background: #fff !important;
         color: var(--pt-blue) !important;
         font-family: inherit !important;
-        font-size: 8px !important;
+        font-size: 10px !important;
         font-weight: 800 !important;
         cursor: pointer !important;
     }
@@ -1012,20 +1015,20 @@
         border-radius: 9px;
         background: var(--pt-blue-soft);
         color: var(--pt-blue);
-        font-size: 23px;
+        font-size: 25px;
     }
 
     #projectTeamManager .pt-modal-title {
         margin: 0;
         color: var(--pt-heading);
-        font-size: 25px;
+        font-size: 27px;
         font-weight: 800;
     }
 
     #projectTeamManager .pt-modal-description {
         margin: 4px 0 0;
         color: #8993a1;
-        font-size: 15px;
+        font-size: 17px;
         line-height: 1.55;
     }
 
@@ -1039,7 +1042,7 @@
         border-radius: 7px !important;
         background: transparent !important;
         color: #7c8694 !important;
-        font-size: 25px !important;
+        font-size: 27px !important;
         cursor: pointer !important;
     }
 
@@ -1072,14 +1075,14 @@
         border-radius: 7px;
         background: #f0f3f6;
         color: #697584;
-        font-size: 17px;
+        font-size: 19px;
     }
 
     #projectTeamManager .pt-context-label {
         display: block;
         margin-bottom: 1px;
         color: #a0a8b3;
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 800;
         letter-spacing: .08em;
         text-transform: uppercase;
@@ -1089,7 +1092,7 @@
         display: block;
         overflow: hidden;
         color: #3e4652;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 800;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -1111,7 +1114,7 @@
         align-items: center;
         gap: 5px;
         color: #74808f;
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 800;
         white-space: nowrap;
     }
@@ -1125,7 +1128,7 @@
         border-radius: 50%;
         background: #e7ebef;
         color: #66717f;
-        font-size: 10px;
+        font-size: 12px;
     }
 
     #projectTeamManager .pt-step.active .pt-step-number {
@@ -1165,20 +1168,20 @@
         border-radius: 6px;
         background: var(--pt-blue-soft);
         color: var(--pt-blue);
-        font-size: 16px;
+        font-size: 18px;
     }
 
     #projectTeamManager .pt-field-title {
         margin: 0;
         color: #3d4551;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 800;
     }
 
     #projectTeamManager .pt-field-description {
         margin: 1px 0 0;
         color: #9aa3af;
-        font-size: 10px;
+        font-size: 12px;
     }
 
     #projectTeamManager .pt-input,
@@ -1192,7 +1195,7 @@
         background: #fff !important;
         color: #303744 !important;
         font-family: inherit !important;
-        font-size: 13px !important;
+        font-size: 15px !important;
     }
 
     #projectTeamManager .pt-input:focus,
@@ -1204,7 +1207,7 @@
     #projectTeamManager .pt-help {
         margin-top: 6px;
         color: #99a1ad;
-        font-size: 10px;
+        font-size: 12px;
         line-height: 1.5;
     }
 
@@ -1242,7 +1245,7 @@
         color: #505b69 !important;
 
         font-family: inherit !important;
-        font-size: 12px !important;
+        font-size: 14px !important;
         font-weight: 800 !important;
         line-height: 1 !important;
 
@@ -1340,7 +1343,7 @@
 
     @media (max-width: 520px) {
         #projectTeamManager .pt-title {
-            font-size: 25px;
+            font-size: 27px;
         }
 
         #projectTeamManager .pt-summary {
@@ -1385,6 +1388,889 @@
             flex: 1;
         }
     }
+
+/* ============================================================
+   FINAL PROJECT TEAM MANAGEMENT REDESIGN
+   Clean blue layout + stronger yellow project accent
+   Keeps the existing Blade structure, routes, forms and JavaScript.
+   ============================================================ */
+
+#projectTeamManager {
+    --pt-page: #f6f8fc;
+    --pt-white: #ffffff;
+    --pt-soft: #fbfcff;
+    --pt-border: #e2e8f2;
+    --pt-border-soft: #edf1f7;
+
+    --pt-heading: #26344d;
+    --pt-text: #526078;
+    --pt-muted: #8490a5;
+
+    --pt-blue: #2f63e8;
+    --pt-blue-hover: #2453ce;
+    --pt-blue-soft: #edf3ff;
+
+    --pt-yellow: #eab308;
+    --pt-yellow-soft: #fff8d9;
+    --pt-yellow-border: #f6d66b;
+
+    --pt-green: #15966a;
+    --pt-green-soft: #eafaf2;
+
+    --pt-red: #dc4654;
+    --pt-red-hover: #bd3442;
+    --pt-red-soft: #fff0f2;
+
+    padding: 26px 28px 54px;
+    background: var(--pt-page);
+    color: var(--pt-text);
+}
+
+#projectTeamManager .pt-page {
+    max-width: 1440px;
+}
+
+#projectTeamManager .pt-header {
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 22px;
+}
+
+#projectTeamManager .pt-back {
+    margin-bottom: 12px;
+    color: #7d8ba1;
+    font-size: 16px;
+    font-weight: 750;
+}
+
+#projectTeamManager .pt-back i {
+    color: var(--pt-blue);
+    font-size: 19px;
+}
+
+#projectTeamManager .pt-kicker {
+    color: var(--pt-blue);
+    font-size: 14px;
+    font-weight: 850;
+    letter-spacing: .12em;
+}
+
+#projectTeamManager .pt-kicker::before {
+    width: 7px;
+    height: 7px;
+    background: var(--pt-yellow);
+    box-shadow: 0 0 0 4px rgba(234, 179, 8, .12);
+}
+
+#projectTeamManager .pt-title {
+    margin-top: 7px;
+    color: var(--pt-heading);
+    font-size: clamp(30px, 3vw, 40px);
+    line-height: 1.15;
+    font-weight: 850;
+    letter-spacing: -.035em;
+}
+
+#projectTeamManager .pt-description {
+    max-width: 680px;
+    margin-top: 10px;
+    color: #8290a6;
+    font-size: 17px;
+    line-height: 1.65;
+}
+
+#projectTeamManager .pt-header-tools {
+    gap: 10px;
+}
+
+#projectTeamManager .pt-course {
+    min-height: 44px;
+    padding: 0 14px;
+    border-color: var(--pt-border);
+    border-radius: 12px;
+    background: var(--pt-white);
+    color: #65738b;
+    font-size: 14px;
+    box-shadow: 0 3px 12px rgba(39, 56, 85, .035);
+}
+
+#projectTeamManager .pt-course i {
+    color: var(--pt-blue);
+}
+
+#projectTeamManager .pt-primary-action {
+    min-height: 44px !important;
+    padding: 0 16px !important;
+    border-radius: 12px !important;
+    background: var(--pt-blue) !important;
+    border-color: var(--pt-blue) !important;
+    font-size: 15px !important;
+    box-shadow: 0 7px 16px rgba(47, 99, 232, .16);
+}
+
+#projectTeamManager .pt-primary-action:hover {
+    background: var(--pt-blue-hover) !important;
+    border-color: var(--pt-blue-hover) !important;
+    transform: translateY(-1px);
+}
+
+#projectTeamManager .pt-project-card {
+    min-height: 108px;
+    margin-bottom: 16px;
+    padding: 22px 24px 22px 27px;
+    border-radius: 17px;
+    border-color: var(--pt-border);
+    background: var(--pt-white);
+    box-shadow: 0 5px 20px rgba(39, 56, 85, .045);
+}
+
+#projectTeamManager .pt-project-card::before {
+    top: 18px;
+    bottom: 18px;
+    width: 5px;
+    background: var(--pt-yellow);
+}
+
+#projectTeamManager .pt-project-main {
+    gap: 14px;
+}
+
+#projectTeamManager .pt-project-icon {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+    border-radius: 16px;
+    border-color: var(--pt-yellow-border);
+    background: linear-gradient(135deg, #fffbe8 0%, #fff1ad 100%);
+    color: #d49a00;
+    font-size: 27px;
+    box-shadow: 0 5px 14px rgba(234, 179, 8, .12);
+}
+
+#projectTeamManager .pt-project-label {
+    margin-bottom: 5px;
+    color: #9aa6b8;
+    font-size: 13px;
+}
+
+#projectTeamManager .pt-project-title {
+    color: var(--pt-heading);
+    font-size: 22px;
+    font-weight: 850;
+}
+
+#projectTeamManager .pt-project-badge {
+    min-height: 31px;
+    padding: 0 11px;
+    border-color: var(--pt-yellow-border);
+    background: var(--pt-yellow-soft);
+    color: #b78300;
+    font-size: 12px;
+}
+
+#projectTeamManager .pt-summary {
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+#projectTeamManager .pt-summary-card {
+    min-height: 104px;
+    gap: 13px;
+    padding: 18px 20px;
+    border-radius: 15px;
+    border-color: var(--pt-border);
+    background: var(--pt-white);
+    box-shadow: 0 4px 15px rgba(39, 56, 85, .035);
+}
+
+#projectTeamManager .pt-summary-icon {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+    border-radius: 14px;
+    font-size: 24px;
+}
+
+#projectTeamManager .pt-summary-icon.blue {
+    background: var(--pt-blue-soft);
+    color: var(--pt-blue);
+}
+
+#projectTeamManager .pt-summary-icon.yellow {
+    background: linear-gradient(135deg, #fffbe8, #fff1ad);
+    color: #d49a00;
+    border: 1px solid var(--pt-yellow-border);
+}
+
+#projectTeamManager .pt-summary-icon.green {
+    background: var(--pt-green-soft);
+    color: var(--pt-green);
+}
+
+#projectTeamManager .pt-summary-label {
+    margin-bottom: 6px;
+    color: #8490a5;
+    font-size: 14px;
+    font-weight: 750;
+}
+
+#projectTeamManager .pt-summary-value {
+    color: var(--pt-heading);
+    font-size: 31px;
+    font-weight: 850;
+}
+
+#projectTeamManager .pt-panel,
+#projectTeamManager .pt-unassigned {
+    border-radius: 17px;
+    border-color: var(--pt-border);
+    background: var(--pt-white);
+    box-shadow: 0 5px 20px rgba(39, 56, 85, .04);
+}
+
+#projectTeamManager .pt-panel-header {
+    min-height: 82px;
+    padding: 18px 23px;
+    border-bottom-color: var(--pt-border);
+}
+
+#projectTeamManager .pt-panel-icon {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    border-radius: 12px;
+    background: var(--pt-blue-soft);
+    color: var(--pt-blue);
+    font-size: 22px;
+}
+
+#projectTeamManager .pt-panel-heading {
+    gap: 12px;
+}
+
+#projectTeamManager .pt-panel-heading h2 {
+    color: var(--pt-heading);
+    font-size: 22px;
+    font-weight: 850;
+}
+
+#projectTeamManager .pt-panel-heading p {
+    margin-top: 5px;
+    color: #8b97aa;
+    font-size: 14px;
+}
+
+#projectTeamManager .pt-panel-count {
+    min-height: 31px;
+    padding: 0 12px;
+    border-color: var(--pt-border);
+    background: #f7f9fc;
+    color: #65738b;
+    font-size: 13px;
+}
+
+#projectTeamManager .pt-team-grid {
+    gap: 15px;
+    padding: 18px;
+    background: #f8faff;
+}
+
+#projectTeamManager .pt-team-card {
+    border-radius: 15px;
+    border-color: var(--pt-border);
+    background: var(--pt-white);
+    box-shadow: 0 3px 12px rgba(39, 56, 85, .025);
+}
+
+#projectTeamManager .pt-team-card:hover {
+    border-color: #cbd7ed;
+    box-shadow: 0 10px 24px rgba(39, 56, 85, .07);
+    transform: translateY(-2px);
+}
+
+#projectTeamManager .pt-team-header {
+    padding: 16px 18px;
+    border-bottom-color: var(--pt-border-soft);
+}
+
+#projectTeamManager .pt-team-number {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    border-radius: 12px;
+    border-color: var(--pt-yellow-border);
+    background: var(--pt-yellow-soft);
+    color: #c18b00;
+    font-size: 14px;
+}
+
+#projectTeamManager .pt-team-name {
+    color: var(--pt-heading);
+    font-size: 17px;
+    font-weight: 850;
+}
+
+#projectTeamManager .pt-team-count {
+    margin-top: 4px;
+    color: #8b97aa;
+    font-size: 13px;
+}
+
+#projectTeamManager .pt-menu-button,
+#projectTeamManager .pt-member-menu-button {
+    border-radius: 9px !important;
+    color: #8a97aa !important;
+}
+
+#projectTeamManager .pt-menu-button:hover,
+#projectTeamManager .pt-menu-button.open,
+#projectTeamManager .pt-member-menu-button:hover,
+#projectTeamManager .pt-member-menu-button.open {
+    border-color: #dce4f1 !important;
+    background: var(--pt-blue-soft) !important;
+    color: var(--pt-blue) !important;
+}
+
+#projectTeamManager .pt-members {
+    padding: 3px 18px 6px;
+}
+
+#projectTeamManager .pt-member {
+    gap: 11px;
+    padding: 13px 0;
+    border-bottom-color: #f0f3f8;
+}
+
+#projectTeamManager .pt-avatar {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    border-color: #e1e7f0;
+    background: #f3f6fb;
+    color: #718099;
+    font-size: 13px;
+}
+
+#projectTeamManager .pt-member-name {
+    color: #3b4961;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+#projectTeamManager .pt-member-role {
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 750;
+}
+
+#projectTeamManager .pt-member-role.leader {
+    color: #c08b00;
+}
+
+#projectTeamManager .pt-member-role.backup {
+    color: #5d78c9;
+}
+
+#projectTeamManager .pt-member-role.member {
+    color: #8b97aa;
+}
+
+#projectTeamManager .pt-team-footer {
+    min-height: 49px;
+    padding: 8px 18px;
+    border-top-color: var(--pt-border-soft);
+    border-radius: 0 0 15px 15px;
+    background: #fbfcff;
+}
+
+#projectTeamManager .pt-ready {
+    font-size: 14px;
+}
+
+#projectTeamManager .pt-view {
+    font-size: 13px;
+}
+
+#projectTeamManager .pt-unassigned {
+    margin-top: 16px;
+}
+
+#projectTeamManager .pt-unassigned-header {
+    padding: 18px 23px;
+    border-bottom-color: var(--pt-border);
+}
+
+#projectTeamManager .pt-unassigned-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: #f3f6fb;
+    color: #718099;
+    font-size: 20px;
+}
+
+#projectTeamManager .pt-unassigned-title h2 {
+    color: var(--pt-heading);
+    font-size: 19px;
+}
+
+#projectTeamManager .pt-unassigned-title p {
+    margin-top: 4px;
+    color: #8b97aa;
+    font-size: 13px;
+}
+
+#projectTeamManager .pt-unassigned-count {
+    width: 30px;
+    height: 30px;
+    background: var(--pt-yellow-soft);
+    color: #b78300;
+    border: 1px solid var(--pt-yellow-border);
+    font-size: 13px;
+}
+
+#projectTeamManager .pt-unassigned-list {
+    gap: 0 26px;
+    padding: 4px 22px 8px;
+}
+
+#projectTeamManager .pt-unassigned-row {
+    gap: 11px;
+    padding: 12px 0;
+    border-bottom-color: #f0f3f8;
+}
+
+#projectTeamManager .pt-assign {
+    min-height: 31px !important;
+    padding: 0 10px !important;
+    border-radius: 8px !important;
+    border-color: #cddcff !important;
+    background: var(--pt-blue-soft) !important;
+    color: var(--pt-blue) !important;
+    font-size: 12px !important;
+}
+
+#projectTeamManager .pt-modal-dialog {
+    border-radius: 20px;
+    border-color: var(--pt-border);
+}
+
+#projectTeamManager .pt-modal-icon {
+    border-radius: 13px;
+    background: var(--pt-blue-soft);
+    color: var(--pt-blue);
+}
+
+#projectTeamManager .pt-modal-title {
+    color: var(--pt-heading);
+    font-size: 29px;
+    font-weight: 850;
+}
+
+#projectTeamManager .pt-modal-description {
+    color: #8996aa;
+    font-size: 16px;
+}
+
+#projectTeamManager .pt-field-card {
+    border-radius: 13px;
+    border-color: var(--pt-border);
+    background: #fbfcff;
+}
+
+#projectTeamManager .pt-field-icon {
+    border-radius: 10px;
+    background: var(--pt-blue-soft);
+    color: var(--pt-blue);
+}
+
+#projectTeamManager .pt-field-title {
+    color: var(--pt-heading);
+    font-size: 16px;
+}
+
+#projectTeamManager .pt-input,
+#projectTeamManager .pt-select {
+    min-height: 52px !important;
+    border-radius: 10px !important;
+    border-color: #d6dfec !important;
+    font-size: 16px !important;
+}
+
+#projectTeamManager .pt-input:focus,
+#projectTeamManager .pt-select:focus {
+    border-color: #8eabff !important;
+    box-shadow: 0 0 0 4px rgba(47, 99, 232, .09) !important;
+}
+
+#projectTeamManager .pt-modal-footer {
+    background: #fbfcff;
+    border-top-color: var(--pt-border);
+}
+
+#projectTeamManager .pt-modal-button {
+    min-height: 48px !important;
+    border-radius: 10px !important;
+    font-size: 15px !important;
+}
+
+#projectTeamManager .pt-modal-button.primary {
+    background: var(--pt-blue) !important;
+    border-color: var(--pt-blue) !important;
+}
+
+#projectTeamManager .pt-modal-button.primary:hover {
+    background: var(--pt-blue-hover) !important;
+    border-color: var(--pt-blue-hover) !important;
+}
+
+.dark-mode #projectTeamManager {
+    --pt-page: #111827;
+    --pt-white: #1b2434;
+    --pt-soft: #202b3e;
+    --pt-border: #334158;
+    --pt-border-soft: #2b374b;
+    --pt-heading: #f2f5fb;
+    --pt-text: #c5cfdf;
+    --pt-muted: #91a0b7;
+    --pt-blue: #82a5ff;
+    --pt-blue-hover: #9bb8ff;
+    --pt-blue-soft: rgba(130, 165, 255, .13);
+    --pt-yellow: #fbbf24;
+    --pt-yellow-soft: rgba(251, 191, 36, .14);
+    --pt-yellow-border: rgba(251, 191, 36, .42);
+    --pt-green-soft: rgba(21, 150, 106, .14);
+    --pt-red-soft: rgba(220, 70, 84, .14);
+}
+
+.dark-mode #projectTeamManager .pt-project-icon,
+.dark-mode #projectTeamManager .pt-summary-icon.yellow {
+    background: rgba(251, 191, 36, .16);
+    border-color: rgba(251, 191, 36, .42);
+    color: #fcd34d;
+}
+
+.dark-mode #projectTeamManager .pt-team-grid {
+    background: #151e2d;
+}
+
+.dark-mode #projectTeamManager .pt-team-number,
+.dark-mode #projectTeamManager .pt-project-badge,
+.dark-mode #projectTeamManager .pt-unassigned-count {
+    background: rgba(251, 191, 36, .14);
+    border-color: rgba(251, 191, 36, .42);
+    color: #fcd34d;
+}
+
+.dark-mode #projectTeamManager .pt-team-name,
+.dark-mode #projectTeamManager .pt-project-title,
+.dark-mode #projectTeamManager .pt-panel-heading h2,
+.dark-mode #projectTeamManager .pt-unassigned-title h2,
+.dark-mode #projectTeamManager .pt-summary-value,
+.dark-mode #projectTeamManager .pt-field-title,
+.dark-mode #projectTeamManager .pt-modal-title {
+    color: var(--pt-heading);
+}
+
+.dark-mode #projectTeamManager .pt-team-card,
+.dark-mode #projectTeamManager .pt-project-card,
+.dark-mode #projectTeamManager .pt-summary-card,
+.dark-mode #projectTeamManager .pt-panel,
+.dark-mode #projectTeamManager .pt-unassigned,
+.dark-mode #projectTeamManager .pt-field-card,
+.dark-mode #projectTeamManager .pt-course,
+.dark-mode #projectTeamManager .pt-menu,
+.dark-mode #projectTeamManager .pt-member-menu,
+.dark-mode #projectTeamManager .pt-modal-dialog {
+    background: var(--pt-white);
+    border-color: var(--pt-border);
+}
+
+.dark-mode #projectTeamManager .pt-team-footer,
+.dark-mode #projectTeamManager .pt-modal-footer {
+    background: #202b3e;
+    border-color: var(--pt-border);
+}
+
+.dark-mode #projectTeamManager .pt-input,
+.dark-mode #projectTeamManager .pt-select {
+    background: #202b3e !important;
+    color: #f2f5fb !important;
+    border-color: #43516a !important;
+}
+
+@media (max-width: 900px) {
+    #projectTeamManager {
+        padding: 22px 18px 42px;
+    }
+
+    #projectTeamManager .pt-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    #projectTeamManager .pt-header-tools {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    #projectTeamManager .pt-course {
+        flex: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    #projectTeamManager {
+        padding: 17px 12px 32px;
+    }
+
+    #projectTeamManager .pt-title {
+        font-size: 30px;
+    }
+
+    #projectTeamManager .pt-description {
+        font-size: 16px;
+    }
+
+    #projectTeamManager .pt-project-card {
+        align-items: flex-start;
+        gap: 14px;
+        padding: 19px 18px 19px 22px;
+    }
+
+    #projectTeamManager .pt-project-title {
+        font-size: 19px;
+        white-space: normal;
+    }
+
+    #projectTeamManager .pt-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #projectTeamManager .pt-summary-card {
+        min-height: 92px;
+        padding: 14px;
+    }
+
+    #projectTeamManager .pt-summary-icon {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+        font-size: 21px;
+    }
+
+    #projectTeamManager .pt-summary-value {
+        font-size: 27px;
+    }
+
+    #projectTeamManager .pt-panel-header,
+    #projectTeamManager .pt-unassigned-header {
+        padding: 16px;
+    }
+
+    #projectTeamManager .pt-team-grid {
+        padding: 12px;
+    }
+
+    #projectTeamManager .pt-modal-header {
+        padding: 23px 20px 18px;
+    }
+
+    #projectTeamManager .pt-modal-body {
+        padding: 8px 20px 22px;
+    }
+
+    #projectTeamManager .pt-modal-footer {
+        padding: 16px 20px 20px;
+    }
+}
+
+@media (max-width: 420px) {
+    #projectTeamManager .pt-summary {
+        grid-template-columns: 1fr;
+    }
+
+    #projectTeamManager .pt-header-tools {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #projectTeamManager .pt-course,
+    #projectTeamManager .pt-primary-action {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+/* ============================================================
+   FINAL DROPDOWN OVERLAY FIX
+   Use a portal-to-body when a 3-dot menu opens. This completely
+   removes the menu from grid/card overflow and stacking contexts.
+   ============================================================ */
+
+#projectTeamManager .pt-panel,
+#projectTeamManager .pt-team-grid {
+    overflow: visible !important;
+}
+
+/* Open owner above nearby content while the menu is being opened. */
+#projectTeamManager .pt-team-card.menu-open {
+    position: relative !important;
+    z-index: 5000 !important;
+    transform: none !important;
+}
+
+#projectTeamManager .pt-member {
+    position: relative;
+}
+
+#projectTeamManager .pt-member.menu-open {
+    z-index: 6000 !important;
+}
+
+#projectTeamManager .pt-menu-button.open,
+#projectTeamManager .pt-member-menu-button.open {
+    position: relative;
+    z-index: 12000 !important;
+}
+
+/* ------------------------------------------------------------
+   PORTALED MENUS
+   These menus are moved directly under <body> when opened.
+   ------------------------------------------------------------ */
+
+body > .pt-menu.pt-menu-portal,
+body > .pt-member-menu.pt-member-menu-portal {
+    position: fixed !important;
+    display: block !important;
+    z-index: 2147483000 !important;
+
+    top: 0;
+    left: 0;
+
+    margin: 0 !important;
+    padding: 5px !important;
+
+    box-sizing: border-box !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Team menu dimensions */
+body > .pt-menu.pt-menu-portal {
+    width: 205px !important;
+    max-height: min(320px, calc(100vh - 24px)) !important;
+
+    border: 1px solid #e2e8f2;
+    border-radius: 10px;
+    background: #ffffff;
+
+    box-shadow:
+        0 18px 42px rgba(20, 30, 48, .18);
+}
+
+/* Member menu dimensions */
+body > .pt-member-menu.pt-member-menu-portal {
+    width: 195px !important;
+    max-height: min(320px, calc(100vh - 24px)) !important;
+
+    border: 1px solid #e2e8f2;
+    border-radius: 10px;
+    background: #ffffff;
+
+    box-shadow:
+        0 18px 42px rgba(20, 30, 48, .18);
+}
+
+/* Menu item styles when outside #projectTeamManager */
+body > .pt-menu.pt-menu-portal .pt-menu-item,
+body > .pt-menu.pt-menu-portal button,
+body > .pt-menu.pt-menu-portal a,
+body > .pt-member-menu.pt-member-menu-portal button {
+    width: 100% !important;
+    min-height: 37px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+
+    margin: 0 !important;
+    padding: 0 9px !important;
+
+    border: 0 !important;
+    border-radius: 7px !important;
+
+    background: transparent !important;
+    color: #596474 !important;
+
+    font-family: inherit !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+
+    text-align: left !important;
+    text-decoration: none !important;
+
+    cursor: pointer !important;
+}
+
+body > .pt-menu.pt-menu-portal .pt-menu-item:hover,
+body > .pt-menu.pt-menu-portal button:hover,
+body > .pt-menu.pt-menu-portal a:hover,
+body > .pt-member-menu.pt-member-menu-portal button:hover {
+    background: #f4f7fb !important;
+    color: #2f63e8 !important;
+}
+
+body > .pt-menu.pt-menu-portal .danger:hover,
+body > .pt-member-menu.pt-member-menu-portal button.danger:hover {
+    background: #fff0f2 !important;
+    color: #dc4654 !important;
+}
+
+body > .pt-menu.pt-menu-portal i,
+body > .pt-member-menu.pt-member-menu-portal i {
+    width: 17px !important;
+    flex: 0 0 17px !important;
+    text-align: center !important;
+    font-size: 17px !important;
+}
+
+/* Dark mode portal menus */
+body.dark-mode > .pt-menu.pt-menu-portal,
+body.dark-mode > .pt-member-menu.pt-member-menu-portal {
+    border-color: #334158;
+    background: #1b2434;
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, .42);
+}
+
+body.dark-mode > .pt-menu.pt-menu-portal .pt-menu-item,
+body.dark-mode > .pt-menu.pt-menu-portal button,
+body.dark-mode > .pt-menu.pt-menu-portal a,
+body.dark-mode > .pt-member-menu.pt-member-menu-portal button {
+    color: #c5cfdf !important;
+}
+
+body.dark-mode > .pt-menu.pt-menu-portal .pt-menu-item:hover,
+body.dark-mode > .pt-menu.pt-menu-portal button:hover,
+body.dark-mode > .pt-menu.pt-menu-portal a:hover,
+body.dark-mode > .pt-member-menu.pt-member-menu-portal button:hover {
+    background: #253149 !important;
+    color: #9bb8ff !important;
+}
+
+body.dark-mode > .pt-menu.pt-menu-portal .danger:hover,
+body.dark-mode > .pt-member-menu.pt-member-menu-portal button.danger:hover {
+    background: rgba(220, 70, 84, .16) !important;
+    color: #ff8b96 !important;
+}
+
 </style>
 
 
@@ -1407,10 +2293,6 @@
                     Back to Project
                 </a>
 
-                <span class="pt-kicker">
-                    Project Team Management
-                </span>
-
                 <h1 class="pt-title">
                     Manage Student Teams
                 </h1>
@@ -1425,11 +2307,6 @@
 
             <div class="pt-header-tools">
 
-                <div class="pt-course">
-                    <i class="bx bx-chalkboard"></i>
-
-                    {{ $classGroup->course->course_name ?? $classGroup->group_name }}
-                </div>
 
 
                 <button
@@ -1483,79 +2360,7 @@
         </section>
 
 
-        {{-- ========================================================
-             SUMMARY
-        ========================================================= --}}
-        <section class="pt-summary">
 
-            <div class="pt-summary-card">
-                <div class="pt-summary-icon blue">
-                    <i class="bx bx-group"></i>
-                </div>
-
-                <div>
-                    <span class="pt-summary-label">
-                        Teams
-                    </span>
-
-                    <strong class="pt-summary-value">
-                        {{ $totalTeams }}
-                    </strong>
-                </div>
-            </div>
-
-
-            <div class="pt-summary-card">
-                <div class="pt-summary-icon blue">
-                    <i class="bx bx-user-check"></i>
-                </div>
-
-                <div>
-                    <span class="pt-summary-label">
-                        Assigned Students
-                    </span>
-
-                    <strong class="pt-summary-value">
-                        {{ $totalAssigned }}
-                    </strong>
-                </div>
-            </div>
-
-
-            <div class="pt-summary-card">
-                <div class="pt-summary-icon yellow">
-                    <i class="bx bxs-crown"></i>
-                </div>
-
-                <div>
-                    <span class="pt-summary-label">
-                        Team Leaders
-                    </span>
-
-                    <strong class="pt-summary-value">
-                        {{ $totalLeaders }}
-                    </strong>
-                </div>
-            </div>
-
-
-            <div class="pt-summary-card">
-                <div class="pt-summary-icon green">
-                    <i class="bx bx-shield-quarter"></i>
-                </div>
-
-                <div>
-                    <span class="pt-summary-label">
-                        Backup Submitters
-                    </span>
-
-                    <strong class="pt-summary-value">
-                        {{ $totalBackups }}
-                    </strong>
-                </div>
-            </div>
-
-        </section>
 
 
         {{-- ========================================================
@@ -1692,20 +2497,7 @@
                                         </button>
 
 
-                                        <a
-                                            href="{{ route(
-                                                'professor.classworks.projects.groups.show',
-                                                [
-                                                    'classGroupId' => $classGroup->id,
-                                                    'projectId' => $project->id,
-                                                    'groupId' => $group->id,
-                                                    'return_to' => $returnTo,
-                                                ]
-                                            ) }}"
-                                        >
-                                            <i class="bx bx-show"></i>
-                                            View Team Details
-                                        </a>
+
 
 
                                         @if($members->isEmpty())
@@ -1947,21 +2739,6 @@
                                 </span>
 
 
-                                <a
-                                    href="{{ route(
-                                        'professor.classworks.projects.groups.show',
-                                        [
-                                            'classGroupId' => $classGroup->id,
-                                            'projectId' => $project->id,
-                                            'groupId' => $group->id,
-                                            'return_to' => $returnTo,
-                                        ]
-                                    ) }}"
-                                    class="pt-view"
-                                >
-                                    View details
-                                    <i class="bx bx-right-arrow-alt"></i>
-                                </a>
 
                             </div>
 
@@ -2085,29 +2862,6 @@
 
                             </div>
 
-
-                            @if($groups->isNotEmpty())
-
-                                <button
-                                    type="button"
-                                    class="pt-assign"
-                                    data-action="add-student"
-                                    data-url="{{ route(
-                                        'professor.classworks.projects.groups.members.add',
-                                        [
-                                            'classGroupId' => $classGroup->id,
-                                            'projectId' => $project->id,
-                                            'groupId' => $groups->first()->id,
-                                        ]
-                                    ) }}"
-                                    data-team-name="{{ $groups->first()->group_name }}"
-                                    data-student-id="{{ $student->id }}"
-                                >
-                                    <i class="bx bx-plus"></i>
-                                    Assign
-                                </button>
-
-                            @endif
 
                         </div>
 
@@ -3693,18 +4447,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document
             .querySelectorAll(
-                '#projectTeamManager .pt-menu, #projectTeamManager .pt-member-menu'
+                '#projectTeamManager .pt-menu, ' +
+                '#projectTeamManager .pt-member-menu, ' +
+                'body > .pt-menu.pt-menu-portal, ' +
+                'body > .pt-member-menu.pt-member-menu-portal'
             )
             .forEach(function (menu) {
 
                 menu.classList.remove('open');
+                menu.classList.remove('open-up');
+
+                restoreMenu(menu);
 
             });
 
 
         document
             .querySelectorAll(
-                '#projectTeamManager .pt-menu-button, #projectTeamManager .pt-member-menu-button'
+                '#projectTeamManager .pt-menu-button, ' +
+                '#projectTeamManager .pt-member-menu-button'
             )
             .forEach(function (button) {
 
@@ -3712,7 +4473,274 @@ document.addEventListener('DOMContentLoaded', function () {
 
             });
 
+
+        document
+            .querySelectorAll(
+                '#projectTeamManager .pt-team-card.menu-open, ' +
+                '#projectTeamManager .pt-member.menu-open'
+            )
+            .forEach(function (item) {
+
+                item.classList.remove('menu-open');
+
+            });
+
     }
+
+
+    function restoreMenu(menu) {
+
+        if (
+            !menu ||
+            menu.dataset.ptPortaled !== '1'
+        ) {
+            return;
+        }
+
+        const parent = menu._ptOriginalParent;
+        const nextSibling = menu._ptOriginalNextSibling;
+
+        if (parent) {
+
+            if (
+                nextSibling &&
+                nextSibling.parentNode === parent
+            ) {
+                parent.insertBefore(
+                    menu,
+                    nextSibling
+                );
+            } else {
+                parent.appendChild(menu);
+            }
+
+        }
+
+        menu.dataset.ptPortaled = '0';
+        menu.classList.remove('pt-menu-portal');
+        menu.classList.remove('pt-member-menu-portal');
+
+        menu.style.position = '';
+        menu.style.left = '';
+        menu.style.top = '';
+        menu.style.right = '';
+        menu.style.bottom = '';
+        menu.style.width = '';
+        menu.style.maxHeight = '';
+
+        menu._ptOriginalParent = null;
+        menu._ptOriginalNextSibling = null;
+
+    }
+
+
+    function portalMenu(menu) {
+
+        if (
+            !menu ||
+            menu.dataset.ptPortaled === '1'
+        ) {
+            return;
+        }
+
+        menu._ptOriginalParent =
+            menu.parentElement;
+
+        menu._ptOriginalNextSibling =
+            menu.nextElementSibling;
+
+        menu.dataset.ptPortaled = '1';
+
+        menu.classList.add(
+            menu.classList.contains('pt-member-menu')
+                ? 'pt-member-menu-portal'
+                : 'pt-menu-portal'
+        );
+
+        document.body.appendChild(menu);
+
+    }
+
+
+    function positionPortalMenu(menu, button) {
+
+        if (!menu || !button) {
+            return;
+        }
+
+        requestAnimationFrame(function () {
+
+            const buttonRect =
+                button.getBoundingClientRect();
+
+            const menuRect =
+                menu.getBoundingClientRect();
+
+            const viewportPadding = 10;
+            const gap = 5;
+
+            let left =
+                buttonRect.right -
+                menuRect.width;
+
+            let top =
+                buttonRect.bottom +
+                gap;
+
+
+            /* Keep the menu inside the viewport horizontally. */
+
+            if (
+                left <
+                viewportPadding
+            ) {
+                left = viewportPadding;
+            }
+
+            if (
+                left + menuRect.width >
+                window.innerWidth - viewportPadding
+            ) {
+                left =
+                    window.innerWidth -
+                    menuRect.width -
+                    viewportPadding;
+            }
+
+
+            /* Open upward when there is not enough room below. */
+
+            if (
+                top + menuRect.height >
+                window.innerHeight -
+                viewportPadding
+            ) {
+
+                top =
+                    buttonRect.top -
+                    menuRect.height -
+                    gap;
+
+                menu.classList.add(
+                    'open-up'
+                );
+
+            } else {
+
+                menu.classList.remove(
+                    'open-up'
+                );
+
+            }
+
+
+            /* If the menu is taller than the viewport, clamp it. */
+
+            if (
+                top <
+                viewportPadding
+            ) {
+                top = viewportPadding;
+            }
+
+            if (
+                top + menuRect.height >
+                window.innerHeight -
+                viewportPadding
+            ) {
+                top =
+                    window.innerHeight -
+                    menuRect.height -
+                    viewportPadding;
+            }
+
+
+            menu.style.left =
+                Math.round(left) + 'px';
+
+            menu.style.top =
+                Math.round(top) + 'px';
+
+        });
+
+    }
+
+
+    function openPortalMenu(
+        menu,
+        button,
+        owner
+    ) {
+
+        if (!menu || !button) {
+            return;
+        }
+
+        closeAllMenus();
+
+        if (owner) {
+            owner.classList.add('menu-open');
+        }
+
+        button.classList.add('open');
+
+        portalMenu(menu);
+
+        menu.classList.add('open');
+
+        positionPortalMenu(
+            menu,
+            button
+        );
+
+    }
+
+
+    function repositionOpenPortalMenus() {
+
+        document
+            .querySelectorAll(
+                'body > .pt-menu.pt-menu-portal.open, ' +
+                'body > .pt-member-menu.pt-member-menu-portal.open'
+            )
+            .forEach(function (menu) {
+
+                const buttonSelector =
+                    menu.classList.contains(
+                        'pt-member-menu-portal'
+                    )
+                        ? '#projectTeamManager [data-member-menu-button].open'
+                        : '#projectTeamManager [data-team-menu-button].open';
+
+                const button =
+                    document.querySelector(
+                        buttonSelector
+                    );
+
+                if (button) {
+
+                    positionPortalMenu(
+                        menu,
+                        button
+                    );
+
+                }
+
+            });
+
+    }
+
+
+    window.addEventListener(
+        'resize',
+        repositionOpenPortalMenus
+    );
+
+    window.addEventListener(
+        'scroll',
+        repositionOpenPortalMenus,
+        true
+    );
 
 
     document
@@ -3750,15 +4778,26 @@ document.addEventListener('DOMContentLoaded', function () {
                         );
 
 
-                    closeAllMenus();
+                    if (wasOpen) {
 
+                        closeAllMenus();
 
-                    if (menu && !wasOpen) {
-
-                        menu.classList.add('open');
-                        button.classList.add('open');
+                        return;
 
                     }
+
+
+                    const card =
+                        button.closest(
+                            '.pt-team-card'
+                        );
+
+
+                    openPortalMenu(
+                        menu,
+                        button,
+                        card
+                    );
 
                 }
             );
@@ -3801,21 +4840,31 @@ document.addEventListener('DOMContentLoaded', function () {
                         );
 
 
-                    closeAllMenus();
+                    if (wasOpen) {
 
+                        closeAllMenus();
 
-                    if (menu && !wasOpen) {
-
-                        menu.classList.add('open');
-                        button.classList.add('open');
+                        return;
 
                     }
+
+
+                    const member =
+                        button.closest(
+                            '.pt-member'
+                        );
+
+
+                    openPortalMenu(
+                        menu,
+                        button,
+                        member
+                    );
 
                 }
             );
 
         });
-
 
     document.addEventListener(
         'click',
@@ -3825,20 +4874,21 @@ document.addEventListener('DOMContentLoaded', function () {
     );
 
 
-    document
-        .querySelectorAll(
-            '#projectTeamManager .pt-menu, #projectTeamManager .pt-member-menu'
-        )
-        .forEach(function (menu) {
+    document.addEventListener(
+        'click',
+        function (event) {
 
-            menu.addEventListener(
-                'click',
-                function (event) {
-                    event.stopPropagation();
-                }
-            );
+            const menu =
+                event.target.closest(
+                    '.pt-menu, .pt-member-menu'
+                );
 
-        });
+            if (menu) {
+                event.stopPropagation();
+            }
+
+        }
+    );
 
 
     /*

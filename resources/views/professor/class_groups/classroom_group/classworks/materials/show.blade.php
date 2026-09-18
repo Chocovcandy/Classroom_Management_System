@@ -1,1833 +1,901 @@
-<style>
-    /* ============================================================
-   CLASSWORK SHOW PAGE
-   MATERIAL
-   ============================================================ */
+@extends('layouts.prof_layout')
 
-    .classwork-show-page {
+@section('content')
+
+<style>
+    /* =========================================================
+       MATERIAL SHOW PAGE
+    ========================================================= */
+
+    .material-page {
         width: 100%;
-        max-width: 1200px;
+        max-width: 1500px;
         margin: 0 auto;
-        padding: 30px 24px 50px;
+        padding: 30px 32px 50px;
+        color: var(--text-color, #1f2937);
     }
 
-
-    /* ============================================================
-   HEADER
-   ============================================================ */
-
-    .classwork-show-header {
+    .material-topbar {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
         margin-bottom: 28px;
     }
 
-    .classwork-back-btn {
+    .material-back {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-
-        margin-bottom: 24px;
-
-        color: var(--text-secondary);
-        text-decoration: none;
-
-        font-size: 14px;
-        font-weight: 600;
-
-        transition: color 0.2s ease;
-    }
-
-    .classwork-back-btn i {
-        font-size: 20px;
-    }
-
-    .classwork-back-btn:hover {
-        color: var(--primary-color);
-    }
-
-
-    /* ============================================================
-   HEADING
-   ============================================================ */
-
-    .classwork-show-heading {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-    }
-
-    .classwork-show-icon {
-        width: 58px;
-        height: 58px;
-
-        flex-shrink: 0;
-
-        display: flex;
-        align-items: center;
         justify-content: center;
-
-        border-radius: 15px;
-
-        font-size: 28px;
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        border: 1px solid var(--border-color, #e5e7eb);
+        border-radius: 13px;
+        background: var(--card-color, #ffffff);
+        color: var(--text-color, #374151);
+        text-decoration: none;
+        transition: 0.2s ease;
     }
 
-
-    /* ============================================================
-   MATERIAL ICON
-   ============================================================ */
-
-    .classwork-show-icon.material {
-        background-color: #e0f2fe;
-        color: #0284c7;
+    .material-back:hover {
+        color: #2563eb;
+        border-color: #93c5fd;
+        background: #eff6ff;
+        transform: translateX(-3px);
     }
 
-
-    /* ============================================================
-   CLASSWORK TYPE
-   ============================================================ */
-
-    .classwork-show-type {
-        display: inline-block;
-
-        margin-bottom: 5px;
-
-        font-size: 12px;
-        font-weight: 700;
-
-        letter-spacing: 0.08em;
+    .material-heading {
+        min-width: 0;
+        flex: 1;
     }
 
-    .classwork-show-type.material {
-        color: #0284c7;
-    }
-
-
-    /* ============================================================
-   TITLE
-   ============================================================ */
-
-    .classwork-show-heading h1 {
-        margin: 0;
-
-        color: var(--text-color);
-
-        font-size: 28px;
-        font-weight: 700;
-        line-height: 1.25;
-
-        word-break: break-word;
-    }
-
-
-    /* ============================================================
-   TOPIC
-   ============================================================ */
-
-    .classwork-show-topic {
+    .material-heading-label {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-
-        margin-top: 8px;
-
-        color: var(--text-secondary);
-
-        font-size: 14px;
-        font-weight: 500;
+        margin-bottom: 8px;
+        padding: 6px 11px;
+        border-radius: 999px;
+        background: #eff6ff;
+        color: #2563eb;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.7px;
+        text-transform: uppercase;
     }
 
-    .classwork-show-topic i {
-        font-size: 17px;
-    }
-
-
-    /* ============================================================
-   MAIN GRID
-   ============================================================ */
-
-    .classwork-show-grid {
-        display: grid;
-
-        grid-template-columns: minmax(0, 1fr) 320px;
-
-        gap: 24px;
-
-        align-items: start;
-    }
-
-    .classwork-show-main {
-        min-width: 0;
-    }
-
-    .classwork-show-sidebar {
-        min-width: 0;
-
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-
-
-    /* ============================================================
-   DETAIL CARD
-   ============================================================ */
-
-    .classwork-detail-card {
-        margin-bottom: 24px;
-
-        background-color: var(--card-color);
-
-        border: 1px solid var(--border-color);
-        border-radius: 16px;
-
-        overflow: hidden;
-    }
-
-    .classwork-show-sidebar .classwork-detail-card {
-        margin-bottom: 0;
-    }
-
-
-    /* ============================================================
-   CARD HEADER
-   ============================================================ */
-
-    .classwork-detail-card-header {
-        display: flex;
-        align-items: center;
-
-        padding: 18px 22px;
-
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .classwork-detail-card-header h2 {
+    .material-heading h1 {
         margin: 0;
-
-        color: var(--text-color);
-
-        font-size: 17px;
-        font-weight: 700;
-    }
-
-
-    /* ============================================================
-   DESCRIPTION
-   ============================================================ */
-
-    .classwork-description {
-        padding: 22px;
-
-        color: var(--text-secondary);
-
-        font-size: 15px;
-        line-height: 1.7;
-
+        color: var(--text-color, #111827);
+        font-size: clamp(1.5rem, 2.5vw, 2.15rem);
+        font-weight: 800;
+        line-height: 1.25;
         overflow-wrap: anywhere;
     }
 
-    .classwork-no-content {
-        color: var(--text-muted);
-
-        font-style: italic;
-    }
-
-
-    /* ============================================================
-   ATTACHED MATERIAL
-   ============================================================ */
-
-    .classwork-file {
+    .material-topic {
         display: flex;
         align-items: center;
-        gap: 15px;
-
-        padding: 20px 22px;
-    }
-
-
-    /* FILE ICON */
-
-    .classwork-file-icon {
-        width: 48px;
-        height: 48px;
-
-        flex-shrink: 0;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 12px;
-
-        background-color: #e0f2fe;
-        color: #0284c7;
-
-        font-size: 24px;
-    }
-
-
-    /* FILE INFORMATION */
-
-    .classwork-file-info {
-        min-width: 0;
-
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .classwork-file-info strong {
-        color: var(--text-color);
-
-        font-size: 14px;
-        font-weight: 600;
-
-        word-break: break-all;
-    }
-
-    .classwork-file-info span {
-        color: var(--text-secondary);
-
-        font-size: 13px;
-    }
-
-
-    /* ============================================================
-   INFORMATION LIST
-   ============================================================ */
-
-    .classwork-info-list {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .classwork-info-item {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-
-        padding: 17px 22px;
-
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .classwork-info-item:last-child {
-        border-bottom: none;
-    }
-
-    .classwork-info-item>i {
-        width: 20px;
-
-        flex-shrink: 0;
-
-        color: var(--text-secondary);
-
-        font-size: 20px;
-    }
-
-    .classwork-info-item>div {
-        min-width: 0;
-
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-    }
-
-    .classwork-info-item span {
-        color: var(--text-secondary);
-
-        font-size: 12px;
-        font-weight: 500;
-    }
-
-    .classwork-info-item strong {
-        color: var(--text-color);
-
-        font-size: 14px;
-        font-weight: 600;
-    }
-
-
-    /* ============================================================
-   ACTION BUTTON
-   ============================================================ */
-
-    .classwork-action-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-
-        margin: 16px;
-
-        padding: 11px 16px;
-
-        background-color: var(--background-color);
-
-        border: 1px solid var(--border-color);
-        border-radius: 10px;
-
-        color: var(--text-color);
-
-        text-decoration: none;
-
-        font-size: 14px;
-        font-weight: 600;
-
-        transition:
-            background-color 0.2s ease,
-            border-color 0.2s ease,
-            color 0.2s ease,
-            transform 0.2s ease;
-    }
-
-    .classwork-action-btn i {
-        font-size: 18px;
-    }
-
-    .classwork-action-btn:hover {
-        border-color: var(--primary-color);
-
-        color: var(--primary-color);
-
-        transform: translateY(-1px);
-    }
-
-    /* ============================================================
-   ATTACHED MATERIAL
-============================================================ */
-
-    .classwork-file {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-
-        padding: 16px;
-
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-
-        background: var(--card-color);
-    }
-
-    .classwork-file-icon {
-        width: 46px;
-        height: 46px;
-
-        flex-shrink: 0;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 10px;
-
-        background: rgba(59, 130, 246, 0.1);
-        color: #3b82f6;
-
-        font-size: 24px;
-    }
-
-    .classwork-file-info {
-        flex: 1;
-        min-width: 0;
-
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .classwork-file-info strong {
-        font-size: 14px;
-        font-weight: 600;
-
-        color: var(--text-color);
-
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .classwork-file-info span {
-        font-size: 12px;
-        color: var(--muted-text-color);
-    }
-
-
-    /* ============================================================
-   OPEN MATERIAL BUTTON
-============================================================ */
-
-    .classwork-file-open {
-        flex-shrink: 0;
-
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-
         gap: 7px;
-
-        padding: 9px 14px;
-
-        border: 1px solid var(--border-color);
-        border-radius: 9px;
-
-        background: var(--background-color);
-        color: var(--text-color);
-
-        cursor: pointer;
-
-        font-size: 13px;
+        margin-top: 10px;
+        color: var(--text-secondary, #6b7280);
+        font-size: 0.92rem;
         font-weight: 600;
-
-        transition:
-            background-color 0.2s ease,
-            border-color 0.2s ease,
-            color 0.2s ease;
     }
 
-
-    .classwork-file-open:hover {
-        border-color: var(--primary-color);
-        color: var(--primary-color);
+    .material-topic i {
+        color: #2563eb;
     }
 
-
-    .classwork-file-open i {
-        font-size: 17px;
-    }
-
-    /* ============================================================
-   MATERIAL PREVIEW MODAL
-============================================================ */
-
-    .material-preview-modal {
-        position: fixed;
-        inset: 0;
-
-        z-index: 9999;
-
+    .material-heading-icon {
         display: flex;
         align-items: center;
         justify-content: center;
-
-        padding: 30px;
-
-        visibility: hidden;
-        opacity: 0;
-
-        transition:
-            opacity 0.2s ease,
-            visibility 0.2s ease;
+        width: 58px;
+        height: 58px;
+        flex-shrink: 0;
+        border-radius: 18px;
+        background: linear-gradient(145deg, #2563eb, #60a5fa);
+        color: #ffffff;
+        font-size: 1.65rem;
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
     }
 
-
-    /* ============================================================
-   ACTIVE MODAL
-============================================================ */
-
-    .material-preview-modal.active {
-        visibility: visible;
-        opacity: 1;
+    .material-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 310px;
+        gap: 24px;
+        align-items: start;
     }
 
-
-    /* ============================================================
-   OVERLAY
-============================================================ */
-
-    .material-preview-overlay {
-        position: absolute;
-        inset: 0;
-
-        background: rgba(0, 0, 0, 0.65);
-
-        backdrop-filter: blur(3px);
+    .material-main,
+    .material-sidebar {
+        min-width: 0;
     }
 
-
-    /* ============================================================
-   MODAL CONTAINER
-============================================================ */
-
-    .material-preview-container {
-        position: relative;
-
-        z-index: 1;
-
-        width: min(1200px, 100%);
-        height: min(850px, 90vh);
-
+    .material-main {
         display: flex;
         flex-direction: column;
-
-        overflow: hidden;
-
-        background: var(--card-color);
-
-        border: 1px solid var(--border-color);
-        border-radius: 16px;
-
-        box-shadow:
-            0 25px 60px rgba(0, 0, 0, 0.25);
-
-        transform: scale(0.96);
-
-        transition: transform 0.2s ease;
+        gap: 22px;
     }
 
-    .material-preview-modal.active .material-preview-container {
-        transform: scale(1);
+    .material-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 
+    .material-card {
+        min-width: 0;
+        padding: 25px;
+        border: 1px solid var(--border-color, #e5e7eb);
+        border-radius: 20px;
+        background: var(--card-color, #ffffff);
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.045);
+    }
 
-    /* ============================================================
-   MODAL HEADER
-============================================================ */
-
-    .material-preview-header {
-        min-height: 60px;
-
+    .material-card-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-
-        gap: 15px;
-
-        padding: 12px 18px;
-
-        border-bottom: 1px solid var(--border-color);
-
-        background: var(--card-color);
+        gap: 14px;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border-color, #e5e7eb);
     }
 
-
-    /* ============================================================
-   TITLE
-============================================================ */
-
-    .material-preview-title {
-        min-width: 0;
-
+    .material-card-header h2,
+    .material-card-header h3 {
         display: flex;
         align-items: center;
-
-        gap: 10px;
+        gap: 9px;
+        margin: 0;
+        color: var(--text-color, #111827);
+        font-size: 1.08rem;
+        font-weight: 800;
     }
 
-    .material-preview-title i {
-        flex-shrink: 0;
-
-        font-size: 22px;
-
-        color: var(--primary-color);
+    .material-card-header h2 i,
+    .material-card-header h3 i {
+        color: #2563eb;
+        font-size: 1.2rem;
     }
 
-    .material-preview-title span {
-        overflow: hidden;
+    .material-card-header span {
+        color: var(--text-secondary, #6b7280);
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
 
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    .material-description {
+        color: var(--text-color, #374151);
+        font-size: 0.98rem;
+        font-weight: 500;
+        line-height: 1.85;
+        overflow-wrap: anywhere;
+    }
 
-        font-size: 14px;
+    .material-description p {
+        margin: 0 0 14px;
+    }
+
+    .material-description p:last-child {
+        margin-bottom: 0;
+    }
+
+    .material-empty {
+        padding: 28px 18px;
+        border: 1px dashed var(--border-color, #d1d5db);
+        border-radius: 14px;
+        background: var(--background-color, #f9fafb);
+        color: var(--text-muted, #9ca3af);
+        text-align: center;
+        font-size: 0.9rem;
         font-weight: 600;
-
-        color: var(--text-color);
     }
 
+    .material-empty i {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 2rem;
+    }
 
-    /* ============================================================
-   CLOSE BUTTON
-============================================================ */
+    .resource-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
 
-    .material-preview-close {
+    .resource-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+        padding: 15px;
+        border: 1px solid var(--border-color, #e5e7eb);
+        border-radius: 15px;
+        background: var(--card-color, #ffffff);
+        transition: 0.2s ease;
+    }
+
+.resource-item:hover {
+    border-color: #93c5fd;
+    background: #f8fbff;
+}
+    .resource-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        flex-shrink: 0;
+        border-radius: 13px;
+        background: #eff6ff;
+        color: #2563eb;
+        font-size: 1.2rem;
+    }
+
+    .resource-info {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .resource-info strong {
+        display: block;
+        margin: 0;
+        color: var(--text-color, #1f2937);
+        font-size: 0.94rem;
+        font-weight: 800;
+        line-height: 1.45;
+        overflow-wrap: anywhere;
+    }
+
+    .resource-info span {
+        display: block;
+        margin-top: 5px;
+        color: var(--text-secondary, #6b7280);
+        font-size: 0.78rem;
+        font-weight: 600;
+    }
+
+    .resource-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    .resource-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        min-height: 36px;
+        padding: 8px 12px;
+        border: 1px solid #bfdbfe;
+        border-radius: 10px;
+        background: #eff6ff;
+        color: #2563eb;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .resource-btn:hover {
+        border-color: #2563eb;
+        background: #2563eb;
+        color: #ffffff;
+    }
+
+    .resource-btn.download {
+        border-color: #d1d5db;
+        background: var(--card-color, #ffffff);
+        color: var(--text-color, #374151);
+    }
+
+    .resource-btn.download:hover {
+        border-color: #2563eb;
+        background: #eff6ff;
+        color: #2563eb;
+    }
+
+    .info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .info-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 38px;
         height: 38px;
-
         flex-shrink: 0;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border: none;
-        border-radius: 8px;
-
-        background: transparent;
-
-        color: var(--text-color);
-
-        cursor: pointer;
-
-        font-size: 24px;
-
-        transition:
-            background 0.2s ease,
-            color 0.2s ease;
+        border-radius: 11px;
+        background: #f3f4f6;
+        color: #6b7280;
+        font-size: 1.1rem;
     }
 
-    .material-preview-close:hover {
-        background: var(--background-color);
-    }
-
-
-    /* ============================================================
-   MODAL BODY
-============================================================ */
-
-    .material-preview-body {
+    .info-content {
+        min-width: 0;
         flex: 1;
-
-        min-height: 0;
-
-        background: #f1f1f1;
     }
 
-
-    /* ============================================================
-   PDF
-============================================================ */
-
-    .material-preview-frame {
+    .info-content span {
         display: block;
-
-        width: 100%;
-        height: 100%;
-
-        border: none;
+        margin-bottom: 4px;
+        color: var(--text-muted, #9ca3af);
+        font-size: 0.73rem;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
     }
 
+    .info-content strong {
+        display: block;
+        color: var(--text-color, #374151);
+        font-size: 0.9rem;
+        font-weight: 750;
+        line-height: 1.5;
+    }
 
-    /* ============================================================
-   IMAGE
-============================================================ */
-
-    .material-preview-image-wrapper {
-        width: 100%;
-        height: 100%;
-
+    .edit-material-btn {
         display: flex;
         align-items: center;
         justify-content: center;
-
-        padding: 30px;
-
-        overflow: auto;
+        gap: 8px;
+        width: 100%;
+        min-height: 45px;
+        padding: 11px 15px;
+        border-radius: 12px;
+        background: #2563eb;
+        color: #ffffff;
+        font-size: 0.86rem;
+        font-weight: 800;
+        text-decoration: none;
+        transition: 0.2s ease;
     }
 
-    .material-preview-image {
+    .edit-material-btn:hover {
+        background: #1d4ed8;
+        color: #ffffff;
+        transform: translateY(-1px);
+    }
+
+    /* =========================================================
+       PREVIEW MODAL
+    ========================================================= */
+
+    .material-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 22px;
+    }
+
+    .material-modal.active {
+        display: flex;
+    }
+
+    .material-modal-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.74);
+        backdrop-filter: blur(5px);
+    }
+
+    .material-modal-container {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        width: min(1100px, 100%);
+        height: min(850px, calc(100vh - 44px));
+        overflow: hidden;
+        border-radius: 20px;
+        background: var(--card-color, #ffffff);
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    .material-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        min-height: 70px;
+        padding: 15px 22px;
+        border-bottom: 1px solid var(--border-color, #e5e7eb);
+    }
+
+    .material-modal-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        color: var(--text-color, #111827);
+        font-size: 1rem;
+        font-weight: 800;
+    }
+
+    .material-modal-title i {
+        color: #2563eb;
+        font-size: 1.3rem;
+    }
+
+    .material-modal-title span {
+        overflow-wrap: anywhere;
+    }
+
+    .material-modal-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .modal-icon-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--border-color, #e5e7eb);
+        border-radius: 10px;
+        background: var(--background-color, #f9fafb);
+        color: var(--text-secondary, #6b7280);
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .modal-icon-btn:hover {
+        border-color: #93c5fd;
+        background: #eff6ff;
+        color: #2563eb;
+    }
+
+    .modal-icon-btn.close:hover {
+        border-color: #fecaca;
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .material-modal-body {
+        flex: 1;
+        min-height: 0;
+        overflow: auto;
+        background: #f3f4f6;
+    }
+
+    .preview-frame {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: 500px;
+        border: 0;
+        background: #ffffff;
+    }
+
+    .preview-image-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100%;
+        padding: 25px;
+    }
+
+    .preview-image {
+        display: block;
         max-width: 100%;
         max-height: 100%;
-
         object-fit: contain;
-
         border-radius: 8px;
     }
 
-
-    /* ============================================================
-   FILE TYPE NOT SUPPORTED
-============================================================ */
-
-    .material-preview-unavailable {
+    .preview-video {
+        display: block;
         width: 100%;
-        height: 100%;
+        max-height: 100%;
+        background: #000000;
+    }
 
+    .preview-audio-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+        padding: 30px;
+    }
+
+    .preview-audio-wrapper audio {
+        width: min(600px, 100%);
+    }
+
+    .preview-unavailable {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-
+        min-height: 300px;
+        padding: 35px;
         text-align: center;
-
-        padding: 30px;
+        color: #6b7280;
     }
 
-    .material-preview-unavailable>i {
-        margin-bottom: 15px;
-
-        font-size: 60px;
-
-        color: var(--muted-text-color);
+    .preview-unavailable i {
+        margin-bottom: 12px;
+        color: #9ca3af;
+        font-size: 3rem;
     }
 
-    .material-preview-unavailable h3 {
+    .preview-unavailable h3 {
         margin: 0 0 8px;
-
-        color: var(--text-color);
-
-        font-size: 18px;
+        color: #374151;
+        font-size: 1.1rem;
     }
 
-    .material-preview-unavailable p {
-        margin: 0 0 20px;
-
-        color: var(--muted-text-color);
-
-        font-size: 13px;
+    .preview-unavailable p {
+        margin: 0 0 18px;
+        font-size: 0.9rem;
     }
-
-
-    /* ============================================================
-   DOWNLOAD BUTTON
-============================================================ */
-
-    .material-preview-download {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-
-        padding: 10px 16px;
-
-        border-radius: 8px;
-
-        background: var(--primary-color);
-        color: #fff;
-
-        text-decoration: none;
-
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-    .material-preview-download:hover {
-        opacity: 0.9;
-    }
-
-
-    /* ============================================================
-   PREVENT PAGE SCROLL
-============================================================ */
 
     body.modal-open {
         overflow: hidden;
     }
 
-    /* ============================================================
-   MODAL HEADER ACTIONS
-============================================================ */
-
-    .material-preview-actions {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-
-    /* ============================================================
-   MODAL BUTTON
-============================================================ */
-
-    .material-preview-btn {
-        width: 38px;
-        height: 38px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border: none;
-        border-radius: 8px;
-
-        background: transparent;
-        color: var(--text-color);
-
-        cursor: pointer;
-
-        font-size: 20px;
-
-        transition:
-            background-color 0.2s ease,
-            color 0.2s ease;
-    }
-
-
-    .material-preview-btn:hover {
-        background: var(--background-color);
-    }
-
-
-    .material-preview-btn.close:hover {
-        background: #fee2e2;
-        color: #dc2626;
-    }
-
-    /* ============================================================
-   FULLSCREEN MODAL
-============================================================ */
-
-    .material-preview-modal.fullscreen {
-        padding: 0;
-    }
-
-
-    .material-preview-modal.fullscreen .material-preview-overlay {
-        background: #000;
-    }
-
-
-    .material-preview-modal.fullscreen .material-preview-container {
-
-        width: 100vw;
-        height: 100vh;
-
-        max-width: none;
-        max-height: none;
-
+    .material-modal.fullscreen .material-modal-container {
+        width: 100%;
+        height: 100%;
         border-radius: 0;
     }
 
-
-/* ============================================================
-   MATERIAL RESOURCES
-   ============================================================ */
-
-.material-resources {
-    margin-top: 24px;
-}
-
-.material-resources-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-}
-
-.material-resources-header h3 {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.material-resources-header h3 i {
-    font-size: 20px;
-}
-
-.material-resources-header > span {
-    font-size: 13px;
-    color: #6b7280;
-}
-
-
-/* ============================================================
-   RESOURCE ITEM
-   ============================================================ */
-
-.material-resource-item {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-
-    padding: 14px 16px;
-    margin-bottom: 10px;
-
-    background: #fff;
-
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.material-resource-item:hover {
-    border-color: #d1d5db;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-
-/* ============================================================
-   FILE ICON
-   ============================================================ */
-
-.material-resource-icon {
-    width: 44px;
-    height: 44px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    border-radius: 9px;
-
-    background: #f3f4f6;
-}
-
-.material-resource-icon i {
-    font-size: 23px;
-}
-
-
-/* ============================================================
-   FILE INFORMATION
-   ============================================================ */
-
-.material-resource-info {
-    flex: 1;
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.material-resource-info strong {
-    overflow: hidden;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    color: #1f2937;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.material-resource-info span {
-    font-size: 12px;
-    color: #6b7280;
-}
-
-
-/* ============================================================
-   RESOURCE ACTIONS
-   ============================================================ */
-
-.material-resource-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    flex-shrink: 0;
-}
-
-.material-resource-open,
-.material-resource-download {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-
-    padding: 8px 12px;
-
-    border-radius: 7px;
-
-    font-size: 13px;
-    font-weight: 500;
-
-    text-decoration: none;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
-}
-
-.material-resource-open {
-    border: 1px solid #e5e7eb;
-
-    background: #fff;
-    color: #374151;
-}
-
-.material-resource-open:hover {
-    background: #f3f4f6;
-}
-
-.material-resource-download {
-    border: 1px solid #e5e7eb;
-
-    background: #f9fafb;
-    color: #374151;
-}
-
-.material-resource-download:hover {
-    background: #e5e7eb;
-}
-
-.material-resource-open i,
-.material-resource-download i {
-    font-size: 17px;
-}
-
-
-/* ============================================================
-   NO RESOURCES
-   ============================================================ */
-
-.material-no-resources {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    padding: 35px 20px;
-
-    text-align: center;
-
-    border: 1px dashed #d1d5db;
-    border-radius: 10px;
-
-    background: #f9fafb;
-}
-
-.material-no-resources i {
-    margin-bottom: 10px;
-
-    font-size: 35px;
-    color: #9ca3af;
-}
-
-.material-no-resources p {
-    margin: 0;
-
-    font-size: 14px;
-    color: #6b7280;
-}
-
-
-/* ============================================================
-   RESOURCE PREVIEW MODAL
-   ============================================================ */
-
-.material-preview-modal {
-    position: fixed;
-    inset: 0;
-
-    display: none;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    height: 100%;
-
-    z-index: 9999;
-}
-
-.material-preview-modal.active {
-    display: flex;
-}
-
-
-/* ============================================================
-   MODAL OVERLAY
-   ============================================================ */
-
-.material-preview-overlay {
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background: rgba(0, 0, 0, 0.65);
-}
-
-
-/* ============================================================
-   MODAL CONTAINER
-   ============================================================ */
-
-.material-preview-container {
-    position: relative;
-
-    width: 92vw;
-    height: 90vh;
-
-    max-width: 1400px;
-
-    display: flex;
-    flex-direction: column;
-
-    background: #fff;
-
-    border-radius: 14px;
-
-    overflow: hidden;
-
-    z-index: 1;
-
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-}
-
-
-/* ============================================================
-   PREVIEW HEADER
-   ============================================================ */
-
-.material-preview-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 20px;
-
-    padding: 14px 18px;
-
-    background: #fff;
-
-    border-bottom: 1px solid #e5e7eb;
-
-    flex-shrink: 0;
-}
-
-.material-preview-title {
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-
-    min-width: 0;
-
-    font-size: 15px;
-    font-weight: 600;
-
-    color: #1f2937;
-}
-
-.material-preview-title i {
-    font-size: 21px;
-
-    flex-shrink: 0;
-}
-
-#materialPreviewTitle {
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-/* ============================================================
-   PREVIEW ACTION BUTTONS
-   ============================================================ */
-
-.material-preview-actions {
-    display: flex;
-    align-items: center;
-
-    gap: 6px;
-
-    flex-shrink: 0;
-}
-
-.material-preview-btn {
-    width: 38px;
-    height: 38px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0;
-
-    border: none;
-    border-radius: 8px;
-
-    background: transparent;
-
-    color: #4b5563;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.material-preview-btn i {
-    font-size: 21px;
-}
-
-.material-preview-btn:hover {
-    background: #f3f4f6;
-    color: #111827;
-}
-
-.material-preview-btn:active {
-    transform: scale(0.95);
-}
-
-.material-preview-btn.close:hover {
-    background: #fee2e2;
-    color: #dc2626;
-}
-
-
-/* ============================================================
-   PREVIEW BODY
-   ============================================================ */
-
-.material-preview-body {
-    position: relative;
-
-    flex: 1;
-
-    min-height: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #f1f5f9;
-
-    overflow: hidden;
-}
-
-
-/* ============================================================
-   PDF PREVIEW
-   ============================================================ */
-
-.material-preview-frame {
-    width: 100%;
-    height: 100%;
-
-    border: none;
-
-    display: block;
-
-    background: #fff;
-}
-
-
-/* ============================================================
-   IMAGE PREVIEW
-   ============================================================ */
-
-.material-preview-image-wrapper {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 30px;
-
-    overflow: auto;
-}
-
-.material-preview-image {
-    display: block;
-
-    max-width: 100%;
-    max-height: 100%;
-
-    width: auto;
-    height: auto;
-
-    object-fit: contain;
-
-    border-radius: 8px;
-
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-
-/* ============================================================
-   VIDEO PREVIEW
-   ============================================================ */
-
-.material-preview-video {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    max-width: 1200px;
-    max-height: 100%;
-
-    object-fit: contain;
-
-    background: #000;
-}
-
-
-/* ============================================================
-   AUDIO PREVIEW
-   ============================================================ */
-
-.material-preview-audio-wrapper {
-    width: min(650px, 90%);
-
-    padding: 40px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 25px;
-
-    background: #fff;
-
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-.material-preview-audio-wrapper::before {
-    content: "♪";
-
-    width: 80px;
-    height: 80px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #f3f4f6;
-
-    font-size: 40px;
-}
-
-.material-preview-audio-wrapper audio {
-    width: 100%;
-}
-
-
-/* ============================================================
-   UNSUPPORTED FILE
-   ============================================================ */
-
-.material-preview-unavailable {
-    width: min(500px, 90%);
-
-    padding: 45px 35px;
-
-    text-align: center;
-
-    background: #fff;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 16px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-}
-
-.material-preview-unavailable > i {
-    margin-bottom: 15px;
-
-    font-size: 55px;
-
-    color: #6b7280;
-}
-
-.material-preview-unavailable h3 {
-    margin: 0 0 8px;
-
-    font-size: 18px;
-    font-weight: 600;
-
-    color: #1f2937;
-}
-
-.material-preview-unavailable p {
-    margin: 0 0 25px;
-
-    font-size: 14px;
-    line-height: 1.6;
-
-    color: #6b7280;
-}
-
-.material-preview-download {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    padding: 10px 18px;
-
-    border-radius: 8px;
-
-    background: #111827;
-    color: #fff;
-
-    text-decoration: none;
-
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.material-preview-download:hover {
-    background: #374151;
-    color: #fff;
-}
-
-
-/* ============================================================
-   FULL SCREEN
-   ============================================================ */
-
-.material-preview-modal.fullscreen {
-    align-items: stretch;
-    justify-content: stretch;
-}
-
-.material-preview-modal.fullscreen
-.material-preview-container {
-    width: 100vw;
-    height: 100vh;
-
-    max-width: none;
-
-    border-radius: 0;
-}
-
-
-/* ============================================================
-   PREVENT BACKGROUND SCROLL
-   ============================================================ */
-
-body.modal-open {
-    overflow: hidden;
-}
-
-
-/* ============================================================
-   MOBILE
-   ============================================================ */
-
-@media (max-width: 768px) {
-
-    .material-resource-item {
-        align-items: flex-start;
-        flex-wrap: wrap;
+    /* =========================================================
+       DARK MODE
+    ========================================================= */
+
+    .dark .material-heading-label {
+        background: rgba(59, 130, 246, 0.15);
+        color: #93c5fd;
     }
 
-    .material-resource-info {
-        flex: 1;
+    .dark .resource-item:hover {
+        border-color: #3b82f6;
+        background: rgba(59, 130, 246, 0.08);
     }
 
-    .material-resource-actions {
-        width: 100%;
-        margin-left: 58px;
+    .dark .resource-icon {
+        background: rgba(59, 130, 246, 0.15);
+        color: #93c5fd;
     }
 
-    .material-resource-open,
-    .material-resource-download {
-        flex: 1;
+    .dark .resource-btn {
+        background: rgba(59, 130, 246, 0.15);
+        border-color: rgba(96, 165, 250, 0.35);
+        color: #93c5fd;
     }
 
-    .material-preview-container {
-        width: 96vw;
-        height: 92vh;
-
-        border-radius: 10px;
+    .dark .resource-btn:hover {
+        background: #2563eb;
+        color: #ffffff;
     }
 
-    .material-preview-header {
-        padding: 10px 12px;
+    .dark .info-icon {
+        background: rgba(156, 163, 175, 0.12);
+        color: #9ca3af;
     }
 
-    .material-preview-title {
-        font-size: 14px;
+    .dark .material-modal-body {
+        background: #111827;
     }
 
-    .material-preview-btn {
-        width: 34px;
-        height: 34px;
-    }
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
 
-    .material-preview-image-wrapper {
-        padding: 15px;
-    }
-
-    .material-preview-audio-wrapper {
-        padding: 25px 20px;
-    }
-
-    .material-preview-unavailable {
-        padding: 35px 20px;
-    }
-}
-
-    /* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
-    @media (max-width: 768px) {
-
-        .material-modal {
-            padding: 10px;
+    @media (max-width: 1050px) {
+        .material-layout {
+            grid-template-columns: minmax(0, 1fr) 280px;
+            gap: 18px;
         }
 
-        .material-modal-container {
-            width: 100%;
-            height: 95vh;
-
-            border-radius: 12px;
+        .material-card {
+            padding: 22px;
         }
-
-        .material-modal-title {
-            max-width: 65%;
-        }
-
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 850px) {
+        .material-page {
+            padding: 24px 20px 40px;
+        }
+
+        .material-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .material-sidebar {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: start;
+        }
+    }
+
+    @media (max-width: 620px) {
+        .material-page {
+            padding: 18px 14px 30px;
+        }
+
+        .material-topbar {
+            gap: 11px;
+            margin-bottom: 23px;
+        }
+
+        .material-back {
+            width: 39px;
+            height: 39px;
+            border-radius: 11px;
+        }
+
+        .material-heading-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            font-size: 1.3rem;
+        }
+
+        .material-heading h1 {
+            font-size: 1.35rem;
+        }
+
+        .material-topic {
+            font-size: 0.82rem;
+        }
+
+        .material-card {
+            padding: 18px;
+            border-radius: 16px;
+        }
+
+        .material-card-header {
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+        }
+
+        .material-card-header h2,
+        .material-card-header h3 {
+            font-size: 0.98rem;
+        }
+
+        .material-description {
+            font-size: 0.9rem;
+            line-height: 1.75;
+        }
+
+        .material-sidebar {
+            display: flex;
+        }
+
+        .resource-item {
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+        }
+
+        .resource-icon {
+            width: 39px;
+            height: 39px;
+            border-radius: 11px;
+            font-size: 1rem;
+        }
+
+        .resource-info strong {
+            font-size: 0.84rem;
+        }
+
+        .resource-info span {
+            font-size: 0.72rem;
+        }
+
+        .resource-actions {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .resource-btn {
+            min-height: 32px;
+            padding: 7px 9px;
+            font-size: 0.7rem;
+        }
 
         .material-modal {
             padding: 0;
         }
 
         .material-modal-container {
-            width: 100vw;
-            height: 100vh;
-
+            width: 100%;
+            height: 100%;
             border-radius: 0;
         }
 
-    }
-
-    /* ============================================================
-   MOBILE
-============================================================ */
-
-    @media (max-width: 768px) {
-
-        .material-preview-modal {
-            padding: 10px;
+        .material-modal-header {
+            min-height: 62px;
+            padding: 13px 15px;
         }
 
-        .material-preview-container {
-            height: 95vh;
-
-            border-radius: 12px;
+        .material-modal-title {
+            font-size: 0.88rem;
         }
 
-        .material-preview-header {
-            min-height: 54px;
-
-            padding: 10px 12px;
-        }
-
-        .material-preview-image-wrapper {
-            padding: 15px;
-        }
-
-    }
-
-    /* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
-    @media (max-width: 900px) {
-
-        .classwork-show-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .classwork-show-sidebar {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-
-            gap: 20px;
+        .preview-frame {
+            min-height: 400px;
         }
     }
 
-
-    @media (max-width: 650px) {
-
-        .classwork-show-page {
-            padding: 20px 16px 40px;
+    @media (max-width: 400px) {
+        .material-heading h1 {
+            font-size: 1.2rem;
         }
 
-        .classwork-show-heading {
-            align-items: flex-start;
-            gap: 14px;
+        .material-heading-label {
+            font-size: 0.64rem;
         }
 
-        .classwork-show-icon {
-            width: 48px;
-            height: 48px;
-
-            border-radius: 12px;
-
-            font-size: 23px;
-        }
-
-        .classwork-show-heading h1 {
-            font-size: 22px;
-        }
-
-        .classwork-show-type {
-            font-size: 11px;
-        }
-
-        .classwork-show-topic {
-            font-size: 13px;
-        }
-
-        .classwork-show-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .classwork-detail-card-header {
-            padding: 16px 18px;
-        }
-
-        .classwork-detail-card-header h2 {
-            font-size: 16px;
-        }
-
-        .classwork-description {
-            padding: 18px;
-
-            font-size: 14px;
-        }
-
-        .classwork-file {
-            padding: 18px;
-        }
-
-        .classwork-file-icon {
-            width: 44px;
-            height: 44px;
-
-            font-size: 21px;
-        }
-
-        .classwork-info-item {
-            padding: 15px 18px;
-        }
-
-        .classwork-action-btn {
-            margin: 14px;
+        .resource-btn span {
+            display: none;
         }
     }
+    /* =========================================================
+   DARK MODE — FILE / RESOURCE HOVER
+   ========================================================= */
 
+html.dark .resource-item,
+body.dark .resource-item,
+.dark-mode .resource-item {
+    background: #111329;
+    border-color: #292d4d;
+}
 
-    /* ============================================================
-   DARK MODE
-   ============================================================ */
+html.dark .resource-item:hover,
+body.dark .resource-item:hover,
+.dark-mode .resource-item:hover {
+    background: #171a35;
+    border-color: #3b82f6;
+}
 
-    [data-theme="dark"] .classwork-show-icon.material {
-        background-color: rgba(2, 132, 199, 0.15);
-        color: #38bdf8;
-    }
+/* File name */
+html.dark .resource-info strong,
+body.dark .resource-info strong,
+.dark-mode .resource-info strong {
+    color: #ffffff;
+}
 
-    [data-theme="dark"] .classwork-show-type.material {
-        color: #38bdf8;
-    }
+/* File type + size */
+html.dark .resource-info span,
+body.dark .resource-info span,
+.dark-mode .resource-info span {
+    color: #aeb6c8;
+}
 
-    [data-theme="dark"] .classwork-file-icon {
-        background-color: rgba(2, 132, 199, 0.15);
-        color: #38bdf8;
-    }
+/* Download button */
+html.dark .resource-btn.download,
+body.dark .resource-btn.download,
+.dark-mode .resource-btn.download {
+    background: #111329;
+    border-color: #34385a;
+    color: #ffffff;
+}
+
+html.dark .resource-btn.download:hover,
+body.dark .resource-btn.download:hover,
+.dark-mode .resource-btn.download:hover {
+    background: #1d4ed8;
+    border-color: #3b82f6;
+    color: #ffffff;
+}
+
+/* Open button */
+html.dark .resource-btn,
+body.dark .resource-btn,
+.dark-mode .resource-btn {
+    color: #93c5fd;
+}
+
+html.dark .resource-btn:hover,
+body.dark .resource-btn:hover,
+.dark-mode .resource-btn:hover {
+    background: #2563eb;
+    border-color: #3b82f6;
+    color: #ffffff;
+}
 </style>
 
-@extends('layouts.prof_layout')
+<div class="material-page">
 
-@php
-use Illuminate\Support\Facades\Storage;
-@endphp
-
-@section('content')
-
-<div class="classwork-show-page">
-
-    {{-- ============================================================
-        HEADER
-    ============================================================ --}}
-
-    <div class="classwork-show-header">
+    {{-- HEADER --}}
+    <div class="material-topbar">
 
         <a
             href="{{ $returnTo === 'classwork'
-                    ? route(
-                        'professor.class-groups.classroom-group.classwork',
-                        $classGroup
-                    )
-                    : route(
-                        'professor.class-groups.classroom-group',
-                        $classGroup
-                    )
-                }}"
-            class="classwork-back-btn">
-            <i class="bx bx-arrow-back"></i>
+                ? route(
+                    'professor.class-groups.classroom-group.classwork',
+                    $classGroup
+                )
+                : route(
+                    'professor.class-groups.classroom-group',
+                    $classGroup
+                )
+            }}"
+            class="material-back"
+            title="Back">
 
-            {{ $returnTo === 'classwork'
-                    ? 'Back to Classwork'
-                    : 'Back to Stream'
-                }}
+            <i class="bx bx-arrow-back"></i>
         </a>
 
-        <div class="classwork-show-heading">
+        <div class="material-heading">
 
-            <div class="classwork-show-icon material">
+            <span class="material-heading-label">
                 <i class="bx bx-book-open"></i>
-            </div>
+                Material
+            </span>
 
-            <div>
-                <span class="classwork-show-type material">
-                    MATERIAL
-                </span>
+            <h1>{{ $material->title }}</h1>
 
-                <h1>
-                    {{ $material->title }}
-                </h1>
-
-                @if($material->topic)
-                <div class="classwork-show-topic">
+            @if($material->topic)
+                <div class="material-topic">
                     <i class="bx bx-folder"></i>
                     {{ $material->topic->topic_name }}
                 </div>
-                @endif
-            </div>
+            @endif
 
+        </div>
+
+        <div class="material-heading-icon">
+            <i class="bx bx-book-open"></i>
         </div>
 
     </div>
 
+    {{-- MAIN CONTENT --}}
+    <div class="material-layout">
 
-    {{-- ============================================================
-        CONTENT
-    ============================================================ --}}
+        {{-- LEFT CONTENT --}}
+        <main class="material-main">
 
-    <div class="classwork-show-grid">
+            {{-- DESCRIPTION --}}
+            <section class="material-card">
 
-        {{-- MAIN CONTENT --}}
-        <div class="classwork-show-main">
-
-            <section class="classwork-detail-card">
-
-                <div class="classwork-detail-card-header">
+                <div class="material-card-header">
                     <h2>
+                        <i class="bx bx-align-left"></i>
                         Description
                     </h2>
                 </div>
 
-                <div class="classwork-description">
+                <div class="material-description">
 
                     @if($material->description)
 
-                    {!! nl2br(e($material->description)) !!}
+                        {!! nl2br(e($material->description)) !!}
 
                     @else
 
-                    <span class="classwork-no-content">
-                        No description provided.
-                    </span>
+                        <div class="material-empty">
+                            <i class="bx bx-file-blank"></i>
+                            No description provided.
+                        </div>
 
                     @endif
 
@@ -1835,18 +903,15 @@ use Illuminate\Support\Facades\Storage;
 
             </section>
 
-            {{-- ============================================================
-                ATTACHED RESOURCES
-            ============================================================= --}}
+            {{-- ATTACHED RESOURCES --}}
+            <section class="material-card">
 
-            <div class="material-resources">
+                <div class="material-card-header">
 
-                <div class="material-resources-header">
-
-                    <h3>
+                    <h2>
                         <i class="bx bx-paperclip"></i>
                         Attached Resources
-                    </h3>
+                    </h2>
 
                     <span>
                         {{ $material->resources->count() }}
@@ -1855,168 +920,186 @@ use Illuminate\Support\Facades\Storage;
 
                 </div>
 
+                <div class="resource-list">
 
-                @forelse($material->resources as $resource)
+                    @forelse($material->resources as $resource)
 
-                @php
-                $extension = strtolower(
-                pathinfo($resource->file_name, PATHINFO_EXTENSION)
-                );
+                        @php
+                            $extension = strtolower(
+                                pathinfo($resource->file_name, PATHINFO_EXTENSION)
+                            );
 
-                $fileUrl = Storage::disk('public')->url(
-                $resource->file_path
-                );
+                            $fileUrl = asset(
+                                'storage/' . ltrim($resource->file_path, '/')
+                            );
 
-                $fileSize = $resource->file_size
-                ? number_format($resource->file_size / 1024 / 1024, 2) . ' MB'
-                : 'Unknown size';
-                @endphp
+                            $fileSize = $resource->file_size
+                                ? number_format(
+                                    $resource->file_size / 1024 / 1024,
+                                    2
+                                ) . ' MB'
+                                : 'Unknown size';
 
-                <div class="material-resource-item">
+                            $previewable = in_array($extension, [
+                                'pdf',
+                                'jpg',
+                                'jpeg',
+                                'png',
+                                'gif',
+                                'webp',
+                                'mp4',
+                                'webm',
+                                'mov',
+                                'mp3',
+                                'wav',
+                                'ogg',
+                                'm4a'
+                            ]);
+                        @endphp
 
-                    {{-- FILE ICON --}}
-                    <div class="material-resource-icon">
+                        <div class="resource-item">
 
-                        @if(in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
-                        <i class="bx bx-image"></i>
+                            <div class="resource-icon">
 
-                        @elseif($extension === 'pdf')
-                        <i class="bx bxs-file-pdf"></i>
+                                @if(in_array($extension, [
+                                    'jpg',
+                                    'jpeg',
+                                    'png',
+                                    'gif',
+                                    'webp'
+                                ]))
 
-                        @elseif(in_array($extension, ['doc', 'docx']))
-                        <i class="bx bxs-file-doc"></i>
+                                    <i class="bx bx-image"></i>
 
-                        @elseif(in_array($extension, ['xls', 'xlsx', 'csv']))
-                        <i class="bx bxs-file"></i>
+                                @elseif($extension === 'pdf')
 
-                        @elseif(in_array($extension, ['ppt', 'pptx']))
-                        <i class="bx bxs-slideshow"></i>
+                                    <i class="bx bxs-file-pdf"></i>
 
-                        @elseif(in_array($extension, ['mp4', 'webm', 'mov', 'avi']))
-                        <i class="bx bx-video"></i>
+                                @elseif(in_array($extension, ['doc', 'docx']))
 
-                        @elseif(in_array($extension, ['mp3', 'wav', 'ogg', 'm4a']))
-                        <i class="bx bx-music"></i>
+                                    <i class="bx bxs-file-doc"></i>
 
-                        @elseif($extension === 'zip')
-                        <i class="bx bxs-file-archive"></i>
+                                @elseif(in_array($extension, ['xls', 'xlsx', 'csv']))
 
-                        @else
-                        <i class="bx bx-file"></i>
-                        @endif
+                                    <i class="bx bxs-file"></i>
 
-                    </div>
+                                @elseif(in_array($extension, ['ppt', 'pptx']))
 
+                                    <i class="bx bxs-slideshow"></i>
 
-                    {{-- FILE INFORMATION --}}
-                    <div class="material-resource-info">
+                                @elseif(in_array($extension, [
+                                    'mp4',
+                                    'webm',
+                                    'mov',
+                                    'avi'
+                                ]))
 
-                        <strong>
-                            {{ $resource->file_name }}
-                        </strong>
+                                    <i class="bx bx-video"></i>
 
-                        <span>
-                            {{ strtoupper($extension) }}
-                            ·
-                            {{ $fileSize }}
-                        </span>
+                                @elseif(in_array($extension, [
+                                    'mp3',
+                                    'wav',
+                                    'ogg',
+                                    'm4a'
+                                ]))
 
-                    </div>
+                                    <i class="bx bx-music"></i>
 
+                                @elseif($extension === 'zip')
 
+                                    <i class="bx bxs-file-archive"></i>
 
+                                @else
 
-                    {{-- ACTIONS --}}
-                    <div class="material-resource-actions">
+                                    <i class="bx bx-file"></i>
 
-                        {{-- OPEN --}}
-                        @if(in_array($extension, [
-                        'pdf',
-                        'jpg',
-                        'jpeg',
-                        'png',
-                        'gif',
-                        'webp',
-                        'mp4',
-                        'webm',
-                        'mov',
-                        'mp3',
-                        'wav',
-                        'ogg',
-                        'm4a'
-                        ]))
+                                @endif
 
-                        <button
-                            type="button"
-                            class="material-resource-open"
-                            onclick="openResourcePreview(
-                '{{ $fileUrl }}',
-                '{{ $extension }}',
-'{{ addslashes($resource->file_name) }}'
-            )">
-                            <i class="bx bx-show"></i>
-                            Open
-                        </button>
+                            </div>
 
-                        @endif
+                            <div class="resource-info">
 
+                                <strong>
+                                    {{ $resource->file_name }}
+                                </strong>
 
-                        {{-- DOWNLOAD --}}
-                        <a
-                            href="{{ $fileUrl }}"
-                            class="material-resource-download"
-                            download="{{ $resource->file_name }}">
-                            <i class="bx bx-download"></i>
-                            Download
-                        </a>
+                                <span>
+                                    {{ strtoupper($extension ?: 'FILE') }}
+                                    ·
+                                    {{ $fileSize }}
+                                </span>
 
-                    </div>
+                            </div>
 
+                            <div class="resource-actions">
 
+                                @if($previewable)
+
+                                    <button
+                                        type="button"
+                                        class="resource-btn"
+                                        data-preview-url="{{ $fileUrl }}"
+                                        data-preview-extension="{{ $extension }}"
+                                        data-preview-name="{{ $resource->file_name }}">
+
+                                        <i class="bx bx-show"></i>
+                                        <span>Open</span>
+                                    </button>
+
+                                @endif
+
+                                <a
+                                    href="{{ $fileUrl }}"
+                                    class="resource-btn download"
+                                    download="{{ $resource->file_name }}">
+
+                                    <i class="bx bx-download"></i>
+                                    <span>Download</span>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    @empty
+
+                        <div class="material-empty">
+                            <i class="bx bx-file-blank"></i>
+                            No resources attached to this material.
+                        </div>
+
+                    @endforelse
 
                 </div>
 
-                @empty
+            </section>
 
-                <div class="material-no-resources">
-
-                    <i class="bx bx-file-blank"></i>
-
-                    <p>
-                        No resources attached to this material.
-                    </p>
-
-                </div>
-
-                @endforelse
-
-            </div>
-
-
-
-        </div>
-
+        </main>
 
         {{-- SIDEBAR --}}
-        <aside class="classwork-show-sidebar">
+        <aside class="material-sidebar">
 
-            <section class="classwork-detail-card">
+            {{-- INFORMATION --}}
+            <section class="material-card">
 
-                <div class="classwork-detail-card-header">
-                    <h2>
+                <div class="material-card-header">
+                    <h3>
+                        <i class="bx bx-info-circle"></i>
                         Information
-                    </h2>
+                    </h3>
                 </div>
 
-                <div class="classwork-info-list">
+                <div class="info-list">
 
-                    <div class="classwork-info-item">
+                    <div class="info-item">
 
-                        <i class="bx bx-calendar"></i>
+                        <div class="info-icon">
+                            <i class="bx bx-calendar"></i>
+                        </div>
 
-                        <div>
-                            <span>Posted</span>
-
+                        <div class="info-content">
+                            <span>Posted Date</span>
                             <strong>
                                 {{ $material->created_at->format('M d, Y') }}
                             </strong>
@@ -2024,13 +1107,14 @@ use Illuminate\Support\Facades\Storage;
 
                     </div>
 
-                    <div class="classwork-info-item">
+                    <div class="info-item">
 
-                        <i class="bx bx-time"></i>
+                        <div class="info-icon">
+                            <i class="bx bx-time"></i>
+                        </div>
 
-                        <div>
-                            <span>Time</span>
-
+                        <div class="info-content">
+                            <span>Posted Time</span>
                             <strong>
                                 {{ $material->created_at->format('h:i A') }}
                             </strong>
@@ -2042,15 +1126,14 @@ use Illuminate\Support\Facades\Storage;
 
             </section>
 
-
             {{-- ACTIONS --}}
+            <section class="material-card">
 
-            <section class="classwork-detail-card">
-
-                <div class="classwork-detail-card-header">
-                    <h2>
+                <div class="material-card-header">
+                    <h3>
+                        <i class="bx bx-slider-alt"></i>
                         Actions
-                    </h2>
+                    </h3>
                 </div>
 
                 <a
@@ -2060,10 +1143,14 @@ use Illuminate\Support\Facades\Storage;
                             'classGroup' => $classGroup->id,
                             'material' => $material->id,
                             'return_to' => 'show',
-                             'origin' => $returnTo,
+                            'origin' => $returnTo,
                         ]
-                    ) }}">
+                    ) }}"
+                    class="edit-material-btn">
+
+                    <i class="bx bx-edit"></i>
                     Edit Material
+
                 </a>
 
             </section>
@@ -2072,499 +1159,293 @@ use Illuminate\Support\Facades\Storage;
 
     </div>
 
-    {{-- ============================================================
-    MATERIAL PREVIEW MODAL
-============================================================ --}}
+</div>
+
+{{-- PREVIEW MODAL --}}
+<div
+    class="material-modal"
+    id="materialPreviewModal"
+    aria-hidden="true">
+
     <div
-        class="material-preview-modal"
-        id="materialPreviewModal"
-        aria-hidden="true">
+        class="material-modal-overlay"
+        id="materialPreviewOverlay">
+    </div>
 
-        {{-- OVERLAY --}}
-        <div
-            class="material-preview-overlay"
-            id="materialPreviewOverlay"></div>
+    <div class="material-modal-container">
 
+        <div class="material-modal-header">
 
-        {{-- MODAL CONTAINER --}}
-        <div class="material-preview-container">
+            <div class="material-modal-title">
 
-            <div class="material-preview-header">
+                <i class="bx bx-file" id="materialPreviewIcon"></i>
 
-                <div class="material-preview-title">
-
-                    <i class="bx bx-file" id="materialPreviewIcon"></i>
-
-                    <span id="materialPreviewTitle">
-                        {{ $material->title }}
-                    </span>
-
-                </div>
-
-                <div class="material-preview-actions">
-
-                    {{-- FULL SCREEN --}}
-                    <button
-                        type="button"
-                        class="material-preview-btn"
-                        id="materialFullscreenBtn"
-                        title="Full Screen"
-                        aria-label="Full Screen">
-
-                        <i class="bx bx-fullscreen"></i>
-
-                    </button>
-
-                    {{-- CLOSE --}}
-                    <button
-                        type="button"
-                        class="material-preview-btn close"
-                        id="closeMaterialBtn"
-                        title="Close"
-                        aria-label="Close">
-
-                        <i class="bx bx-x"></i>
-
-                    </button>
-
-                </div>
+                <span id="materialPreviewTitle">
+                    {{ $material->title }}
+                </span>
 
             </div>
 
+            <div class="material-modal-actions">
 
-            {{-- FILE PREVIEW --}}
-            <div
-                class="material-preview-body"
-                id="materialPreviewBody">
+                <button
+                    type="button"
+                    class="modal-icon-btn"
+                    id="materialFullscreenBtn"
+                    title="Full Screen"
+                    aria-label="Full Screen">
+
+                    <i class="bx bx-fullscreen"></i>
+
+                </button>
+
+                <button
+                    type="button"
+                    class="modal-icon-btn close"
+                    id="closeMaterialBtn"
+                    title="Close"
+                    aria-label="Close">
+
+                    <i class="bx bx-x"></i>
+
+                </button>
 
             </div>
 
         </div>
 
-    </div>
+        <div
+            class="material-modal-body"
+            id="materialPreviewBody">
+        </div>
 
+    </div>
 
 </div>
 
-@endsection
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
 
-        const modal =
-            document.getElementById('materialPreviewModal');
-
-        const closeBtn =
-            document.getElementById('closeMaterialBtn');
-
-        const overlay =
-            document.getElementById('materialPreviewOverlay');
-
-        const fullscreenBtn =
-            document.getElementById('materialFullscreenBtn');
-
-        const previewBody =
-            document.getElementById('materialPreviewBody');
-
-        const previewTitle =
-            document.getElementById('materialPreviewTitle');
-
-        const previewIcon =
-            document.getElementById('materialPreviewIcon');
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | SAFETY CHECK
-        |--------------------------------------------------------------------------
-        */
+        const modal = document.getElementById('materialPreviewModal');
+        const overlay = document.getElementById('materialPreviewOverlay');
+        const closeBtn = document.getElementById('closeMaterialBtn');
+        const fullscreenBtn = document.getElementById('materialFullscreenBtn');
+        const previewBody = document.getElementById('materialPreviewBody');
+        const previewTitle = document.getElementById('materialPreviewTitle');
+        const previewIcon = document.getElementById('materialPreviewIcon');
 
         if (
             !modal ||
-            !closeBtn ||
             !overlay ||
+            !closeBtn ||
             !fullscreenBtn ||
             !previewBody
         ) {
             return;
         }
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | OPEN RESOURCE
-        |--------------------------------------------------------------------------
-        */
-
-        window.openResourcePreview = function(
-            fileUrl,
-            extension,
-            fileName
-        ) {
-
-            previewTitle.textContent = fileName;
-
-            previewBody.innerHTML = '';
-
-            extension = extension.toLowerCase();
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | PDF
-            |--------------------------------------------------------------------------
-            */
-
-            if (extension === 'pdf') {
-
-                previewIcon.className =
-                    'bx bxs-file-pdf';
-
-                const iframe =
-                    document.createElement('iframe');
-
-                iframe.src = fileUrl;
-
-                iframe.title = fileName;
-
-                iframe.className =
-                    'material-preview-frame';
-
-                previewBody.appendChild(iframe);
-
-            }
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | IMAGES
-            |--------------------------------------------------------------------------
-            */
-            else if ([
-                    'jpg',
-                    'jpeg',
-                    'png',
-                    'gif',
-                    'webp'
-                ].includes(extension)) {
-
-                previewIcon.className =
-                    'bx bx-image';
-
-                const wrapper =
-                    document.createElement('div');
-
-                wrapper.className =
-                    'material-preview-image-wrapper';
-
-                const image =
-                    document.createElement('img');
-
-                image.src = fileUrl;
-
-                image.alt = fileName;
-
-                image.className =
-                    'material-preview-image';
-
-                wrapper.appendChild(image);
-
-                previewBody.appendChild(wrapper);
-
-            }
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | VIDEO
-            |--------------------------------------------------------------------------
-            */
-            else if ([
-                    'mp4',
-                    'webm',
-                    'mov'
-                ].includes(extension)) {
-
-                previewIcon.className =
-                    'bx bx-video';
-
-                const video =
-                    document.createElement('video');
-
-                video.src = fileUrl;
-
-                video.controls = true;
-
-                video.autoplay = false;
-
-                video.className =
-                    'material-preview-video';
-
-                previewBody.appendChild(video);
-
-            }
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | AUDIO
-            |--------------------------------------------------------------------------
-            */
-            else if ([
-                    'mp3',
-                    'wav',
-                    'ogg',
-                    'm4a'
-                ].includes(extension)) {
-
-                previewIcon.className =
-                    'bx bx-music';
-
-                const wrapper =
-                    document.createElement('div');
-
-                wrapper.className =
-                    'material-preview-audio-wrapper';
-
-                const audio =
-                    document.createElement('audio');
-
-                audio.src = fileUrl;
-
-                audio.controls = true;
-
-                wrapper.appendChild(audio);
-
-                previewBody.appendChild(wrapper);
-
-            }
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | UNSUPPORTED FILE
-            |--------------------------------------------------------------------------
-            */
-            else {
-
-                previewIcon.className =
-                    'bx bx-file';
-
-                previewBody.innerHTML = `
-
-                <div class="material-preview-unavailable">
-
-                    <i class="bx bx-file"></i>
-
-                    <h3>
-                        Preview not available
-                    </h3>
-
-                    <p>
-                        This file type cannot be previewed
-                        in the browser.
-                    </p>
-
-                    <a
-                        href="${fileUrl}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="material-preview-download">
-
-                        <i class="bx bx-download"></i>
-
-                        Open / Download File
-
-                    </a>
-
-                </div>
-
-            `;
-
-            }
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | SHOW MODAL
-            |--------------------------------------------------------------------------
-            */
-
-            modal.classList.add('active');
-
-            modal.setAttribute(
-                'aria-hidden',
-                'false'
-            );
-
-            document.body.classList.add(
-                'modal-open'
-            );
-
-        };
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | CLOSE MODAL
-        |--------------------------------------------------------------------------
-        */
-
-        function closeMaterialModal() {
-
-            modal.classList.remove('active');
-
-            modal.classList.remove('fullscreen');
-
-            modal.setAttribute(
-                'aria-hidden',
-                'true'
-            );
-
-            document.body.classList.remove(
-                'modal-open'
-            );
-
-
-            /*
-            | Stop video/audio when closing
-            */
-
-            previewBody.innerHTML = '';
-
-            updateFullscreenIcon();
-
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | FULL SCREEN
-        |--------------------------------------------------------------------------
-        */
-
-        function toggleFullscreen() {
-
-            modal.classList.toggle(
-                'fullscreen'
-            );
-
-            updateFullscreenIcon();
-
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | FULLSCREEN ICON
-        |--------------------------------------------------------------------------
-        */
-
         function updateFullscreenIcon() {
 
-            const icon =
-                fullscreenBtn.querySelector('i');
+            const icon = fullscreenBtn.querySelector('i');
 
-            if (
-                modal.classList.contains(
-                    'fullscreen'
-                )
-            ) {
+            if (modal.classList.contains('fullscreen')) {
 
-                icon.className =
-                    'bx bx-exit-fullscreen';
+                icon.className = 'bx bx-exit-fullscreen';
 
                 fullscreenBtn.setAttribute(
-                    'title',
+                    'aria-label',
                     'Exit Full Screen'
                 );
 
                 fullscreenBtn.setAttribute(
-                    'aria-label',
+                    'title',
                     'Exit Full Screen'
                 );
 
             } else {
 
-                icon.className =
-                    'bx bx-fullscreen';
-
-                fullscreenBtn.setAttribute(
-                    'title',
-                    'Full Screen'
-                );
+                icon.className = 'bx bx-fullscreen';
 
                 fullscreenBtn.setAttribute(
                     'aria-label',
                     'Full Screen'
                 );
 
-            }
+                fullscreenBtn.setAttribute(
+                    'title',
+                    'Full Screen'
+                );
 
+            }
         }
 
+        function openPreview(fileUrl, extension, fileName) {
 
-        /*
-        |--------------------------------------------------------------------------
-        | BUTTON EVENTS
-        |--------------------------------------------------------------------------
-        */
+            previewBody.innerHTML = '';
+            previewTitle.textContent = fileName;
 
-        closeBtn.addEventListener(
-            'click',
-            closeMaterialModal
-        );
+            extension = extension.toLowerCase();
 
+            if (extension === 'pdf') {
 
-        overlay.addEventListener(
-            'click',
-            closeMaterialModal
-        );
+                previewIcon.className = 'bx bxs-file-pdf';
 
+                const iframe = document.createElement('iframe');
 
-        fullscreenBtn.addEventListener(
-            'click',
-            toggleFullscreen
-        );
+                iframe.src = fileUrl;
+                iframe.title = fileName;
+                iframe.className = 'preview-frame';
 
+                previewBody.appendChild(iframe);
 
-        /*
-        |--------------------------------------------------------------------------
-        | ESC KEY
-        |--------------------------------------------------------------------------
-        */
+            } else if ([
+                'jpg',
+                'jpeg',
+                'png',
+                'gif',
+                'webp'
+            ].includes(extension)) {
 
-        document.addEventListener(
-            'keydown',
-            function(event) {
+                previewIcon.className = 'bx bx-image';
 
-                if (
-                    event.key === 'Escape' &&
-                    modal.classList.contains('active')
-                ) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'preview-image-wrapper';
 
-                    if (
-                        modal.classList.contains(
-                            'fullscreen'
-                        )
-                    ) {
+                const image = document.createElement('img');
 
-                        modal.classList.remove(
-                            'fullscreen'
-                        );
+                image.src = fileUrl;
+                image.alt = fileName;
+                image.className = 'preview-image';
 
-                        updateFullscreenIcon();
+                wrapper.appendChild(image);
+                previewBody.appendChild(wrapper);
 
-                    } else {
+            } else if ([
+                'mp4',
+                'webm',
+                'mov'
+            ].includes(extension)) {
 
-                        closeMaterialModal();
+                previewIcon.className = 'bx bx-video';
 
-                    }
+                const video = document.createElement('video');
+
+                video.src = fileUrl;
+                video.controls = true;
+                video.className = 'preview-video';
+
+                previewBody.appendChild(video);
+
+            } else if ([
+                'mp3',
+                'wav',
+                'ogg',
+                'm4a'
+            ].includes(extension)) {
+
+                previewIcon.className = 'bx bx-music';
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'preview-audio-wrapper';
+
+                const audio = document.createElement('audio');
+
+                audio.src = fileUrl;
+                audio.controls = true;
+
+                wrapper.appendChild(audio);
+                previewBody.appendChild(wrapper);
+
+            } else {
+
+                previewIcon.className = 'bx bx-file';
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'preview-unavailable';
+
+                wrapper.innerHTML = `
+                    <i class="bx bx-file"></i>
+                    <h3>Preview not available</h3>
+                    <p>This file type cannot be previewed in the browser.</p>
+                    <a
+                        href="${fileUrl}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="resource-btn">
+                        <i class="bx bx-download"></i>
+                        Open / Download File
+                    </a>
+                `;
+
+                previewBody.appendChild(wrapper);
+            }
+
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+        }
+
+        function closePreview() {
+
+            modal.classList.remove('active');
+            modal.classList.remove('fullscreen');
+            modal.setAttribute('aria-hidden', 'true');
+
+            previewBody.innerHTML = '';
+            document.body.classList.remove('modal-open');
+
+            updateFullscreenIcon();
+        }
+
+        document
+            .querySelectorAll('[data-preview-url]')
+            .forEach(function (button) {
+
+                button.addEventListener('click', function () {
+
+                    openPreview(
+                        this.dataset.previewUrl,
+                        this.dataset.previewExtension,
+                        this.dataset.previewName
+                    );
+
+                });
+
+            });
+
+        closeBtn.addEventListener('click', closePreview);
+        overlay.addEventListener('click', closePreview);
+
+        fullscreenBtn.addEventListener('click', function () {
+
+            modal.classList.toggle('fullscreen');
+            updateFullscreenIcon();
+
+        });
+
+        document.addEventListener('keydown', function (event) {
+
+            if (
+                event.key === 'Escape' &&
+                modal.classList.contains('active')
+            ) {
+
+                if (modal.classList.contains('fullscreen')) {
+
+                    modal.classList.remove('fullscreen');
+                    updateFullscreenIcon();
+
+                } else {
+
+                    closePreview();
 
                 }
 
             }
-        );
+
+        });
 
     });
 </script>
+
+@endsection

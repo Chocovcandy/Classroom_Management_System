@@ -1,5 +1,60 @@
+@php
+    $currentUser = auth()->user();
+@endphp
+@php
+    $currentUser = auth()->user();
+
+    $userInitial = strtoupper(
+        substr($currentUser->name ?? 'U', 0, 1)
+    );
+@endphp
 <!DOCTYPE html>
 <html lang="en">
+
+
+    <style>
+        /* ============================================================
+           PROFILE INITIAL
+        ============================================================ */
+
+        .profile-initial {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            background: #4f8ef7;
+            color: #ffffff;
+
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .img-profile.profile-initial {
+            width: 44px;
+            height: 44px;
+
+            border-radius: 50%;
+
+            font-size: 18px;
+        }
+
+        .menu-profile-img.profile-initial {
+            width: 58px;
+            height: 58px;
+
+            border-radius: 50%;
+
+            font-size: 24px;
+        }
+
+        .dark .profile-initial,
+        .dark-mode .profile-initial {
+            background: #7189ff;
+            color: #ffffff;
+        }
+    </style>
 
 <head>
     <meta charset="UTF-8">
@@ -12,6 +67,8 @@
     @vite('resources/css/web.css')
     <!-- javascript for darkmode -->
     @vite('resources/js/app.js')
+
+    
 
     <!-- BOXICON -->
     <link
@@ -39,31 +96,7 @@
 
             <!-- rightside -->
             <div class="topbar-right">
-                <!-- Icon For top bar-->
-                <div class="topbar-icon">
-                    <!-- languages icon -->
-                    <a href="#" class="icon-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-language">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M9 6.371c0 4.418 -2.239 6.629 -5 6.629" />
-                            <path d="M4 6.371h7" />
-                            <path d="M5 9c0 2.144 2.252 3.908 6 4" />
-                            <path d="M12 20l4 -9l4 9" />
-                            <path d="M19.1 18h-6.2" />
-                            <path d="M6.694 3l.793 .582" />
-                        </svg>
-                    </a>
-                    <!-- notification icon  -->
-                    <a href="#" class="icon-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-bell-ringing">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
-                            <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
-                            <path d="M21 6.727a11.05 11.05 0 0 0 -2.794 -3.727" />
-                            <path d="M3 6.727a11.05 11.05 0 0 1 2.792 -3.727" />
-                        </svg>
-                    </a>
-                </div>
+
 
                 <!-- Theme Toggle    -->
                 <div class="theme-switch">
@@ -88,86 +121,164 @@
                 </div>
 
 
-                <div class="profile-dropdown">
+<!-- ====================================================
 
-                    <div class="profile">
+     PROFILE DROPDOWN
 
-                        <img
-                            src="{{ asset('images/profile.png') }}"
-                            alt="profile"
-                            class="img-profile">
+==================================================== -->
 
-                        <div class="profile-text">
-                            <p class="profile-text-name">
-                                {{ auth()->user()->name }}
-                            </p>
+<div class="profile-dropdown">
 
-                            <p class="profile-text-role">
-                                {{ auth()->user()->roles()->first()->name ?? 'No Role' }}
-                            </p>
-                        </div>
+    <div class="profile">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down">
-                            <path d="m6 9 6 6 6-6" />
-                        </svg>
+        <!-- ==================================================
 
-                    </div>
+             USER PROFILE IMAGE / INITIAL
 
-                    <!-- drop down for profile info and log out option  -->
+        ================================================== -->
 
-                    <div class="profile-menu">
+        @if ($currentUser && $currentUser->profile_image)
 
-                        <div class="profile-menu-header">
+            <img
+                src="{{ asset('storage/' . $currentUser->profile_image) }}"
+                alt="{{ $currentUser->name }}"
+                class="img-profile"
+            >
 
-                            <img
-                                src="{{ asset('images/profile.png') }}"
-                                alt="profile"
-                                class="menu-profile-img">
+        @else
 
-                            <h3>{{ auth()->user()->name }}</h3>
+            <div class="img-profile profile-initial">
+                {{ $userInitial }}
+            </div>
 
-                            <p>{{ auth()->user()->email }}</p>
+        @endif
 
-                            <span class="role-badge">
-                                {{ auth()->user()->roles()->first()->name ?? 'No Role' }}
 
-                        </div>
+        <div class="profile-text">
 
-                        <div class="profile-menu-divider"></div>
+            <p class="profile-text-name">
+                {{ $currentUser->name ?? 'User' }}
+            </p>
 
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-cog-icon lucide-user-round-cog">
-                                <path d="m14.305 19.53.923-.382" />
-                                <path d="m15.228 16.852-.923-.383" />
-                                <path d="m16.852 15.228-.383-.923" />
-                                <path d="m16.852 20.772-.383.924" />
-                                <path d="m19.148 15.228.383-.923" />
-                                <path d="m19.53 21.696-.382-.924" />
-                                <path d="M2 21a8 8 0 0 1 10.434-7.62" />
-                                <path d="m20.772 16.852.924-.383" />
-                                <path d="m20.772 19.148.924.383" />
-                                <circle cx="10" cy="8" r="5" />
-                                <circle cx="18" cy="18" r="3" />
-                            </svg>
-                            Account Settings
-                        </a>
+            <p class="profile-text-role">
+                {{ $currentUser->roles()->first()->role_name ?? 'No Role' }}
+            </p>
 
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+        </div>
 
-                            <button type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out">
-                                    <path d="m16 17 5-5-5-5" />
-                                    <path d="M21 12H9" />
-                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                                </svg>
-                                Logout
-                            </button>
-                        </form>
 
-                    </div>
+        <!-- Dropdown arrow -->
 
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-chevron-down-icon lucide-chevron-down"
+        >
+            <path d="m6 9 6 6 6-6" />
+        </svg>
+
+    </div>
+
+
+    <!-- ==================================================
+
+         PROFILE MENU
+
+    ================================================== -->
+
+    <div class="profile-menu">
+
+        <div class="profile-menu-header">
+
+            <!-- ==================================================
+
+                 MENU PROFILE IMAGE / INITIAL
+
+            ================================================== -->
+
+            @if ($currentUser && $currentUser->profile_image)
+
+                <img
+                    src="{{ asset('storage/' . $currentUser->profile_image) }}"
+                    alt="{{ $currentUser->name }}"
+                    class="menu-profile-img"
+                >
+
+            @else
+
+                <div class="menu-profile-img profile-initial">
+                    {{ $userInitial }}
                 </div>
+
+            @endif
+
+
+            <h3>
+                {{ $currentUser->name ?? 'User' }}
+            </h3>
+
+            <p>
+                {{ $currentUser->email ?? '' }}
+            </p>
+
+            <span class="role-badge">
+                {{ $currentUser->roles()->first()->role_name ?? 'No Role' }}
+            </span>
+
+        </div>
+
+
+        <div class="profile-menu-divider"></div>
+
+
+        <!-- ==================================================
+
+             LOGOUT
+
+        ================================================== -->
+
+        <form
+            method="POST"
+            action="{{ route('logout') }}"
+        >
+
+            @csrf
+
+            <button type="submit">
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-log-out-icon lucide-log-out"
+                >
+                    <path d="m16 17 5-5-5-5" />
+                    <path d="M21 12H9" />
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                </svg>
+
+                Logout
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 
             </div>
 
@@ -175,112 +286,162 @@
 
         <div class="layout">
             <!-- sidebar  -->
-            <aside class="sidebar closed" id="sidebar">
-                <ul class="sidebar-menu">
-                    <li><a href="{{ route('hod.dashboard') }}" class="sidebar-link" id="sidebarlinks">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20 3h-6c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1m-1 8h-4V5h4zm-9-8H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1M9 7H5V5h4zm11 8h-6c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1m-1 4h-4v-2h4zm-9-8H4c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-8c0-.55-.45-1-1-1m-1 8H5v-6h4z"></path>
-                            </svg>
-                            <!-- use span to move text and controllable by css and js -->
-                            <span class="sidebar-text">
-                                Dashboard
-                            </span>
-                        </a>
-                    </li>
-                    <li><a href=" " class="sidebar-link" id="sidebarlinks">
+ 
+<!-- ============================================================
+     HOD SIDEBAR
+============================================================ -->
 
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M6 2c-1.10457 0-2 .89543-2 2v4c0 .55228.44772 1 1 1s1-.44772 1-1V4h12v7h-2c-.5523 0-1 .4477-1 1v2h-1c-.5523 0-1 .4477-1 1s.4477 1 1 1h5c.5523 0 1-.4477 1-1V3.85714C20 2.98529 19.3667 2 18.268 2H6Z" />
-                                <path d="M6 11.5C6 9.567 7.567 8 9.5 8S13 9.567 13 11.5 11.433 15 9.5 15 6 13.433 6 11.5ZM4 20c0-2.2091 1.79086-4 4-4h3c2.2091 0 4 1.7909 4 4 0 1.1046-.8954 2-2 2H6c-1.10457 0-2-.8954-2-2Z" />
-                            </svg>
+<aside class="sidebar open" id="sidebar">
 
-                            <span class="sidebar-text">
-                                Professors
-                            </span>
-                        </a>
-                    </li>
+    <!-- ========================================================
+         SIDEBAR TOGGLE BUTTON
+    ======================================================== -->
+
+    <button
+        type="button"
+        id="sidebarToggle"
+        class="sidebar-toggle"
+        aria-label="Close sidebar"
+        aria-expanded="true"
+    >
+        <i class="bx bx-chevron-left"></i>
+    </button>
 
 
+    <!-- ========================================================
+         SIDEBAR NAVIGATION
+    ======================================================== -->
 
-                    <li>
-                        <a href="{{ route('hod.schedules.index') }}"
-                            class="sidebar-link"
-                            id="sidebarlinks">
-
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2.25"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="lucide lucide-graduation-cap-icon lucide-graduation-cap">
-
-                                <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
-
-                                <path d="M22 10v6" />
-
-                                <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
-
-                            </svg>
-
-                            <span class="sidebar-text">
-                                Schedule
-                            </span>
-
-                        </a>
-                    </li>
+    <ul class="sidebar-menu">
 
 
-<li>
-    <a href="{{ route('hod.courses.index') }}"
-       class="sidebar-link"
-       id="sidebarlinks">
+        <!-- ====================================================
+             DASHBOARD
+        ==================================================== -->
 
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="24"
-             height="24"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="2"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             class="lucide lucide-book-marked-icon lucide-book-marked">
+        <li>
+            <a
+                href="{{ route('hod.dashboard') }}"
+                class="sidebar-link {{ request()->routeIs('hod.dashboard') ? 'active' : '' }}"
+            >
 
-            <path d="M10 2v8l3-3 3 3V2" />
-            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a2.5 2.5 0 0 0 0-5H20" />
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="512"
+                    height="512"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path d="M20 3h-6c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1m-1 8h-4V5h4zm-9-8H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1M9 7H5V5h4zm11 8h-6c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1m-1 4h-4v-2h4zm-9-8H4c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-8c0-.55-.45-1-1-1m-1 8H5v-6h4z"></path>
+                </svg>
 
-        </svg>
+                <span class="sidebar-text">
+                    Dashboard
+                </span>
 
-        <span class="sidebar-text">
-            Courses
-        </span>
-
-    </a>
-</li>
-
+            </a>
+        </li>
 
 
+        <!-- ====================================================
+             PROFESSORS
+        ==================================================== -->
 
-                    <li class="bottom-sidebar"><a href="#" class="sidebar-link" id="sidebarlinks">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m0 6c-1.08 0-2-.92-2-2s.92-2 2-2 2 .92 2 2-.92 2-2 2"></path>
-                                <path d="m20.42 13.4-.51-.29c.05-.37.08-.74.08-1.11s-.03-.74-.08-1.11l.51-.29c.96-.55 1.28-1.78.73-2.73l-1-1.73a2.006 2.006 0 0 0-2.73-.73l-.53.31c-.58-.46-1.22-.83-1.9-1.11v-.6c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v.6c-.67.28-1.31.66-1.9 1.11l-.53-.31c-.96-.55-2.18-.22-2.73.73l-1 1.73c-.55.96-.22 2.18.73 2.73l.51.29c-.05.37-.08.74-.08 1.11s.03.74.08 1.11l-.51.29c-.96.55-1.28 1.78-.73 2.73l1 1.73c.55.95 1.77 1.28 2.73.73l.53-.31c.58.46 1.22.83 1.9 1.11v.6c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2v-.6a8.7 8.7 0 0 0 1.9-1.11l.53.31c.95.55 2.18.22 2.73-.73l1-1.73c.55-.96.22-2.18-.73-2.73m-2.59-2.78c.11.45.17.92.17 1.38s-.06.92-.17 1.38a1 1 0 0 0 .47 1.11l1.12.65-1 1.73-1.14-.66c-.38-.22-.87-.16-1.19.14-.68.65-1.51 1.13-2.38 1.4-.42.13-.71.52-.71.96v1.3h-2v-1.3c0-.44-.29-.83-.71-.96-.88-.27-1.7-.75-2.38-1.4a1.01 1.01 0 0 0-1.19-.15l-1.14.66-1-1.73 1.12-.65c.39-.22.58-.68.47-1.11-.11-.45-.17-.92-.17-1.38s.06-.93.17-1.38A1 1 0 0 0 5.7 9.5l-1.12-.65 1-1.73 1.14.66c.38.22.87.16 1.19-.14.68-.65 1.51-1.13 2.38-1.4.42-.13.71-.52.71-.96v-1.3h2v1.3c0 .44.29.83.71.96.88.27 1.7.75 2.38 1.4.32.31.81.36 1.19.14l1.14-.66 1 1.73-1.12.65c-.39.22-.58.68-.47 1.11Z"></path>
-                            </svg>
-                            <span class="sidebar-text">
-                                Settings
-                            </span>
-                        </a>
-                    </li>
+        <li>
+            <a
+                href="{{ route('hod.professors.index') }}"
+                class="sidebar-link {{ request()->routeIs('hod.professors.*') ? 'active' : '' }}"
+            >
 
-                </ul>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path d="M6 2c-1.10457 0-2 .89543-2 2v4c0 .55228.44772 1 1 1s1-.44772 1-1V4h12v7h-2c-.5523 0-1 .4477-1 1v2h-1c-.5523 0-1 .4477-1 1s.4477 1 1 1h5c.5523 0 1-.4477 1-1V3.85714C20 2.98529 19.3667 2 18.268 2H6Z" />
+                    <path d="M6 11.5C6 9.567 7.567 8 9.5 8S13 9.567 13 11.5 11.433 15 9.5 15 6 13.433 6 11.5ZM4 20c0-2.2091 1.79086-4 4-4h3c2.2091 0 4 1.7909 4 4 0 1.1046-.8954 2-2 2H6c-1.10457 0-2-.8954-2-2Z" />
+                </svg>
 
-            </aside>
+                <span class="sidebar-text">
+                    Professors
+                </span>
+
+            </a>
+        </li>
+
+
+        <!-- ====================================================
+             SCHEDULE
+        ==================================================== -->
+
+        <li>
+            <a
+                href="{{ route('hod.schedules.index') }}"
+                class="sidebar-link {{ request()->routeIs('hod.schedules.*') ? 'active' : '' }}"
+            >
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+                    <path d="M22 10v6" />
+                    <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+                </svg>
+
+                <span class="sidebar-text">
+                    Schedule
+                </span>
+
+            </a>
+        </li>
+
+
+        <!-- ====================================================
+             COURSES
+        ==================================================== -->
+
+        <li>
+            <a
+                href="{{ route('hod.courses.index') }}"
+                class="sidebar-link {{ request()->routeIs('hod.courses.*') ? 'active' : '' }}"
+            >
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M10 2v8l3-3 3 3V2" />
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a2.5 2.5 0 0 0 0-5H20" />
+                </svg>
+
+                <span class="sidebar-text">
+                    Courses
+                </span>
+
+            </a>
+        </li>
+
+
+    </ul>
+
+</aside>
 
             <main class="main-content">
                 @yield('content')

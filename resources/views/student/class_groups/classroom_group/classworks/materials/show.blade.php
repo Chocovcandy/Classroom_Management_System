@@ -1,916 +1,252 @@
 <style>
-    /* ============================================================
-   CLASSWORK SHOW PAGE
-   MATERIAL
+/* ============================================================
+   STUDENT MATERIAL SHOW PAGE
+   Redesigned to match the Professor Material Show style
    ============================================================ */
 
-    .classwork-show-page {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 30px 24px 50px;
-    }
+.classwork-show-page {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 28px 56px;
+    box-sizing: border-box;
+}
 
-
-    /* ============================================================
+/* ============================================================
    HEADER
    ============================================================ */
 
-    .classwork-show-header {
-        margin-bottom: 28px;
-    }
+.classwork-show-header {
+    margin-bottom: 30px;
+}
 
-    .classwork-back-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
+.classwork-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
 
-        margin-bottom: 24px;
+    margin-bottom: 24px;
 
-        color: var(--text-secondary);
-        text-decoration: none;
+    color: var(--text-secondary);
+    text-decoration: none;
 
-        font-size: 14px;
-        font-weight: 600;
+    font-size: 15px;
+    font-weight: 650;
 
-        transition: color 0.2s ease;
-    }
+    transition: color 0.2s ease, transform 0.2s ease;
+}
 
-    .classwork-back-btn i {
-        font-size: 20px;
-    }
+.classwork-back-btn i {
+    font-size: 21px;
+}
 
-    .classwork-back-btn:hover {
-        color: var(--primary-color);
-    }
+.classwork-back-btn:hover {
+    color: var(--primary-color);
+    transform: translateX(-2px);
+}
 
-
-    /* ============================================================
-   HEADING
+/* ============================================================
+   TITLE AREA
    ============================================================ */
 
-    .classwork-show-heading {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-    }
+.classwork-show-heading {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 
-    .classwork-show-icon {
-        width: 58px;
-        height: 58px;
+.classwork-show-icon {
+    width: 66px;
+    height: 66px;
 
-        flex-shrink: 0;
+    flex-shrink: 0;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        border-radius: 15px;
+    border-radius: 16px;
 
-        font-size: 28px;
-    }
+    font-size: 31px;
+}
 
+.classwork-show-icon.material {
+    background: #e0f2fe;
+    color: #0284c7;
+}
 
-    /* ============================================================
-   MATERIAL ICON
-   ============================================================ */
+.classwork-show-type {
+    display: inline-block;
 
-    .classwork-show-icon.material {
-        background-color: #e0f2fe;
-        color: #0284c7;
-    }
+    margin-bottom: 6px;
 
+    font-size: 13px;
+    font-weight: 800;
 
-    /* ============================================================
-   CLASSWORK TYPE
-   ============================================================ */
+    letter-spacing: 0.09em;
+}
 
-    .classwork-show-type {
-        display: inline-block;
+.classwork-show-type.material {
+    color: #0284c7;
+}
 
-        margin-bottom: 5px;
+.classwork-show-heading h1 {
+    margin: 0;
 
-        font-size: 12px;
-        font-weight: 700;
+    color: var(--text-color);
 
-        letter-spacing: 0.08em;
-    }
+    font-size: 31px;
+    font-weight: 750;
+    line-height: 1.25;
 
-    .classwork-show-type.material {
-        color: #0284c7;
-    }
+    word-break: break-word;
+}
 
+.classwork-show-topic {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
 
-    /* ============================================================
-   TITLE
-   ============================================================ */
+    margin-top: 9px;
 
-    .classwork-show-heading h1 {
-        margin: 0;
+    color: var(--text-secondary);
 
-        color: var(--text-color);
+    font-size: 15px;
+    font-weight: 550;
+}
 
-        font-size: 28px;
-        font-weight: 700;
-        line-height: 1.25;
+.classwork-show-topic i {
+    font-size: 18px;
+}
 
-        word-break: break-word;
-    }
-
-
-    /* ============================================================
-   TOPIC
-   ============================================================ */
-
-    .classwork-show-topic {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-
-        margin-top: 8px;
-
-        color: var(--text-secondary);
-
-        font-size: 14px;
-        font-weight: 500;
-    }
-
-    .classwork-show-topic i {
-        font-size: 17px;
-    }
-
-
-    /* ============================================================
+/* ============================================================
    MAIN GRID
    ============================================================ */
 
-    .classwork-show-grid {
-        display: grid;
+.classwork-show-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 26px;
+    align-items: start;
+}
 
-        grid-template-columns: minmax(0, 1fr) 320px;
+.classwork-show-main {
+    min-width: 0;
+}
 
-        gap: 24px;
+.classwork-show-sidebar {
+    min-width: 0;
 
-        align-items: start;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
 
-    .classwork-show-main {
-        min-width: 0;
-    }
-
-    .classwork-show-sidebar {
-        min-width: 0;
-
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-
-
-    /* ============================================================
-   DETAIL CARD
+/* ============================================================
+   CARDS
    ============================================================ */
 
-    .classwork-detail-card {
-        margin-bottom: 24px;
+.classwork-detail-card,
+.material-resources {
+    background: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 17px;
+    overflow: hidden;
+}
 
-        background-color: var(--card-color);
+.classwork-detail-card {
+    margin-bottom: 26px;
+}
 
-        border: 1px solid var(--border-color);
-        border-radius: 16px;
+.classwork-show-sidebar .classwork-detail-card {
+    margin-bottom: 0;
+}
 
-        overflow: hidden;
-    }
-
-    .classwork-show-sidebar .classwork-detail-card {
-        margin-bottom: 0;
-    }
-
-
-    /* ============================================================
+/* ============================================================
    CARD HEADER
    ============================================================ */
 
-    .classwork-detail-card-header {
-        display: flex;
-        align-items: center;
+.classwork-detail-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-        padding: 18px 22px;
+    min-height: 62px;
+    padding: 18px 24px;
 
-        border-bottom: 1px solid var(--border-color);
-    }
+    border-bottom: 1px solid var(--border-color);
+}
 
-    .classwork-detail-card-header h2 {
-        margin: 0;
+.classwork-detail-card-header h2 {
+    margin: 0;
 
-        color: var(--text-color);
+    color: var(--text-color);
 
-        font-size: 17px;
-        font-weight: 700;
-    }
+    font-size: 19px;
+    font-weight: 750;
+}
 
-
-    /* ============================================================
+/* ============================================================
    DESCRIPTION
    ============================================================ */
 
-    .classwork-description {
-        padding: 22px;
+.classwork-description {
+    padding: 25px;
 
-        color: var(--text-secondary);
+    color: var(--text-secondary);
 
-        font-size: 15px;
-        line-height: 1.7;
+    font-size: 16px;
+    line-height: 1.75;
 
-        overflow-wrap: anywhere;
-    }
+    overflow-wrap: anywhere;
+}
 
-    .classwork-no-content {
-        color: var(--text-muted);
-
-        font-style: italic;
-    }
-
-
-    /* ============================================================
-   ATTACHED MATERIAL
-   ============================================================ */
-
-    .classwork-file {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-
-        padding: 20px 22px;
-    }
-
-
-    /* FILE ICON */
-
-    .classwork-file-icon {
-        width: 48px;
-        height: 48px;
-
-        flex-shrink: 0;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 12px;
-
-        background-color: #e0f2fe;
-        color: #0284c7;
-
-        font-size: 24px;
-    }
-
-
-    /* FILE INFORMATION */
-
-    .classwork-file-info {
-        min-width: 0;
-
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .classwork-file-info strong {
-        color: var(--text-color);
-
-        font-size: 14px;
-        font-weight: 600;
-
-        word-break: break-all;
-    }
-
-    .classwork-file-info span {
-        color: var(--text-secondary);
-
-        font-size: 13px;
-    }
-
-
-    /* ============================================================
-   INFORMATION LIST
-   ============================================================ */
-
-    .classwork-info-list {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .classwork-info-item {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-
-        padding: 17px 22px;
-
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .classwork-info-item:last-child {
-        border-bottom: none;
-    }
-
-    .classwork-info-item>i {
-        width: 20px;
-
-        flex-shrink: 0;
-
-        color: var(--text-secondary);
-
-        font-size: 20px;
-    }
-
-    .classwork-info-item>div {
-        min-width: 0;
-
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-    }
-
-    .classwork-info-item span {
-        color: var(--text-secondary);
-
-        font-size: 12px;
-        font-weight: 500;
-    }
-
-    .classwork-info-item strong {
-        color: var(--text-color);
-
-        font-size: 14px;
-        font-weight: 600;
-    }
-
-
-    /* ============================================================
-   ACTION BUTTON
-   ============================================================ */
-
-    .classwork-action-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-
-        margin: 16px;
-
-        padding: 11px 16px;
-
-        background-color: var(--background-color);
-
-        border: 1px solid var(--border-color);
-        border-radius: 10px;
-
-        color: var(--text-color);
-
-        text-decoration: none;
-
-        font-size: 14px;
-        font-weight: 600;
-
-        transition:
-            background-color 0.2s ease,
-            border-color 0.2s ease,
-            color 0.2s ease,
-            transform 0.2s ease;
-    }
-
-    .classwork-action-btn i {
-        font-size: 18px;
-    }
-
-    .classwork-action-btn:hover {
-        border-color: var(--primary-color);
-
-        color: var(--primary-color);
-
-        transform: translateY(-1px);
-    }
-
-    /* ============================================================
-   ATTACHED MATERIAL
-============================================================ */
-
-    .classwork-file {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-
-        padding: 16px;
-
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-
-        background: var(--card-color);
-    }
-
-    .classwork-file-icon {
-        width: 46px;
-        height: 46px;
-
-        flex-shrink: 0;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 10px;
-
-        background: rgba(59, 130, 246, 0.1);
-        color: #3b82f6;
-
-        font-size: 24px;
-    }
-
-    .classwork-file-info {
-        flex: 1;
-        min-width: 0;
-
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .classwork-file-info strong {
-        font-size: 14px;
-        font-weight: 600;
-
-        color: var(--text-color);
-
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .classwork-file-info span {
-        font-size: 12px;
-        color: var(--muted-text-color);
-    }
-
-
-    /* ============================================================
-   OPEN MATERIAL BUTTON
-============================================================ */
-
-    .classwork-file-open {
-        flex-shrink: 0;
-
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-
-        gap: 7px;
-
-        padding: 9px 14px;
-
-        border: 1px solid var(--border-color);
-        border-radius: 9px;
-
-        background: var(--background-color);
-        color: var(--text-color);
-
-        cursor: pointer;
-
-        font-size: 13px;
-        font-weight: 600;
-
-        transition:
-            background-color 0.2s ease,
-            border-color 0.2s ease,
-            color 0.2s ease;
-    }
-
-
-    .classwork-file-open:hover {
-        border-color: var(--primary-color);
-        color: var(--primary-color);
-    }
-
-
-    .classwork-file-open i {
-        font-size: 17px;
-    }
-
-    /* ============================================================
-   MATERIAL PREVIEW MODAL
-============================================================ */
-
-    .material-preview-modal {
-        position: fixed;
-        inset: 0;
-
-        z-index: 9999;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        padding: 30px;
-
-        visibility: hidden;
-        opacity: 0;
-
-        transition:
-            opacity 0.2s ease,
-            visibility 0.2s ease;
-    }
-
-
-    /* ============================================================
-   ACTIVE MODAL
-============================================================ */
-
-    .material-preview-modal.active {
-        visibility: visible;
-        opacity: 1;
-    }
-
-
-    /* ============================================================
-   OVERLAY
-============================================================ */
-
-    .material-preview-overlay {
-        position: absolute;
-        inset: 0;
-
-        background: rgba(0, 0, 0, 0.65);
-
-        backdrop-filter: blur(3px);
-    }
-
-
-    /* ============================================================
-   MODAL CONTAINER
-============================================================ */
-
-    .material-preview-container {
-        position: relative;
-
-        z-index: 1;
-
-        width: min(1200px, 100%);
-        height: min(850px, 90vh);
-
-        display: flex;
-        flex-direction: column;
-
-        overflow: hidden;
-
-        background: var(--card-color);
-
-        border: 1px solid var(--border-color);
-        border-radius: 16px;
-
-        box-shadow:
-            0 25px 60px rgba(0, 0, 0, 0.25);
-
-        transform: scale(0.96);
-
-        transition: transform 0.2s ease;
-    }
-
-    .material-preview-modal.active .material-preview-container {
-        transform: scale(1);
-    }
-
-
-    /* ============================================================
-   MODAL HEADER
-============================================================ */
-
-    .material-preview-header {
-        min-height: 60px;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        gap: 15px;
-
-        padding: 12px 18px;
-
-        border-bottom: 1px solid var(--border-color);
-
-        background: var(--card-color);
-    }
-
-
-    /* ============================================================
-   TITLE
-============================================================ */
-
-    .material-preview-title {
-        min-width: 0;
-
-        display: flex;
-        align-items: center;
-
-        gap: 10px;
-    }
-
-    .material-preview-title i {
-        flex-shrink: 0;
-
-        font-size: 22px;
-
-        color: var(--primary-color);
-    }
-
-    .material-preview-title span {
-        overflow: hidden;
-
-        text-overflow: ellipsis;
-        white-space: nowrap;
-
-        font-size: 14px;
-        font-weight: 600;
-
-        color: var(--text-color);
-    }
-
-
-    /* ============================================================
-   CLOSE BUTTON
-============================================================ */
-
-    .material-preview-close {
-        width: 38px;
-        height: 38px;
-
-        flex-shrink: 0;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border: none;
-        border-radius: 8px;
-
-        background: transparent;
-
-        color: var(--text-color);
-
-        cursor: pointer;
-
-        font-size: 24px;
-
-        transition:
-            background 0.2s ease,
-            color 0.2s ease;
-    }
-
-    .material-preview-close:hover {
-        background: var(--background-color);
-    }
-
-
-    /* ============================================================
-   MODAL BODY
-============================================================ */
-
-    .material-preview-body {
-        flex: 1;
-
-        min-height: 0;
-
-        background: #f1f1f1;
-    }
-
-
-    /* ============================================================
-   PDF
-============================================================ */
-
-    .material-preview-frame {
-        display: block;
-
-        width: 100%;
-        height: 100%;
-
-        border: none;
-    }
-
-
-    /* ============================================================
-   IMAGE
-============================================================ */
-
-    .material-preview-image-wrapper {
-        width: 100%;
-        height: 100%;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        padding: 30px;
-
-        overflow: auto;
-    }
-
-    .material-preview-image {
-        max-width: 100%;
-        max-height: 100%;
-
-        object-fit: contain;
-
-        border-radius: 8px;
-    }
-
-
-    /* ============================================================
-   FILE TYPE NOT SUPPORTED
-============================================================ */
-
-    .material-preview-unavailable {
-        width: 100%;
-        height: 100%;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        text-align: center;
-
-        padding: 30px;
-    }
-
-    .material-preview-unavailable>i {
-        margin-bottom: 15px;
-
-        font-size: 60px;
-
-        color: var(--muted-text-color);
-    }
-
-    .material-preview-unavailable h3 {
-        margin: 0 0 8px;
-
-        color: var(--text-color);
-
-        font-size: 18px;
-    }
-
-    .material-preview-unavailable p {
-        margin: 0 0 20px;
-
-        color: var(--muted-text-color);
-
-        font-size: 13px;
-    }
-
-
-    /* ============================================================
-   DOWNLOAD BUTTON
-============================================================ */
-
-    .material-preview-download {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-
-        padding: 10px 16px;
-
-        border-radius: 8px;
-
-        background: var(--primary-color);
-        color: #fff;
-
-        text-decoration: none;
-
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-    .material-preview-download:hover {
-        opacity: 0.9;
-    }
-
-
-    /* ============================================================
-   PREVENT PAGE SCROLL
-============================================================ */
-
-    body.modal-open {
-        overflow: hidden;
-    }
-
-    /* ============================================================
-   MODAL HEADER ACTIONS
-============================================================ */
-
-    .material-preview-actions {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-
-    /* ============================================================
-   MODAL BUTTON
-============================================================ */
-
-    .material-preview-btn {
-        width: 38px;
-        height: 38px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border: none;
-        border-radius: 8px;
-
-        background: transparent;
-        color: var(--text-color);
-
-        cursor: pointer;
-
-        font-size: 20px;
-
-        transition:
-            background-color 0.2s ease,
-            color 0.2s ease;
-    }
-
-
-    .material-preview-btn:hover {
-        background: var(--background-color);
-    }
-
-
-    .material-preview-btn.close:hover {
-        background: #fee2e2;
-        color: #dc2626;
-    }
-
-    /* ============================================================
-   FULLSCREEN MODAL
-============================================================ */
-
-    .material-preview-modal.fullscreen {
-        padding: 0;
-    }
-
-
-    .material-preview-modal.fullscreen .material-preview-overlay {
-        background: #000;
-    }
-
-
-    .material-preview-modal.fullscreen .material-preview-container {
-
-        width: 100vw;
-        height: 100vh;
-
-        max-width: none;
-        max-height: none;
-
-        border-radius: 0;
-    }
-
+.classwork-no-content {
+    color: var(--text-muted);
+    font-style: italic;
+}
 
 /* ============================================================
-   MATERIAL RESOURCES
+   RESOURCES
    ============================================================ */
 
 .material-resources {
-    margin-top: 24px;
+    margin-top: 26px;
+    padding: 22px;
+    overflow: visible;
 }
 
 .material-resources-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 14px;
+
+    margin-bottom: 16px;
 }
 
 .material-resources-header h3 {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
+
     margin: 0;
-    font-size: 16px;
-    font-weight: 600;
+
+    color: var(--text-color);
+
+    font-size: 19px;
+    font-weight: 750;
 }
 
 .material-resources-header h3 i {
-    font-size: 20px;
+    color: var(--primary-color);
+    font-size: 22px;
 }
 
 .material-resources-header > span {
-    font-size: 13px;
-    color: #6b7280;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 550;
 }
-
 
 /* ============================================================
    RESOURCE ITEM
@@ -919,34 +255,39 @@
 .material-resource-item {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
 
-    padding: 14px 16px;
-    margin-bottom: 10px;
+    padding: 17px 18px;
+    margin-bottom: 11px;
 
-    background: #fff;
+    background: var(--card-color);
 
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 13px;
 
     transition:
         border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.material-resource-item:last-child {
+    margin-bottom: 0;
 }
 
 .material-resource-item:hover {
-    border-color: #d1d5db;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-color: rgba(59, 130, 246, 0.35);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
 }
 
-
 /* ============================================================
-   FILE ICON
+   RESOURCE ICON
    ============================================================ */
 
 .material-resource-icon {
-    width: 44px;
-    height: 44px;
+    width: 50px;
+    height: 50px;
 
     display: flex;
     align-items: center;
@@ -954,18 +295,18 @@
 
     flex-shrink: 0;
 
-    border-radius: 9px;
+    border-radius: 12px;
 
-    background: #f3f4f6;
+    background: rgba(59, 130, 246, 0.10);
+    color: #3b82f6;
 }
 
 .material-resource-icon i {
-    font-size: 23px;
+    font-size: 26px;
 }
 
-
 /* ============================================================
-   FILE INFORMATION
+   RESOURCE INFORMATION
    ============================================================ */
 
 .material-resource-info {
@@ -974,26 +315,25 @@
 
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
 }
 
 .material-resource-info strong {
     overflow: hidden;
 
-    font-size: 14px;
-    font-weight: 600;
+    color: var(--text-color);
 
-    color: #1f2937;
+    font-size: 15px;
+    font-weight: 700;
 
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .material-resource-info span {
-    font-size: 12px;
-    color: #6b7280;
+    color: var(--text-secondary);
+    font-size: 13px;
 }
-
 
 /* ============================================================
    RESOURCE ACTIONS
@@ -1002,7 +342,7 @@
 .material-resource-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
 
     flex-shrink: 0;
 }
@@ -1012,54 +352,57 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 7px;
 
-    padding: 8px 12px;
+    min-height: 40px;
+    padding: 0 14px;
 
-    border-radius: 7px;
+    border-radius: 9px;
 
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 650;
 
     text-decoration: none;
-
     cursor: pointer;
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease;
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .material-resource-open {
-    border: 1px solid #e5e7eb;
-
-    background: #fff;
-    color: #374151;
+    border: 1px solid var(--border-color);
+    background: var(--card-color);
+    color: var(--text-color);
 }
 
 .material-resource-open:hover {
-    background: #f3f4f6;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
 }
 
 .material-resource-download {
-    border: 1px solid #e5e7eb;
-
-    background: #f9fafb;
-    color: #374151;
+    border: 1px solid var(--primary-color);
+    background: var(--primary-color);
+    color: #fff;
 }
 
 .material-resource-download:hover {
-    background: #e5e7eb;
+    opacity: 0.92;
+    color: #fff;
+    transform: translateY(-1px);
 }
 
 .material-resource-open i,
 .material-resource-download i {
-    font-size: 17px;
+    font-size: 18px;
 }
 
-
 /* ============================================================
-   NO RESOURCES
+   EMPTY RESOURCES
    ============================================================ */
 
 .material-no-resources {
@@ -1068,33 +411,98 @@
     align-items: center;
     justify-content: center;
 
-    padding: 35px 20px;
+    padding: 42px 24px;
 
     text-align: center;
 
-    border: 1px dashed #d1d5db;
-    border-radius: 10px;
+    border: 1px dashed var(--border-color);
+    border-radius: 12px;
 
-    background: #f9fafb;
+    background: var(--background-color);
 }
 
 .material-no-resources i {
-    margin-bottom: 10px;
+    margin-bottom: 11px;
 
-    font-size: 35px;
-    color: #9ca3af;
+    color: var(--text-muted);
+    font-size: 40px;
 }
 
 .material-no-resources p {
     margin: 0;
 
-    font-size: 14px;
-    color: #6b7280;
+    color: var(--text-secondary);
+    font-size: 15px;
 }
 
+/* ============================================================
+   INFORMATION SIDEBAR
+   ============================================================ */
+
+.classwork-info-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.classwork-info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 19px 23px;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+.classwork-info-item:last-child {
+    border-bottom: none;
+}
+
+.classwork-info-item > i {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+    background: var(--background-color);
+    color: var(--primary-color);
+
+    font-size: 21px;
+}
+
+.classwork-info-item > div {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.classwork-info-item span {
+    color: var(--text-secondary);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.classwork-info-item strong {
+    color: var(--text-color);
+
+    font-size: 15px;
+    font-weight: 700;
+}
 
 /* ============================================================
-   RESOURCE PREVIEW MODAL
+   PREVIEW MODAL
    ============================================================ */
 
 .material-preview-modal {
@@ -1109,16 +517,13 @@
     height: 100%;
 
     z-index: 9999;
+    padding: 22px;
+    box-sizing: border-box;
 }
 
 .material-preview-modal.active {
     display: flex;
 }
-
-
-/* ============================================================
-   MODAL OVERLAY
-   ============================================================ */
 
 .material-preview-overlay {
     position: absolute;
@@ -1127,53 +532,41 @@
     width: 100%;
     height: 100%;
 
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(15, 23, 42, 0.74);
+    backdrop-filter: blur(5px);
 }
-
-
-/* ============================================================
-   MODAL CONTAINER
-   ============================================================ */
 
 .material-preview-container {
     position: relative;
+    z-index: 1;
 
-    width: 92vw;
-    height: 90vh;
-
-    max-width: 1400px;
+    width: min(1200px, 100%);
+    height: min(850px, calc(100vh - 44px));
 
     display: flex;
     flex-direction: column;
 
-    background: #fff;
-
-    border-radius: 14px;
-
     overflow: hidden;
 
-    z-index: 1;
+    background: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
 
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.28);
 }
-
-
-/* ============================================================
-   PREVIEW HEADER
-   ============================================================ */
 
 .material-preview-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    gap: 20px;
+    gap: 18px;
 
-    padding: 14px 18px;
+    min-height: 68px;
+    padding: 14px 20px;
 
-    background: #fff;
-
-    border-bottom: 1px solid #e5e7eb;
+    background: var(--card-color);
+    border-bottom: 1px solid var(--border-color);
 
     flex-shrink: 0;
 }
@@ -1182,46 +575,37 @@
     display: flex;
     align-items: center;
 
-    gap: 10px;
-
+    gap: 11px;
     min-width: 0;
 
-    font-size: 15px;
-    font-weight: 600;
+    color: var(--text-color);
 
-    color: #1f2937;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 .material-preview-title i {
-    font-size: 21px;
-
+    color: var(--primary-color);
+    font-size: 23px;
     flex-shrink: 0;
 }
 
 #materialPreviewTitle {
     overflow: hidden;
-
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-
-/* ============================================================
-   PREVIEW ACTION BUTTONS
-   ============================================================ */
-
 .material-preview-actions {
     display: flex;
     align-items: center;
-
-    gap: 6px;
-
+    gap: 7px;
     flex-shrink: 0;
 }
 
 .material-preview-btn {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
 
     display: flex;
     align-items: center;
@@ -1230,27 +614,23 @@
     padding: 0;
 
     border: none;
-    border-radius: 8px;
+    border-radius: 9px;
 
     background: transparent;
-
-    color: #4b5563;
+    color: var(--text-color);
 
     cursor: pointer;
 
+    font-size: 22px;
+
     transition:
-        background 0.2s ease,
+        background-color 0.2s ease,
         color 0.2s ease,
         transform 0.2s ease;
 }
 
-.material-preview-btn i {
-    font-size: 21px;
-}
-
 .material-preview-btn:hover {
-    background: #f3f4f6;
-    color: #111827;
+    background: var(--background-color);
 }
 
 .material-preview-btn:active {
@@ -1262,16 +642,10 @@
     color: #dc2626;
 }
 
-
-/* ============================================================
-   PREVIEW BODY
-   ============================================================ */
-
 .material-preview-body {
     position: relative;
 
     flex: 1;
-
     min-height: 0;
 
     display: flex;
@@ -1283,26 +657,15 @@
     overflow: hidden;
 }
 
-
-/* ============================================================
-   PDF PREVIEW
-   ============================================================ */
-
 .material-preview-frame {
     width: 100%;
     height: 100%;
 
-    border: none;
-
     display: block;
 
+    border: none;
     background: #fff;
 }
-
-
-/* ============================================================
-   IMAGE PREVIEW
-   ============================================================ */
 
 .material-preview-image-wrapper {
     width: 100%;
@@ -1312,9 +675,10 @@
     align-items: center;
     justify-content: center;
 
-    padding: 30px;
+    padding: 32px;
 
     overflow: auto;
+    box-sizing: border-box;
 }
 
 .material-preview-image {
@@ -1328,15 +692,9 @@
 
     object-fit: contain;
 
-    border-radius: 8px;
-
+    border-radius: 9px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
-
-
-/* ============================================================
-   VIDEO PREVIEW
-   ============================================================ */
 
 .material-preview-video {
     display: block;
@@ -1348,31 +706,25 @@
     max-height: 100%;
 
     object-fit: contain;
-
     background: #000;
 }
 
-
-/* ============================================================
-   AUDIO PREVIEW
-   ============================================================ */
-
 .material-preview-audio-wrapper {
-    width: min(650px, 90%);
+    width: min(680px, 90%);
 
-    padding: 40px;
+    padding: 42px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    gap: 25px;
+    gap: 26px;
 
     background: #fff;
 
     border: 1px solid #e5e7eb;
-    border-radius: 16px;
+    border-radius: 17px;
 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
@@ -1380,8 +732,8 @@
 .material-preview-audio-wrapper::before {
     content: "♪";
 
-    width: 80px;
-    height: 80px;
+    width: 86px;
+    height: 86px;
 
     display: flex;
     align-items: center;
@@ -1391,134 +743,163 @@
 
     background: #f3f4f6;
 
-    font-size: 40px;
+    font-size: 43px;
 }
 
 .material-preview-audio-wrapper audio {
     width: 100%;
 }
 
-
-/* ============================================================
-   UNSUPPORTED FILE
-   ============================================================ */
-
 .material-preview-unavailable {
-    width: min(500px, 90%);
+    width: min(520px, 90%);
 
-    padding: 45px 35px;
+    padding: 48px 38px;
 
     text-align: center;
 
     background: #fff;
 
     border: 1px solid #e5e7eb;
-
-    border-radius: 16px;
+    border-radius: 17px;
 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 .material-preview-unavailable > i {
-    margin-bottom: 15px;
-
-    font-size: 55px;
+    margin-bottom: 16px;
 
     color: #6b7280;
+    font-size: 60px;
 }
 
 .material-preview-unavailable h3 {
-    margin: 0 0 8px;
-
-    font-size: 18px;
-    font-weight: 600;
+    margin: 0 0 9px;
 
     color: #1f2937;
+
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .material-preview-unavailable p {
-    margin: 0 0 25px;
-
-    font-size: 14px;
-    line-height: 1.6;
+    margin: 0 0 26px;
 
     color: #6b7280;
+
+    font-size: 15px;
+    line-height: 1.6;
 }
 
 .material-preview-download {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     gap: 8px;
 
-    padding: 10px 18px;
+    padding: 11px 19px;
 
-    border-radius: 8px;
+    border-radius: 9px;
 
-    background: #111827;
+    background: var(--primary-color);
     color: #fff;
 
     text-decoration: none;
 
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .material-preview-download:hover {
-    background: #374151;
+    opacity: 0.9;
     color: #fff;
 }
 
-
 /* ============================================================
-   FULL SCREEN
+   FULLSCREEN
    ============================================================ */
 
 .material-preview-modal.fullscreen {
-    align-items: stretch;
-    justify-content: stretch;
+    padding: 0;
 }
 
-.material-preview-modal.fullscreen
-.material-preview-container {
+.material-preview-modal.fullscreen .material-preview-overlay {
+    background: #000;
+}
+
+.material-preview-modal.fullscreen .material-preview-container {
     width: 100vw;
     height: 100vh;
 
     max-width: none;
+    max-height: none;
 
     border-radius: 0;
+    border: none;
 }
 
-
 /* ============================================================
-   PREVENT BACKGROUND SCROLL
+   BODY LOCK
    ============================================================ */
 
 body.modal-open {
     overflow: hidden;
 }
 
-
 /* ============================================================
-   MOBILE
+   RESPONSIVE
    ============================================================ */
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
+    .classwork-show-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .classwork-show-sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+    }
+}
+
+@media (max-width: 700px) {
+    .classwork-show-page {
+        padding: 24px 18px 45px;
+    }
+
+    .classwork-show-heading {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .classwork-show-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 14px;
+        font-size: 27px;
+    }
+
+    .classwork-show-heading h1 {
+        font-size: 26px;
+    }
+
+    .classwork-show-topic {
+        font-size: 14px;
+    }
+
+    .classwork-show-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
 
     .material-resource-item {
         align-items: flex-start;
         flex-wrap: wrap;
     }
 
-    .material-resource-info {
-        flex: 1;
-    }
-
     .material-resource-actions {
         width: 100%;
-        margin-left: 58px;
+        margin-left: 66px;
     }
 
     .material-resource-open,
@@ -1529,12 +910,12 @@ body.modal-open {
     .material-preview-container {
         width: 96vw;
         height: 92vh;
-
-        border-radius: 10px;
+        border-radius: 13px;
     }
 
     .material-preview-header {
-        padding: 10px 12px;
+        min-height: 58px;
+        padding: 10px 13px;
     }
 
     .material-preview-title {
@@ -1542,16 +923,139 @@ body.modal-open {
     }
 
     .material-preview-btn {
-        width: 34px;
-        height: 34px;
+        width: 36px;
+        height: 36px;
     }
 
     .material-preview-image-wrapper {
-        padding: 15px;
+        padding: 16px;
+    }
+}
+
+@media (max-width: 500px) {
+    .classwork-show-page {
+        padding: 20px 14px 38px;
+    }
+
+    .classwork-back-btn {
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .classwork-show-heading {
+        gap: 12px;
+    }
+
+    .classwork-show-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        font-size: 23px;
+    }
+
+    .classwork-show-type {
+        font-size: 11px;
+    }
+
+    .classwork-show-heading h1 {
+        font-size: 22px;
+    }
+
+    .classwork-show-topic {
+        margin-top: 7px;
+        font-size: 13px;
+    }
+
+    .classwork-detail-card-header {
+        min-height: 56px;
+        padding: 15px 17px;
+    }
+
+    .classwork-detail-card-header h2 {
+        font-size: 17px;
+    }
+
+    .classwork-description {
+        padding: 18px;
+        font-size: 14px;
+    }
+
+    .material-resources {
+        padding: 17px;
+    }
+
+    .material-resources-header h3 {
+        font-size: 17px;
+    }
+
+    .material-resources-header > span {
+        font-size: 12px;
+    }
+
+    .material-resource-item {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .material-resource-icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    .material-resource-icon i {
+        font-size: 23px;
+    }
+
+    .material-resource-info strong {
+        font-size: 14px;
+    }
+
+    .material-resource-info span {
+        font-size: 12px;
+    }
+
+    .material-resource-actions {
+        margin-left: 56px;
+        gap: 7px;
+    }
+
+    .material-resource-open,
+    .material-resource-download {
+        min-height: 38px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+    .classwork-info-item {
+        padding: 16px 18px;
+    }
+
+    .material-preview-modal {
+        padding: 0;
+    }
+
+    .material-preview-container {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .material-preview-title {
+        max-width: 65%;
+    }
+
+    .material-preview-actions {
+        gap: 3px;
+    }
+
+    .material-preview-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 20px;
     }
 
     .material-preview-audio-wrapper {
-        padding: 25px 20px;
+        padding: 25px 18px;
     }
 
     .material-preview-unavailable {
@@ -1559,181 +1063,41 @@ body.modal-open {
     }
 }
 
-    /* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
-    @media (max-width: 768px) {
-
-        .material-modal {
-            padding: 10px;
-        }
-
-        .material-modal-container {
-            width: 100%;
-            height: 95vh;
-
-            border-radius: 12px;
-        }
-
-        .material-modal-title {
-            max-width: 65%;
-        }
-
-    }
-
-    @media (max-width: 480px) {
-
-        .material-modal {
-            padding: 0;
-        }
-
-        .material-modal-container {
-            width: 100vw;
-            height: 100vh;
-
-            border-radius: 0;
-        }
-
-    }
-
-    /* ============================================================
-   MOBILE
-============================================================ */
-
-    @media (max-width: 768px) {
-
-        .material-preview-modal {
-            padding: 10px;
-        }
-
-        .material-preview-container {
-            height: 95vh;
-
-            border-radius: 12px;
-        }
-
-        .material-preview-header {
-            min-height: 54px;
-
-            padding: 10px 12px;
-        }
-
-        .material-preview-image-wrapper {
-            padding: 15px;
-        }
-
-    }
-
-    /* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
-    @media (max-width: 900px) {
-
-        .classwork-show-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .classwork-show-sidebar {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-
-            gap: 20px;
-        }
-    }
-
-
-    @media (max-width: 650px) {
-
-        .classwork-show-page {
-            padding: 20px 16px 40px;
-        }
-
-        .classwork-show-heading {
-            align-items: flex-start;
-            gap: 14px;
-        }
-
-        .classwork-show-icon {
-            width: 48px;
-            height: 48px;
-
-            border-radius: 12px;
-
-            font-size: 23px;
-        }
-
-        .classwork-show-heading h1 {
-            font-size: 22px;
-        }
-
-        .classwork-show-type {
-            font-size: 11px;
-        }
-
-        .classwork-show-topic {
-            font-size: 13px;
-        }
-
-        .classwork-show-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .classwork-detail-card-header {
-            padding: 16px 18px;
-        }
-
-        .classwork-detail-card-header h2 {
-            font-size: 16px;
-        }
-
-        .classwork-description {
-            padding: 18px;
-
-            font-size: 14px;
-        }
-
-        .classwork-file {
-            padding: 18px;
-        }
-
-        .classwork-file-icon {
-            width: 44px;
-            height: 44px;
-
-            font-size: 21px;
-        }
-
-        .classwork-info-item {
-            padding: 15px 18px;
-        }
-
-        .classwork-action-btn {
-            margin: 14px;
-        }
-    }
-
-
-    /* ============================================================
+/* ============================================================
    DARK MODE
    ============================================================ */
 
-    [data-theme="dark"] .classwork-show-icon.material {
-        background-color: rgba(2, 132, 199, 0.15);
-        color: #38bdf8;
-    }
+[data-theme="dark"] .classwork-show-icon.material {
+    background-color: rgba(2, 132, 199, 0.15);
+    color: #38bdf8;
+}
 
-    [data-theme="dark"] .classwork-show-type.material {
-        color: #38bdf8;
-    }
+[data-theme="dark"] .classwork-show-type.material {
+    color: #38bdf8;
+}
 
-    [data-theme="dark"] .classwork-file-icon {
-        background-color: rgba(2, 132, 199, 0.15);
-        color: #38bdf8;
-    }
+[data-theme="dark"] .material-resource-icon {
+    background: rgba(59, 130, 246, 0.14);
+    color: #7fa3ff;
+}
+
+[data-theme="dark"] .material-resource-item {
+    background: var(--card-color);
+}
+
+[data-theme="dark"] .material-preview-audio-wrapper,
+[data-theme="dark"] .material-preview-unavailable {
+    background: var(--card-color);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .material-preview-unavailable h3 {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .material-preview-unavailable p {
+    color: var(--text-secondary);
+}
 </style>
 @extends('layouts.student_layout')
 

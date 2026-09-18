@@ -53,6 +53,10 @@
                         Total Students
                     </span>
 
+                    <span class="stat-action">
+    Manage →
+</span>
+
                 </div>
 
             </a>
@@ -87,6 +91,9 @@
                         Total Academic Staff
                     </span>
 
+                    <span class="stat-action">
+    Manage →
+</span>
                 </div>
 
 
@@ -118,40 +125,17 @@
                         Total Departments
                     </span>
 
-                </div>
-
-
-            </a>
-
-
-
-            <!-- fourth card -->
-            <a href="#" class="stat-card">
-
-
-                <div class="stat-icon">
-
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M18.458 3.11A1 1 0 0 1 19 4v16a1 1 0 0 1-1.581.814L12 16.944V7.056l5.419-3.87a1 1 0 0 1 1.039-.076ZM22 12c0 1.48-.804 2.773-2 3.465v-6.93c1.196.692 2 1.984 2 3.465ZM10 8H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6V8Zm0 9H5v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3Z" clip-rule="evenodd" />
-                    </svg>
-
-                </div>
-
-
-                <div class="stat-info">
-
-                    <span class="stat-value">
-                        10
-                    </span>
-
-                    <span class="stat-title">
-                        Total Announcements
-                    </span>
+                    <span class="stat-action">
+    Manage →
+</span>
 
                 </div>
 
 
             </a>
+
+
+
 
 
         </div>
@@ -178,9 +162,7 @@
                     Departments
                 </button>
 
-                <button data-filter="announcements">
-                    Announcements
-                </button>
+
 
             </div>
 
@@ -279,34 +261,7 @@
                         />
                     </svg>
 
-                {{-- Announcement --}}
-                @elseif ($activity['type'] === 'announcement')
 
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="2"
-                        stroke="currentColor"
-                        class="activity-icon"
-                        aria-hidden="true"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M10.5 6.75L15.75 3v18l-5.25-3.75
-
-                               M15.75 6.75h2.25
-                               a3 3 0 0 1 3 3v4.5
-                               a3 3 0 0 1-3 3h-2.25
-
-                               M10.5 6.75H5.25
-                               A2.25 2.25 0 0 0 3 9v6
-                               a2.25 2.25 0 0 0 2.25 2.25h5.25
-
-                               M7.5 17.25l1.5 3h3l-1.5-3"
-                        />
-                    </svg>
 
                 @endif
 
@@ -320,26 +275,20 @@
 
                 <span class="activity-title">
 
-                    @if ($activity['type'] === 'academic')
+            @if ($activity['type'] === 'academic')
 
-                        {{-- Do not show the admin name here --}}
-                        A new user account was created
+                A new user account was created
 
-                    @elseif ($activity['type'] === 'department')
+            @elseif ($activity['type'] === 'department')
 
-                        {{ $activity['name'] ?? 'A department' }}
-                        created a new department
+                {{ $activity['name'] ?? 'A department' }}
+               department was created
 
-                    @elseif ($activity['type'] === 'announcement')
+            @else
 
-                        {{ $activity['name'] ?? 'A user' }}
-                        created a new announcement
+                {{ $activity['action'] ?? 'New activity' }}
 
-                    @else
-
-                        {{ $activity['action'] ?? 'New activity' }}
-
-                    @endif
+            @endif
 
                 </span>
 
@@ -455,7 +404,7 @@
                     <div class="activity-info">
 
                         <span class="activity-title">
-                            {{ $department->department_name }} department created
+                            {{ $department->department_name }} department was created. 
                         </span>
 
 
@@ -476,14 +425,7 @@
 
             </div>
 
-            <!-- annoucement list -->
-            <div class="activity-list hidden" data-type="announcements">
 
-                <div class="empty-state">
-                    No announcements yet.
-                </div>
-
-            </div>
 
 
         </div>
@@ -492,178 +434,7 @@
 
 
 
-    <!--------------- Right side of the main content of the dashboard-------------------------- -->
-    <div class="dashboard-right">
 
-        <!-- =============================overview card ===========================-->
-<div class="overview-card">
-
-    <div class="overview-header">
-        <h2>Today's Summary</h2>
-
-        <span class="overview-eyebrow">
-            {{ now()->format('M j') }}
-        </span>
-    </div>
-
-    <div class="overview-content">
-
-        {{-- New Users --}}
-        <div class="overview-item" data-stat="classes">
-
-            <div class="overview-item-icon">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke-width="2"
-                     stroke="currentColor">
-                    <path stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M15 19.128a9.38 9.38 0 0 0 2.625.372
-                          9.337 9.337 0 0 0 4.121-.952
-                          4.125 4.125 0 0 0-7.533-2.493
-                          M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07
-                          M15 19.128v.106A12.318 12.318 0 0 1 8.624 21
-                          c-2.331 0-4.512-.645-6.374-1.766
-                          l-.001-.109a6.375 6.375 0 0 1 11.964-3.07
-                          M12 6.375a3.375 3.375 0 1 1-6.75 0
-                          3.375 3.375 0 0 1 6.75 0Zm8.25 2.25
-                          a2.625 2.625 0 1 1-5.25 0
-                          2.625 2.625 0 0 1 5.25 0Z" />
-                </svg>
-            </div>
-
-            <div class="overview-item-text">
-                <span class="overview-item-name">
-                    New Users
-                </span>
-
-                <span class="overview-item-description">
-                    Registered today
-                </span>
-            </div>
-
-            <span class="overview-item-value">
-                {{ $newUsersToday }}
-            </span>
-
-        </div>
-
-        {{-- New Departments --}}
-        <div class="overview-item" data-stat="students">
-
-            <div class="overview-item-icon">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke-width="2"
-                     stroke="currentColor">
-                    <path stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M6.75 2.994v2.25m10.5-2.25v2.25
-                          m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25
-                          h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251
-                          m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5
-                          a2.25 2.25 0 0 0 2.25-2.25
-                          m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25
-                          h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5
-                          m-6.75-6h2.25m-9 2.25h4.5" />
-                </svg>
-            </div>
-
-            <div class="overview-item-text">
-                <span class="overview-item-name">
-                    New Departments
-                </span>
-
-                <span class="overview-item-description">
-                    Registered today
-                </span>
-            </div>
-
-            <span class="overview-item-value">
-                {{ $newDepartmentsToday }}
-            </span>
-
-        </div>
-
-        {{-- Announcements --}}
-        <div class="overview-item" data-stat="announcements">
-
-            <div class="overview-item-icon">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     fill="currentColor"
-                     viewBox="0 0 24 24">
-                    <path fill-rule="evenodd"
-                          d="M18.458 3.11A1 1 0 0 1 19 4v16a1 1 0 0 1-1.581.814
-                          L12 16.944V7.056l5.419-3.87a1 1 0 0 1 1.039-.076ZM22 12
-                          c0 1.48-.804 2.773-2 3.465v-6.93c1.196.692 2 1.984 2 3.465ZM10 8H4
-                          a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6V8Zm0 9H5v3a1 1 0 0 0 1 1h3
-                          a1 1 0 0 0 1-1v-3Z"
-                          clip-rule="evenodd" />
-                </svg>
-            </div>
-
-            <div class="overview-item-text">
-                <span class="overview-item-name">
-                    New Announcements
-                </span>
-
-                <span class="overview-item-description">
-                    Announcement feature not available
-                </span>
-            </div>
-
-            <span class="overview-item-value">
-                {{ $newAnnouncementsToday }}
-            </span>
-
-        </div>
-
-    </div>
-
-    {{-- Quick Actions --}}
-    <div class="quick-action">
-
-        <h2>Quick Actions</h2>
-
-        <div class="quick-action-buttons">
-
-            <a href="{{ route('admin.users.index') }}"
-               class="quick-action-button">
-                + Add User
-            </a>
-
-            <a href="{{ route('admin.departments.create') }}"
-               class="quick-action-button">
-                + Add Department
-            </a>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-        <!-- =============================chart card============================= -->
-        <!-- Student Enrollment Graph -->
-        <!-- add js to this  -->
-        <div class="chart-card">
-
-            <div class="chart-header">
-                <h2>Student Enrollment</h2>
-                <p>Number of students by academic year</p>
-            </div>
-
-
-            <div class="chart-container">
-                <canvas id="studentChart"></canvas>
-            </div>
-
-
-        </div>
-    </div>
 
 
 

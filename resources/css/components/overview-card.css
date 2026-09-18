@@ -544,3 +544,98 @@
         font-size: 12px;
     }
 }
+
+/* ============================================================
+   OVERVIEW CARD AFTER REMOVING ANNOUNCEMENTS
+============================================================ */
+
+.overview-card {
+    height: auto;
+    min-height: 0;
+    padding: 8px 13px 13px;
+}
+
+/* Add space between the remaining overview items */
+.overview-card .overview-content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Make each remaining item slightly more comfortable */
+.overview-card .overview-item {
+    min-height: 30px;
+    padding: 10px 0;
+}
+
+/* Keep the divider between the items */
+.overview-card .overview-item + .overview-item {
+    border-top: 1px solid var(--border-color);
+    padding-top: 18px;
+}
+
+/* Add a little space before Quick Actions */
+.overview-card .quick-action {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Quick Actions heading */
+.overview-card .quick-action h2 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 17px;
+    line-height: 1.2;
+}
+
+/* Quick Actions buttons */
+.overview-card .quick-action-buttons {
+    gap: 12px;
+}
+
+.overview-card .quick-action-button {
+    padding: 10px 18px;
+    min-height: 44px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .overview-card {
+        padding: 16px 18px 18px;
+    }
+
+    .overview-card .overview-content {
+        gap: 14px;
+    }
+
+    .overview-card .quick-action {
+        margin-top: 22px;
+        padding-top: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .overview-card {
+        padding: 14px;
+        border-radius: 16px;
+    }
+
+    .overview-card .overview-content {
+        gap: 10px;
+    }
+
+    .overview-card .overview-item {
+        min-height: 62px;
+        padding: 10px 0;
+    }
+
+    .overview-card .overview-item + .overview-item {
+        padding-top: 14px;
+    }
+
+    .overview-card .quick-action {
+        margin-top: 18px;
+        padding-top: 16px;
+    }
+}

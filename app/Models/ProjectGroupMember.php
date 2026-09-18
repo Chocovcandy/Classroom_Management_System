@@ -34,14 +34,14 @@ class ProjectGroupMember extends Model
     }
 
     /**
- * Grades received by this team member for project submissions.
- */
-public function submissionGrades(): HasMany
-{
-    return $this->hasMany(
-        ProjectSubmissionGrade::class,
-        'student_id',
-        'user_id'
-    );
-}
+     * Grades received by this team member for project submissions.
+     */
+    public function submissionGrades(): HasMany
+    {
+        return $this->hasMany(
+            ProjectSubmissionGrade::class,
+            'student_id',
+            'user_id'
+        );
+    }
 }

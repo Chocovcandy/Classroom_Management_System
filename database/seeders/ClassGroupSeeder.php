@@ -16,7 +16,7 @@ class ClassGroupSeeder extends Seeder
     public function run(): void
     {
         // Get the Computer Science professor
-        $professor = User::where('email', 'theary@gmail.com')->first();
+        $professor = User::where('email', 'theary@lifeun.edu.kh')->first();
 
         if (!$professor) {
             return;

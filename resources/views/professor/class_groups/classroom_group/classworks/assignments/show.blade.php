@@ -573,33 +573,268 @@
     font-weight:800;
 }
 
+/* ============================================================
+   STUDENT SUBMISSIONS
+   ============================================================ */
+
+.submission-summary {
+    display:flex;
+    align-items:center;
+    gap:13px;
+    margin:14px 20px 0;
+    padding:13px 15px;
+    border:1px solid var(--as-blue-border);
+    border-radius:12px;
+    background:var(--as-blue-soft);
+}
+
+.submission-summary-icon {
+    width:42px;
+    height:42px;
+    flex:0 0 42px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--as-blue-border);
+    border-radius:10px;
+    background:var(--as-surface);
+    color:var(--as-blue);
+    box-shadow:var(--as-small-shadow);
+    font-size:20px;
+}
+
+.submission-summary > div:last-child {
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+}
+
+.submission-summary strong {
+    color:var(--as-text);
+    font-size:17px;
+    line-height:1.1;
+    font-weight:800;
+}
+
+.submission-summary span {
+    color:var(--as-muted);
+    font-size:11px;
+    line-height:1.3;
+}
+
+
+/* ============================================================
+   SUBMISSION LIST
+   ============================================================ */
+
+.submission-list {
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    margin:13px 20px 17px;
+}
+
+
+/* ============================================================
+   SUBMISSION ITEM
+   ============================================================ */
+
+.submission-item {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+    padding:12px;
+    border:1px solid var(--as-border);
+    border-radius:12px;
+    background:var(--as-soft);
+    transition:
+        border-color .18s ease,
+        background .18s ease,
+        box-shadow .18s ease,
+        transform .18s ease;
+}
+
+.submission-item:hover {
+    border-color:var(--as-blue-border);
+    background:var(--as-blue-soft);
+    box-shadow:var(--as-small-shadow);
+    transform:translateY(-1px);
+}
+
+
+/* ============================================================
+   STUDENT ICON
+   ============================================================ */
+
+.submission-student-icon {
+    width:40px;
+    height:40px;
+    flex:0 0 40px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--as-blue-border);
+    border-radius:50%;
+    background:var(--as-surface);
+    color:var(--as-blue);
+    font-size:18px;
+}
+
+
+/* ============================================================
+   STUDENT INFORMATION
+   ============================================================ */
+
+.submission-student-info {
+    min-width:0;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+}
+
+.submission-student-info strong {
+    display:block;
+    overflow:hidden;
+    color:var(--as-text);
+    font-size:13px;
+    line-height:1.3;
+    font-weight:800;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.submission-student-info span {
+    display:flex;
+    align-items:center;
+    gap:4px;
+    color:var(--as-muted);
+    font-size:10px;
+    line-height:1.3;
+}
+
+.submission-student-info span::before {
+    content:"";
+    width:5px;
+    height:5px;
+    flex:0 0 5px;
+    border-radius:50%;
+    background:var(--as-blue);
+}
+
+
+/* ============================================================
+   GRADE STATUS
+   ============================================================ */
+
+.submission-grade-status {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    flex:0 0 auto;
+    min-height:29px;
+    padding:0 9px;
+    border-radius:8px;
+    font-size:10px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.submission-grade-status.graded {
+    border:1px solid var(--as-green-border);
+    background:var(--as-green-soft);
+    color:var(--as-green-dark);
+}
+
+.submission-grade-status.ungraded {
+    border:1px solid #fde68a;
+    background:var(--as-warning-soft);
+    color:var(--as-warning);
+}
+
+.submission-grade-status i {
+    font-size:14px;
+}
+
+.submission-grade-score {
+    margin-left:2px;
+    font-weight:800;
+}
+
+
+/* ============================================================
+   VIEW SUBMISSION BUTTON
+   ============================================================ */
+
 .submission-view-btn {
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    gap:4px;
+    gap:6px;
     flex:0 0 auto;
-    min-height:31px;
-    padding:0 9px;
-    border:1px solid var(--as-blue-border);
-    border-radius:7px;
-    background:var(--as-surface);
-    color:var(--as-blue);
+    min-height:35px;
+    padding:0 12px;
+    border:1px solid var(--as-blue);
+    border-radius:8px;
+    background:var(--as-blue);
+    color:#fff;
     text-decoration:none;
-    font-size:9px;
+    font-size:10px;
     font-weight:800;
+    line-height:1;
     white-space:nowrap;
-    transition:.18s ease;
+    transition:
+        background .18s ease,
+        border-color .18s ease,
+        transform .18s ease,
+        box-shadow .18s ease;
 }
 
 .submission-view-btn:hover {
-    border-color:var(--as-blue);
-    background:var(--as-blue-soft);
-    color:var(--as-blue-dark);
+    border-color:var(--as-blue-dark);
+    background:var(--as-blue-dark);
+    color:#fff;
+    box-shadow:0 4px 12px rgba(37,99,235,.18);
+    transform:translateY(-1px);
 }
 
 .submission-view-btn i {
-    font-size:14px;
+    font-size:15px;
+}
+
+
+/* ============================================================
+   EMPTY SUBMISSION STATE
+   ============================================================ */
+
+.submission-placeholder {
+    min-height:125px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin:14px 20px 17px;
+    padding:20px;
+    border:1px dashed var(--as-border);
+    border-radius:12px;
+    background:var(--as-soft);
+    text-align:center;
+}
+
+.submission-placeholder i {
+    margin-bottom:8px;
+    color:var(--as-light);
+    font-size:28px;
+}
+
+.submission-placeholder p {
+    margin:0;
+    color:var(--as-muted);
+    font-size:11px;
+    line-height:1.4;
 }
 
 /* ============================================================
@@ -690,15 +925,20 @@
    FILE VIEWER
    ============================================================ */
 
+/* ============================================================
+   FILE VIEWER
+   Global because the modal is outside .classwork-show-page
+   ============================================================ */
+
 .material-viewer-modal {
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:rgba(2,6,23,.76);
+    position:fixed !important;
+    inset:0 !important;
+    z-index:99999 !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:20px !important;
+    background:rgba(2,6,23,.76) !important;
     opacity:0;
     visibility:hidden;
     pointer-events:none;
@@ -706,350 +946,152 @@
 }
 
 .material-viewer-modal.active {
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
+    opacity:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
 }
 
 .material-viewer-container {
-    width:min(1200px,100%);
-    height:min(850px,90vh);
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-    border:1px solid var(--as-border);
-    border-radius:14px;
-    background:var(--as-surface);
-    box-shadow:0 24px 70px rgba(0,0,0,.35);
+    width:min(1200px,100%) !important;
+    height:min(850px,90vh) !important;
+    display:flex !important;
+    flex-direction:column !important;
+    overflow:hidden !important;
+    border:1px solid var(--as-border) !important;
+    border-radius:14px !important;
+    background:#ffffff !important;
+    box-shadow:0 24px 70px rgba(0,0,0,.35) !important;
 }
 
 .material-viewer-header {
-    min-height:54px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    padding:0 14px;
-    border-bottom:1px solid var(--as-border);
-    background:var(--as-surface);
+    min-height:54px !important;
+    width:100% !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:12px !important;
+    padding:0 14px !important;
+    border-bottom:1px solid var(--as-border) !important;
+    background:#ffffff !important;
+    flex:0 0 auto !important;
 }
 
 .material-viewer-title {
-    min-width:0;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    color:var(--as-text-2);
-    font-size:12px;
-    font-weight:750;
+    min-width:0 !important;
+    flex:1 1 auto !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+    color:var(--as-text-2) !important;
+    font-size:12px !important;
+    font-weight:750 !important;
+    overflow:hidden !important;
 }
 
 .material-viewer-title i {
-    color:var(--as-blue);
-    font-size:18px;
+    flex:0 0 auto !important;
+    color:var(--as-blue) !important;
+    font-size:18px !important;
 }
 
 .material-viewer-title span {
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+    white-space:nowrap !important;
 }
 
 .material-viewer-actions {
-    display:flex;
-    align-items:center;
-    gap:5px;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:6px !important;
+    flex:0 0 auto !important;
+    visibility:visible !important;
+    opacity:1 !important;
 }
 
 .material-viewer-btn {
-    width:34px;
-    height:34px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:0;
-    border:1px solid var(--as-border);
-    border-radius:8px;
-    background:transparent;
-    color:var(--as-muted);
-    cursor:pointer;
-    transition:.18s ease;
+    width:36px !important;
+    height:36px !important;
+    min-width:36px !important;
+    min-height:36px !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:0 !important;
+    margin:0 !important;
+    border:1px solid var(--as-border) !important;
+    border-radius:8px !important;
+    background:#ffffff !important;
+    color:var(--as-muted) !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    cursor:pointer !important;
+    appearance:none !important;
+    -webkit-appearance:none !important;
 }
 
 .material-viewer-btn:hover {
-    border-color:var(--as-blue);
-    background:var(--as-blue-soft);
-    color:var(--as-text);
+    border-color:var(--as-blue) !important;
+    background:var(--as-blue-soft) !important;
+    color:var(--as-blue) !important;
 }
 
 .material-viewer-btn.close:hover {
-    border-color:#ef4444;
-    color:#ef4444;
+    border-color:#ef4444 !important;
+    background:#fef2f2 !important;
+    color:#ef4444 !important;
 }
 
 .material-viewer-btn i {
-    font-size:18px;
+    display:inline-block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    font-size:19px !important;
+    line-height:1 !important;
 }
 
 .material-viewer-body {
-    flex:1;
-    min-height:0;
-    background:#171717;
+    flex:1 1 auto !important;
+    min-height:0 !important;
+    background:#171717 !important;
 }
 
 .material-viewer-body iframe {
-    display:block;
-    width:100%;
-    height:100%;
-    border:0;
-    background:#fff;
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    border:0 !important;
+    background:#ffffff !important;
 }
 
 .material-viewer-container:fullscreen {
-    width:100vw;
-    height:100vh;
-    border:0;
-    border-radius:0;
+    width:100vw !important;
+    height:100vh !important;
+    border:0 !important;
+    border-radius:0 !important;
 }
 
-/* ============================================================
-   FOCUS
-   ============================================================ */
-
-.classwork-show-page button:focus-visible,
-.classwork-show-page a:focus-visible {
-    outline:3px solid rgba(37,99,235,.16);
-    outline-offset:2px;
+/* Modal is outside the page wrapper, so dark mode must target it globally. */
+.dark-mode .material-viewer-container,
+.dark-mode .material-viewer-header {
+    border-color:var(--as-border) !important;
+    background:#ffffff !important;
 }
 
-/* ============================================================
-   DARK MODE
-   ============================================================ */
-
-.dark-mode .classwork-show-page {
-    --as-green:#49d5a7;
-    --as-green-dark:#62e0b5;
-    --as-green-soft:rgba(73,213,167,.12);
-    --as-green-light:rgba(73,213,167,.18);
-    --as-green-border:rgba(73,213,167,.34);
-
-    --as-blue:#6d76ff;
-    --as-blue-dark:#8990ff;
-    --as-blue-soft:rgba(109,118,255,.12);
-    --as-blue-border:rgba(109,118,255,.34);
-
-    --as-text:#f4f5ff;
-    --as-text-2:#e6e8f7;
-    --as-muted:#a1a4cc;
-    --as-light:#9295bd;
-
-    --as-border:#2b2e52;
-    --as-border-light:#252847;
-    --as-surface:#171933;
-    --as-soft:#12142a;
-
-    --as-warning:#f2c361;
-    --as-warning-soft:rgba(242,195,97,.12);
-
-    --as-shadow:0 7px 24px rgba(0,0,10,.25);
-    --as-small-shadow:0 2px 8px rgba(0,0,10,.18);
-
-    color:var(--as-text);
-    color-scheme:dark;
+.dark-mode .material-viewer-title {
+    color:var(--as-text-2) !important;
 }
 
-.dark-mode .classwork-show-page .classwork-back-btn {
-    color:var(--as-muted);
+.dark-mode .material-viewer-btn {
+    border-color:var(--as-border) !important;
+    background:#ffffff !important;
+    color:var(--as-muted) !important;
 }
 
-.dark-mode .classwork-show-page .classwork-back-btn:hover {
-    color:var(--as-blue-dark);
-}
-
-.dark-mode .classwork-show-page .classwork-show-icon {
-    border-color:var(--as-green-border);
-    background:var(--as-green-soft);
-    color:var(--as-green);
-}
-
-.dark-mode .classwork-show-page .classwork-show-type {
-    color:var(--as-green-dark);
-}
-
-.dark-mode .classwork-show-page .classwork-show-heading h1,
-.dark-mode .classwork-show-page .classwork-detail-card-header h2 {
-    color:var(--as-text);
-}
-
-.dark-mode .classwork-show-page .classwork-show-topic {
-    color:var(--as-muted);
-}
-
-.dark-mode .classwork-show-page .classwork-show-topic i {
-    color:var(--as-blue);
-}
-
-.dark-mode .classwork-show-page .classwork-detail-card,
-.dark-mode .classwork-show-page .classwork-detail-card-header {
-    border-color:var(--as-border);
-    background:var(--as-surface);
-}
-
-.dark-mode .classwork-show-page .classwork-description {
-    color:var(--as-text-2);
-}
-
-.dark-mode .classwork-show-page .assignment-form-box {
-    border-color:var(--as-blue-border);
-    background:rgba(109,118,255,.07);
-}
-
-.dark-mode .classwork-show-page .assignment-form-icon {
-    border-color:var(--as-blue-border);
-    background:var(--as-surface);
-    color:var(--as-blue);
-}
-
-.dark-mode .classwork-show-page .assignment-form-info strong {
-    color:var(--as-text-2);
-}
-
-.dark-mode .classwork-show-page .assignment-form-info span {
-    color:var(--as-muted);
-}
-
-.dark-mode .classwork-show-page .assignment-form-open {
-    border-color:var(--as-blue);
-    background:var(--as-blue);
-    color:#fff;
-}
-
-.dark-mode .classwork-show-page .classwork-file {
-    border-color:var(--as-border);
-    background:var(--as-soft);
-}
-
-.dark-mode .classwork-show-page .classwork-file:hover {
-    border-color:var(--as-blue-border);
-    background:var(--as-blue-soft);
-}
-
-.dark-mode .classwork-show-page .classwork-file-icon {
-    border-color:var(--as-green-border);
-    background:var(--as-green-soft);
-    color:var(--as-green);
-}
-
-.dark-mode .classwork-show-page .classwork-file-info strong {
-    color:var(--as-text-2);
-}
-
-.dark-mode .classwork-show-page .classwork-file-info span {
-    color:var(--as-light);
-}
-
-.dark-mode .classwork-show-page .classwork-file-open {
-    border-color:var(--as-blue-border);
-    background:var(--as-surface);
-    color:var(--as-blue-dark);
-}
-
-.dark-mode .classwork-show-page .classwork-no-files,
-.dark-mode .classwork-show-page .submission-placeholder {
-    border-color:#3a3e68;
-    background:var(--as-soft);
-}
-
-.dark-mode .classwork-show-page .submission-summary {
-    border-color:var(--as-blue-border);
-    background:rgba(109,118,255,.08);
-}
-
-.dark-mode .classwork-show-page .submission-summary-icon {
-    background:var(--as-surface);
-    color:var(--as-blue);
-}
-
-.dark-mode .classwork-show-page .submission-summary strong {
-    color:var(--as-text);
-}
-
-.dark-mode .classwork-show-page .submission-item {
-    border-color:var(--as-border);
-    background:var(--as-soft);
-}
-
-.dark-mode .classwork-show-page .submission-item:hover {
-    border-color:var(--as-blue-border);
-    background:var(--as-blue-soft);
-}
-
-.dark-mode .classwork-show-page .submission-student-icon {
-    border-color:var(--as-border);
-    background:var(--as-surface);
-    color:var(--as-muted);
-}
-
-.dark-mode .classwork-show-page .submission-student-info strong {
-    color:var(--as-text-2);
-}
-
-.dark-mode .classwork-show-page .submission-student-info span {
-    color:var(--as-light);
-}
-
-.dark-mode .classwork-show-page .submission-grade-status.graded {
-    background:rgba(73,213,167,.12);
-    color:var(--as-green-dark);
-}
-
-.dark-mode .classwork-show-page .submission-grade-status.ungraded {
-    background:var(--as-warning-soft);
-    color:var(--as-warning);
-}
-
-.dark-mode .classwork-show-page .submission-view-btn {
-    border-color:var(--as-blue-border);
-    background:var(--as-surface);
-    color:var(--as-blue-dark);
-}
-
-.dark-mode .classwork-show-page .classwork-info-item {
-    border-color:var(--as-border-light);
-}
-
-.dark-mode .classwork-show-page .classwork-info-item > i {
-    background:var(--as-blue-soft);
-    color:var(--as-blue);
-}
-
-.dark-mode .classwork-show-page .classwork-info-item span {
-    color:var(--as-muted);
-}
-
-.dark-mode .classwork-show-page .classwork-info-item strong {
-    color:var(--as-text-2);
-}
-
-.dark-mode .classwork-show-page .classwork-action-btn {
-    border-color:var(--as-green-border);
-    background:var(--as-green-soft);
-    color:var(--as-green-dark);
-}
-
-.dark-mode .classwork-show-page .material-viewer-container,
-.dark-mode .classwork-show-page .material-viewer-header {
-    border-color:var(--as-border);
-    background:var(--as-surface);
-}
-
-.dark-mode .classwork-show-page .material-viewer-title {
-    color:var(--as-text-2);
-}
-
-.dark-mode .classwork-show-page .material-viewer-btn {
-    border-color:var(--as-border);
-    color:var(--as-muted);
+.dark-mode .material-viewer-btn:hover {
+    background:var(--as-blue-soft) !important;
+    color:var(--as-blue) !important;
 }
 
 /* ============================================================
@@ -1180,6 +1222,9 @@
 
 @section('content')
 
+@php
+    $returnTo = request('origin', request('return_to', 'stream'));
+@endphp
 <div class="classwork-show-page">
 
     {{-- ============================================================
@@ -1348,103 +1393,111 @@
 
             @endif
 
-            {{-- ====================================================
-                ATTACHED FILES
-            ===================================================== --}}
+{{-- ====================================================
+     ATTACHED FILES
+===================================================== --}}
 
-            <section class="classwork-detail-card">
+@php
+    /*
+     * Only resources with a real file_path are attachments.
+     * If there are no real files, the entire card is hidden.
+     */
+    $assignmentFiles = $assignment->resources
+        ? $assignment->resources->filter(function ($resource) {
+            return !empty($resource->file_path);
+        })
+        : collect();
+@endphp
 
-                <div class="classwork-detail-card-header">
+@if($assignmentFiles->isNotEmpty())
 
-                    <h2>
-                        Attachments
-                    </h2>
+    <section class="classwork-detail-card">
 
-                </div>
+        <div class="classwork-detail-card-header">
 
+            <h2>
+                Attached Files
+            </h2>
 
-                @if($assignment->resources->isNotEmpty())
-
-                <div class="classwork-files">
-
-                    @foreach($assignment->resources as $resource)
-
-                    <div class="classwork-file">
-
-
-                        {{-- FILE ICON --}}
-
-                        <div class="classwork-file-icon assignment">
-
-                            <i class="bx bx-file"></i>
-
-                        </div>
+        </div>
 
 
-                        {{-- FILE INFORMATION --}}
+        <div class="classwork-files">
 
-                        <div class="classwork-file-info">
+            @foreach($assignmentFiles as $resource)
 
-                            <strong>
-                                {{ $resource->file_name ?? $resource->title }}
-                            </strong>
+                @php
+                    $fileName =
+                        $resource->file_name
+                        ?? $resource->title
+                        ?? basename($resource->file_path);
 
-                            <span>
+                    $fileUrl = asset(
+                        'storage/' . ltrim($resource->file_path, '/')
+                    );
 
-                                {{ $resource->file_size
-                                            ? number_format($resource->file_size / 1024, 1) . ' KB'
-                                            : 'Assignment attachment'
-                                        }}
+                    $fileSize = $resource->file_size
+                        ? number_format(
+                            $resource->file_size / 1024,
+                            1
+                        ) . ' KB'
+                        : 'Assignment attachment';
+                @endphp
 
-                            </span>
 
-                        </div>
+                <div class="classwork-file">
 
+                    {{-- FILE ICON --}}
 
-                        {{-- OPEN FILE --}}
+                    <div class="classwork-file-icon assignment">
 
-                        @if($resource->file_path)
-
-                        <button
-                            type="button"
-                            class="classwork-file-open"
-                            data-file-url="{{ asset('storage/' . $resource->file_path) }}"
-                            data-file-name="{{ $resource->file_name ?? $resource->title }}"
-                            onclick="openAssignmentFile(
-                                            this.dataset.fileUrl,
-                                            this.dataset.fileName
-                                        )">
-                            <i class="bx bx-show"></i>
-
-                            Open
-                        </button>
-
-                        @endif
-
+                        <i class="bx bx-file"></i>
 
                     </div>
 
-                    @endforeach
+
+                    {{-- FILE INFORMATION --}}
+
+                    <div class="classwork-file-info">
+
+                        <strong>
+                            {{ $fileName }}
+                        </strong>
+
+                        <span>
+                            {{ $fileSize }}
+                        </span>
+
+                    </div>
+
+
+                    {{-- OPEN FILE --}}
+
+                    <button
+                        type="button"
+                        class="classwork-file-open"
+                        data-file-url="{{ $fileUrl }}"
+                        data-file-name="{{ $fileName }}"
+                        onclick="openAssignmentFile(
+                            this.dataset.fileUrl,
+                            this.dataset.fileName
+                        )">
+
+                        <i class="bx bx-show"></i>
+
+                        Open
+
+                    </button>
 
                 </div>
 
-                @else
+            @endforeach
 
-                <div class="classwork-no-files">
+        </div>
 
-                    <i class="bx bx-file"></i>
+    </section>
 
-                    <p>
-                        No files attached to this assignment.
-                    </p>
-
-                </div>
-
-                @endif
-
-            </section>
-
-
+@endif
 
             {{-- ====================================================
                 STUDENT SUBMISSIONS
@@ -1549,21 +1602,19 @@
                         {{-- ========================================================
          VIEW SUBMISSION
     ========================================================= --}}
+<a
+    href="{{ route('professor.class-groups.assignments.submissions.show', [
+        'classGroup' => $classGroup->id,
+        'assignment' => $assignment->id,
+        'submission' => $submission->id,
+        'origin' => request('return_to', 'stream'),
+    ]) }}"
+    class="classwork-show-page submission-view-btn">
 
-                        <a
-                            href="{{ route('professor.class-groups.assignments.submissions.show', [
-            'classGroup' => $classGroup->id,
-            'assignment' => $assignment->id,
-            'submission' => $submission->id,
-        ]) }}"
-                            class="submission-view-btn">
+    <i class="bx bx-show"></i>
+    <span>View Submission</span>
 
-                            <i class="bx bx-show"></i>
-
-                            View Submission
-
-                        </a>
-
+</a>
                     </div>
 
                     @endforeach
@@ -1776,7 +1827,7 @@
 
                 <button
                     type="button"
-                    class="material-viewer-btn"
+                    class="material-viewer-btn fullscreen"
                     onclick="toggleAssignmentFullscreen()"
                     title="Fullscreen">
                     <i class="bx bx-fullscreen"></i>
@@ -1822,272 +1873,247 @@
 ================================================================= --}}
 
 <script>
-    /*
-    |--------------------------------------------------------------------------
-    | Open assignment file
-    |--------------------------------------------------------------------------
-    */
+/* ============================================================
+   ASSIGNMENT FILE VIEWER
+   ============================================================ */
 
-    function openAssignmentFile(fileUrl, fileName) {
+function openAssignmentFile(fileUrl, fileName) {
 
-        const modal =
-            document.getElementById(
-                'assignmentViewerModal'
-            );
+    const modal = document.getElementById('assignmentViewerModal');
+    const iframe = document.getElementById('assignmentViewerFrame');
+    const title = document.getElementById('assignmentViewerTitle');
 
-        const iframe =
-            document.getElementById(
-                'assignmentViewerFrame'
-            );
-
-        const title =
-            document.getElementById(
-                'assignmentViewerTitle'
-            );
-
-
-        if (!modal || !iframe) {
-
-            console.error(
-                'Assignment viewer modal or iframe not found.'
-            );
-
-            return;
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Set title
-        |--------------------------------------------------------------------------
-        */
-
-        if (title) {
-
-            title.textContent =
-                fileName ||
-                'Assignment Attachment';
-
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Load file
-        |--------------------------------------------------------------------------
-        */
-
-        iframe.src = fileUrl;
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Open modal
-        |--------------------------------------------------------------------------
-        */
-
-        modal.classList.add('active');
-
-        document.body.classList.add(
-            'material-modal-open'
-        );
-
+    if (!modal || !iframe) {
+        console.error('Assignment viewer modal or iframe not found.');
+        return;
     }
 
+    if (title) {
+        title.textContent = fileName || 'Assignment Attachment';
+    }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Close modal
-    |--------------------------------------------------------------------------
-    */
+    iframe.src = fileUrl || '';
 
-    function closeAssignmentModal() {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
 
-        const modal =
-            document.getElementById(
-                'assignmentViewerModal'
-            );
-
-        const iframe =
-            document.getElementById(
-                'assignmentViewerFrame'
-            );
+    document.body.classList.add('material-modal-open');
+}
 
 
-        if (!modal || !iframe) {
+/* ============================================================
+   CLOSE VIEWER
+   ============================================================ */
 
-            return;
+async function closeAssignmentModal() {
 
+    const modal = document.getElementById('assignmentViewerModal');
+    const iframe = document.getElementById('assignmentViewerFrame');
+    const title = document.getElementById('assignmentViewerTitle');
+
+    if (!modal) {
+        return;
+    }
+
+    /* Exit fullscreen first */
+    if (document.fullscreenElement) {
+        try {
+            await document.exitFullscreen();
+        } catch (error) {
+            console.error('Could not exit fullscreen:', error);
         }
+    }
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Clear iframe
-        |--------------------------------------------------------------------------
-        */
-
+    if (iframe) {
         iframe.src = '';
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Close modal
-        |--------------------------------------------------------------------------
-        */
-
-        modal.classList.remove('active');
-
-        document.body.classList.remove(
-            'material-modal-open'
-        );
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Exit browser fullscreen if active
-        |--------------------------------------------------------------------------
-        */
-
-        if (document.fullscreenElement) {
-
-            document.exitFullscreen();
-
-        }
-
     }
 
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Toggle fullscreen
-    |--------------------------------------------------------------------------
-    */
+    document.body.classList.remove('material-modal-open');
 
-    function toggleAssignmentFullscreen() {
+    if (title) {
+        title.textContent = 'Assignment Attachment';
+    }
 
-        const container =
-            document.querySelector(
-                '#assignmentViewerModal .material-viewer-container'
-            );
+    updateAssignmentFullscreenButton(false);
+}
 
 
-        if (!container) {
+/* ============================================================
+   FULLSCREEN BUTTON
+   ============================================================ */
 
-            return;
+async function toggleAssignmentFullscreen() {
 
-        }
+    const modal = document.getElementById('assignmentViewerModal');
+    const container = modal
+        ? modal.querySelector('.material-viewer-container')
+        : null;
 
+    if (!container) {
+        return;
+    }
+
+    try {
 
         if (!document.fullscreenElement) {
 
-            container
-                .requestFullscreen()
-                .catch(function(error) {
+            await container.requestFullscreen();
 
-                    console.error(
-                        'Fullscreen failed:',
-                        error
-                    );
-
-                });
+            updateAssignmentFullscreenButton(true);
 
         } else {
 
-            document.exitFullscreen();
+            await document.exitFullscreen();
+
+            updateAssignmentFullscreenButton(false);
 
         }
 
+    } catch (error) {
+
+        console.error('Assignment fullscreen failed:', error);
+
+    }
+}
+
+
+/* ============================================================
+   UPDATE FULLSCREEN ICON
+   ============================================================ */
+
+function updateAssignmentFullscreenButton(isFullscreen) {
+
+    const button = document.querySelector(
+        '#assignmentViewerModal .material-viewer-btn.fullscreen'
+    );
+
+    if (!button) {
+        return;
     }
 
+    const icon = button.querySelector('i');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Click outside viewer
-    |--------------------------------------------------------------------------
-    */
+    if (isFullscreen) {
 
-    const assignmentModal =
-        document.getElementById(
-            'assignmentViewerModal'
-        );
+        if (icon) {
+            icon.className = 'bx bx-exit-fullscreen';
+        }
+
+        button.setAttribute('title', 'Exit Fullscreen');
+        button.setAttribute('aria-label', 'Exit Fullscreen');
+
+    } else {
+
+        if (icon) {
+            icon.className = 'bx bx-fullscreen';
+        }
+
+        button.setAttribute('title', 'Fullscreen');
+        button.setAttribute('aria-label', 'Fullscreen');
+    }
+}
 
 
-    if (assignmentModal) {
+/* ============================================================
+   FULLSCREEN CHANGE
+   Keeps icon correct when user presses browser ESC.
+   ============================================================ */
 
-        assignmentModal.addEventListener(
+document.addEventListener('fullscreenchange', function () {
+
+    const modal = document.getElementById('assignmentViewerModal');
+
+    if (!modal) {
+        return;
+    }
+
+    updateAssignmentFullscreenButton(
+        !!document.fullscreenElement
+    );
+});
+
+
+/* ============================================================
+   INITIALIZE VIEWER BUTTONS
+   ============================================================ */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const modal = document.getElementById('assignmentViewerModal');
+    const fullscreenBtn = document.querySelector(
+        '#assignmentViewerModal .material-viewer-btn.fullscreen'
+    );
+    const closeBtn = document.querySelector(
+        '#assignmentViewerModal .material-viewer-btn.close'
+    );
+
+    if (fullscreenBtn) {
+
+        fullscreenBtn.addEventListener(
             'click',
-            function(event) {
-
-                if (
-                    event.target ===
-                    assignmentModal
-                ) {
-
-                    closeAssignmentModal();
-
-                }
-
-            }
+            toggleAssignmentFullscreen
         );
 
     }
 
+    if (closeBtn) {
 
-    /*
-    |--------------------------------------------------------------------------
-    | ESC key
-    |--------------------------------------------------------------------------
-    */
+        closeBtn.addEventListener(
+            'click',
+            closeAssignmentModal
+        );
 
-    document.addEventListener(
-        'keydown',
-        function(event) {
+    }
 
-            if (event.key !== 'Escape') {
+    if (modal) {
 
-                return;
-
-            }
-
-
-            const modal =
-                document.getElementById(
-                    'assignmentViewerModal'
-                );
-
-
-            if (!modal) {
-
-                return;
-
-            }
-
+        modal.addEventListener('click', function (event) {
 
             /*
-            | If browser fullscreen is active,
-            | let the first ESC exit fullscreen.
-            */
-
-            if (document.fullscreenElement) {
-
-                return;
-
-            }
-
-
-            if (
-                modal.classList.contains(
-                    'active'
-                )
-            ) {
-
+             * Clicking the dark background closes the viewer.
+             * Clicking inside the viewer does nothing.
+             */
+            if (event.target === modal) {
                 closeAssignmentModal();
-
             }
 
-        }
-    );
+        });
+
+    }
+
+});
+
+
+/* ============================================================
+   ESC KEY
+   ============================================================ */
+
+document.addEventListener('keydown', function (event) {
+
+    if (event.key !== 'Escape') {
+        return;
+    }
+
+    const modal = document.getElementById('assignmentViewerModal');
+
+    if (!modal || !modal.classList.contains('active')) {
+        return;
+    }
+
+    /*
+     * If browser fullscreen is active, let the browser
+     * exit fullscreen first.
+     */
+    if (document.fullscreenElement) {
+        return;
+    }
+
+    closeAssignmentModal();
+
+});
 </script>
 
 @endsection

@@ -75,8 +75,8 @@
     align-items: center;
     justify-content: space-between;
 
-    min-height: 170px;
-    padding: 22px 26px;
+    min-height: 180px;
+    padding: 25px 30px;
 
     overflow: hidden;
     box-sizing: border-box;
@@ -94,13 +94,13 @@
 
 .classwork-eyebrow {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 7px;
 
     color: var(--button-color);
 
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 800;
-    letter-spacing: 1.2px;
+    letter-spacing: 1.3px;
 }
 
 .classwork-header h1 {
@@ -108,19 +108,19 @@
 
     color: var(--heading-color);
 
-    font-size: 25px;
+    font-size: 28px;
     font-weight: 800;
     line-height: 1.25;
 }
 
 .classwork-header p {
-    max-width: 520px;
-    margin: 7px 0 0;
+    max-width: 560px;
+    margin: 9px 0 0;
 
     color: var(--secondary-text-color);
 
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.55;
 }
 
 
@@ -135,18 +135,18 @@
     align-items: center;
     justify-content: center;
 
-    width: 175px;
-    height: 125px;
+    width: 185px;
+    height: 135px;
 
-    margin-left: 20px;
+    margin-left: 25px;
     flex-shrink: 0;
 }
 
 .classwork-illustration-circle {
     position: absolute;
 
-    width: 105px;
-    height: 105px;
+    width: 115px;
+    height: 115px;
 
     background-color: var(--topic-soft);
 
@@ -161,10 +161,10 @@
     display: flex;
     flex-direction: column;
 
-    width: 72px;
-    height: 88px;
+    width: 78px;
+    height: 94px;
 
-    padding: 18px 13px;
+    padding: 19px 14px;
 
     box-sizing: border-box;
 
@@ -206,8 +206,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
 
     margin-top: auto;
 
@@ -216,7 +216,7 @@
 
     border-radius: 6px;
 
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .classwork-illustration-icon {
@@ -227,8 +227,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
 
     background-color: var(--card-color);
     border: 1px solid var(--border-color);
@@ -236,7 +236,7 @@
 
     box-shadow: 0 5px 15px var(--shadow-color);
 
-    font-size: 17px;
+    font-size: 18px;
 }
 
 .illustration-book {
@@ -346,12 +346,12 @@
 .classwork-filter {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
 
     width: calc(100% - 10px);
 
-    margin-top: 14px;
-    padding: 4px;
+    margin-top: 15px;
+    padding: 5px;
 
     box-sizing: border-box;
 
@@ -368,12 +368,12 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 7px;
+    gap: 8px;
 
-    min-width: 88px;
-    height: 37px;
+    min-width: 96px;
+    height: 42px;
 
-    padding: 0 13px;
+    padding: 0 15px;
 
     flex-shrink: 0;
 
@@ -384,7 +384,7 @@
     border-radius: 9px;
 
     font-family: inherit;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 700;
 
     cursor: pointer;
@@ -396,7 +396,7 @@
 }
 
 .classwork-filter-item i {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .classwork-filter-item:hover {
@@ -421,11 +421,11 @@
 .classwork-content {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
 
     width: calc(100% - 10px);
 
-    margin-top: 10px;
+    margin-top: 12px;
     padding-bottom: 30px;
 
     box-sizing: border-box;
@@ -465,9 +465,9 @@
     align-items: center;
     justify-content: space-between;
 
-    min-height: 68px;
+    min-height: 76px;
 
-    padding: 10px 12px 10px 15px;
+    padding: 12px 14px 12px 17px;
 
     box-sizing: border-box;
 
@@ -483,7 +483,7 @@
 .classwork-topic-info {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
 
     min-width: 0;
 }
@@ -493,8 +493,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 39px;
-    height: 39px;
+    width: 43px;
+    height: 43px;
 
     flex-shrink: 0;
 
@@ -504,7 +504,7 @@
     border: 1px solid var(--primary-border);
     border-radius: 10px;
 
-    font-size: 19px;
+    font-size: 21px;
 }
 
 .classwork-topic-icon.no-topic {
@@ -523,7 +523,7 @@
 
     color: var(--heading-color);
 
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 800;
     line-height: 1.3;
 
@@ -533,11 +533,11 @@
 }
 
 .classwork-topic-text p {
-    margin: 3px 0 0;
+    margin: 4px 0 0;
 
     color: var(--secondary-text-color);
 
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.4;
 
     white-space: nowrap;
@@ -553,10 +553,10 @@
 .classwork-topic-actions {
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
 
     flex-shrink: 0;
-    margin-left: 12px;
+    margin-left: 14px;
 }
 
 .classwork-topic-toggle {
@@ -564,8 +564,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
 
     padding: 0;
 
@@ -584,7 +584,7 @@
 }
 
 .classwork-topic-toggle i {
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .classwork-topic-toggle:hover {
@@ -600,7 +600,7 @@
    ============================================================ */
 
 .classwork-topic-items {
-    padding: 0 10px 10px;
+    padding: 0 11px 11px;
 }
 
 .classwork-item {
@@ -609,9 +609,9 @@
     display: flex;
     align-items: center;
 
-    min-height: 64px;
+    min-height: 72px;
 
-    padding: 8px 8px 8px 10px;
+    padding: 10px 10px 10px 12px;
 
     box-sizing: border-box;
 
@@ -626,7 +626,7 @@
 
 .classwork-item:hover {
     background-color: var(--surface-color);
-    padding-left: 13px;
+    padding-left: 15px;
 }
 
 
@@ -639,16 +639,16 @@
     align-items: center;
     justify-content: center;
 
-    width: 38px;
-    height: 38px;
+    width: 43px;
+    height: 43px;
 
-    margin-right: 12px;
+    margin-right: 14px;
 
     flex-shrink: 0;
 
     border-radius: 10px;
 
-    font-size: 18px;
+    font-size: 21px;
 }
 
 .classwork-item-icon.material {
@@ -691,9 +691,9 @@
 
     color: var(--heading-color);
 
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
-    line-height: 1.35;
+    line-height: 1.4;
 
     white-space: nowrap;
     overflow: hidden;
@@ -704,12 +704,12 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 7px;
 
-    margin: 4px 0 0;
+    margin: 5px 0 0;
 
-    font-size: 10px;
-    line-height: 1.3;
+    font-size: 12px;
+    line-height: 1.35;
 }
 
 .classwork-item-type {
@@ -753,20 +753,20 @@
 .classwork-topic-empty {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
 
-    min-height: 48px;
+    min-height: 54px;
 
-    padding: 8px 10px;
+    padding: 10px 12px;
 
     color: var(--secondary-text-color);
 
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .classwork-topic-empty i {
     color: var(--topic-color);
-    font-size: 17px;
+    font-size: 18px;
 }
 
 
@@ -780,9 +780,9 @@
     align-items: center;
     justify-content: center;
 
-    min-height: 260px;
+    min-height: 280px;
 
-    padding: 30px;
+    padding: 35px;
 
     box-sizing: border-box;
 
@@ -799,17 +799,17 @@
     align-items: center;
     justify-content: center;
 
-    width: 52px;
-    height: 52px;
+    width: 58px;
+    height: 58px;
 
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 
     color: var(--topic-color);
     background-color: var(--topic-soft);
 
     border-radius: 13px;
 
-    font-size: 26px;
+    font-size: 28px;
 }
 
 .classwork-empty h2 {
@@ -817,53 +817,71 @@
 
     color: var(--heading-color);
 
-    font-size: 17px;
+    font-size: 19px;
     font-weight: 800;
 }
 
 .classwork-empty p {
-    max-width: 420px;
+    max-width: 440px;
 
-    margin: 7px 0 0;
+    margin: 8px 0 0;
 
     color: var(--secondary-text-color);
 
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.6;
 }
 
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET / SMALL SCREEN
    ============================================================ */
 
 @media (max-width: 600px) {
 
     .classwork-header {
-        min-height: 145px;
-        padding: 20px;
+        min-height: 155px;
+        padding: 22px;
     }
 
     .classwork-header-illustration {
-        width: 120px;
-        height: 100px;
-        margin-left: 10px;
+        width: 130px;
+        height: 105px;
+        margin-left: 12px;
     }
 
     .classwork-illustration-circle {
-        width: 85px;
-        height: 85px;
+        width: 90px;
+        height: 90px;
     }
 
     .classwork-header h1 {
-        font-size: 22px;
+        font-size: 24px;
     }
 
     .classwork-header p {
+        font-size: 13px;
+    }
+
+    .classwork-filter-item {
+        min-width: 88px;
+        height: 40px;
         font-size: 12px;
+    }
+
+    .classwork-topic-text h2 {
+        font-size: 16px;
+    }
+
+    .classwork-item-content h3 {
+        font-size: 14px;
     }
 }
 
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
 
 @media (max-width: 480px) {
 
@@ -871,44 +889,94 @@
         display: none;
     }
 
+    .classwork-filter {
+        gap: 6px;
+    }
+
     .classwork-filter-item {
-        min-width: 78px;
-        padding: 0 10px;
-    }
-
-    .classwork-topic-header {
-        min-height: 62px;
-        padding-left: 11px;
-    }
-
-    .classwork-topic-icon {
-        width: 35px;
-        height: 35px;
-    }
-
-    .classwork-topic-text h2 {
-        font-size: 14px;
-    }
-
-    .classwork-item {
-        min-height: 60px;
-    }
-
-    .classwork-item-icon {
-        width: 35px;
-        height: 35px;
-        margin-right: 9px;
-    }
-
-    .classwork-item-content h3 {
+        min-width: 84px;
+        height: 40px;
+        padding: 0 11px;
         font-size: 12px;
     }
 
+    .classwork-filter-item i {
+        font-size: 17px;
+    }
+
+    .classwork-topic-header {
+        min-height: 68px;
+        padding-left: 12px;
+        padding-right: 10px;
+    }
+
+    .classwork-topic-info {
+        gap: 11px;
+    }
+
+    .classwork-topic-icon {
+        width: 39px;
+        height: 39px;
+        font-size: 19px;
+    }
+
+    .classwork-topic-text h2 {
+        font-size: 15px;
+    }
+
+    .classwork-topic-text p {
+        font-size: 11px;
+    }
+
+    .classwork-topic-toggle {
+        width: 35px;
+        height: 35px;
+    }
+
+    .classwork-topic-toggle i {
+        font-size: 20px;
+    }
+
+    .classwork-item {
+        min-height: 66px;
+        padding: 9px 7px 9px 9px;
+    }
+
+    .classwork-item-icon {
+        width: 39px;
+        height: 39px;
+        margin-right: 10px;
+        font-size: 19px;
+    }
+
+    .classwork-item-content h3 {
+        font-size: 14px;
+    }
+
     .classwork-item-content p {
-        font-size: 9px;
+        font-size: 11px;
+        gap: 5px;
+    }
+
+    .classwork-topic-empty {
+        font-size: 11px;
+    }
+
+    .classwork-empty {
+        min-height: 250px;
+        padding: 25px;
+    }
+
+    .classwork-empty h2 {
+        font-size: 17px;
+    }
+
+    .classwork-empty p {
+        font-size: 12px;
     }
 }
 </style>
+
 
 
 @extends('layouts.student_layout')

@@ -480,6 +480,30 @@
     }
 
     /* ============================================================
+   REMOVE BLUE LINE AROUND COURSE CARDS
+   ============================================================ */
+
+.course-card {
+    border: 1px solid #e5eaf1 !important;
+    border-top: 1px solid #e5eaf1 !important;
+}
+
+/* Remove any extra blue top border or outline */
+.course-card::before {
+    display: none !important;
+}
+
+/* Keep the purple accent only on the left */
+.course-card-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #818cf8, #c4b5fd);
+}
+
+    /* ============================================================
        ALERT
     ============================================================ */
 
@@ -1196,6 +1220,46 @@
         background: #be123c;
     }
 
+    /* ============================================================
+   REMOVE ALL INTRO TRANSITIONS AND ANIMATIONS
+   ============================================================ */
+
+.hod-courses-page,
+.hod-courses-page *,
+.hod-courses-page *::before,
+.hod-courses-page *::after {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Keep cards stable */
+.course-card,
+.course-stat-card,
+.courses-panel,
+.courses-header,
+.course-alert {
+    transform: none !important;
+}
+
+/* Remove hover movement */
+.course-card:hover,
+.course-stat-card:hover,
+.create-course-btn:hover,
+.course-action:hover {
+    transform: none !important;
+}
+
+/* Remove the course accent line */
+.course-card-accent {
+    display: none !important;
+}
+
+/* Keep a clean, normal card border */
+.course-card,
+.course-card:hover {
+    border: 1px solid #e5eaf1 !important;
+    box-shadow: none !important;
+}
     /* ============================================================
        ANIMATION
     ============================================================ */

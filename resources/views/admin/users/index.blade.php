@@ -89,6 +89,63 @@
 
 
     {{-- =====================================================
+     SUCCESS MESSAGE
+====================================================== --}}
+
+@if(session('success'))
+
+    <div class="user-success-message">
+
+        <div class="user-success-icon">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+        </div>
+
+        <div class="user-success-content">
+
+            <strong>
+                Success
+            </strong>
+
+            <span>
+                {{ session('success') }}
+            </span>
+
+        </div>
+
+        <button
+            type="button"
+            class="user-success-close"
+            onclick="this.parentElement.remove()"
+            aria-label="Close message"
+        >
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="M6 6l12 12"></path>
+                <path d="M18 6 6 18"></path>
+            </svg>
+        </button>
+
+    </div>
+
+@endif
+
+
+    {{-- =====================================================
          TOOLBAR
     ====================================================== --}}
 
@@ -1361,11 +1418,12 @@
 .quick-filters {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     padding: 17px 20px;
     border-bottom: 1px solid #edf1f7;
     overflow-x: auto;
 }
+
 
 .quick-filter {
     display: inline-flex;
@@ -1383,8 +1441,8 @@
 }
 
 .quick-filter:hover {
-    background: #f1f5f9;
-    color: #334155;
+    background: #eff6ff;
+    color: #2563eb;
 }
 
 .quick-filter.active {
@@ -1694,6 +1752,108 @@
     border-top: 1px solid #edf1f7;
 }
 
+/* =========================================================
+   SUCCESS MESSAGE
+========================================================= */
+
+.user-success-message {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 13px 15px;
+    border: 1px solid #bbf7d0;
+    border-radius: 13px;
+    background: #f0fdf4;
+    color: #166534;
+}
+
+.user-success-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.user-success-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.user-success-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.user-success-content strong {
+    color: #166534;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.user-success-content span {
+    color: #15803d;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.user-success-close {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #65a30d;
+    cursor: pointer;
+}
+
+.user-success-close:hover {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.user-success-close svg {
+    width: 16px;
+    height: 16px;
+}
+.dark-mode .user-success-message {
+    border-color: rgba(74, 222, 128, 0.25);
+    background: rgba(74, 222, 128, 0.08);
+}
+
+.dark-mode .user-success-icon {
+    background: rgba(74, 222, 128, 0.14);
+    color: #4ade80;
+}
+
+.dark-mode .user-success-content strong {
+    color: #86efac;
+}
+
+.dark-mode .user-success-content span {
+    color: #bbf7d0;
+}
+
+.dark-mode .user-success-close {
+    color: #86efac;
+}
+
+.dark-mode .user-success-close:hover {
+    background: rgba(74, 222, 128, 0.12);
+    color: #bbf7d0;
+}
 
 /* =========================================================
    RESPONSIVE
@@ -1778,6 +1938,616 @@
         border-radius: 16px;
     }
 
+}
+
+/* =========================================================
+   USER INDEX / CREATE / EDIT DARK MODE
+   Uses the colors from variable.css
+========================================================= */
+
+.dark-mode .users-header,
+.dark-mode .users-card,
+.dark-mode .create-header,
+.dark-mode .edit-header,
+.dark-mode .create-form-card,
+.dark-mode .edit-form-card,
+.dark-mode .form-card,
+.dark-mode .user-form-card {
+    background-color: var(--card-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+/* Headings */
+.dark-mode .users-header h1,
+.dark-mode .users-header h2,
+.dark-mode .users-header h3,
+.dark-mode .create-header h1,
+.dark-mode .edit-header h1,
+.dark-mode .form-card h1,
+.dark-mode .form-card h2,
+.dark-mode .form-card h3 {
+    color: var(--heading-color);
+}
+
+/* Descriptions and secondary text */
+.dark-mode .users-header p,
+.dark-mode .create-header p,
+.dark-mode .edit-header p,
+.dark-mode .form-card p,
+.dark-mode .form-description {
+    color: var(--secondary-text-color);
+}
+
+/* Toolbar */
+.dark-mode .users-toolbar {
+    background-color: var(--card-color);
+    border-color: var(--border-color);
+}
+
+/* Table */
+.dark-mode .users-table,
+.dark-mode .users-table table {
+    background-color: var(--card-color);
+    color: var(--text-color);
+}
+
+.dark-mode .users-table thead,
+.dark-mode .users-table th {
+    background-color: var(--table-header-bg);
+    color: #ffffff;
+    border-color: var(--table-divider);
+}
+
+.dark-mode .users-table td {
+    background-color: var(--card-color);
+    color: var(--text-color);
+    border-color: var(--table-divider);
+}
+
+.dark-mode .users-table tbody tr:hover td {
+    background-color: var(--table-row-hover);
+}
+
+/* User name and email */
+.dark-mode .user-name {
+    color: var(--heading-color);
+}
+
+.dark-mode .user-email,
+.dark-mode .user-department,
+.dark-mode .user-details,
+.dark-mode .empty-value {
+    color: var(--secondary-text-color);
+}
+
+/* Avatar */
+.dark-mode .user-avatar,
+.dark-mode .avatar,
+.dark-mode .profile-avatar {
+    background-color: var(--surface-hover);
+    color: var(--icon-color);
+}
+
+/* Form labels */
+.dark-mode .create-form-card label,
+.dark-mode .edit-form-card label,
+.dark-mode .form-card label,
+.dark-mode .user-form-card label {
+    color: var(--text-color);
+}
+
+/* Inputs */
+.dark-mode .create-form-card input,
+.dark-mode .create-form-card select,
+.dark-mode .create-form-card textarea,
+.dark-mode .edit-form-card input,
+.dark-mode .edit-form-card select,
+.dark-mode .edit-form-card textarea,
+.dark-mode .form-card input,
+.dark-mode .form-card select,
+.dark-mode .form-card textarea,
+.dark-mode .user-form-card input,
+.dark-mode .user-form-card select,
+.dark-mode .user-form-card textarea {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+/* Input placeholder */
+.dark-mode .create-form-card input::placeholder,
+.dark-mode .create-form-card textarea::placeholder,
+.dark-mode .edit-form-card input::placeholder,
+.dark-mode .edit-form-card textarea::placeholder,
+.dark-mode .form-card input::placeholder,
+.dark-mode .form-card textarea::placeholder {
+    color: var(--placeholder-color);
+}
+
+/* Select dropdown options */
+.dark-mode .create-form-card select option,
+.dark-mode .edit-form-card select option,
+.dark-mode .form-card select option {
+    background-color: var(--card-color);
+    color: var(--text-color);
+}
+
+/* Input focus */
+.dark-mode .create-form-card input:focus,
+.dark-mode .create-form-card select:focus,
+.dark-mode .create-form-card textarea:focus,
+.dark-mode .edit-form-card input:focus,
+.dark-mode .edit-form-card select:focus,
+.dark-mode .edit-form-card textarea:focus,
+.dark-mode .form-card input:focus,
+.dark-mode .form-card select:focus,
+.dark-mode .form-card textarea:focus {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* Input icons */
+.dark-mode .input-icon,
+.dark-mode .input-wrap i,
+.dark-mode .input-wrap svg {
+    color: var(--icon-color);
+}
+
+/* Back buttons */
+.dark-mode .back-button,
+.dark-mode .back-dashboard,
+.dark-mode .users-back-button {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.dark-mode .back-button:hover,
+.dark-mode .back-dashboard:hover,
+.dark-mode .users-back-button:hover {
+    background-color: var(--surface-hover);
+    color: var(--heading-color);
+}
+
+/* Secondary buttons */
+.dark-mode .secondary-button,
+.dark-mode .users-secondary-button,
+.dark-mode .form-button.secondary {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.dark-mode .secondary-button:hover,
+.dark-mode .users-secondary-button:hover,
+.dark-mode .form-button.secondary:hover {
+    background-color: var(--surface-hover);
+}
+
+/* Edit and delete actions */
+.dark-mode .edit-button,
+.dark-mode .user-action-edit {
+    color: var(--primary-color);
+}
+
+.dark-mode .edit-button:hover,
+.dark-mode .user-action-edit:hover {
+    background-color: var(--surface-hover);
+}
+
+.dark-mode .delete-button,
+.dark-mode .user-action-delete {
+    color: var(--danger-color);
+}
+
+.dark-mode .delete-button:hover,
+.dark-mode .user-action-delete:hover {
+    background-color: rgba(255, 141, 141, 0.12);
+}
+
+/* Pagination */
+.dark-mode .pagination,
+.dark-mode .table-pagination {
+    background-color: var(--card-color);
+    border-color: var(--border-color);
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .pagination a,
+.dark-mode .pagination span,
+.dark-mode .table-pagination a,
+.dark-mode .table-pagination span {
+    color: var(--secondary-text-color);
+    background-color: transparent;
+    border-color: var(--border-color);
+}
+
+.dark-mode .pagination a:hover,
+.dark-mode .table-pagination a:hover {
+    background-color: var(--surface-hover);
+    color: var(--heading-color);
+}
+
+/* Active pagination */
+.dark-mode .pagination .active span,
+.dark-mode .table-pagination .active span {
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+}
+
+/* Error messages */
+.dark-mode .error-message,
+.dark-mode .invalid-feedback,
+.dark-mode .text-danger {
+    color: var(--danger-color);
+}
+
+/* Required star */
+.dark-mode .required,
+.dark-mode .required-mark {
+    color: var(--danger-color);
+}
+
+/* Horizontal lines */
+.dark-mode .users-card hr,
+.dark-mode .create-form-card hr,
+.dark-mode .edit-form-card hr,
+.dark-mode .form-card hr {
+    border-color: var(--border-color);
+}
+/* =========================================================
+   COMPLETE USER INDEX DARK MODE FIX
+========================================================= */
+
+.dark-mode .users-page {
+    color: var(--text-color);
+}
+
+/* Back to dashboard */
+.dark-mode .top-dashboard-link a {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .top-dashboard-link a:hover {
+    color: var(--primary-color);
+}
+
+/* Header */
+.dark-mode .users-header h1 {
+    color: var(--heading-color);
+}
+
+.dark-mode .users-header p {
+    color: var(--secondary-text-color);
+}
+
+/* Create user button */
+.dark-mode .users-create-button {
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--primary-hover)
+    );
+    color: var(--button-text-color);
+}
+
+/* Toolbar search */
+.dark-mode .users-search-box {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+}
+
+.dark-mode .users-search-box:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+.dark-mode .search-icon {
+    color: var(--icon-color);
+}
+
+.dark-mode .users-search-box input {
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+.dark-mode .users-search-box input::placeholder {
+    color: var(--placeholder-color);
+}
+
+.dark-mode .clear-search {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .clear-search:hover {
+    background-color: var(--surface-hover);
+    color: var(--text-color);
+}
+
+/* Filter and sort buttons */
+.dark-mode .toolbar-button {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.dark-mode .toolbar-button:hover,
+.dark-mode .toolbar-button.active {
+    background-color: var(--surface-hover);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.dark-mode .toolbar-count {
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+}
+
+/* Filter and sort dropdown panels */
+.dark-mode .users-dropdown-panel {
+    background-color: var(--card-color);
+    border-color: var(--border-color);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+.dark-mode .dropdown-heading {
+    border-bottom-color: var(--border-color);
+}
+
+.dark-mode .dropdown-heading h3 {
+    color: var(--heading-color);
+}
+
+.dark-mode .dropdown-heading p {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .dropdown-label {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .filter-role-option,
+.dark-mode .sort-option {
+    color: var(--text-color);
+}
+
+/* Custom checkbox and radio */
+.dark-mode .custom-checkbox,
+.dark-mode .custom-radio {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+}
+
+.dark-mode .filter-role-option input:checked + .custom-checkbox,
+.dark-mode .sort-option input:checked + .custom-radio {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.dark-mode .filter-role-option input:checked + .custom-checkbox::after {
+    border-color: #ffffff;
+}
+
+.dark-mode .dropdown-actions {
+    border-top-color: var(--border-color);
+}
+
+.dark-mode .dropdown-clear {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .dropdown-clear:hover {
+    color: var(--primary-color);
+}
+
+.dark-mode .dropdown-apply {
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+}
+
+.dark-mode .dropdown-apply:hover {
+    background-color: var(--primary-hover);
+}
+
+.dark-mode .users-result-label {
+    color: var(--secondary-text-color);
+}
+
+/* Main users card */
+.dark-mode .users-card {
+    background-color: var(--card-color);
+    border-color: var(--border-color);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+}
+
+/* Quick filters */
+.dark-mode .quick-filters {
+    background-color: var(--card-color);
+    border-bottom-color: var(--border-color);
+}
+
+.dark-mode .quick-filter {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .quick-filter:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.dark-mode .quick-filter.active {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+/* Table */
+.dark-mode .users-table {
+    background-color: var(--card-color);
+    color: var(--text-color);
+}
+
+.dark-mode .users-table thead {
+    background-color: var(--table-header-bg);
+}
+
+.dark-mode .users-table th {
+    background-color: var(--table-header-bg);
+    color: #ffffff;
+    border-bottom-color: var(--table-divider);
+}
+
+.dark-mode .users-table td {
+    background-color: var(--card-color);
+    color: var(--text-color);
+    border-bottom-color: var(--table-divider);
+}
+
+.dark-mode .users-table tbody tr:hover,
+.dark-mode .users-table tbody tr:hover td {
+    background-color: var(--table-row-hover);
+}
+
+/* ID badge */
+.dark-mode .id-badge {
+    background-color: var(--surface-hover);
+    color: var(--secondary-text-color);
+}
+
+/* Avatar */
+.dark-mode .user-avatar {
+    background: var(--surface-hover);
+    border-color: var(--border-color);
+    color: var(--primary-color);
+}
+
+/* User details */
+.dark-mode .user-name {
+    color: var(--heading-color);
+}
+
+.dark-mode .user-email {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .user-departments {
+    color: var(--text-color);
+}
+
+.dark-mode .empty-value {
+    color: var(--secondary-text-color);
+}
+
+/* Role badges */
+.dark-mode .role-admin {
+    background-color: rgba(255, 141, 141, 0.16);
+    color: var(--danger-color);
+}
+
+.dark-mode .role-hod {
+    background-color: rgba(196, 181, 253, 0.16);
+    color: #c4b5fd;
+}
+
+.dark-mode .role-professor {
+    background-color: rgba(109, 118, 255, 0.18);
+    color: var(--primary-hover);
+}
+
+.dark-mode .role-student {
+    background-color: rgba(73, 213, 167, 0.16);
+    color: var(--success-color);
+}
+
+.dark-mode .role-default {
+    background-color: var(--surface-hover);
+    color: var(--secondary-text-color);
+}
+
+/* Action buttons */
+.dark-mode .user-action-edit {
+    background-color: var(--primary-light);
+    border-color: var(--primary-border);
+    color: var(--primary-hover);
+}
+
+.dark-mode .user-action-edit:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--primary-color);
+}
+
+.dark-mode .user-action-delete {
+    background-color: rgba(255, 141, 141, 0.12);
+    border-color: rgba(255, 141, 141, 0.25);
+    color: var(--danger-color);
+}
+
+.dark-mode .user-action-delete:hover {
+    background-color: rgba(255, 141, 141, 0.2);
+    border-color: var(--danger-color);
+}
+
+/* Empty table state */
+.dark-mode .table-empty-icon {
+    background-color: var(--surface-hover);
+    color: var(--icon-color);
+}
+
+.dark-mode .table-empty-content h3 {
+    color: var(--heading-color);
+}
+
+.dark-mode .table-empty-content p {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .empty-reset-button {
+    background-color: var(--primary-light);
+    color: var(--primary-hover);
+}
+
+.dark-mode .empty-reset-button:hover {
+    background-color: var(--surface-hover);
+}
+
+/* Pagination */
+.dark-mode .pagination-wrapper {
+    background-color: var(--card-color);
+    border-top-color: var(--border-color);
+}
+
+/* Laravel custom pagination */
+.dark-mode .pagination-wrapper nav,
+.dark-mode .pagination-wrapper ul {
+    color: var(--text-color);
+}
+
+.dark-mode .pagination-wrapper a,
+.dark-mode .pagination-wrapper span {
+    background-color: transparent;
+    color: var(--secondary-text-color);
+    border-color: var(--border-color);
+}
+
+.dark-mode .pagination-wrapper a:hover {
+    background-color: var(--surface-hover);
+    color: var(--heading-color);
+}
+
+.dark-mode .pagination-wrapper .active span,
+.dark-mode .pagination-wrapper [aria-current="page"] span {
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+    border-color: var(--primary-color);
+}
+
+/* Force all table-related white backgrounds to use dark colors */
+.dark-mode .users-card *,
+.dark-mode .users-table-wrapper *,
+.dark-mode .pagination-wrapper * {
+    scrollbar-color: var(--border-color) var(--card-color);
 }
 
 </style>

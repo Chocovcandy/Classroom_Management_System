@@ -1,3 +1,4 @@
+
 @extends('layouts.admin_layout')
 
 @section('title', 'Create User')
@@ -56,6 +57,7 @@
 
 
                 {{-- Top Actions --}}
+
                 <div class="user-header-actions">
 
                     <a
@@ -71,7 +73,7 @@
                         class="submit-button"
                     >
                         <i class='bx bx-user-plus'></i>
-                        Create User
+                        Save User
                     </button>
 
                 </div>
@@ -155,6 +157,7 @@
 
 
                 {{-- Full Name --}}
+
                 <div class="field-group">
 
                     <label for="name">
@@ -189,6 +192,7 @@
 
 
                 {{-- Email --}}
+
                 <div class="field-group">
 
                     <label for="email">
@@ -223,6 +227,7 @@
 
 
                 {{-- Password --}}
+
                 <div class="field-group full-width">
 
                     <label for="password">
@@ -247,10 +252,12 @@
                             onclick="togglePassword()"
                             aria-label="Show or hide password"
                         >
+
                             <i
                                 class='bx bx-show'
                                 id="passwordIcon"
                             ></i>
+
                         </button>
 
                     </div>
@@ -302,7 +309,6 @@
             </div>
 
 
-
             <div class="field-group">
 
                 <label>
@@ -320,6 +326,7 @@
                                 type="checkbox"
                                 name="role_ids[]"
                                 value="{{ $role->id }}"
+                                data-role-name="{{ $role->role_name }}"
                                 {{ in_array($role->id, old('role_ids', [])) ? 'checked' : '' }}
                             >
 
@@ -364,6 +371,93 @@
 
 
                 @error('role_ids.*')
+
+                    <small class="field-error">
+                        {{ $message }}
+                    </small>
+
+                @enderror
+
+
+                {{-- =====================================================
+                     ADMIN ROLE WARNING
+                ====================================================== --}}
+
+                <div
+                    id="adminRoleWarning"
+                    class="role-warning"
+                    style="display: none;"
+                >
+
+                    <div class="role-warning-icon">
+                        <i class='bx bx-error-circle'></i>
+                    </div>
+
+                    <div class="role-warning-content">
+
+                        <strong>
+                            Invalid role combination
+                        </strong>
+
+                        <p>
+                            Cannot create a user with the Admin role together
+                            with HoD or Professor because Admin does not have a department.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{-- =====================================================
+                 DEPARTMENT
+            ====================================================== --}}
+
+            <div
+                class="field-group department-field-group"
+                id="departmentField"
+                style="display: none;"
+            >
+
+                <label for="department_id">
+                    Department <span>*</span>
+                </label>
+
+                <div class="field-shell">
+
+                    <i class='bx bx-buildings'></i>
+
+                    <select
+                        id="department_id"
+                        name="department_id"
+                    >
+
+                        <option value="">
+                            Select department
+                        </option>
+
+                        @foreach ($departments as $department)
+
+                            <option
+                                value="{{ $department->id }}"
+                                {{ old('department_id') == $department->id ? 'selected' : '' }}
+                            >
+                                {{ $department->department_name }}
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                </div>
+
+                <small class="department-help-text">
+                    Admin assigns the department for HoD and Professor accounts.
+                </small>
+
+                @error('department_id')
 
                     <small class="field-error">
                         {{ $message }}
@@ -569,6 +663,13 @@
 .submit-button:hover {
     transform: translateY(-1px);
     box-shadow: 0 10px 21px rgba(37, 99, 235, 0.24);
+}
+
+.submit-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 .cancel-button i,
@@ -905,6 +1006,90 @@
 
 
 /* =========================================================
+   ROLE WARNING
+========================================================= */
+
+.role-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin-top: 14px;
+    padding: 13px 15px;
+    border: 1px solid #f8d18a;
+    border-radius: 12px;
+    background: #fff8e8;
+}
+
+.role-warning-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.role-warning-icon i {
+    font-size: 18px;
+}
+
+.role-warning-content {
+    min-width: 0;
+}
+
+.role-warning-content strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #92400e;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.role-warning-content p {
+    margin: 0;
+    color: #a16207;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   DEPARTMENT
+========================================================= */
+
+.department-field-group {
+    margin-top: 20px;
+}
+
+.department-field-group .field-shell select {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px 0 12px;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: #172033;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.department-field-group .field-shell select:invalid {
+    color: #94a3b8;
+}
+
+.department-help-text {
+    display: block;
+    margin-top: 6px;
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+
+/* =========================================================
    SUMMARY
 ========================================================= */
 
@@ -1034,6 +1219,330 @@
 
 }
 
+
+/* =========================================================
+   CREATE USER - COMPLETE DARK MODE
+========================================================= */
+
+.dark-mode .admin-user-create-page {
+    color: var(--text-color);
+}
+
+
+/* Page header */
+
+.dark-mode .back-link {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .back-link:hover {
+    color: var(--primary-color);
+}
+
+.dark-mode .user-title-icon {
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--primary-hover)
+    );
+    color: var(--button-text-color);
+    box-shadow: 0 10px 22px rgba(109, 118, 255, 0.18);
+}
+
+.dark-mode .page-eyebrow {
+    color: var(--primary-color);
+}
+
+.dark-mode .user-title-row h1 {
+    color: var(--heading-color);
+}
+
+.dark-mode .user-title-row p {
+    color: var(--secondary-text-color);
+}
+
+
+/* Header buttons */
+
+.dark-mode .cancel-button {
+    border-color: var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-color);
+}
+
+.dark-mode .cancel-button:hover {
+    border-color: var(--primary-color);
+    background: var(--surface-hover);
+    color: var(--heading-color);
+}
+
+.dark-mode .submit-button {
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--primary-hover)
+    );
+    color: var(--button-text-color);
+}
+
+.dark-mode .submit-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+
+/* Validation alert */
+
+.dark-mode .user-form-alert {
+    border-color: rgba(255, 141, 141, 0.35);
+    background: rgba(255, 141, 141, 0.10);
+    color: var(--text-color);
+}
+
+.dark-mode .alert-icon {
+    background: rgba(255, 141, 141, 0.16);
+    color: var(--danger-color);
+}
+
+.dark-mode .user-form-alert strong {
+    color: var(--heading-color);
+}
+
+.dark-mode .user-form-alert li {
+    color: var(--secondary-text-color);
+}
+
+
+/* Form cards */
+
+.dark-mode .user-form-card {
+    border-color: var(--border-color);
+    background: var(--card-color);
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.22);
+}
+
+
+/* Section heading */
+
+.dark-mode .form-card-heading {
+    border-bottom-color: var(--border-color);
+}
+
+.dark-mode .section-icon.blue {
+    background: rgba(109, 118, 255, 0.16);
+    color: var(--primary-color);
+}
+
+.dark-mode .section-icon.purple {
+    background: rgba(196, 181, 253, 0.14);
+    color: #c4b5fd;
+}
+
+.dark-mode .section-kicker {
+    color: var(--secondary-text-color);
+}
+
+.dark-mode .form-card-heading h2 {
+    color: var(--heading-color);
+}
+
+.dark-mode .form-card-heading p {
+    color: var(--secondary-text-color);
+}
+
+
+/* Form labels */
+
+.dark-mode .field-group label {
+    color: var(--text-color);
+}
+
+.dark-mode .field-group label > span {
+    color: var(--danger-color);
+}
+
+
+/* Input shell */
+
+.dark-mode .field-shell {
+    border-color: var(--border-color);
+    background: var(--surface-color);
+}
+
+.dark-mode .field-shell:focus-within {
+    border-color: var(--primary-color);
+    background: var(--surface-color);
+    box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+.dark-mode .field-shell > i {
+    color: var(--icon-color);
+}
+
+
+/* Inputs */
+
+.dark-mode .field-shell input {
+    background: transparent;
+    color: var(--text-color);
+}
+
+.dark-mode .field-shell input::placeholder {
+    color: var(--placeholder-color);
+}
+
+
+/* Password button */
+
+.dark-mode .password-toggle {
+    color: var(--icon-color);
+}
+
+.dark-mode .password-toggle:hover {
+    background: var(--surface-hover);
+    color: var(--primary-color);
+}
+
+
+/* Field errors */
+
+.dark-mode .field-error {
+    color: var(--danger-color);
+}
+
+
+/* Role cards */
+
+.dark-mode .role-option-content {
+    border-color: var(--border-color);
+    background: var(--surface-color);
+}
+
+.dark-mode .role-option-content:hover {
+    border-color: var(--primary-color);
+    background: var(--surface-hover);
+}
+
+.dark-mode .role-option input:checked + .role-option-content {
+    border-color: var(--primary-color);
+    background: var(--primary-light);
+    box-shadow: 0 0 0 2px rgba(109, 118, 255, 0.12);
+}
+
+
+/* Role icon */
+
+.dark-mode .role-option-icon {
+    background: var(--surface-hover);
+    color: var(--icon-color);
+}
+
+.dark-mode .role-option input:checked + .role-option-content .role-option-icon {
+    background: rgba(109, 118, 255, 0.20);
+    color: var(--primary-color);
+}
+
+
+/* Role text */
+
+.dark-mode .role-option-text strong {
+    color: var(--text-color);
+}
+
+.dark-mode .role-option-text small {
+    color: var(--secondary-text-color);
+}
+
+
+/* Role check box */
+
+.dark-mode .role-check {
+    border-color: var(--border-color);
+    background: var(--surface-color);
+    color: transparent;
+}
+
+.dark-mode .role-option input:checked + .role-option-content .role-check {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+    color: var(--button-text-color);
+}
+
+
+/* Role warning */
+
+.dark-mode .role-warning {
+    border-color: rgba(251, 191, 36, 0.30);
+    background: rgba(251, 191, 36, 0.10);
+}
+
+.dark-mode .role-warning-icon {
+    background: rgba(251, 191, 36, 0.16);
+    color: #fbbf24;
+}
+
+.dark-mode .role-warning-content strong {
+    color: var(--heading-color);
+}
+
+.dark-mode .role-warning-content p {
+    color: var(--secondary-text-color);
+}
+
+
+/* Department */
+
+.dark-mode .department-field-group .field-shell select {
+    background: transparent;
+    color: var(--text-color);
+}
+
+.dark-mode .department-field-group .field-shell select option {
+    background: var(--card-color);
+    color: var(--text-color);
+}
+
+.dark-mode .department-help-text {
+    color: var(--secondary-text-color);
+}
+
+
+/* Summary card */
+
+.dark-mode .user-summary-card {
+    border-color: rgba(109, 118, 255, 0.30);
+    background: rgba(109, 118, 255, 0.10);
+}
+
+.dark-mode .summary-icon {
+    background: rgba(109, 118, 255, 0.18);
+    color: var(--primary-color);
+}
+
+.dark-mode .user-summary-card strong {
+    color: var(--heading-color);
+}
+
+.dark-mode .user-summary-card p {
+    color: var(--secondary-text-color);
+}
+
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    .dark-mode .user-header-actions {
+        width: 100%;
+    }
+
+    .dark-mode .cancel-button,
+    .dark-mode .submit-button {
+        flex: 1;
+    }
+
+}
+
 </style>
 
 
@@ -1062,6 +1571,127 @@ function togglePassword() {
     }
 
 }
+
+
+function updateRoleState() {
+
+    const roleInputs =
+        document.querySelectorAll('input[name="role_ids[]"]');
+
+    const departmentField =
+        document.getElementById('departmentField');
+
+    const departmentSelect =
+        document.getElementById('department_id');
+
+    const adminRoleWarning =
+        document.getElementById('adminRoleWarning');
+
+    const submitButton =
+        document.querySelector('.submit-button');
+
+
+    let adminSelected = false;
+    let hodSelected = false;
+    let professorSelected = false;
+
+
+    roleInputs.forEach(function (input) {
+
+        if (!input.checked) {
+            return;
+        }
+
+        const roleName = input.dataset.roleName;
+
+
+        if (roleName === 'Admin') {
+            adminSelected = true;
+        }
+
+
+        if (roleName === 'HoD') {
+            hodSelected = true;
+        }
+
+
+        if (roleName === 'Professor') {
+            professorSelected = true;
+        }
+
+    });
+
+
+    const academicRoleSelected =
+        hodSelected || professorSelected;
+
+
+    // =========================================
+    // SHOW / HIDE DEPARTMENT
+    // =========================================
+
+    if (academicRoleSelected) {
+
+        departmentField.style.display = 'block';
+
+        departmentSelect.required = true;
+
+    } else {
+
+        departmentField.style.display = 'none';
+
+        departmentSelect.required = false;
+
+        departmentSelect.value = '';
+
+    }
+
+
+    // =========================================
+    // ADMIN + ACADEMIC ROLE WARNING
+    // =========================================
+
+    if (adminSelected && academicRoleSelected) {
+
+        adminRoleWarning.style.display = 'flex';
+
+        submitButton.disabled = true;
+
+        submitButton.title =
+            'Cannot create a user with the Admin role together with HoD or Professor because Admin does not have a department.';
+
+    } else {
+
+        adminRoleWarning.style.display = 'none';
+
+        submitButton.disabled = false;
+
+        submitButton.title = '';
+
+    }
+
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const roleInputs =
+        document.querySelectorAll('input[name="role_ids[]"]');
+
+
+    roleInputs.forEach(function (input) {
+
+        input.addEventListener(
+            'change',
+            updateRoleState
+        );
+
+    });
+
+
+    updateRoleState();
+
+});
 
 </script>
 

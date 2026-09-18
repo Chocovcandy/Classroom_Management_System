@@ -3,6 +3,9 @@
 @section('title', 'Quiz Submission')
 
 @section('content')
+@php
+    $origin = request('origin', 'stream');
+@endphp
 
 <div class="student-submission-page">
 
@@ -13,16 +16,14 @@
     <div class="student-submission-header">
 
         {{-- BACK TO QUIZ --}}
-        <a
-            href="{{ route('professor.class-groups.quizzes.show', [
-                'classGroup' => $classGroup->id,
-                'quiz' => $quiz->id,
-            ]) }}"
-            class="student-submission-back"
-        >
-            <i class="bx bx-arrow-back"></i>
-            Back to Quiz
-        </a>
+<a href="{{ route('professor.class-groups.quizzes.show', [
+    'classGroup' => $classGroup->id,
+    'quiz' => $quiz->id,
+    'return_to' => $origin,
+]) }}" class="student-submission-back">
+    <i class="bx bx-arrow-back"></i>
+    Back to Quiz
+</a>
 
 
         {{-- QUIZ HEADER --}}
@@ -396,73 +397,104 @@
        GRADING SUMMARY + MODAL
     ============================================================= --}}
 
-    <section class="student-submission-card">
+    <section class="student-submission-card mark-card">
 
-        <div class="student-submission-card-header">
+        <div class="mark-card-header">
 
-            <h2>Mark</h2>
+            <div class="mark-card-heading">
+
+                <div class="mark-card-heading-icon">
+                    <i class="bx bx-award"></i>
+                </div>
+
+                <div>
+                    <h2>Mark</h2>
+                    <p>Review this student's result</p>
+                </div>
+
+            </div>
 
             @if($submission->graded_at)
                 <span class="mark-status">
                     <i class="bx bx-check-circle"></i>
                     Graded
                 </span>
+            @else
+                <span class="mark-status mark-status-pending">
+                    <i class="bx bx-time-five"></i>
+                    Pending
+                </span>
             @endif
 
         </div>
 
 
-        {{-- GRADING SUMMARY --}}
-        <div class="mark-summary">
+        {{-- SCORE PANEL --}}
+        <div class="mark-hero">
 
-            <div class="mark-summary-left">
+            @if($submission->score !== null)
 
-                <div class="mark-summary-icon">
-                    <i class="bx bx-award"></i>
-                </div>
+                <div class="mark-score-block">
 
-                <div class="mark-summary-content">
+                    <span class="mark-score-label">SCORE</span>
 
-                    @if($submission->score !== null)
+                    <div class="mark-score-line">
 
                         <strong>
                             {{ rtrim(rtrim(number_format($submission->score, 2), '0'), '.') }}
-                            /
+                            <span>/</span>
                             {{ rtrim(rtrim(number_format($quiz->points, 2), '0'), '.') }}
                         </strong>
 
-                        <span>
+                        <span class="mark-percent">
                             {{ $quiz->points > 0
                                 ? number_format(($submission->score / $quiz->points) * 100, 1)
                                 : '0.0'
                             }}%
                         </span>
 
-                    @else
+                    </div>
 
-                        <strong>Not graded yet</strong>
-
-                        <span>Give this student a mark and optional feedback.</span>
-
-                    @endif
+                    <span class="mark-score-caption">
+                        Final score for this quiz
+                    </span>
 
                 </div>
 
+            @else
+
+                <div class="mark-ungraded">
+
+                    <div class="mark-ungraded-icon">
+                        <i class="bx bx-edit-alt"></i>
+                    </div>
+
+                    <div class="mark-ungraded-content">
+                        <strong>Not graded yet</strong>
+                        <span>Enter a score and optional feedback for this student.</span>
+                    </div>
+
+                </div>
+
+            @endif
+
+
+            <div class="mark-action">
+
+                <button
+                    type="button"
+                    class="open-grade-modal-btn"
+                    id="openGradeModal"
+                >
+                    <i class="bx bx-edit"></i>
+
+                    {{ $submission->score !== null
+                        ? 'Edit Grade'
+                        : 'Mark Student'
+                    }}
+                </button>
+
             </div>
-
-
-            <button
-                type="button"
-                class="open-grade-modal-btn"
-                id="openGradeModal"
-            >
-                <i class="bx bx-edit"></i>
-
-                {{ $submission->score !== null
-                    ? 'Edit Grade'
-                    : 'Mark Student'
-                }}
-            </button>
 
         </div>
 
@@ -2166,245 +2198,301 @@ body.modal-open {
 
 
 /* ============================================================
-   MARK SUMMARY
+   MARK CARD
    ============================================================ */
 
-.mark-summary {
+.mark-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(139, 92, 246, 0.28);
+    background:
+        linear-gradient(180deg, rgba(139, 92, 246, 0.055) 0%, var(--card-color) 34%);
+    box-shadow:
+        0 8px 24px rgba(139, 92, 246, 0.08);
+}
 
+.mark-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #8b5cf6;
+}
+
+.mark-card-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    gap: 20px;
-
-    padding: 20px;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.14);
 }
 
-
-.mark-summary-left {
-
+.mark-card-heading {
     display: flex;
     align-items: center;
-
-    gap: 14px;
-
+    gap: 12px;
     min-width: 0;
 }
 
-
-.mark-summary-icon {
-
-    width: 48px;
-    height: 48px;
-
+.mark-card-heading-icon {
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
-
     flex-shrink: 0;
-
-    border-radius: 12px;
-
-    background: rgba(99, 102, 241, 0.10);
-
-    color: #6366f1;
-
-    font-size: 23px;
+    border-radius: 11px;
+    background: rgba(139, 92, 246, 0.13);
+    color: #8b5cf6;
+    font-size: 21px;
 }
 
-
-.mark-summary-content {
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 4px;
-
-    min-width: 0;
-}
-
-
-.mark-summary-content strong {
-
+.mark-card-heading h2 {
+    margin: 0;
     color: var(--text-color);
-
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 700;
 }
 
-
-.mark-summary-content span {
-
+.mark-card-heading p {
+    margin: 3px 0 0;
     color: var(--text-secondary);
-
-    font-size: 13px;
+    font-size: 12px;
 }
 
-
-.open-grade-modal-btn {
-
+.mark-status {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 6px;
+    flex-shrink: 0;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: #f0fdf4;
+    color: #15803d;
+    font-size: 12px;
+    font-weight: 700;
+}
 
-    gap: 8px;
+.mark-status i {
+    font-size: 15px;
+}
 
-    min-height: 40px;
+.mark-status-pending {
+    background: rgba(139, 92, 246, 0.10);
+    color: #7c3aed;
+}
 
-    padding: 0 15px;
+/* ============================================================
+   MARK HERO
+   ============================================================ */
 
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-
+.mark-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 24px;
+    margin: 18px 20px;
+    padding: 20px;
+    border: 1px solid rgba(139, 92, 246, 0.18);
+    border-radius: 14px;
     background: var(--card-color);
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.045);
+}
 
+.mark-score-block {
+    min-width: 0;
+}
+
+.mark-score-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #8b5cf6;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.10em;
+}
+
+.mark-score-line {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.mark-score-line strong {
     color: var(--text-color);
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+}
 
-    font-size: 13px;
+.mark-score-line strong span {
+    color: var(--text-secondary);
+    font-size: 20px;
     font-weight: 600;
+}
 
+.mark-percent {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 10px;
+    border-radius: 8px;
+    background: rgba(139, 92, 246, 0.10);
+    color: #7c3aed;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.mark-score-caption {
+    display: block;
+    margin-top: 7px;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.mark-ungraded {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.mark-ungraded-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: rgba(139, 92, 246, 0.10);
+    color: #8b5cf6;
+    font-size: 22px;
+}
+
+.mark-ungraded-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.mark-ungraded-content strong {
+    color: var(--text-color);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.mark-ungraded-content span {
+    color: var(--text-secondary);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.mark-action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.open-grade-modal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 17px;
+    border: none;
+    border-radius: 9px;
+    background: #8b5cf6;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
     cursor: pointer;
-
+    box-shadow: 0 5px 14px rgba(139, 92, 246, 0.22);
     transition:
         background-color 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
-
 
 .open-grade-modal-btn:hover {
-
-    background: var(--background-color);
-
-    border-color: var(--primary-color);
-
-    color: var(--primary-color);
-
+    background: #7c3aed;
     transform: translateY(-1px);
+    box-shadow: 0 7px 18px rgba(139, 92, 246, 0.28);
 }
 
+.open-grade-modal-btn:active {
+    transform: translateY(0);
+}
 
 .open-grade-modal-btn i {
-
     font-size: 17px;
 }
-
 
 /* ============================================================
    FEEDBACK PREVIEW
    ============================================================ */
 
 .mark-feedback-preview {
-
     margin: 0 20px 16px;
-
     padding: 13px 14px;
-
+    border: 1px solid rgba(139, 92, 246, 0.14);
+    border-left: 3px solid #8b5cf6;
     border-radius: 10px;
-
-    background: var(--background-color);
+    background: rgba(139, 92, 246, 0.045);
 }
-
 
 .mark-feedback-label {
-
     display: flex;
     align-items: center;
-
     gap: 7px;
-
     margin-bottom: 6px;
-
     color: var(--text-color);
-
     font-size: 12px;
-    font-weight: 650;
+    font-weight: 700;
 }
 
-
 .mark-feedback-label i {
-
-    color: var(--primary-color);
-
+    color: #8b5cf6;
     font-size: 16px;
 }
 
-
 .mark-feedback-preview p {
-
     margin: 0;
-
     color: var(--text-secondary);
-
     font-size: 13px;
-
     line-height: 1.55;
-
     white-space: pre-wrap;
-
     word-break: break-word;
 }
-
-
-/* ============================================================
-   GRADED STATUS
-   ============================================================ */
-
-.mark-status {
-
-    display: inline-flex;
-    align-items: center;
-
-    gap: 6px;
-
-    padding: 6px 10px;
-
-    border-radius: 20px;
-
-    font-size: 12px;
-    font-weight: 600;
-
-    color: #15803d;
-
-    background: #f0fdf4;
-}
-
-
-.mark-status i {
-
-    font-size: 15px;
-}
-
 
 /* ============================================================
    GRADED INFO
    ============================================================ */
 
 .graded-info {
-
     display: flex;
     align-items: center;
-
     gap: 8px;
-
     margin: 0 20px 18px;
-
     padding: 10px 12px;
-
     border-radius: 8px;
-
-    background: var(--background-color);
-
+    background: rgba(139, 92, 246, 0.045);
     color: var(--text-secondary);
-
-    font-size: 13px;
+    font-size: 12px;
 }
 
-
 .graded-info i {
-
-    font-size: 17px;
+    color: #8b5cf6;
+    font-size: 16px;
 }
 
 
@@ -2895,30 +2983,43 @@ body.modal-open {
 
 @media (max-width: 600px) {
 
-    .mark-summary {
-
+    .mark-card-header {
         align-items: flex-start;
-
         flex-direction: column;
-
+        gap: 12px;
         padding: 16px;
     }
 
 
-    .open-grade-modal-btn {
+    .mark-hero {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin: 16px;
+        padding: 16px;
+    }
 
+
+    .mark-score-line strong {
+        font-size: 28px;
+    }
+
+
+    .mark-action {
+        justify-content: stretch;
+    }
+
+
+    .open-grade-modal-btn {
         width: 100%;
     }
 
 
     .mark-feedback-preview {
-
         margin: 0 16px 14px;
     }
 
 
     .graded-info {
-
         margin: 0 16px 16px;
     }
 

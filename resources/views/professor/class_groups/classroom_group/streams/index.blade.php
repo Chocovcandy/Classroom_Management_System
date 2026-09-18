@@ -190,391 +190,737 @@
 
             <section class="classroom-stream">
 
-    <style>
-        /* ============================================================
+                <style>
+                    /* ============================================================
            STREAM CONTENT ONLY
            Light card style to match the rest of the classroom.
            No dark background is used here.
            ============================================================ */
 
-        .stream-content-redesign {
-            width: 100%;
-        }
+                    .stream-content-redesign {
+                        width: 100%;
+                    }
 
-        .stream-content-redesign .classroom-stream-card {
-            overflow: hidden;
-            border: 1px solid #e6eaf0;
-            border-radius: 16px;
-            background: #ffffff;
-            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.035);
-        }
+                    .stream-content-redesign .classroom-stream-card {
+                        overflow: hidden;
+                        border: 1px solid #e6eaf0;
+                        border-radius: 16px;
+                        background: #ffffff;
+                        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.035);
+                    }
 
-        /* ------------------------------------------------------------
+                    /* ------------------------------------------------------------
            ACTIVITY ROW
            ------------------------------------------------------------ */
 
-        .stream-content-redesign .stream-item {
-            position: relative;
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            min-height: 86px;
-            padding: 18px 20px;
-            border-bottom: 1px solid #eef1f5;
-            background: #ffffff;
-            transition: background-color .18s ease;
-        }
+                    .stream-content-redesign .stream-item {
+                        position: relative;
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 16px;
+                        min-height: 86px;
+                        padding: 18px 20px;
+                        border-bottom: 1px solid #eef1f5;
+                        background: #ffffff;
+                        transition: background-color .18s ease;
+                    }
 
-        .stream-content-redesign .stream-item:last-child {
-            border-bottom: 0;
-        }
+                    .stream-content-redesign .stream-item:last-child {
+                        border-bottom: 0;
+                    }
 
-        .stream-content-redesign .stream-item:hover {
-            background: #fafcff;
-        }
+                    .stream-content-redesign .stream-item:hover {
+                        background: #fafcff;
+                    }
 
-        /* Small type indicator */
-        .stream-content-redesign .stream-item::before {
-            position: absolute;
-            top: 15px;
-            bottom: 15px;
-            left: 0;
-            width: 3px;
-            border-radius: 0 3px 3px 0;
-            background: #cbd5e1;
-            content: "";
-        }
+                    /* Small type indicator */
+                    .stream-content-redesign .stream-item::before {
+                        position: absolute;
+                        top: 15px;
+                        bottom: 15px;
+                        left: 0;
+                        width: 3px;
+                        border-radius: 0 3px 3px 0;
+                        background: #cbd5e1;
+                        content: "";
+                    }
 
-        .stream-content-redesign .stream-item-announcement::before {
-            background: #f97316;
-        }
+                    .stream-content-redesign .stream-item-announcement::before {
+                        background: #f97316;
+                    }
 
-        .stream-content-redesign .stream-item-material::before {
-            background: #3b82f6;
-        }
+                    .stream-content-redesign .stream-item-material::before {
+                        background: #3b82f6;
+                    }
 
-        .stream-content-redesign .stream-item-assignment::before {
-            background: #6366f1;
-        }
+                    .stream-content-redesign .stream-item-assignment::before {
+                        background: #6366f1;
+                    }
 
-        .stream-content-redesign .stream-item-quiz::before {
-            background: #f59e0b;
-        }
+                    .stream-content-redesign .stream-item-quiz::before {
+                        background: #f59e0b;
+                    }
 
-        .stream-content-redesign .stream-item-exam::before {
-            background: #ef4444;
-        }
+                    .stream-content-redesign .stream-item-exam::before {
+                        background: #ef4444;
+                    }
 
-        .stream-content-redesign .stream-item-project::before {
-            background: #eab308;
-        }
+                    .stream-content-redesign .stream-item-project::before {
+                        background: #eab308;
+                    }
 
-        /* ------------------------------------------------------------
+                    /* ------------------------------------------------------------
            ICON
            ------------------------------------------------------------ */
 
-        .stream-content-redesign .stream-item-icon {
-            display: grid;
-            place-items: center;
-            width: 44px;
-            height: 44px;
-            flex: 0 0 44px;
-            margin-top: 1px;
-            border-radius: 12px;
-            background: #f3f6fa;
-            color: #64748b;
-            font-size: 20px;
-        }
+                    .stream-content-redesign .stream-item-icon {
+                        display: grid;
+                        place-items: center;
+                        width: 44px;
+                        height: 44px;
+                        flex: 0 0 44px;
+                        margin-top: 1px;
+                        border-radius: 12px;
+                        background: #f3f6fa;
+                        color: #64748b;
+                        font-size: 20px;
+                    }
 
-        .stream-content-redesign .stream-item-announcement .stream-item-icon {
-            background: #fff7ed;
-            color: #ea580c;
-        }
+                    .stream-content-redesign .stream-item-announcement .stream-item-icon {
+                        background: #fff7ed;
+                        color: #ea580c;
+                    }
 
-        .stream-content-redesign .stream-item-material .stream-item-icon {
-            background: #eff6ff;
-            color: #2563eb;
-        }
+                    .stream-content-redesign .stream-item-material .stream-item-icon {
+                        background: #eff6ff;
+                        color: #2563eb;
+                    }
 
-        .stream-content-redesign .stream-item-assignment .stream-item-icon {
-            background: #eef2ff;
-            color: #4f46e5;
-        }
+                    .stream-content-redesign .stream-item-assignment .stream-item-icon {
+                        background: #eef2ff;
+                        color: #4f46e5;
+                    }
 
-        .stream-content-redesign .stream-item-quiz .stream-item-icon {
-            background: #fff8e8;
-            color: #d97706;
-        }
+                    .stream-content-redesign .stream-item-quiz .stream-item-icon {
+                        background: #fff8e8;
+                        color: #d97706;
+                    }
 
-        .stream-content-redesign .stream-item-exam .stream-item-icon {
-            background: #fef2f2;
-            color: #dc2626;
-        }
+                    .stream-content-redesign .stream-item-exam .stream-item-icon {
+                        background: #fef2f2;
+                        color: #dc2626;
+                    }
 
-        /* Project = yellow */
-        .stream-content-redesign .stream-item-project .stream-item-icon {
-            background: #fff8d6;
-            color: #a16207;
-        }
+                    /* Project = yellow */
+                    .stream-content-redesign .stream-item-project .stream-item-icon {
+                        background: #fff8d6;
+                        color: #a16207;
+                    }
+/* ============================================================
+   DARK MODE — STREAM
+   Match the sidebar / classroom dark theme
+   ============================================================ */
 
-        /* ------------------------------------------------------------
+html.dark .stream-content-redesign .classroom-stream-card,
+body.dark .stream-content-redesign .classroom-stream-card,
+.dark-mode .stream-content-redesign .classroom-stream-card {
+    background: #111329;
+    border-color: #292d4d;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .18);
+}
+
+/* Stream items */
+html.dark .stream-content-redesign .stream-item,
+body.dark .stream-content-redesign .stream-item,
+.dark-mode .stream-content-redesign .stream-item {
+    background: #111329;
+    border-bottom-color: #292d4d;
+}
+
+/* Hover */
+html.dark .stream-content-redesign .stream-item:hover,
+body.dark .stream-content-redesign .stream-item:hover,
+.dark-mode .stream-content-redesign .stream-item:hover {
+    background: #171a35;
+}
+
+
+/* ============================================================
+   TEXT
+   ============================================================ */
+
+html.dark .stream-content-redesign .stream-item-title,
+body.dark .stream-content-redesign .stream-item-title,
+.dark-mode .stream-content-redesign .stream-item-title {
+    color: #ffffff;
+}
+
+html.dark .stream-content-redesign .stream-item-posted,
+body.dark .stream-content-redesign .stream-item-posted,
+.dark-mode .stream-content-redesign .stream-item-posted {
+    color: #d5d9e5;
+}
+
+html.dark .stream-content-redesign .stream-item-posted strong,
+body.dark .stream-content-redesign .stream-item-posted strong,
+.dark-mode .stream-content-redesign .stream-item-posted strong {
+    color: #ffffff;
+}
+
+html.dark .stream-content-redesign .stream-item-time,
+body.dark .stream-content-redesign .stream-item-time,
+.dark-mode .stream-content-redesign .stream-item-time {
+    color: #9da6b8;
+}
+
+html.dark .stream-content-redesign .stream-announcement-text,
+body.dark .stream-content-redesign .stream-announcement-text,
+.dark-mode .stream-content-redesign .stream-announcement-text {
+    color: #c1c8d6;
+}
+
+
+/* ============================================================
+   STREAM HEADER
+   ============================================================ */
+
+html.dark .stream-content-redesign .stream-section-header h2,
+body.dark .stream-content-redesign .stream-section-header h2,
+.dark-mode .stream-content-redesign .stream-section-header h2 {
+    color: #ffffff;
+}
+
+html.dark .stream-content-redesign .stream-section-header p,
+body.dark .stream-content-redesign .stream-section-header p,
+.dark-mode .stream-content-redesign .stream-section-header p {
+    color: #8492e8;
+}
+
+
+/* ============================================================
+   TOPIC / PROJECT BADGES
+   ============================================================ */
+
+html.dark .stream-content-redesign .stream-item-topic,
+body.dark .stream-content-redesign .stream-item-topic,
+.dark-mode .stream-content-redesign .stream-item-topic {
+    background: #1b1e38;
+    border-color: #34385a;
+    color: #c3c9dc;
+}
+
+html.dark .stream-content-redesign .stream-project-type,
+body.dark .stream-content-redesign .stream-project-type,
+.dark-mode .stream-content-redesign .stream-project-type {
+    background: #1b1e38;
+    border-color: #34385a;
+    color: #c3c9dc;
+}
+
+html.dark .stream-content-redesign .stream-project-badge,
+body.dark .stream-content-redesign .stream-project-badge,
+.dark-mode .stream-content-redesign .stream-project-badge {
+    background: #3a3118;
+    color: #f5c84b;
+}
+
+
+/* ============================================================
+   THREE DOT MENU
+   ============================================================ */
+
+html.dark .stream-content-redesign .stream-item-menu,
+body.dark .stream-content-redesign .stream-item-menu,
+.dark-mode .stream-content-redesign .stream-item-menu {
+    color: #9da6ba;
+}
+
+html.dark .stream-content-redesign .stream-item-menu:hover,
+html.dark .stream-content-redesign .stream-item-options.show .stream-item-menu,
+body.dark .stream-content-redesign .stream-item-menu:hover,
+body.dark .stream-content-redesign .stream-item-options.show .stream-item-menu,
+.dark-mode .stream-content-redesign .stream-item-menu:hover,
+.dark-mode .stream-content-redesign .stream-item-options.show .stream-item-menu {
+    background: #252946;
+    color: #ffffff;
+}
+
+
+/* Dropdown */
+html.dark .stream-content-redesign .stream-options-menu,
+body.dark .stream-content-redesign .stream-options-menu,
+.dark-mode .stream-content-redesign .stream-options-menu {
+    background: #111329;
+    border-color: #34385a;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+}
+
+html.dark .stream-content-redesign .stream-options-item,
+body.dark .stream-content-redesign .stream-options-item,
+.dark-mode .stream-content-redesign .stream-options-item {
+    color: #e5e9f2;
+}
+
+html.dark .stream-content-redesign .stream-options-item:hover,
+body.dark .stream-content-redesign .stream-options-item:hover,
+.dark-mode .stream-content-redesign .stream-options-item:hover {
+    background: #1c2040;
+    color: #ffffff;
+}
+
+
+/* ============================================================
+   EMPTY STREAM
+   ============================================================ */
+
+html.dark .stream-content-redesign .classroom-stream-empty,
+body.dark .stream-content-redesign .classroom-stream-empty,
+.dark-mode .stream-content-redesign .classroom-stream-empty {
+    background: #111329;
+}
+
+html.dark .stream-content-redesign .classroom-stream-empty-icon,
+body.dark .stream-content-redesign .classroom-stream-empty-icon,
+.dark-mode .stream-content-redesign .classroom-stream-empty-icon {
+    background: #1b1e38;
+    color: #9da6ba;
+}
+
+html.dark .stream-content-redesign .classroom-stream-empty h3,
+body.dark .stream-content-redesign .classroom-stream-empty h3,
+.dark-mode .stream-content-redesign .classroom-stream-empty h3 {
+    color: #ffffff;
+}
+
+html.dark .stream-content-redesign .classroom-stream-empty p,
+body.dark .stream-content-redesign .classroom-stream-empty p,
+.dark-mode .stream-content-redesign .classroom-stream-empty p {
+    color: #9da6b8;
+}
+                    /* ------------------------------------------------------------
            CONTENT
            ------------------------------------------------------------ */
 
-        .stream-content-redesign .stream-item-content {
-            min-width: 0;
-            flex: 1;
-            padding-right: 8px;
-        }
+                    .stream-content-redesign .stream-item-content {
+                        min-width: 0;
+                        flex: 1;
+                        padding-right: 8px;
+                    }
 
-        .stream-content-redesign .stream-item-posted {
-            margin: 0 0 5px;
-            color: #7a8697;
-            font-size: 12px;
-            line-height: 1.45;
-        }
+                    .stream-content-redesign .stream-item-posted {
+                        margin: 0 0 5px;
+                        color: #7a8697;
+                        font-size: 12px;
+                        line-height: 1.45;
+                    }
 
-        .stream-content-redesign .stream-item-posted strong {
-            color: #334155;
-            font-weight: 700;
-        }
+                    .stream-content-redesign .stream-item-posted strong {
+                        color: #334155;
+                        font-weight: 700;
+                    }
 
-        .stream-content-redesign .stream-item-time {
-            color: #a0a9b7;
-        }
+                    .stream-content-redesign .stream-item-time {
+                        color: #a0a9b7;
+                    }
 
-        .stream-content-redesign .stream-item-title {
-            margin: 0;
-            color: #18212f;
-            font-size: 15px;
-            font-weight: 700;
-            line-height: 1.4;
-        }
+                    .stream-content-redesign .stream-item-title {
+                        margin: 0;
+                        color: #18212f;
+                        font-size: 15px;
+                        font-weight: 700;
+                        line-height: 1.4;
+                    }
 
-        .stream-content-redesign .stream-item-content-link {
-            display: block;
-            color: inherit;
-            text-decoration: none;
-        }
+                    .stream-content-redesign .stream-item-content-link {
+                        display: block;
+                        color: inherit;
+                        text-decoration: none;
+                    }
 
-        .stream-content-redesign .stream-item-content-link:hover .stream-item-title {
-            color: #2563eb;
-        }
+                    .stream-content-redesign .stream-item-content-link:hover .stream-item-title {
+                        color: #2563eb;
+                    }
 
-        .stream-content-redesign .stream-item-project .stream-item-content-link:hover .stream-item-title {
-            color: #a16207;
-        }
+                    .stream-content-redesign .stream-item-project .stream-item-content-link:hover .stream-item-title {
+                        color: #a16207;
+                    }
 
-        /* Topic */
-        .stream-content-redesign .stream-item-topic {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 8px;
-            padding: 4px 8px;
-            border: 1px solid #e6eaf0;
-            border-radius: 7px;
-            background: #f8fafc;
-            color: #64748b;
-            font-size: 10px;
-            font-weight: 650;
-        }
+                    /* Topic */
+                    .stream-content-redesign .stream-item-topic {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 5px;
+                        margin-top: 8px;
+                        padding: 4px 8px;
+                        border: 1px solid #e6eaf0;
+                        border-radius: 7px;
+                        background: #f8fafc;
+                        color: #64748b;
+                        font-size: 10px;
+                        font-weight: 650;
+                    }
 
-        .stream-content-redesign .stream-item-topic i {
-            font-size: 12px;
-        }
+                    .stream-content-redesign .stream-item-topic i {
+                        font-size: 12px;
+                    }
 
-        /* Project metadata */
-        .stream-content-redesign .stream-project-meta {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 7px;
-            margin-top: 8px;
-        }
+                    /* Project metadata */
+                    .stream-content-redesign .stream-project-meta {
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        gap: 7px;
+                        margin-top: 8px;
+                    }
 
-        .stream-content-redesign .stream-project-badge,
-        .stream-content-redesign .stream-project-type {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 8px;
-            border-radius: 7px;
-            font-size: 10px;
-            font-weight: 700;
-        }
+                    .stream-content-redesign .stream-project-badge,
+                    .stream-content-redesign .stream-project-type {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 5px;
+                        padding: 4px 8px;
+                        border-radius: 7px;
+                        font-size: 10px;
+                        font-weight: 700;
+                    }
 
-        .stream-content-redesign .stream-project-badge {
-            background: #fff8d6;
-            color: #946f00;
-        }
+                    .stream-content-redesign .stream-project-badge {
+                        background: #fff8d6;
+                        color: #946f00;
+                    }
 
-        .stream-content-redesign .stream-project-type {
-            border: 1px solid #e6eaf0;
-            background: #f8fafc;
-            color: #64748b;
-        }
+                    .stream-content-redesign .stream-project-type {
+                        border: 1px solid #e6eaf0;
+                        background: #f8fafc;
+                        color: #64748b;
+                    }
 
-        .stream-content-redesign .stream-project-badge i,
-        .stream-content-redesign .stream-project-type i {
-            font-size: 12px;
-        }
+                    .stream-content-redesign .stream-project-badge i,
+                    .stream-content-redesign .stream-project-type i {
+                        font-size: 12px;
+                    }
 
-        /* Announcement */
-        .stream-content-redesign .stream-announcement-text {
-            max-width: 760px;
-            margin: 6px 0 0;
-            color: #64748b;
-            font-size: 12px;
-            line-height: 1.65;
-            display: -webkit-box;
-            overflow: hidden;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-        }
+                    /* Announcement */
+                    .stream-content-redesign .stream-announcement-text {
+                        max-width: 760px;
+                        margin: 6px 0 0;
+                        color: #64748b;
+                        font-size: 12px;
+                        line-height: 1.65;
+                        display: -webkit-box;
+                        overflow: hidden;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 3;
+                    }
 
-        /* ------------------------------------------------------------
+                    /* ------------------------------------------------------------
            THREE DOT MENU
            ------------------------------------------------------------ */
 
-        .stream-content-redesign .stream-item-options {
-            position: relative;
-            flex: 0 0 auto;
-            margin-left: auto;
-        }
+                    .stream-content-redesign .stream-item-options {
+                        position: relative;
+                        flex: 0 0 auto;
+                        margin-left: auto;
+                    }
 
-        .stream-content-redesign .stream-item-menu {
-            display: grid;
-            place-items: center;
-            width: 32px;
-            height: 32px;
-            border: 0;
-            border-radius: 9px;
-            background: transparent;
-            color: #9aa5b4;
-            cursor: pointer;
-            transition: background-color .18s ease, color .18s ease;
-        }
+                    .stream-content-redesign .stream-item-menu {
+                        display: grid;
+                        place-items: center;
+                        width: 32px;
+                        height: 32px;
+                        border: 0;
+                        border-radius: 9px;
+                        background: transparent;
+                        color: #9aa5b4;
+                        cursor: pointer;
+                        transition: background-color .18s ease, color .18s ease;
+                    }
 
-        .stream-content-redesign .stream-item-menu:hover,
-        .stream-content-redesign .stream-item-options.show .stream-item-menu {
-            background: #f1f5f9;
-            color: #334155;
-        }
+                    .stream-content-redesign .stream-item-menu:hover,
+                    .stream-content-redesign .stream-item-options.show .stream-item-menu {
+                        background: #f1f5f9;
+                        color: #334155;
+                    }
 
-        .stream-content-redesign .stream-options-menu {
-            z-index: 20;
-            min-width: 140px;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            background: #ffffff;
-            box-shadow: 0 12px 28px rgba(15, 23, 42, .12);
-        }
+                    .stream-content-redesign .stream-options-menu {
+                        z-index: 20;
+                        min-width: 140px;
+                        overflow: hidden;
+                        border: 1px solid #e2e8f0;
+                        border-radius: 10px;
+                        background: #ffffff;
+                        box-shadow: 0 12px 28px rgba(15, 23, 42, .12);
+                    }
 
-        .stream-content-redesign .stream-options-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            width: 100%;
-            padding: 9px 11px;
-            border: 0;
-            background: transparent;
-            color: #475569;
-            font-size: 12px;
-            font-weight: 650;
-            text-decoration: none;
-            cursor: pointer;
-        }
+                    .stream-content-redesign .stream-options-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        width: 100%;
+                        padding: 9px 11px;
+                        border: 0;
+                        background: transparent;
+                        color: #475569;
+                        font-size: 12px;
+                        font-weight: 650;
+                        text-decoration: none;
+                        cursor: pointer;
+                    }
 
-        .stream-content-redesign .stream-options-item:hover {
-            background: #f8fafc;
-            color: #0f172a;
-        }
+                    .stream-content-redesign .stream-options-item:hover {
+                        background: #f8fafc;
+                        color: #0f172a;
+                    }
 
-        .stream-content-redesign .stream-options-delete {
-            color: #dc2626;
-        }
+                    .stream-content-redesign .stream-options-delete {
+                        color: #dc2626;
+                    }
 
-        /* ------------------------------------------------------------
+                    /* ------------------------------------------------------------
            EMPTY STATE
            ------------------------------------------------------------ */
 
-        .stream-content-redesign .classroom-stream-empty {
-            padding: 55px 24px;
-            text-align: center;
-            background: #ffffff;
-        }
+                    .stream-content-redesign .classroom-stream-empty {
+                        padding: 55px 24px;
+                        text-align: center;
+                        background: #ffffff;
+                    }
 
-        .stream-content-redesign .classroom-stream-empty-icon {
-            display: grid;
-            place-items: center;
-            width: 46px;
-            height: 46px;
-            margin: 0 auto 12px;
-            border-radius: 12px;
-            background: #f4f6f9;
-            color: #a0a9b7;
-            font-size: 21px;
-        }
+                    .stream-content-redesign .classroom-stream-empty-icon {
+                        display: grid;
+                        place-items: center;
+                        width: 46px;
+                        height: 46px;
+                        margin: 0 auto 12px;
+                        border-radius: 12px;
+                        background: #f4f6f9;
+                        color: #a0a9b7;
+                        font-size: 21px;
+                    }
 
-        .stream-content-redesign .classroom-stream-empty h3 {
-            margin: 0;
-            color: #334155;
-            font-size: 14px;
-            font-weight: 700;
-        }
+                    .stream-content-redesign .classroom-stream-empty h3 {
+                        margin: 0;
+                        color: #334155;
+                        font-size: 14px;
+                        font-weight: 700;
+                    }
 
-        .stream-content-redesign .classroom-stream-empty p {
-            max-width: 460px;
-            margin: 6px auto 0;
-            color: #94a3b8;
-            font-size: 12px;
-            line-height: 1.6;
-        }
+                    .stream-content-redesign .classroom-stream-empty p {
+                        max-width: 460px;
+                        margin: 6px auto 0;
+                        color: #94a3b8;
+                        font-size: 12px;
+                        line-height: 1.6;
+                    }
 
-        @media (max-width: 700px) {
-            .stream-content-redesign .stream-item {
-                gap: 11px;
-                min-height: 0;
-                padding: 15px 13px;
-            }
+                    @media (max-width: 700px) {
+                        .stream-content-redesign .stream-item {
+                            gap: 11px;
+                            min-height: 0;
+                            padding: 15px 13px;
+                        }
 
-            .stream-content-redesign .stream-item::before {
-                top: 13px;
-                bottom: 13px;
-            }
+                        .stream-content-redesign .stream-item::before {
+                            top: 13px;
+                            bottom: 13px;
+                        }
 
-            .stream-content-redesign .stream-item-icon {
-                width: 38px;
-                height: 38px;
-                flex-basis: 38px;
-                border-radius: 10px;
-                font-size: 18px;
-            }
+                        .stream-content-redesign .stream-item-icon {
+                            width: 38px;
+                            height: 38px;
+                            flex-basis: 38px;
+                            border-radius: 10px;
+                            font-size: 18px;
+                        }
 
-            .stream-content-redesign .stream-item-posted {
-                font-size: 11px;
-            }
+                        .stream-content-redesign .stream-item-posted {
+                            font-size: 11px;
+                        }
 
-            .stream-content-redesign .stream-item-title {
-                font-size: 14px;
-            }
-        }
-    </style>
+                        .stream-content-redesign .stream-item-title {
+                            font-size: 14px;
+                        }
+                    }
 
-    <div class="stream-content-redesign">
+                    /* ============================================================
+   STREAM SECTION HEADER
+   ============================================================ */
 
-        <div class="classroom-stream-card">
+                    .stream-content-redesign .stream-section-header {
+                        margin-bottom: 16px;
+                    }
 
-            @forelse ($streamItems as $streamItem)
+                    .stream-content-redesign .stream-section-header h2 {
+                        margin: 0;
+                        color: #18212f;
+                        font-size: 22px;
+                        font-weight: 750;
+                        line-height: 1.3;
+                    }
 
-                @php
+                    .stream-content-redesign .stream-section-header p {
+                        margin: 6px 0 0;
+                        color: #6478d9;
+                        font-size: 13px;
+                        font-weight: 500;
+                        line-height: 1.5;
+                    }
 
-                    $type = $streamItem['type'];
-                    $item = $streamItem['item'] ?? null;
+                    @media (max-width: 700px) {
+                        .stream-content-redesign .stream-section-header h2 {
+                            font-size: 20px;
+                        }
 
-                    $icon = match ($type) {
+                        .stream-content-redesign .stream-section-header p {
+                            font-size: 12px;
+                        }
+
+                    }
+
+                    /* ============================================================
+   BIGGER + BOLDER GRAY TEXT
+   ============================================================ */
+
+                    /* Posted by + activity description */
+                    .stream-content-redesign .stream-item-posted {
+                        color: #64748b;
+                        font-size: 14px;
+                        font-weight: 600;
+                        line-height: 1.5;
+                    }
+
+                    /* Posted user's name */
+                    .stream-content-redesign .stream-item-posted strong {
+                        color: #334155;
+                        font-size: 14px;
+                        font-weight: 800;
+                    }
+
+                    /* Time text */
+                    .stream-content-redesign .stream-item-time {
+                        color: #8b98ac;
+                        font-size: 13px;
+                        font-weight: 600;
+                    }
+
+                    /* Announcement description */
+                    .stream-content-redesign .stream-announcement-text {
+                        color: #64748b;
+                        font-size: 14px;
+                        font-weight: 600;
+                        line-height: 1.7;
+                    }
+
+                    /* Topic label */
+                    .stream-content-redesign .stream-item-topic {
+                        color: #64748b;
+                        font-size: 12px;
+                        font-weight: 750;
+                    }
+
+                    /* Project type label */
+                    .stream-content-redesign .stream-project-type {
+                        color: #64748b;
+                        font-size: 12px;
+                        font-weight: 750;
+                    }
+
+                    /* Three-dot menu icon */
+                    .stream-content-redesign .stream-item-menu {
+                        color: #8794a8;
+                    }
+
+                    /* Menu text */
+                    .stream-content-redesign .stream-options-item {
+                        color: #475569;
+                        font-size: 13px;
+                        font-weight: 700;
+                    }
+
+                    /* Empty stream description */
+                    .stream-content-redesign .classroom-stream-empty p {
+                        color: #8794a8;
+                        font-size: 14px;
+                        font-weight: 600;
+                        line-height: 1.7;
+                    }
+
+                    /* Empty stream title */
+                    .stream-content-redesign .classroom-stream-empty h3 {
+                        color: #334155;
+                        font-size: 16px;
+                        font-weight: 800;
+                    }
+
+                    /* Stream subtitle */
+                    .stream-content-redesign .stream-section-header p {
+                        color: #6478d9;
+                        font-size: 14px;
+                        font-weight: 700;
+                        line-height: 1.6;
+                    }
+
+
+                    /* ============================================================
+   MOBILE TEXT SIZE
+   ============================================================ */
+
+                    @media (max-width: 700px) {
+
+                        .stream-content-redesign .stream-item-posted {
+                            font-size: 13px;
+                            font-weight: 600;
+                        }
+
+                        .stream-content-redesign .stream-item-posted strong {
+                            font-size: 13px;
+                            font-weight: 800;
+                        }
+
+                        .stream-content-redesign .stream-item-time {
+                            font-size: 12px;
+                            font-weight: 600;
+                        }
+
+                        .stream-content-redesign .stream-announcement-text {
+                            font-size: 13px;
+                            font-weight: 600;
+                        }
+
+                        .stream-content-redesign .stream-item-topic,
+                        .stream-content-redesign .stream-project-type {
+                            font-size: 11px;
+                            font-weight: 700;
+                        }
+
+                        .stream-content-redesign .stream-options-item {
+                            font-size: 12px;
+                            font-weight: 700;
+                        }
+
+                        .stream-content-redesign .stream-section-header p {
+                            font-size: 13px;
+                            font-weight: 700;
+                        }
+                    }
+                </style>
+
+                <div class="stream-content-redesign">
+                    <div class="stream-section-header">
+                        <h2>Stream</h2>
+                        <p>Latest announcements, materials, assignments, and activities</p>
+                    </div>
+
+                    <div class="classroom-stream-card">
+
+                        @forelse ($streamItems as $streamItem)
+
+                        @php
+
+                        $type = $streamItem['type'];
+                        $item = $streamItem['item'] ?? null;
+
+                        $icon = match ($type) {
 
                         'announcement' => 'bx-bell',
                         'material' => 'bx-file',
@@ -584,9 +930,9 @@
                         'project' => 'bx-briefcase-alt-2',
 
                         default => 'bx-news',
-                    };
+                        };
 
-                    $action = match ($type) {
+                        $action = match ($type) {
 
                         'announcement' => 'posted an announcement',
                         'material' => 'posted a material',
@@ -596,98 +942,98 @@
                         'project' => 'posted a project',
 
                         default => 'posted an activity',
-                    };
+                        };
 
-                    $topic = null;
+                        $topic = null;
 
-                    if ($item && isset($item->topic)) {
+                        if ($item && isset($item->topic)) {
                         $topic = $item->topic;
-                    }
+                        }
 
-                    $detailRoute = match ($type) {
+                        $detailRoute = match ($type) {
 
                         'material' => route(
-                            'professor.class-groups.materials.show',
-                            [
-                                'classGroup' => $classGroup->id,
-                                'material' => $item->id,
-                            ]
+                        'professor.class-groups.materials.show',
+                        [
+                        'classGroup' => $classGroup->id,
+                        'material' => $item->id,
+                        ]
                         ),
 
                         'assignment' => route(
-                            'professor.class-groups.assignments.show',
-                            [
-                                'classGroup' => $classGroup->id,
-                                'assignment' => $item->id,
-                            ]
+                        'professor.class-groups.assignments.show',
+                        [
+                        'classGroup' => $classGroup->id,
+                        'assignment' => $item->id,
+                        ]
                         ),
 
                         'quiz' => route(
-                            'professor.class-groups.quizzes.show',
-                            [
-                                'classGroup' => $classGroup->id,
-                                'quiz' => $item->id,
-                            ]
+                        'professor.class-groups.quizzes.show',
+                        [
+                        'classGroup' => $classGroup->id,
+                        'quiz' => $item->id,
+                        ]
                         ),
 
                         'exam' => route(
-                            'professor.class-groups.exams.show',
-                            [
-                                'classGroup' => $classGroup->id,
-                                'exam' => $item->id,
-                            ]
+                        'professor.class-groups.exams.show',
+                        [
+                        'classGroup' => $classGroup->id,
+                        'exam' => $item->id,
+                        ]
                         ),
 
                         'project' => route(
-                            'professor.classworks.projects.show',
-                            [
-                                'classGroupId' => $classGroup->id,
-                                'projectId' => $item->id,
-                            ]
+                        'professor.classworks.projects.show',
+                        [
+                        'classGroupId' => $classGroup->id,
+                        'projectId' => $item->id,
+                        ]
                         ),
 
                         default => null,
-                    };
+                        };
 
-                @endphp
+                        @endphp
 
-                <article
-                    class="stream-item stream-item-{{ $type }}"
-                    data-type="{{ $type }}">
+                        <article
+                            class="stream-item stream-item-{{ $type }}"
+                            data-type="{{ $type }}">
 
-                    <div class="stream-item-icon">
-                        <i class="bx {{ $icon }}"></i>
-                    </div>
+                            <div class="stream-item-icon">
+                                <i class="bx {{ $icon }}"></i>
+                            </div>
 
-                    <div class="stream-item-content">
+                            <div class="stream-item-content">
 
-                        <p class="stream-item-posted">
-                            <strong>{{ $streamItem['posted_by'] }}</strong>
-                            {{ $action }}
-                            <span class="stream-item-time">
-                                · {{ $streamItem['created_at']->diffForHumans() }}
-                            </span>
-                        </p>
+                                <p class="stream-item-posted">
+                                    <strong>{{ $streamItem['posted_by'] }}</strong>
+                                    {{ $action }}
+                                    <span class="stream-item-time">
+                                        · {{ $streamItem['created_at']->diffForHumans() }}
+                                    </span>
+                                </p>
 
-                        @if ($type === 'announcement')
+                                @if ($type === 'announcement')
 
-                            <div class="stream-announcement-content">
+                                <div class="stream-announcement-content">
 
-                                <h3 class="stream-item-title">
-                                    {{ $streamItem['title'] }}
-                                </h3>
+                                    <h3 class="stream-item-title">
+                                        {{ $streamItem['title'] }}
+                                    </h3>
 
-                                @if (!empty($item->content))
+                                    @if (!empty($item->content))
                                     <p class="stream-announcement-text">
                                         {{ $item->content }}
                                     </p>
-                                @endif
+                                    @endif
 
-                            </div>
+                                </div>
 
-                        @else
+                                @else
 
-                            @if ($detailRoute)
+                                @if ($detailRoute)
 
                                 <a
                                     href="{{ $detailRoute }}"
@@ -698,69 +1044,69 @@
                                     </h3>
 
                                     @if ($topic)
-                                        <div class="stream-item-topic">
-                                            <i class="bx bx-folder"></i>
-                                            <span>{{ $topic->topic_name }}</span>
-                                        </div>
+                                    <div class="stream-item-topic">
+                                        <i class="bx bx-folder"></i>
+                                        <span>{{ $topic->topic_name }}</span>
+                                    </div>
                                     @endif
 
                                     @if ($type === 'project')
 
-                                        <div class="stream-project-meta">
+                                    <div class="stream-project-meta">
 
-                                            <span class="stream-project-badge">
-                                                <i class="bx bx-briefcase-alt-2"></i>
-                                                Project
-                                            </span>
+                                        <span class="stream-project-badge">
+                                            <i class="bx bx-briefcase-alt-2"></i>
+                                            Project
+                                        </span>
 
-                                            <span class="stream-project-type">
-                                                <i class="bx bx-group"></i>
-                                                {{ ucfirst($item->project_type ?? 'individual') }}
-                                            </span>
+                                        <span class="stream-project-type">
+                                            <i class="bx bx-group"></i>
+                                            {{ ucfirst($item->project_type ?? 'individual') }}
+                                        </span>
 
-                                        </div>
+                                    </div>
 
                                     @endif
 
                                 </a>
 
-                            @else
+                                @else
 
                                 <h3 class="stream-item-title">
                                     {{ $streamItem['title'] }}
                                 </h3>
 
-                            @endif
+                                @endif
 
-                        @endif
+                                @endif
 
-                    </div>
+                            </div>
 
-                    @if (
-                        $item &&
-                        $item->user_id === Auth::id() &&
-                        in_array($type, [
+                            @if (
+                            $item &&
+                            $item->user_id === Auth::id() &&
+                            in_array($type, [
                             'announcement',
                             'material',
                             'assignment',
                             'quiz',
                             'exam',
                             'project',
-                        ])
-                    )
+                            ])
+                            )
 
-                        <div class="stream-item-options">
+                            <div class="stream-item-options">
 
-                            <button
-                                type="button"
-                                class="stream-item-menu"
-                                aria-label="More options">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
+                                <button
+                                    type="button"
+                                    class="stream-item-menu"
+                                    aria-label="More options">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
 
-                            <div class="stream-options-menu">
+                                <div class="stream-options-menu">
 
-                                @if ($type === 'announcement')
+                                    @if ($type === 'announcement')
 
                                     <a
                                         href="{{ route(
@@ -775,7 +1121,7 @@
                                         <span>Edit</span>
                                     </a>
 
-                                @elseif ($type === 'material')
+                                    @elseif ($type === 'material')
 
                                     <a
                                         href="{{ route(
@@ -791,7 +1137,7 @@
                                         <span>Edit</span>
                                     </a>
 
-                                @elseif ($type === 'assignment')
+                                    @elseif ($type === 'assignment')
 
                                     <a
                                         href="{{ route(
@@ -807,7 +1153,7 @@
                                         <span>Edit</span>
                                     </a>
 
-                                @elseif ($type === 'quiz')
+                                    @elseif ($type === 'quiz')
 
                                     <a
                                         href="{{ route(
@@ -823,7 +1169,7 @@
                                         <span>Edit</span>
                                     </a>
 
-                                @elseif ($type === 'exam')
+                                    @elseif ($type === 'exam')
 
                                     <a
                                         href="{{ route(
@@ -839,7 +1185,7 @@
                                         <span>Edit</span>
                                     </a>
 
-                                @elseif ($type === 'project')
+                                    @elseif ($type === 'project')
 
                                     <a
                                         href="{{ route(
@@ -854,9 +1200,9 @@
                                         <span>Edit</span>
                                     </a>
 
-                                @endif
+                                    @endif
 
-                                @if ($type === 'announcement')
+                                    @if ($type === 'announcement')
 
                                     <form
                                         action="{{ route(
@@ -882,7 +1228,7 @@
                                         </button>
                                     </form>
 
-                                @elseif ($type === 'material')
+                                    @elseif ($type === 'material')
 
                                     <form
                                         action="{{ route(
@@ -908,7 +1254,7 @@
                                         </button>
                                     </form>
 
-                                @elseif ($type === 'assignment')
+                                    @elseif ($type === 'assignment')
 
                                     <form
                                         action="{{ route(
@@ -934,7 +1280,7 @@
                                         </button>
                                     </form>
 
-                                @elseif ($type === 'quiz')
+                                    @elseif ($type === 'quiz')
 
                                     <form
                                         action="{{ route(
@@ -960,7 +1306,7 @@
                                         </button>
                                     </form>
 
-                                @elseif ($type === 'exam')
+                                    @elseif ($type === 'exam')
 
                                     <form
                                         action="{{ route(
@@ -986,7 +1332,7 @@
                                         </button>
                                     </form>
 
-                                @elseif ($type === 'project')
+                                    @elseif ($type === 'project')
 
                                     <form
                                         action="{{ route(
@@ -1012,43 +1358,43 @@
                                         </button>
                                     </form>
 
-                                @endif
+                                    @endif
 
+                                </div>
                             </div>
+
+                            @endif
+
+                        </article>
+
+                        @empty
+
+                        <div class="classroom-stream-empty">
+
+                            <div class="classroom-stream-empty-icon">
+                                <i class="bx bx-news"></i>
+                            </div>
+
+                            <h3>
+                                No activity yet
+                            </h3>
+
+                            <p>
+                                Announcements, materials, assignments, quizzes,
+                                exams, and projects will appear here.
+                            </p>
+
                         </div>
 
-                    @endif
+                        @endforelse
 
-                </article>
-
-            @empty
-
-                <div class="classroom-stream-empty">
-
-                    <div class="classroom-stream-empty-icon">
-                        <i class="bx bx-news"></i>
                     </div>
-
-                    <h3>
-                        No activity yet
-                    </h3>
-
-                    <p>
-                        Announcements, materials, assignments, quizzes,
-                        exams, and projects will appear here.
-                    </p>
 
                 </div>
 
-            @endforelse
+            </section>
 
-        </div>
-
-    </div>
-
-</section>
-
-        </main>
+    </main>
 
 
     {{-- ============================================================

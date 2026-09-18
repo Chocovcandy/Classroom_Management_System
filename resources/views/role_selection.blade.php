@@ -115,7 +115,7 @@
                         </h3>
                         <p>
 
-                            For professors, deans, and administrators
+                            For professors, HoDs, and administrators 
                             with school-provided credentials.
 
                         </p>

@@ -25,182 +25,298 @@ class ScheduleController extends Controller
 
 
     // index function
+public function index(Request $request)
+{
+    /** @var User $user */
+    $user = Auth::user();
 
-    public function index(Request $request)
-    {
-        /** @var User $user */
-        /** @var User $user */
-        $user = Auth::user();
+    $department = $user->departments()
+        ->with('head', 'college')
+        ->where('head_id', $user->id)
+        ->first();
 
-        $department = $user->departments()
-            ->with('head', 'college')
-            ->where('head_id', $user->id)
-            ->first();
-
-        if (!$department) {
-            abort(403, 'You are not assigned as HoD of a department.');
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | BROWSE FILTERS
-        |--------------------------------------------------------------------------
-        | "all" means no filter is applied.
-        */
-        $year = $request->input('year', 'all');
-        $promotion = $request->input('promotion', 'all');
-        $semester = $request->input('semester', 'all');
-
-        $validYears = ['all', '1', '2', '3', '4', 1, 2, 3, 4];
-        if (!in_array($year, $validYears, true)) {
-            $year = 'all';
-        }
-
-        if ($year !== 'all') {
-            $year = (string) (int) $year;
-        }
-
-        if (!in_array($semester, ['all', 'Semester 1', 'Semester 2'], true)) {
-            $semester = 'all';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | PROMOTION FILTER
-        |--------------------------------------------------------------------------
-        */
-
-        $availablePromotions = Schedule::whereHas('scheduleDepartments', function ($query) use ($department) {
-            $query->where('department_id', $department->id);
-        })
-            ->whereNotNull('promotion')
-            ->distinct()
-            ->orderBy('promotion')
-            ->pluck('promotion');
-
-        if ($promotion !== 'all' && !in_array((int) $promotion, $availablePromotions->map(fn ($value) => (int) $value)->all(), true)) {
-            $promotion = 'all';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | LOAD ALL SESSIONS THAT BELONG TO THIS HOD'S DEPARTMENT
-        |--------------------------------------------------------------------------
-        */
-        $query = Schedule::with([
-            'course',
-            'professor',
-            'room',
-            'timeSlot',
-            'scheduleDepartments',
-        ])
-            ->whereHas('scheduleDepartments', function ($query) use ($department) {
-                $query->where('department_id', $department->id);
-            });
-
-        if ($year !== 'all') {
-            $query->whereHas('scheduleDepartments', function ($query) use ($department, $year) {
-                $query->where('department_id', $department->id)
-                    ->where('year_level', (int) $year);
-            });
-        }
-
-        if ($semester !== 'all') {
-            $query->where('semester', $semester);
-        }
-
-        if ($promotion !== 'all') {
-            $query->where('promotion', (int) $promotion);
-        }
-
-        $schedules = $query
-            ->orderByRaw("FIELD(day_of_week, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')")
-            ->orderBy('slot_id')
-            ->orderByDesc('created_at')
-            ->get();
-
-        /*
-        |--------------------------------------------------------------------------
-        | GROUP SESSIONS INTO WEEKLY SCHEDULES
-        |--------------------------------------------------------------------------
-        */
-        $scheduleGroups = $schedules
-            ->groupBy(function ($schedule) {
-                return $schedule->schedule_group_id
-                    ?: 'schedule-' . $schedule->id;
-            })
-            ->map(function ($group) use ($department) {
-                $first = $group->first();
-
-                $yearLevels = $group
-                    ->flatMap(function ($schedule) use ($department) {
-                        return $schedule->scheduleDepartments
-                            ->where('department_id', $department->id)
-                            ->pluck('year_level');
-                    })
-                    ->map(fn ($value) => (int) $value)
-                    ->unique()
-                    ->sort()
-                    ->values();
-
-                $yearLevelLabel = $yearLevels->count() === 1
-                    ? 'Year ' . $yearLevels->first()
-                    : ($yearLevels->isEmpty()
-                        ? 'All Years'
-                        : $yearLevels->map(fn ($level) => 'Year ' . $level)->implode(' + '));
-
-                return (object) [
-                    'id' => $first->id,
-                    'schedule_group_id' => $first->schedule_group_id,
-                    'semester' => $first->semester,
-                    'academic_year' => $first->academic_year,
-                    'promotion' => $first->promotion,
-                    'starting_date' => $first->starting_date,
-                    'finished_date' => $first->finished_date,
-                    'midterm_exam_start' => $first->midterm_exam_start,
-                    'midterm_exam_end' => $first->midterm_exam_end,
-                    'final_exam_start' => $first->final_exam_start,
-                    'final_exam_end' => $first->final_exam_end,
-                    'status' => $first->status,
-                    'sessions' => $group->values(),
-                    'session_count' => $group->count(),
-                    'day_count' => $group->pluck('day_of_week')->unique()->count(),
-                    'year_level_label' => $yearLevelLabel,
-                    'year_levels' => $yearLevels,
-                    'latest_created_at' => $group->max('created_at'),
-                ];
-            })
-            ->sortByDesc('latest_created_at')
-            ->values();
-
-        $timeSlots = TimeSlot::orderBy('session_number')
-            ->take(4)
-            ->get();
-
-        $allFilteredSchedules = $schedules;
-        $exportSchedule = $allFilteredSchedules->first();
-
-        $scheduledDays = $allFilteredSchedules
-            ->pluck('day_of_week')
-            ->unique()
-            ->values()
-            ->toArray();
-
-        $promotions = $availablePromotions;
-
-        return view('hod.schedules.lists.index', compact(
-            'schedules',
-            'scheduleGroups',
-            'department',
-            'year',
-            'promotion',
-            'promotions',
-            'semester',
-            'timeSlots',
-            'exportSchedule',
-            'scheduledDays'
-        ));
+    if (!$department) {
+        abort(403, 'You are not assigned as HoD of a department.');
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | BROWSE FILTERS
+    |--------------------------------------------------------------------------
+    */
+
+    $year = $request->input('year', 'all');
+    $promotion = $request->input('promotion', 'all');
+    $semester = $request->input('semester', 'all');
+
+    $validYears = ['all', '1', '2', '3', '4', 1, 2, 3, 4];
+
+    if (!in_array($year, $validYears, true)) {
+        $year = 'all';
+    }
+
+    if ($year !== 'all') {
+        $year = (string) ((int) $year);
+    }
+
+    if (!in_array($semester, [
+        'all',
+        'Semester 1',
+        'Semester 2',
+    ], true)) {
+        $semester = 'all';
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | PROMOTION FILTER
+    |--------------------------------------------------------------------------
+    */
+
+    $availablePromotions = Schedule::whereHas(
+        'scheduleDepartments',
+        function ($query) use ($department) {
+            $query->where('department_id', $department->id);
+        }
+    )
+        ->whereNotNull('promotion')
+        ->distinct()
+        ->orderBy('promotion')
+        ->pluck('promotion');
+
+    if (
+        $promotion !== 'all'
+        && !in_array(
+            (int) $promotion,
+            $availablePromotions
+                ->map(fn ($value) => (int) $value)
+                ->all(),
+            true
+        )
+    ) {
+        $promotion = 'all';
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | LOAD SCHEDULES
+    |--------------------------------------------------------------------------
+    |
+    | A combined-year schedule must be returned when any of its
+    | year levels match the selected year.
+    |
+    | When "all" is selected, no year_level filter is applied.
+    |--------------------------------------------------------------------------
+    */
+
+    $query = Schedule::with([
+        'course',
+        'professor',
+        'room',
+        'timeSlot',
+        'scheduleDepartments',
+    ])
+        ->whereHas(
+            'scheduleDepartments',
+            function ($query) use ($department) {
+                $query->where('department_id', $department->id);
+            }
+        );
+
+    /*
+    |--------------------------------------------------------------------------
+    | YEAR FILTER
+    |--------------------------------------------------------------------------
+    */
+
+    if ($year !== 'all') {
+        $query->whereHas(
+            'scheduleDepartments',
+            function ($query) use ($department, $year) {
+                $query
+                    ->where('department_id', $department->id)
+                    ->where('year_level', (int) $year);
+            }
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | SEMESTER FILTER
+    |--------------------------------------------------------------------------
+    */
+
+    if ($semester !== 'all') {
+        $query->where('semester', $semester);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | PROMOTION FILTER
+    |--------------------------------------------------------------------------
+    */
+
+    if ($promotion !== 'all') {
+        $query->where('promotion', (int) $promotion);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | GET SCHEDULES
+    |--------------------------------------------------------------------------
+    */
+
+    $schedules = $query
+        ->orderByRaw("
+            FIELD(
+                day_of_week,
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday'
+            )
+        ")
+        ->orderBy('slot_id')
+        ->orderByDesc('created_at')
+        ->get();
+
+    /*
+    |--------------------------------------------------------------------------
+    | GROUP SESSIONS INTO WEEKLY SCHEDULES
+    |--------------------------------------------------------------------------
+    |
+    | Do not group by the selected filter year.
+    | Group by the real schedule_group_id instead.
+    |--------------------------------------------------------------------------
+    */
+
+    $scheduleGroups = $schedules
+        ->groupBy(function ($schedule) {
+            return $schedule->schedule_group_id
+                ?: 'schedule-' . $schedule->id;
+        })
+        ->map(function ($group) use ($department) {
+            $first = $group->first();
+
+            /*
+            |--------------------------------------------------------------------------
+            | GET ALL YEAR LEVELS FROM THE COMBINED SCHEDULE
+            |--------------------------------------------------------------------------
+            */
+
+            $yearLevels = $group
+                ->flatMap(function ($schedule) use ($department) {
+                    return $schedule->scheduleDepartments
+                        ->where('department_id', $department->id)
+                        ->pluck('year_level');
+                })
+                ->map(fn ($value) => (int) $value)
+                ->unique()
+                ->sort()
+                ->values();
+
+            /*
+            |--------------------------------------------------------------------------
+            | DISPLAY YEAR LABEL
+            |--------------------------------------------------------------------------
+            */
+
+            if ($yearLevels->isEmpty()) {
+                $yearLevelLabel = 'All Years';
+            } elseif ($yearLevels->count() === 1) {
+                $yearLevelLabel = 'Year ' . $yearLevels->first();
+            } else {
+                $yearLevelLabel = $yearLevels
+                    ->map(fn ($level) => 'Year ' . $level)
+                    ->implode(' + ');
+            }
+
+            return (object) [
+                'id' => $first->id,
+
+                'schedule_group_id' => $first->schedule_group_id,
+
+                'semester' => $first->semester,
+
+                'academic_year' => $first->academic_year,
+
+                'promotion' => $first->promotion,
+
+                'starting_date' => $first->starting_date,
+
+                'finished_date' => $first->finished_date,
+
+                'midterm_exam_start' => $first->midterm_exam_start,
+
+                'midterm_exam_end' => $first->midterm_exam_end,
+
+                'final_exam_start' => $first->final_exam_start,
+
+                'final_exam_end' => $first->final_exam_end,
+
+                'status' => $first->status,
+
+                'sessions' => $group->values(),
+
+                'session_count' => $group->count(),
+
+                'day_count' => $group
+                    ->pluck('day_of_week')
+                    ->unique()
+                    ->count(),
+
+                'year_level_label' => $yearLevelLabel,
+
+                'year_levels' => $yearLevels,
+
+                'latest_created_at' => $group->max('created_at'),
+            ];
+        })
+        ->sortByDesc('latest_created_at')
+        ->values();
+
+    /*
+    |--------------------------------------------------------------------------
+    | TIME SLOTS
+    |--------------------------------------------------------------------------
+    */
+
+    $timeSlots = TimeSlot::orderBy('session_number')
+        ->take(4)
+        ->get();
+
+    /*
+    |--------------------------------------------------------------------------
+    | EXPORT DATA
+    |--------------------------------------------------------------------------
+    */
+
+    $allFilteredSchedules = $schedules;
+
+    $exportSchedule = $allFilteredSchedules->first();
+
+    $scheduledDays = $allFilteredSchedules
+        ->pluck('day_of_week')
+        ->unique()
+        ->values()
+        ->toArray();
+
+    $promotions = $availablePromotions;
+
+    return view('hod.schedules.lists.index', compact(
+        'schedules',
+        'scheduleGroups',
+        'department',
+        'year',
+        'promotion',
+        'promotions',
+        'semester',
+        'timeSlots',
+        'exportSchedule',
+        'scheduledDays'
+    ));
+}
 
     public function create(Request $request)
     {
@@ -304,6 +420,7 @@ $user = Auth::user();
 
         $year = $schedule->scheduleDepartments()
             ->where('department_id', $department->id)
+            ->orderBy('id')
             ->value('year_level');
 
         $year = (int) ($year ?? 1);
@@ -368,7 +485,9 @@ $user = Auth::user();
             'professor',
             'room',
             'timeSlot',
-            'scheduleDepartments',
+            'scheduleDepartments' => function ($query) {
+                $query->orderBy('id');
+            },
         ])
             ->whereIn('day_of_week', [
                 'Monday',
@@ -446,164 +565,298 @@ $user = Auth::user();
     }
 
 
-    public function update(Request $request, Schedule $schedule)
-    {
-        /*
-        |--------------------------------------------------------------------------
-        | VALIDATION
-        |--------------------------------------------------------------------------
-        */
+public function update(Request $request, Schedule $schedule)
+{
+    /*
+    |--------------------------------------------------------------------------
+    | VALIDATION
+    |--------------------------------------------------------------------------
+    */
 
-        $request->validate([
-            'semester' => 'required|in:Semester 1,Semester 2',
+    $request->validate([
+        'semester' => 'required|in:Semester 1,Semester 2',
 
-            'academic_year' => 'required|string|max:20',
+        'academic_year' => 'required|string|max:20',
 
-            'promotion' => 'required|integer|min:1|max:100',
+        'promotion' => 'required|integer|min:1|max:100',
 
-            'starting_date' => 'required|date',
+        'starting_date' => 'required|date',
 
-            'finished_date' =>
-                'required|date|after_or_equal:starting_date',
+        'finished_date' =>
+            'required|date|after_or_equal:starting_date',
 
-            'midterm_exam_start' => 'required|date',
+        'midterm_exam_start' => 'required|date',
 
-            'midterm_exam_end' =>
-                'required|date|after_or_equal:midterm_exam_start',
+        'midterm_exam_end' =>
+            'required|date|after_or_equal:midterm_exam_start',
 
-            'final_exam_start' => 'required|date',
+        'final_exam_start' => 'required|date',
 
-            'final_exam_end' =>
-                'required|date|after_or_equal:final_exam_start',
+        'final_exam_end' =>
+            'required|date|after_or_equal:final_exam_start',
 
-            'main_year' =>
-                'required|integer|in:1,2,3,4',
+        'main_year' =>
+            'required|integer|in:1,2,3,4',
 
-            'note' =>
-                'nullable|string|max:5000',
-
-            /*
-            |--------------------------------------------------------------------------
-            | WHOLE WEEK
-            |--------------------------------------------------------------------------
-            |
-            | Each day may contain zero or more enabled sessions.
-            | Disabled/empty sessions are simply not submitted by the Blade.
-            |
-            */
-
-            'days' =>
-                'required|array|min:1',
-
-            'days.*' =>
-                'array',
-
-            'days.*.*.activity_type' =>
-                'nullable|in:course,chapel,break,free,other',
-
-            'days.*.*.special_note' =>
-                'nullable|string|max:500',
-
-            'days.*.*.course_id' =>
-                'nullable|exists:courses,id',
-
-            'days.*.*.professor_id' =>
-                'nullable|exists:users,id',
-
-            'days.*.*.room_id' =>
-                'nullable|exists:classrooms,id',
-
-            'days.*.*.slot_id' =>
-                'required|exists:time_slots,id',
-
-            'days.*.*.combined_years' =>
-                'nullable|array',
-
-            'days.*.*.combined_years.*' =>
-                'integer|in:1,2,3,4',
-        ]);
-
-        /** @var User $user */
-        $user = Auth::user();
-
-        $mainYear = (int) $request->main_year;
+        'note' =>
+            'nullable|string|max:5000',
 
         /*
         |--------------------------------------------------------------------------
-        | VALID DAYS
+        | WHOLE WEEK
         |--------------------------------------------------------------------------
+        |
+        | Each day may contain zero or more enabled sessions.
+        | Disabled/empty sessions are simply not submitted by the Blade.
+        |
         */
 
-        $validDays = [
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-        ];
+        'days' =>
+            'required|array|min:1',
 
-        foreach ($request->days as $day => $dayRows) {
-            if (!in_array($day, $validDays, true)) {
-                return back()
-                    ->withInput()
-                    ->withErrors([
-                        'days' =>
-                            'Invalid schedule day selected.',
-                    ]);
+        'days.*' =>
+            'array',
+
+        'days.*.*.activity_type' =>
+            'nullable|in:course,chapel,break,free,other',
+
+        'days.*.*.special_note' =>
+            'nullable|string|max:500',
+
+        'days.*.*.course_id' =>
+            'nullable|exists:courses,id',
+
+        'days.*.*.professor_id' =>
+            'nullable|exists:users,id',
+
+        'days.*.*.room_id' =>
+            'nullable|exists:classrooms,id',
+
+        'days.*.*.slot_id' =>
+            'required|exists:time_slots,id',
+
+        'days.*.*.combined_years' =>
+            'nullable|array',
+
+        'days.*.*.combined_years.*' =>
+            'integer|in:1,2,3,4',
+    ]);
+
+    /** @var User $user */
+    $user = Auth::user();
+
+    $mainYear = (int) $request->main_year;
+
+    /*
+    |--------------------------------------------------------------------------
+    | VALID DAYS
+    |--------------------------------------------------------------------------
+    */
+
+    $validDays = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+    ];
+
+    foreach ($request->days as $day => $dayRows) {
+        if (!in_array($day, $validDays, true)) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'days' =>
+                        'Invalid schedule day selected.',
+                ]);
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | GET HOD DEPARTMENT
+    |--------------------------------------------------------------------------
+    */
+
+    $department = $user->departments()
+        ->with('head')
+        ->where('head_id', $user->id)
+        ->first();
+
+    if (!$department) {
+        abort(
+            403,
+            'You are not assigned as HoD of a department.'
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHECK ACCESS
+    |--------------------------------------------------------------------------
+    */
+
+    $belongsToDepartment = $schedule
+        ->scheduleDepartments()
+        ->where(
+            'department_id',
+            $department->id
+        )
+        ->exists();
+
+    if (!$belongsToDepartment) {
+        abort(
+            403,
+            'You are not allowed to edit this schedule.'
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | PREVENT CHANGING INTO AN EXISTING MAIN-YEAR SCHEDULE
+    |--------------------------------------------------------------------------
+    |
+    | IMPORTANT:
+    | The first ScheduleDepartment record for a schedule is the main year.
+    | Combined years are stored after the main year and must NOT be treated
+    | as owners of the weekly schedule.
+    |
+    | The current weekly schedule is excluded from this check, so saving
+    | without changing its main year does not conflict with itself.
+    |
+    */
+
+    $currentGroupId = $schedule->schedule_group_id;
+
+    $existingSchedules = Schedule::with([
+        'scheduleDepartments' => function ($query) use ($department) {
+            $query
+                ->where('department_id', $department->id)
+                ->orderBy('id');
+        },
+    ])
+        ->where(
+            'semester',
+            $request->semester
+        )
+        ->where(
+            'academic_year',
+            $request->academic_year
+        )
+        ->where(
+            'promotion',
+            $request->promotion
+        )
+        ->when(
+            $currentGroupId,
+            function ($query) use ($currentGroupId) {
+                $query->where(
+                    'schedule_group_id',
+                    '!=',
+                    $currentGroupId
+                );
+            },
+            function ($query) use ($schedule) {
+                $query->where(
+                    'id',
+                    '!=',
+                    $schedule->id
+                );
             }
+        )
+        ->whereHas(
+            'scheduleDepartments',
+            function ($query) use ($department) {
+                $query->where(
+                    'department_id',
+                    $department->id
+                );
+            }
+        )
+        ->get();
+
+    $scheduleAlreadyExists = $existingSchedules->contains(
+        function ($existingSchedule) use ($mainYear) {
+
+            $mainDepartmentYear = $existingSchedule
+                ->scheduleDepartments
+                ->sortBy('id')
+                ->first();
+
+            return $mainDepartmentYear
+                && (int) $mainDepartmentYear->year_level === $mainYear;
         }
+    );
 
-        /*
-        |--------------------------------------------------------------------------
-        | GET HOD DEPARTMENT
-        |--------------------------------------------------------------------------
-        */
+    if ($scheduleAlreadyExists) {
+        return back()
+            ->withInput()
+            ->withErrors([
+                'main_year' =>
+                    'A weekly schedule already exists for this main year, promotion, semester, and academic year.',
+            ]);
+    }
 
-        $department = $user->departments()
-            ->with('head')
-            ->where('head_id', $user->id)
-            ->first();
+    /*
+    |--------------------------------------------------------------------------
+    | LOAD THE EXISTING WEEK
+    |--------------------------------------------------------------------------
+    |
+    | Prefer schedule_group_id because it identifies the actual weekly
+    | timetable. Only use the old lookup method for legacy records that
+    | do not have a group id.
+    |
+    */
 
-        if (!$department) {
-            abort(
-                403,
-                'You are not assigned as HoD of a department.'
-            );
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | CHECK ACCESS
-        |--------------------------------------------------------------------------
-        */
-
-        $belongsToDepartment = $schedule->scheduleDepartments()
-            ->where(
-                'department_id',
-                $department->id
-            )
-            ->exists();
-
-        if (!$belongsToDepartment) {
-            abort(
-                403,
-                'You are not allowed to edit this schedule.'
-            );
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | LOAD THE EXISTING WEEK
-        |--------------------------------------------------------------------------
-        |
-        | This gives us all schedules that currently belong to the schedule
-        | being edited. We use the ORIGINAL values here because the user may
-        | change semester, academic year or promotion during the edit.
-        |
-        */
+    if ($schedule->schedule_group_id) {
 
         $oldSchedules = Schedule::with([
-            'scheduleDepartments',
+            'scheduleDepartments' => function ($query) {
+                $query->orderBy('id');
+            },
+        ])
+            ->where(
+                'schedule_group_id',
+                $schedule->schedule_group_id
+            )
+            ->whereIn(
+                'day_of_week',
+                $validDays
+            )
+            ->whereIn(
+                'slot_id',
+                TimeSlot::orderBy('session_number')
+                    ->take(4)
+                    ->pluck('id')
+            )
+            ->whereHas(
+                'scheduleDepartments',
+                function ($query) use ($department) {
+                    $query->where(
+                        'department_id',
+                        $department->id
+                    );
+                }
+            )
+            ->orderByRaw(
+                "FIELD(
+                    day_of_week,
+                    'Monday',
+                    'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday'
+                )"
+            )
+            ->orderBy('slot_id')
+            ->get();
+
+    } else {
+
+        $oldSchedules = Schedule::with([
+            'scheduleDepartments' => function ($query) {
+                $query->orderBy('id');
+            },
         ])
             ->whereIn(
                 'day_of_week',
@@ -636,173 +889,146 @@ $user = Auth::user();
                     );
                 }
             )
+            ->orderByRaw(
+                "FIELD(
+                    day_of_week,
+                    'Monday',
+                    'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday'
+                )"
+            )
+            ->orderBy('slot_id')
             ->orderByDesc('updated_at')
             ->get()
             ->unique(function ($item) {
                 return $item->day_of_week . '-' . $item->slot_id;
             })
             ->values();
+    }
 
-        /*
-        |--------------------------------------------------------------------------
-        | FALLBACK: MAKE SURE ORIGINAL SCHEDULE IS INCLUDED
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | FALLBACK: MAKE SURE ORIGINAL SCHEDULE IS INCLUDED
+    |--------------------------------------------------------------------------
+    */
 
-        if (
-            !$oldSchedules->contains(
-                'id',
-                $schedule->id
-            )
-        ) {
-            $oldSchedules->push(
-                $schedule
-            );
-        }
+    if (
+        !$oldSchedules->contains(
+            'id',
+            $schedule->id
+        )
+    ) {
+        $oldSchedules->push(
+            $schedule
+        );
+    }
 
-        $oldScheduleIds = $oldSchedules
-            ->pluck('id')
-            ->map(
-                fn ($id) => (int) $id
-            )
-            ->values()
-            ->all();
+    $oldScheduleIds = $oldSchedules
+        ->pluck('id')
+        ->map(
+            fn ($id) => (int) $id
+        )
+        ->values()
+        ->all();
 
-        /*
-        |--------------------------------------------------------------------------
-        | PREPARE ROWS
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | PREPARE ROWS
+    |--------------------------------------------------------------------------
+    */
 
-        $preparedRows = [];
+    $preparedRows = [];
 
-        foreach ($request->days as $day => $dayRows) {
+    foreach ($request->days as $day => $dayRows) {
 
-            foreach ($dayRows as $index => $row) {
+        foreach ($dayRows as $index => $row) {
+
+            /*
+            |--------------------------------------------------------------------------
+            | ACTIVITY TYPE
+            |--------------------------------------------------------------------------
+            */
+
+            $activityType =
+                $row['activity_type']
+                ?? 'course';
+
+            $specialNote =
+                $row['special_note']
+                ?? null;
+
+            /*
+            |--------------------------------------------------------------------------
+            | NORMAL COURSE
+            |--------------------------------------------------------------------------
+            */
+
+            if ($activityType === 'course') {
 
                 /*
                 |--------------------------------------------------------------------------
-                | ACTIVITY TYPE
+                | COMPLETELY EMPTY SESSION
                 |--------------------------------------------------------------------------
                 */
 
-                $activityType =
-                    $row['activity_type']
-                    ?? 'course';
-
-                $specialNote =
-                    $row['special_note']
-                    ?? null;
-
-                /*
-                |--------------------------------------------------------------------------
-                | NORMAL COURSE
-                |--------------------------------------------------------------------------
-                */
-
-                if ($activityType === 'course') {
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | COMPLETELY EMPTY SESSION
-                    |--------------------------------------------------------------------------
-                    |
-                    | The Create flow allows an unused time slot.
-                    | Do not create anything for it.
-                    |
-                    */
-
-                    if (
-                        empty($row['course_id']) &&
-                        empty($row['professor_id']) &&
-                        empty($row['room_id'])
-                    ) {
-                        continue;
-                    }
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | COURSE SESSION MUST BE COMPLETE
-                    |--------------------------------------------------------------------------
-                    */
-
-                    if (
-                        empty($row['course_id']) ||
-                        empty($row['professor_id']) ||
-                        empty($row['room_id'])
-                    ) {
-                        return back()
-                            ->withInput()
-                            ->withErrors([
-                                "days.{$day}.{$index}.course_id" =>
-                                    'Please complete the course, professor, and classroom for this session.',
-                            ]);
-                    }
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | COURSE MUST BELONG TO HOD DEPARTMENT
-                    |--------------------------------------------------------------------------
-                    */
-
-                    $course = Course::where(
-                        'id',
-                        $row['course_id']
-                    )
-                        ->where(
-                            'department_id',
-                            $department->id
-                        )
-                        ->first();
-
-                    if (!$course) {
-                        return back()
-                            ->withInput()
-                            ->withErrors([
-                                "days.{$day}.{$index}.course_id" =>
-                                    'This course does not belong to your department.',
-                            ]);
-                    }
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | GET YEAR LEVELS
-                    |--------------------------------------------------------------------------
-                    */
-
-                    $combinedYears = array_map(
-                        'intval',
-                        $row['combined_years'] ?? []
-                    );
-
-                    $yearLevels = array_unique([
-                        $mainYear,
-                        ...$combinedYears,
-                    ]);
-
-                    $preparedRows[] = [
-                        'day' => $day,
-                        'index' => $index,
-                        'activity_type' => 'course',
-                        'special_note' => null,
-                        'course_id' => $row['course_id'],
-                        'professor_id' => $row['professor_id'],
-                        'room_id' => $row['room_id'],
-                        'slot_id' => $row['slot_id'],
-                        'year_levels' => $yearLevels,
-                    ];
-
+                if (
+                    empty($row['course_id']) &&
+                    empty($row['professor_id']) &&
+                    empty($row['room_id'])
+                ) {
                     continue;
                 }
 
                 /*
                 |--------------------------------------------------------------------------
-                | SPECIAL ACTIVITY
+                | COURSE SESSION MUST BE COMPLETE
                 |--------------------------------------------------------------------------
-                |
-                | Chapel, Break, Free Time and Other do not need a course,
-                | professor or classroom.
-                |
+                */
+
+                if (
+                    empty($row['course_id']) ||
+                    empty($row['professor_id']) ||
+                    empty($row['room_id'])
+                ) {
+                    return back()
+                        ->withInput()
+                        ->withErrors([
+                            "days.{$day}.{$index}.course_id" =>
+                                'Please complete the course, professor, and classroom for this session.',
+                        ]);
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | COURSE MUST BELONG TO HOD DEPARTMENT
+                |--------------------------------------------------------------------------
+                */
+
+                $course = Course::where(
+                    'id',
+                    $row['course_id']
+                )
+                    ->where(
+                        'department_id',
+                        $department->id
+                    )
+                    ->first();
+
+                if (!$course) {
+                    return back()
+                        ->withInput()
+                        ->withErrors([
+                            "days.{$day}.{$index}.course_id" =>
+                                'This course does not belong to your department.',
+                        ]);
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | GET YEAR LEVELS
+                |--------------------------------------------------------------------------
                 */
 
                 $combinedYears = array_map(
@@ -810,167 +1036,119 @@ $user = Auth::user();
                     $row['combined_years'] ?? []
                 );
 
-                $yearLevels = array_unique([
-                    $mainYear,
-                    ...$combinedYears,
-                ]);
+                $yearLevels = array_values(
+                    array_unique([
+                        $mainYear,
+                        ...$combinedYears,
+                    ])
+                );
 
                 $preparedRows[] = [
                     'day' => $day,
                     'index' => $index,
-                    'activity_type' => $activityType,
-                    'special_note' => $specialNote,
-                    'course_id' => null,
-                    'professor_id' => null,
-                    'room_id' => null,
+                    'activity_type' => 'course',
+                    'special_note' => null,
+                    'course_id' => $row['course_id'],
+                    'professor_id' => $row['professor_id'],
+                    'room_id' => $row['room_id'],
                     'slot_id' => $row['slot_id'],
                     'year_levels' => $yearLevels,
                 ];
-            }
-        }
 
-        /*
-        |--------------------------------------------------------------------------
-        | CHECK FOR DUPLICATE SESSION SLOT IN THE SAME DAY
-        |--------------------------------------------------------------------------
-        */
-
-        $seenSlots = [];
-
-        foreach ($preparedRows as $row) {
-
-            $slotKey =
-                $row['day'] . '-' . $row['slot_id'];
-
-            if (isset($seenSlots[$slotKey])) {
-                return back()
-                    ->withInput()
-                    ->withErrors([
-                        "days.{$row['day']}.{$row['index']}.slot_id" =>
-                            'This time slot is already used in another session for this day.',
-                    ]);
+                continue;
             }
 
-            $seenSlots[$slotKey] = true;
+            /*
+            |--------------------------------------------------------------------------
+            | SPECIAL ACTIVITY
+            |--------------------------------------------------------------------------
+            */
+
+            $combinedYears = array_map(
+                'intval',
+                $row['combined_years'] ?? []
+            );
+
+            $yearLevels = array_unique([
+                $mainYear,
+                ...$combinedYears,
+            ]);
+
+            $preparedRows[] = [
+                'day' => $day,
+                'index' => $index,
+                'activity_type' => $activityType,
+                'special_note' => $specialNote,
+                'course_id' => null,
+                'professor_id' => null,
+                'room_id' => null,
+                'slot_id' => $row['slot_id'],
+                'year_levels' => $yearLevels,
+            ];
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHECK FOR DUPLICATE SESSION SLOT IN THE SAME DAY
+    |--------------------------------------------------------------------------
+    */
+
+    $seenSlots = [];
+
+    foreach ($preparedRows as $row) {
+
+        $slotKey =
+            $row['day'] . '-' . $row['slot_id'];
+
+        if (isset($seenSlots[$slotKey])) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    "days.{$row['day']}.{$row['index']}.slot_id" =>
+                        'This time slot is already used in another session for this day.',
+                ]);
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | CHECK CONFLICTS BETWEEN SESSIONS IN THIS EDIT
-        |--------------------------------------------------------------------------
-        */
+        $seenSlots[$slotKey] = true;
+    }
 
-        foreach ($preparedRows as $currentIndex => $current) {
+    /*
+    |--------------------------------------------------------------------------
+    | CHECK CONFLICTS BETWEEN SESSIONS IN THIS EDIT
+    |--------------------------------------------------------------------------
+    */
 
-            foreach ($preparedRows as $otherIndex => $other) {
+    foreach ($preparedRows as $currentIndex => $current) {
 
-                if ($currentIndex >= $otherIndex) {
-                    continue;
-                }
+        foreach ($preparedRows as $otherIndex => $other) {
 
-                /*
-                |--------------------------------------------------------------------------
-                | DIFFERENT DAY
-                |--------------------------------------------------------------------------
-                */
-
-                if ($current['day'] !== $other['day']) {
-                    continue;
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | DIFFERENT TIME
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    (int) $current['slot_id'] !==
-                    (int) $other['slot_id']
-                ) {
-                    continue;
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | PROFESSOR CONFLICT
-                |--------------------------------------------------------------------------
-                |
-                | Only Course sessions have professors.
-                |
-                */
-
-                if (
-                    !empty($current['professor_id']) &&
-                    !empty($other['professor_id']) &&
-                    (int) $current['professor_id'] ===
-                    (int) $other['professor_id']
-                ) {
-                    return back()
-                        ->withInput()
-                        ->withErrors([
-                            "days.{$current['day']}.{$current['index']}.professor_id" =>
-                                'This professor is already selected in another session at this time.',
-                        ]);
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | CLASSROOM CONFLICT
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    !empty($current['room_id']) &&
-                    !empty($other['room_id']) &&
-                    (int) $current['room_id'] ===
-                    (int) $other['room_id']
-                ) {
-                    return back()
-                        ->withInput()
-                        ->withErrors([
-                            "days.{$current['day']}.{$current['index']}.room_id" =>
-                                'This classroom is already selected in another session at this time.',
-                        ]);
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | YEAR LEVEL CONFLICT
-                |--------------------------------------------------------------------------
-                |
-                | Applies to both courses and special activities.
-                |
-                */
-
-                $sameYear = array_intersect(
-                    $current['year_levels'],
-                    $other['year_levels']
-                );
-
-                if (!empty($sameYear)) {
-                    return back()
-                        ->withInput()
-                        ->withErrors([
-                            "days.{$current['day']}.{$current['index']}.activity_type" =>
-                                'One or more selected year levels are already selected in another session at this time.',
-                        ]);
-                }
+            if ($currentIndex >= $otherIndex) {
+                continue;
             }
-        }
 
-        /*
-        |--------------------------------------------------------------------------
-        | CHECK DATABASE CONFLICTS
-        |--------------------------------------------------------------------------
-        |
-        | Ignore all sessions currently being edited.
-        |
-        */
+            /*
+            |--------------------------------------------------------------------------
+            | DIFFERENT DAY
+            |--------------------------------------------------------------------------
+            */
 
-        foreach ($preparedRows as $row) {
+            if ($current['day'] !== $other['day']) {
+                continue;
+            }
 
-            $ignoreIds = $oldScheduleIds;
+            /*
+            |--------------------------------------------------------------------------
+            | DIFFERENT TIME
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                (int) $current['slot_id'] !==
+                (int) $other['slot_id']
+            ) {
+                continue;
+            }
 
             /*
             |--------------------------------------------------------------------------
@@ -979,48 +1157,17 @@ $user = Auth::user();
             */
 
             if (
-                $row['activity_type'] === 'course' &&
-                !empty($row['professor_id'])
+                !empty($current['professor_id']) &&
+                !empty($other['professor_id']) &&
+                (int) $current['professor_id'] ===
+                (int) $other['professor_id']
             ) {
-
-                $professorConflict = Schedule::where(
-                    'professor_id',
-                    $row['professor_id']
-                )
-                    ->where(
-                        'day_of_week',
-                        $row['day']
-                    )
-                    ->where(
-                        'slot_id',
-                        $row['slot_id']
-                    )
-                    ->where(
-                        'semester',
-                        $request->semester
-                    )
-                    ->where(
-                        'academic_year',
-                        $request->academic_year
-                    )
-                    ->where(
-                        'promotion',
-                        $request->promotion
-                    )
-                    ->whereNotIn(
-                        'id',
-                        $ignoreIds
-                    )
-                    ->exists();
-
-                if ($professorConflict) {
-                    return back()
-                        ->withInput()
-                        ->withErrors([
-                            "days.{$row['day']}.{$row['index']}.professor_id" =>
-                                'This professor already has a schedule at this time.',
-                        ]);
-                }
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        "days.{$current['day']}.{$current['index']}.professor_id" =>
+                            'This professor is already selected in another session at this time.',
+                    ]);
             }
 
             /*
@@ -1030,48 +1177,17 @@ $user = Auth::user();
             */
 
             if (
-                $row['activity_type'] === 'course' &&
-                !empty($row['room_id'])
+                !empty($current['room_id']) &&
+                !empty($other['room_id']) &&
+                (int) $current['room_id'] ===
+                (int) $other['room_id']
             ) {
-
-                $classroomConflict = Schedule::where(
-                    'room_id',
-                    $row['room_id']
-                )
-                    ->where(
-                        'day_of_week',
-                        $row['day']
-                    )
-                    ->where(
-                        'slot_id',
-                        $row['slot_id']
-                    )
-                    ->where(
-                        'semester',
-                        $request->semester
-                    )
-                    ->where(
-                        'academic_year',
-                        $request->academic_year
-                    )
-                    ->where(
-                        'promotion',
-                        $request->promotion
-                    )
-                    ->whereNotIn(
-                        'id',
-                        $ignoreIds
-                    )
-                    ->exists();
-
-                if ($classroomConflict) {
-                    return back()
-                        ->withInput()
-                        ->withErrors([
-                            "days.{$row['day']}.{$row['index']}.room_id" =>
-                                'This classroom is already occupied at this time.',
-                        ]);
-                }
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        "days.{$current['day']}.{$current['index']}.room_id" =>
+                            'This classroom is already selected in another session at this time.',
+                    ]);
             }
 
             /*
@@ -1080,10 +1196,54 @@ $user = Auth::user();
             |--------------------------------------------------------------------------
             */
 
-            $yearConflict = Schedule::where(
-                'day_of_week',
-                $row['day']
+            $sameYear = array_intersect(
+                $current['year_levels'],
+                $other['year_levels']
+            );
+
+            if (!empty($sameYear)) {
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        "days.{$current['day']}.{$current['index']}.activity_type" =>
+                            'One or more selected year levels are already selected in another session at this time.',
+                    ]);
+            }
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHECK DATABASE CONFLICTS
+    |--------------------------------------------------------------------------
+    |
+    | Ignore all sessions belonging to the weekly schedule being edited.
+    |
+    */
+
+    foreach ($preparedRows as $row) {
+
+        $ignoreIds = $oldScheduleIds;
+
+        /*
+        |--------------------------------------------------------------------------
+        | PROFESSOR CONFLICT
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $row['activity_type'] === 'course' &&
+            !empty($row['professor_id'])
+        ) {
+
+            $professorConflict = Schedule::where(
+                'professor_id',
+                $row['professor_id']
             )
+                ->where(
+                    'day_of_week',
+                    $row['day']
+                )
                 ->where(
                     'slot_id',
                     $row['slot_id']
@@ -1104,328 +1264,389 @@ $user = Auth::user();
                     'id',
                     $ignoreIds
                 )
-                ->whereHas(
-                    'scheduleDepartments',
-                    function ($query) use (
-                        $department,
-                        $row
-                    ) {
-                        $query
-                            ->where(
-                                'department_id',
-                                $department->id
-                            )
-                            ->whereIn(
-                                'year_level',
-                                $row['year_levels']
-                            );
-                    }
-                )
                 ->exists();
 
-            if ($yearConflict) {
+            if ($professorConflict) {
                 return back()
                     ->withInput()
                     ->withErrors([
-                        "days.{$row['day']}.{$row['index']}.activity_type" =>
-                            'One or more selected year levels already have a schedule at this time.',
+                        "days.{$row['day']}.{$row['index']}.professor_id" =>
+                            'This professor already has a schedule at this time.',
                     ]);
             }
         }
 
         /*
         |--------------------------------------------------------------------------
-        | SAVE WHOLE WEEK
+        | CLASSROOM CONFLICT
         |--------------------------------------------------------------------------
         */
 
-        DB::transaction(function () use (
-            $request,
-            $schedule,
-            $user,
-            $department,
-            $oldSchedules,
-            $oldScheduleIds,
-            $preparedRows
+        if (
+            $row['activity_type'] === 'course' &&
+            !empty($row['room_id'])
         ) {
 
-            /*
-            |--------------------------------------------------------------------------
-            | KEEP ONE GROUP ID FOR THE WHOLE WEEK
-            |--------------------------------------------------------------------------
-            |
-            | Existing weekly schedules keep their group id.
-            | Old records without one receive a new shared group id.
-            |
-            */
+            $classroomConflict = Schedule::where(
+                'room_id',
+                $row['room_id']
+            )
+                ->where(
+                    'day_of_week',
+                    $row['day']
+                )
+                ->where(
+                    'slot_id',
+                    $row['slot_id']
+                )
+                ->where(
+                    'semester',
+                    $request->semester
+                )
+                ->where(
+                    'academic_year',
+                    $request->academic_year
+                )
+                ->where(
+                    'promotion',
+                    $request->promotion
+                )
+                ->whereNotIn(
+                    'id',
+                    $ignoreIds
+                )
+                ->exists();
 
-            $scheduleGroupId =
-                $schedule->schedule_group_id
-                ?: (string) Str::uuid();
+            if ($classroomConflict) {
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        "days.{$row['day']}.{$row['index']}.room_id" =>
+                            'This classroom is already occupied at this time.',
+                    ]);
+            }
+        }
 
-            $savedScheduleIds = [];
+        /*
+        |--------------------------------------------------------------------------
+        | YEAR LEVEL CONFLICT
+        |--------------------------------------------------------------------------
+        */
 
-            /*
-            |--------------------------------------------------------------------------
-            | SAVE EACH ENABLED SESSION
-            |--------------------------------------------------------------------------
-            */
-
-            foreach ($preparedRows as $row) {
-
-                /*
-                |--------------------------------------------------------------------------
-                | FIND EXISTING SESSION
-                |--------------------------------------------------------------------------
-                */
-
-                $sessionSchedule = $oldSchedules->first(
-                    function ($oldSchedule) use ($row) {
-                        return $oldSchedule->day_of_week ===
-                            $row['day']
-                            &&
-                            (int) $oldSchedule->slot_id ===
-                            (int) $row['slot_id'];
-                    }
-                );
-
-                /*
-                |--------------------------------------------------------------------------
-                | PREPARE DATA
-                |--------------------------------------------------------------------------
-                */
-
-                $scheduleData = [
-                    'schedule_group_id' => $scheduleGroupId,
-
-                    'activity_type' => $row['activity_type'],
-
-                    'special_note' =>
-                        $row['activity_type'] !== 'course'
-                            ? $row['special_note']
-                            : null,
-
-                    'course_id' =>
-                        $row['activity_type'] === 'course'
-                            ? $row['course_id']
-                            : null,
-
-                    'professor_id' =>
-                        $row['activity_type'] === 'course'
-                            ? $row['professor_id']
-                            : null,
-
-                    'room_id' =>
-                        $row['activity_type'] === 'course'
-                            ? $row['room_id']
-                            : null,
-
-                    'day_of_week' => $row['day'],
-
-                    'slot_id' => $row['slot_id'],
-
-                    'semester' => $request->semester,
-
-                    'academic_year' =>
-                        $request->academic_year,
-
-                    'promotion' =>
-                        $request->promotion,
-
-                    'starting_date' =>
-                        $request->starting_date,
-
-                    'finished_date' =>
-                        $request->finished_date,
-
-                    'midterm_exam_start' =>
-                        $request->midterm_exam_start,
-
-                    'midterm_exam_end' =>
-                        $request->midterm_exam_end,
-
-                    'final_exam_start' =>
-                        $request->final_exam_start,
-
-                    'final_exam_end' =>
-                        $request->final_exam_end,
-
-                    'status' => 'draft',
-
-                    'note' =>
-                        $request->input('note'),
-                ];
-
-                /*
-                |--------------------------------------------------------------------------
-                | UPDATE OR CREATE
-                |--------------------------------------------------------------------------
-                */
-
-                if ($sessionSchedule) {
-
-                    $sessionSchedule->update(
-                        $scheduleData
-                    );
-
-                } else {
-
-                    $scheduleData['created_by'] =
-                        $user->id;
-
-                    $scheduleData['approved_by'] =
-                        null;
-
-                    $sessionSchedule =
-                        Schedule::create(
-                            $scheduleData
+        $yearConflict = Schedule::where(
+            'day_of_week',
+            $row['day']
+        )
+            ->where(
+                'slot_id',
+                $row['slot_id']
+            )
+            ->where(
+                'semester',
+                $request->semester
+            )
+            ->where(
+                'academic_year',
+                $request->academic_year
+            )
+            ->where(
+                'promotion',
+                $request->promotion
+            )
+            ->whereNotIn(
+                'id',
+                $ignoreIds
+            )
+            ->whereHas(
+                'scheduleDepartments',
+                function ($query) use (
+                    $department,
+                    $row
+                ) {
+                    $query
+                        ->where(
+                            'department_id',
+                            $department->id
+                        )
+                        ->whereIn(
+                            'year_level',
+                            $row['year_levels']
                         );
                 }
+            )
+            ->exists();
 
-                /*
-                |--------------------------------------------------------------------------
-                | UPDATE DEPARTMENT YEAR LEVELS
-                |--------------------------------------------------------------------------
-                */
+        if ($yearConflict) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    "days.{$row['day']}.{$row['index']}.activity_type" =>
+                        'One or more selected year levels already have a schedule at this time.',
+                ]);
+        }
+    }
 
-                $sessionSchedule
-                    ->scheduleDepartments()
-                    ->where(
-                        'department_id',
-                        $department->id
-                    )
-                    ->delete();
+    /*
+    |--------------------------------------------------------------------------
+    | SAVE WHOLE WEEK
+    |--------------------------------------------------------------------------
+    */
 
-                foreach (
-                    $row['year_levels']
-                    as $yearLevel
-                ) {
+    $savedScheduleIds = [];
 
-                    ScheduleDepartment::create([
-                        'schedule_id' =>
-                            $sessionSchedule->id,
+    DB::transaction(function () use (
+        $request,
+        $schedule,
+        $user,
+        $department,
+        $oldSchedules,
+        $preparedRows,
+        &$savedScheduleIds
+    ) {
 
-                        'department_id' =>
-                            $department->id,
+        /*
+        |--------------------------------------------------------------------------
+        | KEEP ONE GROUP ID FOR THE WHOLE WEEK
+        |--------------------------------------------------------------------------
+        */
 
-                        'year_level' =>
-                            $yearLevel,
-                    ]);
+        $scheduleGroupId =
+            $schedule->schedule_group_id
+            ?: (string) Str::uuid();
+
+        /*
+        |--------------------------------------------------------------------------
+        | SAVE EACH ENABLED SESSION
+        |--------------------------------------------------------------------------
+        */
+
+        foreach ($preparedRows as $row) {
+
+            /*
+            |--------------------------------------------------------------------------
+            | FIND EXISTING SESSION
+            |--------------------------------------------------------------------------
+            */
+
+            $sessionSchedule = $oldSchedules->first(
+                function ($oldSchedule) use ($row) {
+                    return $oldSchedule->day_of_week ===
+                        $row['day']
+                        &&
+                        (int) $oldSchedule->slot_id ===
+                        (int) $row['slot_id'];
                 }
+            );
 
-                $savedScheduleIds[] =
-                    (int) $sessionSchedule->id;
+            /*
+            |--------------------------------------------------------------------------
+            | PREPARE DATA
+            |--------------------------------------------------------------------------
+            */
+
+            $scheduleData = [
+                'schedule_group_id' => $scheduleGroupId,
+
+                'activity_type' => $row['activity_type'],
+
+                'special_note' =>
+                    $row['activity_type'] !== 'course'
+                        ? $row['special_note']
+                        : null,
+
+                'course_id' =>
+                    $row['activity_type'] === 'course'
+                        ? $row['course_id']
+                        : null,
+
+                'professor_id' =>
+                    $row['activity_type'] === 'course'
+                        ? $row['professor_id']
+                        : null,
+
+                'room_id' =>
+                    $row['activity_type'] === 'course'
+                        ? $row['room_id']
+                        : null,
+
+                'day_of_week' => $row['day'],
+
+                'slot_id' => $row['slot_id'],
+
+                'semester' => $request->semester,
+
+                'academic_year' =>
+                    $request->academic_year,
+
+                'promotion' =>
+                    $request->promotion,
+
+                'starting_date' =>
+                    $request->starting_date,
+
+                'finished_date' =>
+                    $request->finished_date,
+
+                'midterm_exam_start' =>
+                    $request->midterm_exam_start,
+
+                'midterm_exam_end' =>
+                    $request->midterm_exam_end,
+
+                'final_exam_start' =>
+                    $request->final_exam_start,
+
+                'final_exam_end' =>
+                    $request->final_exam_end,
+
+                'status' => 'draft',
+
+                'note' =>
+                    $request->input('note'),
+            ];
+
+            /*
+            |--------------------------------------------------------------------------
+            | UPDATE OR CREATE
+            |--------------------------------------------------------------------------
+            */
+
+            if ($sessionSchedule) {
+
+                $sessionSchedule->update(
+                    $scheduleData
+                );
+
+            } else {
+
+                $scheduleData['created_by'] =
+                    $user->id;
+
+                $scheduleData['approved_by'] =
+                    null;
+
+                $sessionSchedule =
+                    Schedule::create(
+                        $scheduleData
+                    );
             }
 
             /*
             |--------------------------------------------------------------------------
-            | REMOVE DISABLED / DELETED SESSIONS
+            | UPDATE DEPARTMENT YEAR LEVELS
             |--------------------------------------------------------------------------
+            |
+            | Main year is always inserted first.
+            | Combined years are inserted after it.
+            |
             */
 
-            foreach ($oldSchedules as $oldSchedule) {
+            $sessionSchedule
+                ->scheduleDepartments()
+                ->where(
+                    'department_id',
+                    $department->id
+                )
+                ->delete();
 
-                if (
-                    in_array(
-                        (int) $oldSchedule->id,
-                        $savedScheduleIds,
-                        true
-                    )
-                ) {
-                    continue;
-                }
+            foreach (
+                $row['year_levels']
+                as $yearLevel
+            ) {
 
-                /*
-                |--------------------------------------------------------------------------
-                | Remove only this department's relationship
-                |--------------------------------------------------------------------------
-                */
+                ScheduleDepartment::create([
+                    'schedule_id' =>
+                        $sessionSchedule->id,
 
-                $oldSchedule
-                    ->scheduleDepartments()
-                    ->where(
-                        'department_id',
-                        $department->id
-                    )
-                    ->delete();
+                    'department_id' =>
+                        $department->id,
 
-                /*
-                |--------------------------------------------------------------------------
-                | Delete the schedule if no department uses it
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    !$oldSchedule
-                        ->scheduleDepartments()
-                        ->exists()
-                ) {
-                    $oldSchedule->delete();
-                }
+                    'year_level' =>
+                        $yearLevel,
+                ]);
             }
 
-            /*
-            |--------------------------------------------------------------------------
-            | MAKE ORIGINAL SCHEDULE ID CONTINUE TO BE USABLE
-            |--------------------------------------------------------------------------
-            |
-            | If the original schedule was disabled/deleted, another saved
-            | session becomes the primary editing record for future edits.
-            |
-            */
+            $savedScheduleIds[] =
+                (int) $sessionSchedule->id;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | REMOVE DISABLED / DELETED SESSIONS
+        |--------------------------------------------------------------------------
+        */
+
+        foreach ($oldSchedules as $oldSchedule) {
 
             if (
-                !in_array(
-                    (int) $schedule->id,
+                in_array(
+                    (int) $oldSchedule->id,
                     $savedScheduleIds,
                     true
                 )
             ) {
-                /*
-                | Nothing else is required here.
-                | The redirect will use the main year/day values.
-                */
+                continue;
             }
-        });
 
-        /*
-        |--------------------------------------------------------------------------
-        | DONE
-        |--------------------------------------------------------------------------
-        */
+            /*
+            |--------------------------------------------------------------------------
+            | REMOVE ONLY THIS DEPARTMENT'S RELATIONSHIP
+            |--------------------------------------------------------------------------
+            */
 
-        /*
-        |--------------------------------------------------------------------------
-        | RETURN TO DOCX PREVIEW WHEN EDIT WAS OPENED FROM PREVIEW
-        |--------------------------------------------------------------------------
-        */
+            $oldSchedule
+                ->scheduleDepartments()
+                ->where(
+                    'department_id',
+                    $department->id
+                )
+                ->delete();
 
-        if ($request->boolean('return_to_preview')) {
-            $previewScheduleId = $savedScheduleIds[0] ?? $schedule->id;
+            /*
+            |--------------------------------------------------------------------------
+            | DELETE THE SCHEDULE IF NO DEPARTMENT USES IT
+            |--------------------------------------------------------------------------
+            */
 
-            return redirect()
-                ->route('hod.schedules.previewDocx', $previewScheduleId)
-                ->with(
-                    'success',
-                    'Weekly schedule updated successfully.'
-                );
+            if (
+                !$oldSchedule
+                    ->scheduleDepartments()
+                    ->exists()
+            ) {
+                $oldSchedule->delete();
+            }
         }
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | DONE
+    |--------------------------------------------------------------------------
+    */
+
+    if ($request->boolean('return_to_preview')) {
+
+        $previewScheduleId =
+            $savedScheduleIds[0] ?? $schedule->id;
 
         return redirect()
             ->route(
-                'hod.schedules.index',
-                [
-                    'year' => $mainYear,
-                    'day' => 'Monday',
-                    'semester' => $request->semester,
-                    'promotion' => $request->promotion,
-                ]
+                'hod.schedules.previewDocx',
+                $previewScheduleId
             )
             ->with(
                 'success',
                 'Weekly schedule updated successfully.'
             );
     }
+
+return redirect()
+    ->route('hod.schedules.index')
+    ->with(
+        'success',
+        'Weekly schedule updated successfully.'
+    );
+}
 
 
     public function checkConflict(Request $request)
@@ -1719,6 +1940,36 @@ public function store(Request $request)
         );
     }
 
+
+
+$scheduleAlreadyExists = Schedule::where('semester', $request->semester)
+    ->where('academic_year', $request->academic_year)
+    ->where('promotion', $request->promotion)
+    ->whereHas('scheduleDepartments', function ($query) use ($department, $mainYear) {
+        $query
+            ->where('department_id', $department->id)
+            ->where('year_level', $mainYear)
+            ->whereRaw(
+                'schedule_departments.id = (
+                    SELECT MIN(sd2.id)
+                    FROM schedule_departments AS sd2
+                    WHERE sd2.schedule_id = schedule_departments.schedule_id
+                      AND sd2.department_id = ?
+                )',
+                [$department->id]
+            );
+    })
+    ->exists();
+
+    if ($scheduleAlreadyExists) {
+        return back()
+            ->withInput()
+            ->withErrors([
+                'main_year' =>
+                    'A schedule already exists for this main year, promotion, semester, and academic year. Please edit the existing schedule instead of creating another one.',
+            ]);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | VALID DAYS
@@ -1776,12 +2027,12 @@ public function store(Request $request)
                     $row['combined_years'] ?? []
                 );
 
-                $yearLevels = array_unique(
+                $yearLevels = array_values(array_unique(
                     array_merge(
                         [$mainYear],
                         $combinedYears
                     )
-                );
+                ));
 
                 /*
                 |--------------------------------------------------------------------------
@@ -2218,6 +2469,14 @@ public function store(Request $request)
 
     $scheduleGroupId = (string) Str::uuid();
 
+    DB::transaction(function () use (
+        $preparedRows,
+        $department,
+        $request,
+        $user,
+        $scheduleGroupId
+    ) {
+
     foreach ($preparedRows as $row) {
 
         /*
@@ -2348,6 +2607,8 @@ public function store(Request $request)
         ])->saveQuietly();
     }
 
+    });
+
     /*
     |--------------------------------------------------------------------------
     | REDIRECT
@@ -2355,10 +2616,7 @@ public function store(Request $request)
     */
 
     return redirect()
-        ->route('hod.schedules.index', [
-            'year' => $request->main_year,
-            'day' => 'Monday',
-        ])
+        ->route('hod.schedules.index')
         ->with(
             'success',
             'Schedules created successfully.'
@@ -2367,7 +2625,7 @@ public function store(Request $request)
 
 
 
-public function destroy(Request $request, Schedule $schedule)
+public function destroy(Schedule $schedule)
 {
     /** @var User $user */
     $user = Auth::user();
@@ -2408,133 +2666,33 @@ public function destroy(Request $request, Schedule $schedule)
 
     /*
     |--------------------------------------------------------------------------
-    | DELETE ENTIRE WEEKLY SCHEDULE
+    | REQUIRE WEEKLY SCHEDULE GROUP
     |--------------------------------------------------------------------------
     |
-    | A weekly schedule now uses ONE shared schedule_group_id
-    | for Monday -> Friday.
+    | Every schedule should belong to one schedule_group_id.
+    | One group represents the whole weekly schedule.
     |
     */
 
-    if ($request->input('delete_type') === 'week') {
-
-        /*
-        |--------------------------------------------------------------------------
-        | GET THE GROUP ID
-        |--------------------------------------------------------------------------
-        */
-
-        $scheduleGroupId = $schedule->schedule_group_id;
-
-        /*
-        |--------------------------------------------------------------------------
-        | IF THIS IS A NEW PROPERLY GROUPED SCHEDULE
-        |--------------------------------------------------------------------------
-        */
-
-        if ($scheduleGroupId) {
-
-            $weeklySchedules = Schedule::query()
-                ->where('schedule_group_id', $scheduleGroupId)
-                ->get();
-
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | LEGACY SUPPORT
-        |--------------------------------------------------------------------------
-        |
-        | Older schedules were created with a different group ID
-        | for each day.
-        |
-        | If no group ID exists, fall back to:
-        |
-        | Semester
-        | Academic Year
-        | Promotion
-        | Department
-        |
-        */
-
-        else {
-
-            $weeklySchedules = Schedule::query()
-                ->where('semester', $schedule->semester)
-                ->where('academic_year', $schedule->academic_year)
-                ->where('promotion', $schedule->promotion)
-                ->whereIn('day_of_week', [
-                    'Monday',
-                    'Tuesday',
-                    'Wednesday',
-                    'Thursday',
-                    'Friday',
-                ])
-                ->whereHas(
-                    'scheduleDepartments',
-                    function ($query) use ($department) {
-                        $query->where(
-                            'department_id',
-                            $department->id
-                        );
-                    }
-                )
-                ->get();
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | DELETE RELATIONSHIPS FIRST
-        |--------------------------------------------------------------------------
-        */
-
-        foreach ($weeklySchedules as $weeklySchedule) {
-
-            $weeklySchedule
-                ->scheduleDepartments()
-                ->delete();
-
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | DELETE ALL SCHEDULE RECORDS
-        |--------------------------------------------------------------------------
-        */
-
-        foreach ($weeklySchedules as $weeklySchedule) {
-
-            $weeklySchedule->delete();
-
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | REDIRECT
-        |--------------------------------------------------------------------------
-        */
-
-        return redirect()
-            ->route('hod.schedules.index', [
-                'year' => $request->input('year', 'all'),
-                'promotion' => $request->input('promotion', 'all'),
-                'semester' => $request->input('semester', 'all'),
-            ])
-            ->with(
-                'success',
-                'Entire weekly schedule deleted successfully.'
-            );
+    if (!$schedule->schedule_group_id) {
+        abort(
+            422,
+            'This schedule does not have a valid weekly schedule group.'
+        );
     }
 
     /*
     |--------------------------------------------------------------------------
-    | SINGLE SESSION DELETE
+    | GET ENTIRE WEEKLY SCHEDULE
     |--------------------------------------------------------------------------
     */
 
-    $year = $request->input('year', 'all');
-    $promotion = $request->input('promotion', 'all');
-    $semester = $request->input('semester', 'all');
+    $weeklySchedules = Schedule::query()
+        ->where(
+            'schedule_group_id',
+            $schedule->schedule_group_id
+        )
+        ->get();
 
     /*
     |--------------------------------------------------------------------------
@@ -2542,31 +2700,33 @@ public function destroy(Request $request, Schedule $schedule)
     |--------------------------------------------------------------------------
     */
 
-    $schedule->scheduleDepartments()->delete();
+    foreach ($weeklySchedules as $weeklySchedule) {
+        $weeklySchedule
+            ->scheduleDepartments()
+            ->delete();
+    }
 
     /*
     |--------------------------------------------------------------------------
-    | DELETE SCHEDULE
+    | DELETE ALL SESSIONS IN THIS WEEKLY SCHEDULE
     |--------------------------------------------------------------------------
     */
 
-    $schedule->delete();
+    foreach ($weeklySchedules as $weeklySchedule) {
+        $weeklySchedule->delete();
+    }
 
     /*
     |--------------------------------------------------------------------------
-    | REDIRECT
+    | REDIRECT TO FULL SCHEDULE LIST
     |--------------------------------------------------------------------------
     */
 
     return redirect()
-        ->route('hod.schedules.index', [
-            'year' => $year,
-            'promotion' => $promotion,
-            'semester' => $semester,
-        ])
+        ->route('hod.schedules.index')
         ->with(
             'success',
-            'Session deleted successfully.'
+            'Weekly schedule deleted successfully.'
         );
 }
 
@@ -2689,6 +2849,7 @@ public function exportDocx(Schedule $schedule)
 
     $year = $schedule->scheduleDepartments()
         ->where('department_id', $department->id)
+        ->orderBy('id')
         ->value('year_level');
 
     $year = (int) ($year ?? 1);
@@ -3726,6 +3887,7 @@ public function previewDocx(Schedule $schedule)
 
     $year = $schedule->scheduleDepartments()
         ->where('department_id', $department->id)
+        ->orderBy('id')
         ->value('year_level');
 
     $year = (int) ($year ?? 1);

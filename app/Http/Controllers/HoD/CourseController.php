@@ -13,29 +13,46 @@ class CourseController extends Controller
     /**
      * Display a listing of the courses belonging to the HOD's department.
      */
-    public function index()
-    {
-        /** @var User $user */
-        $user = Auth::user();
+/**
+ * Display a listing of the courses belonging to the HOD's department.
+ */
+public function index(Request $request)
+{
+    /** @var User $user */
+    $user = Auth::user();
 
-        $department = $user->departments()
-            ->where('head_id', $user->id)
-            ->first();
+    $department = $user->departments()
+        ->where('head_id', $user->id)
+        ->first();
 
-        if (!$department) {
-            abort(403, 'You are not assigned as a department head.');
-        }
-
-        $courses = Course::where('department_id', $department->id)
-            ->with('department')
-            ->latest()
-            ->paginate(10);
-
-        return view('hod.courses.index', compact(
-            'courses',
-            'department'
-        ));
+    if (!$department) {
+        abort(403, 'You are not assigned as a department head.');
     }
+
+    // Get the search keyword from the form
+    $search = trim($request->input('search', ''));
+
+    // Get courses belonging to this department
+    $courses = Course::where('department_id', $department->id)
+        ->with('department')
+
+        // Search by course code or course name
+        ->when($search !== '', function ($query) use ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('course_code', 'like', '%' . $search . '%')
+                  ->orWhere('course_name', 'like', '%' . $search . '%');
+            });
+        })
+
+        ->latest()
+        ->paginate(10)
+        ->withQueryString();
+
+    return view('hod.courses.index', compact(
+        'courses',
+        'department'
+    ));
+}
 
     /**
      * Show the form for creating a new course.
@@ -89,10 +106,11 @@ class CourseController extends Controller
                 'max:255',
             ],
 
-            'description' => [
-                'required',
-                'string',
-            ],
+'description' => [
+    'nullable',
+    'string',
+    'max:2000',
+],
 
             'credits' => [
                 'nullable',
@@ -184,10 +202,11 @@ class CourseController extends Controller
                 'max:255',
             ],
 
-            'description' => [
-                'required',
-                'string',
-            ],
+'description' => [
+    'nullable',
+    'string',
+    'max:2000',
+],
 
             'credits' => [
                 'nullable',

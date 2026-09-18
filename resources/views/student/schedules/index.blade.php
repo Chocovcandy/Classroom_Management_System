@@ -743,7 +743,7 @@
                         Department
                     </label>
 <select name="department_id" id="department_id">
-    <option value="">All Departments</option>
+
 
     @foreach($departments as $department)
         <option

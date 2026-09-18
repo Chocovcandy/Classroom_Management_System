@@ -1,3 +1,4 @@
+
 @extends('layouts.prof_layout')
 
 @section('title', 'Professor Dashboard')
@@ -6,10 +7,17 @@
 
 <div class="dashboard-container">
 
-    <!---------------- Left side of the main content of the dashboard ---------------->
+    {{-- =====================================================
+         DASHBOARD LEFT
+    ====================================================== --}}
+
     <div class="dashboard-left">
 
-        <!-- ======================== Welcome Card ======================== -->
+
+        {{-- =================================================
+             WELCOME CARD
+        ================================================== --}}
+
         <div class="welcome-card">
 
             <div class="welcome-text">
@@ -26,381 +34,265 @@
             </div>
 
             <div class="welcome-img-container">
+
                 <div id="welcome-animation"></div>
+
             </div>
 
         </div>
 
 
-        <!-- ======================= Statistic Cards ======================= -->
-        <div class="stat-container">
 
+        {{-- =================================================
+             ACADEMIC FEATURES
+        ================================================== --}}
 
-            <!-- ================= FIRST CARD ================= -->
-            <!-- Department Students -->
+        <section class="academic-overview">
 
-            <a href="#"
-                class="stat-card">
 
-                <div class="stat-icon">
+            {{-- SECTION HEADER --}}
 
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="currentColor"
-                        viewBox="0 0 24 24">
+            <div class="academic-overview-header">
 
-                        <path fill-rule="evenodd"
-                            d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4 2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.82-3.096a5.51 5.51 0 0 0-2.797-6.293 3.5 3.5 0 1 1 2.796 6.292ZM19.5 18h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1a5.503 5.503 0 0 1-.471.762A5.998 5.998 0 0 1 19.5 18ZM4 7.5a3.5 3.5 0 0 1 5.477-2.889 5.5 5.5 0 0 0-2.796 6.293A3.501 3.501 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4 2 2 0 0 0 2 2h.5a5.998 5.998 0 0 1 3.071-5.238A5.505 5.505 0 0 1 7.1 12Z"
-                            clip-rule="evenodd" />
+                <span class="academic-label">
+                    ACADEMIC
+                </span>
 
-                    </svg>
+                <h2>
+                    Your Academic Workspace
+                </h2>
 
-                </div>
-
-
-                <div class="stat-info">
-
-                    <span class="stat-value">
-
-                    </span>
-
-                    <span class="stat-title">
-                        Department
-                        <br>
-                        Students
-                    </span>
-
-                </div>
-
-            </a>
-
-
-
-            <!-- ================= SECOND CARD ================= -->
-            <!-- Department Academic Staff -->
-
-            <a href="#"
-                class="stat-card">
-
-                <div class="stat-icon">
-
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M6 2c-1.10457 0-2 .89543-2 2v4c0 .55228.44772 1 1 1s1-.44772 1-1V4h12v7h-2c-.5523 0-1 .4477-1 1v2h-1c-.5523 0-1 .4477-1 1s.4477 1 1 1h5c.5523 0 1-.4477 1-1V3.85714C20 2.98529 19.3667 2 18.268 2H6Z" />
-                        <path d="M6 11.5C6 9.567 7.567 8 9.5 8S13 9.567 13 11.5 11.433 15 9.5 15 6 13.433 6 11.5ZM4 20c0-2.2091 1.79086-4 4-4h3c2.2091 0 4 1.7909 4 4 0 1.1046-.8954 2-2 2H6c-1.10457 0-2-.8954-2-2Z" />
-                    </svg>
-
-                </div>
-
-
-                <div class="stat-info">
-
-                    <span class="stat-value">
-
-                    </span>
-
-                    <span class="stat-title">
-                        Department
-                        <br>
-                        Professor
-                    </span>
-
-                </div>
-
-            </a>
-
-
-
-            <!-- ================= THIRD CARD ================= -->
-            <!-- Classes / Courses -->
-
-            <a href="#"
-                class="stat-card">
-
-                <div class="stat-icon">
-
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="currentColor"
-                        viewBox="0 0 24 24">
-
-                        <path fill-rule="evenodd"
-                            d="M4 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4Zm4 0a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H8Zm0 7a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Zm0 4a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2H8Z"
-                            clip-rule="evenodd" />
-
-                    </svg>
-
-                </div>
-
-
-                <div class="stat-info">
-
-                    <span class="stat-value">
-
-                    </span>
-
-                    <span class="stat-title">
-                        Department
-                        <br>
-                        Classes
-                    </span>
-
-                </div>
-
-            </a>
-
-
-
-            <!-- ================= FOURTH CARD ================= -->
-            <!-- Announcements -->
-
-            <a href="#"
-                class="stat-card">
-
-                <div class="stat-icon">
-
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="currentColor"
-                        viewBox="0 0 24 24">
-
-                        <path fill-rule="evenodd"
-                            d="M18.458 3.11A1 1 0 0 1 19 4v16a1 1 0 0 1-1.581.814L12 16.944V7.056l5.419-3.87a1 1 0 0 1 1.039-.076ZM22 12c0 1.48-.804 2.773-2 3.465v-6.93c1.196.692 2 1.984 2 3.465ZM10 8H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6V8Zm0 9H5v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3Z"
-                            clip-rule="evenodd" />
-
-                    </svg>
-
-                </div>
-
-
-                <div class="stat-info">
-
-                    <span class="stat-value">
-
-                    </span>
-
-                    <span class="stat-title">
-                        Department
-                        <br>
-                        Announcements
-                    </span>
-
-                </div>
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =========================================================
-     MY CLASS GROUPS
-     ========================================================= -->
-
-        <section class="courses-section">
-
-            {{-- Section Header --}}
-
-            <div class="courses-header">
-
-                <div>
-
-                    <span class="courses-label">
-                        ACADEMIC
-                    </span>
-
-                    <h2>
-                        My Classes
-                    </h2>
-
-                    <p>
-                        Class groups currently assigned to you.
-                    </p>
-
-                </div>
-
-
-                <a
-                    href="{{ route('professor.class-groups.index') }}"
-                    class="view-all-courses">
-                    View All
-
-                    <i class="bx bx-right-arrow-alt"></i>
-
-                </a>
+                <p>
+                    Manage your class groups and teaching schedule.
+                </p>
 
             </div>
 
 
-            {{-- =====================================================
-         CLASS GROUP CARDS
-    ====================================================== --}}
 
-            <div class="courses-grid">
+            {{-- =================================================
+                 FEATURE CARDS
+            ================================================== --}}
 
-                @forelse ($classGroups as $classGroup)
-
-                <div class="course-card">
+            <div class="academic-content-grid">
 
 
-                    {{-- ===============================
-                     CARD TOP
-                ================================ --}}
+                {{-- =================================================
+                     CLASS GROUPS CARD
+                ================================================== --}}
 
-                    <div class="course-card-top">
+                <div class="academic-feature-card">
 
-                        <span class="course-code">
 
-                            {{ $classGroup->course->course_code }}
+                    {{-- HEADER --}}
 
+                    <div class="academic-feature-header">
+
+                        <span class="academic-feature-label">
+                            ACADEMIC
                         </span>
 
+                        <h2>
+                            Class Groups
+                        </h2>
 
-                        <span class="course-semester">
-
-                            {{ $classGroup->group_name }}
-
-                        </span>
-
-                    </div>
-
-
-
-                    {{-- ===============================
-                     COURSE ICON
-                ================================ --}}
-
-                    <div class="course-icon">
-
-                        <i class="bx bx-book-open"></i>
-
-                    </div>
-
-
-
-                    {{-- ===============================
-                     COURSE INFORMATION
-                ================================ --}}
-
-                    <div class="course-info">
-
-                        <h3>
-
-                            {{ $classGroup->course->course_name }}
-
-                        </h3>
-
-
-                        <p class="course-department">
-
-                            {{ $classGroup->description
-                            ?? 'No class description available.' }}
-
+                        <p>
+                            Manage your academic classes.
                         </p>
 
                     </div>
 
 
 
-                    {{-- ===============================
-                     CLASS INFORMATION
-                ================================ --}}
+                    {{-- ICON --}}
 
-                    <div class="course-teacher">
+                    <div class="academic-feature-icon">
 
                         <i class="bx bx-group"></i>
-
-                        <span>
-
-                            {{ $classGroup->students->count() }}
-
-                            Students
-
-                        </span>
 
                     </div>
 
 
 
-                    {{-- ===============================
-                     CARD FOOTER
-                ================================ --}}
+                    {{-- CONTENT --}}
 
-                    <div class="course-footer">
+                    <h3>
+                        Manage Class Groups
+                    </h3>
 
-                        <div class="course-students">
+                    <p class="academic-feature-description">
 
-                            <i class="bx bx-key"></i>
+                        Create, organize, and manage your assigned
+                        class groups in one place.
+
+                    </p>
+
+
+
+                    {{-- FEATURES --}}
+
+                    <div class="academic-feature-items">
+
+                        <div>
+
+                            <i class="bx bx-check-circle"></i>
 
                             <span>
-
-                                {{ $classGroup->group_code }}
-
+                                Manage students
                             </span>
 
                         </div>
 
+                        <div>
+
+                            <i class="bx bx-check-circle"></i>
+
+                            <span>
+                                Manage class activities
+                            </span>
+
+                        </div>
+
+                        <div>
+    <i class="bx bx-check-circle"></i>
+    <span>Track student progress</span>
+</div>
+                    </div>
+
+
+
+                    {{-- BUTTON --}}
+
                     <a
-                        href="{{ route(
-                            'professor.class-groups.classroom-group',
-                            $classGroup
-                        ) }}"
-                        class="course-button"
+                        href="{{ route('professor.class-groups.index') }}"
+                        class="academic-feature-button"
                     >
-                        Open Class
+
+                        <i class="bx bx-grid-alt"></i>
+
+                        <span>
+                            Manage Class Groups
+                        </span>
 
                         <i class="bx bx-right-arrow-alt"></i>
+
                     </a>
 
-                    </div>
 
                 </div>
 
-                @empty
 
-                {{-- ===============================
-                 EMPTY STATE
-            ================================ --}}
 
-                <div class="courses-empty">
+                {{-- =================================================
+                     MY SCHEDULE CARD
+                ================================================== --}}
 
-                    <div class="courses-empty-icon">
+                <div class="academic-feature-card">
 
-                        <i class="bx bx-book-open"></i>
+
+                    {{-- HEADER --}}
+
+                    <div class="academic-feature-header">
+
+                        <span class="academic-feature-label">
+                            ACADEMIC
+                        </span>
+
+                        <h2>
+                            My Schedule
+                        </h2>
+
+                        <p>
+                            Stay organized with your teaching timetable.
+                        </p>
 
                     </div>
 
 
+
+                    {{-- ICON --}}
+
+                    <div class="academic-feature-icon">
+
+                        <i class="bx bx-calendar-alt"></i>
+
+                    </div>
+
+
+
+                    {{-- CONTENT --}}
+
                     <h3>
-                        No Classes Yet
+                        Teaching Schedule
                     </h3>
 
+                    <p class="academic-feature-description">
 
-                    <p>
-                        You currently don't have any class groups
-                        assigned to you.
+                        View your assigned courses, classrooms,
+                        and teaching times in one place.
+
                     </p>
 
 
+
+                    {{-- FEATURES --}}
+
+                    <div class="academic-feature-items">
+
+                        <div>
+
+                            <i class="bx bx-check-circle"></i>
+
+                            <span>
+                                View teaching timetable
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <i class="bx bx-check-circle"></i>
+
+                            <span>
+                                Check teaching days and times
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <i class="bx bx-check-circle"></i>
+
+                            <span>
+                                View assigned classrooms
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    {{-- BUTTON --}}
+
                     <a
-                        href="{{ route(
-                        'professor.class-groups.index'
-                    ) }}"
-                        class="courses-empty-button">
-                        View Class Groups
+                        href="{{ route('professor.schedule.index') }}"
+                        class="academic-feature-button"
+                    >
+
+                        <i class="bx bx-calendar-check"></i>
+
+                        <span>
+                            Open My Schedule
+                        </span>
+
+                        <i class="bx bx-right-arrow-alt"></i>
+
                     </a>
+
 
                 </div>
 
-                @endforelse
 
             </div>
 
@@ -409,154 +301,492 @@
 
     </div>
 
-
-
-    <!--------------- Right side of the main content of the dashboard ---------------->
-
-    <div class="dashboard-right">
-
-
-        <!-- ============================= Overview Card ============================= -->
-
-        <div class="overview-card">
-
-            <div class="overview-header">
-                <h2>Today's Summary</h2>
-                <span class="overview-eyebrow">{{ now()->format('M j') }}</span>
-            </div>
-
-            <div class="overview-content">
-
-                <div class="overview-item" data-stat="classes">
-
-                    <div class="overview-item-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-                        </svg>
-                    </div>
-
-                    <div class="overview-item-text">
-                        <span class="overview-item-name">New Classes</span>
-                        <span class="overview-item-description">Published today</span>
-                    </div>
-
-                    <span class="overview-item-value">
-                        <!-- add controller here to display new classes -->
-                        8
-                    </span>
-                </div>
-
-                <div class="overview-item" data-stat="students">
-
-                    <div class="overview-item-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
-                        </svg>
-                    </div>
-
-                    <div class="overview-item-text">
-                        <span class="overview-item-name">New Students</span>
-                        <span class="overview-item-description">Registered today</span>
-                    </div>
-
-                    <span class="overview-item-value">
-                        <!-- add controller here to display new students -->
-                        6
-                    </span>
-                </div>
-
-                <div class="overview-item" data-stat="announcements">
-
-                    <div class="overview-item-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M18.458 3.11A1 1 0 0 1 19 4v16a1 1 0 0 1-1.581.814L12 16.944V7.056l5.419-3.87a1 1 0 0 1 1.039-.076ZM22 12c0 1.48-.804 2.773-2 3.465v-6.93c1.196.692 2 1.984 2 3.465ZM10 8H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6V8Zm0 9H5v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3Z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-
-                    <div class="overview-item-text">
-                        <span class="overview-item-name">New Announcements</span>
-                        <span class="overview-item-description">Published today</span>
-                    </div>
-
-                    <span class="overview-item-value">
-                        <!-- add controller here to display new announcements -->
-                        8
-                    </span>
-                </div>
-
-            </div>
-
-            <div class="quick-action">
-                <h2>Quick Actions</h2>
-
-                <div class="quick-action-buttons">
-                    <a href="{{ route('admin.users.index') }}" class="quick-action-button">
-                        + Materials
-                    </a>
-                    <a href="#" class="quick-action-button">
-                        + Announcements
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-
-        <!-- ============================= Chart Card ============================= -->
-
-        <div class="chart-card">
-
-            <div class="chart-header">
-
-                <h2>
-                    Student Enrollment
-                </h2>
-
-                <p>
-                    Number of students in your department by academic year
-                </p>
-
-            </div>
-
-
-            <div class="chart-container">
-
-                <canvas id="studentChart"></canvas>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
 </div>
 
 
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+{{-- =========================================================
+     LOTTIE ANIMATION
+========================================================= --}}
 
-<!-- Lottie -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
 
-
 <script>
-    lottie.loadAnimation({
 
-        container: document.getElementById('welcome-animation'),
+    document.addEventListener('DOMContentLoaded', function () {
 
-        renderer: 'svg',
+        const welcomeAnimation =
+            document.getElementById('welcome-animation');
 
-        loop: true,
+        if (welcomeAnimation && typeof lottie !== 'undefined') {
 
-        autoplay: true,
+            lottie.loadAnimation({
 
-        path: "{{ asset('animations/welcome.json') }}"
+                container: welcomeAnimation,
+
+                renderer: 'svg',
+
+                loop: true,
+
+                autoplay: true,
+
+                path: "{{ asset('animations/welcome.json') }}"
+
+            });
+
+        }
 
     });
+
 </script>
 
 
+
+{{-- =========================================================
+     ACADEMIC FEATURE CARD STYLES
+========================================================= --}}
+
+
+<style>
+
+/* =========================================================
+   ACADEMIC OVERVIEW
+========================================================= */
+
+.academic-overview {
+
+    width: 100%;
+
+    margin-top: 18px;
+
+}
+
+.academic-overview-header {
+
+    margin-bottom: 14px;
+
+}
+
+.academic-label {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #2563eb;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+}
+
+.academic-overview-header h2 {
+
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    line-height: 1.25;
+
+}
+
+.academic-overview-header p {
+
+    margin: 5px 0 0;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================================
+   FEATURE GRID
+========================================================= */
+
+.academic-content-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+    width: 100%;
+
+    align-items: stretch;
+
+}
+
+
+/* =========================================================
+   FEATURE CARD
+========================================================= */
+
+.academic-feature-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    min-width: 0;
+
+    min-height: 0;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5eaf2;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 3px 12px rgba(15, 23, 42, 0.035);
+
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.academic-feature-header {
+
+    width: 100%;
+
+    margin-bottom: 18px;
+
+}
+
+.academic-feature-label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #2563eb;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+}
+
+.academic-feature-header h2 {
+
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    line-height: 1.25;
+
+}
+
+.academic-feature-header p {
+
+    margin: 6px 0 0;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.academic-feature-icon {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 56px;
+
+    height: 56px;
+
+    margin-bottom: 18px;
+
+    color: #2563eb;
+
+    background: #eff6ff;
+
+    border-radius: 14px;
+
+}
+
+.academic-feature-icon i {
+
+    font-size: 29px;
+
+}
+
+
+/* =========================================================
+   FEATURE TITLE
+========================================================= */
+
+.academic-feature-card h3 {
+
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    line-height: 1.3;
+
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.academic-feature-description {
+
+    max-width: 560px;
+
+    margin: 8px 0 0;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================================
+   FEATURE LIST
+========================================================= */
+
+.academic-feature-items {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid #e5eaf2;
+
+}
+
+.academic-feature-items div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #334155;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+}
+
+.academic-feature-items i {
+
+    flex-shrink: 0;
+
+    color: #2563eb;
+
+    font-size: 17px;
+
+}
+
+
+/* =========================================================
+   BLUE BUTTON
+========================================================= */
+
+.academic-feature-button {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 12px 14px;
+
+    color: #ffffff;
+
+    background: #2563eb;
+
+    border: 1px solid #2563eb;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    line-height: 1.3;
+
+    text-decoration: none;
+
+    transition:
+
+        background 0.2s ease,
+
+        transform 0.2s ease;
+
+}
+
+.academic-feature-button i {
+
+    flex-shrink: 0;
+
+    font-size: 17px;
+
+}
+
+.academic-feature-button span {
+
+    text-align: center;
+
+}
+
+.academic-feature-button:hover {
+
+    color: #ffffff;
+
+    background: #1d4ed8;
+
+    border-color: #1d4ed8;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .academic-content-grid {
+
+        gap: 14px;
+
+    }
+
+    .academic-feature-card {
+
+        padding: 20px;
+
+    }
+
+    .academic-feature-header h2 {
+
+        font-size: 21px;
+
+    }
+
+    .academic-feature-card h3 {
+
+        font-size: 18px;
+
+    }
+
+}
+
+@media (max-width: 850px) {
+
+    .academic-content-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+@media (max-width: 520px) {
+
+    .academic-feature-card {
+
+        padding: 20px;
+
+        border-radius: 14px;
+
+    }
+
+    .academic-feature-header h2 {
+
+        font-size: 21px;
+
+    }
+
+    .academic-feature-card h3 {
+
+        font-size: 19px;
+
+    }
+
+    .academic-feature-description {
+
+        font-size: 12px;
+
+    }
+
+    .academic-feature-button {
+
+        font-size: 12px;
+
+        padding: 12px;
+
+    }
+
+}
+
+</style>
 @endsection

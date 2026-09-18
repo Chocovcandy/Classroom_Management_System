@@ -82,6 +82,7 @@
         || in_array($currentStudentRole, ['leader', 'backup'], true);
 @endphp
 
+
 <style>
     /* ============================================================
        STUDENT PROJECT SHOW PAGE
@@ -1477,24 +1478,37 @@
 
     <div class="classwork-show-header">
 
-        <a
-            href="{{ $returnTo === 'marks'
-                ? route('student.class-groups.marks', $classGroup)
-                : ($returnTo === 'classwork'
-                    ? route('student.class-groups.classroom-group.classwork', $classGroup)
-                    : route('student.class-groups.classroom-group', $classGroup))
-            }}"
-            class="classwork-back-btn"
-        >
-            <i class="bx bx-arrow-back"></i>
+<a
+    href="{{
+        $returnTo === 'marks'
+            ? route(
+                'student.class-groups.marks',
+                $classGroup
+            )
+            : ($returnTo === 'classwork'
+                ? route(
+                    'student.class-groups.classroom-group.classwork',
+                    $classGroup
+                )
+                : route(
+                    'student.class-groups.classroom-group',
+                    $classGroup
+                )
+            )
+    }}"
+    class="classwork-back-btn"
+>
+    <i class="bx bx-arrow-back"></i>
 
-            {{ $returnTo === 'marks'
-                ? 'Back to Marks'
-                : ($returnTo === 'classwork'
-                    ? 'Back to Classwork'
-                    : 'Back to Stream')
-            }}
-        </a>
+    {{
+        $returnTo === 'marks'
+            ? 'Back to Marks'
+            : ($returnTo === 'classwork'
+                ? 'Back to Classwork'
+                : 'Back to Stream'
+            )
+    }}
+</a>
 
         <div class="classwork-show-heading">
 
