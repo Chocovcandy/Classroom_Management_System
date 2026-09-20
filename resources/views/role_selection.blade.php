@@ -195,6 +195,16 @@
 
 @php
     $role = session('current_role_name');
+
+    // If no current role is stored,
+    // automatically use the user's only role.
+    if (!$role) {
+        $roles = auth()->user()->roles;
+
+        if ($roles->count() === 1) {
+            $role = $roles->first()->role_name;
+        }
+    }
 @endphp
 
 

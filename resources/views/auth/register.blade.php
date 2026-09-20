@@ -1246,7 +1246,7 @@
             "universityEmailSuggestion"
         );
 
-        const universityDomain = "@life.edu.kh";
+        const universityDomain = "@lifeun.edu.kh";
 
         if (!emailInput || !emailSuggestion) {
             return;
@@ -1254,7 +1254,7 @@
 
         function updateEmailSuggestion() {
 
-            const value = emailInput.value.trim();
+            const value = emailInput.value.trim();`
 
             /*
              * Do not change the user's input.
