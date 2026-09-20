@@ -1254,7 +1254,7 @@
 
         function updateEmailSuggestion() {
 
-            const value = emailInput.value.trim();`
+            const value = emailInput.value.trim();
 
             /*
              * Do not change the user's input.
