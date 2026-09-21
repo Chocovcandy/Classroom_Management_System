@@ -2533,6 +2533,56 @@
 .classwork-info-item{gap:11px;padding:13px 17px}.classwork-info-item>i{width:35px;height:35px;flex-basis:35px;font-size:17px}.classwork-info-item span{font-size:10px}.classwork-info-item strong{font-size:13px}.attachment-count{min-height:28px;padding:4px 10px;font-size:11px}
 @media(max-width:900px){.classwork-show-page{max-width:100%;padding:18px 20px 32px}.classwork-show-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.classwork-show-page{padding:15px 12px 25px}.classwork-show-heading h1{font-size:23px}.classwork-show-icon{width:48px;height:48px;flex-basis:48px;font-size:22px}.classwork-detail-card-header{padding:13px 15px}.classwork-description{padding:16px 15px;font-size:12.5px}}
+/* ============================================================
+   ASSIGNMENT FILE VIEWER — WHITE HEADER & BUTTONS
+   ============================================================ */
+
+.classwork-show-page .material-viewer-header {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.classwork-show-page .material-viewer-btn {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #64748b !important;
+}
+
+.classwork-show-page .material-viewer-btn:hover {
+    background: #f8fafc !important;
+    border-color: #2563eb !important;
+    color: #2563eb !important;
+}
+
+.classwork-show-page .material-viewer-btn.close:hover {
+    background: #fef2f2 !important;
+    border-color: #ef4444 !important;
+    color: #ef4444 !important;
+}
+
+/* Keep the header white even in dark mode */
+.dark-mode .classwork-show-page .material-viewer-header {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+
+.dark-mode .classwork-show-page .material-viewer-btn {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    color: #64748b !important;
+}
+
+.dark-mode .classwork-show-page .material-viewer-btn:hover {
+    background: #f8fafc !important;
+    border-color: #2563eb !important;
+    color: #2563eb !important;
+}
+
+.dark-mode .classwork-show-page .material-viewer-btn.close:hover {
+    background: #fef2f2 !important;
+    border-color: #ef4444 !important;
+    color: #ef4444 !important;
+}
 </style>
 
 
@@ -2664,6 +2714,59 @@
 
             </section>
 
+            {{-- ====================================================
+    GOOGLE FORM
+===================================================== --}}
+
+@if(!empty($assignment->google_form_url))
+
+<section class="classwork-detail-card">
+
+    <div class="classwork-detail-card-header">
+
+        <h2>
+            Google Form
+        </h2>
+
+    </div>
+
+    <div class="assignment-form-section">
+
+        <div class="assignment-form-box">
+
+            <div class="assignment-form-icon">
+                <i class="bx bx-link-external"></i>
+            </div>
+
+            <div class="assignment-form-info">
+
+                <strong>
+                    Google Form
+                </strong>
+
+                <span>
+                    Complete the form provided by your professor.
+                </span>
+
+            </div>
+
+            <a
+                href="{{ $assignment->google_form_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="assignment-form-open"
+            >
+                <i class="bx bx-link-external"></i>
+                Open Form
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+@endif
 
 
             {{-- ====================================================
