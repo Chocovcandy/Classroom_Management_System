@@ -83,12 +83,12 @@ class StudentQuizController extends Controller
         |--------------------------------------------------------------------------
         */
 
-// Only allow known return locations.
-$returnTo = $request->query('return_to', 'classwork');
+        // Only allow known return locations.
+        $returnTo = $request->query('return_to', 'classwork');
 
-if (!in_array($returnTo, ['stream', 'classwork', 'marks'])) {
-    $returnTo = 'classwork';
-}
+        if (!in_array($returnTo, ['stream', 'classwork', 'marks'])) {
+            $returnTo = 'classwork';
+        }
 
 
         return view(
@@ -196,24 +196,24 @@ if (!in_array($returnTo, ['stream', 'classwork', 'marks'])) {
 
                 if ($request->hasFile('attachments')) {
 
-    foreach ($request->file('attachments') as $file) {
+                    foreach ($request->file('attachments') as $file) {
 
-       $path = $file->store(
-    'quiz-submissions',
-    'public'
-);
+                        $path = $file->store(
+                            'quiz-submissions',
+                            'public'
+                        );
 
-$submission->resources()->create([
-    'title' => $file->getClientOriginalName(),
-    'type' => 'file',
-    'file_path' => $path,
-    'file_name' => $file->getClientOriginalName(),
-    'mime_type' => $file->getClientMimeType(),
-    'file_size' => $file->getSize(),
-    'url' => null,
-]);
-    }
-}
+                        $submission->resources()->create([
+                            'title' => $file->getClientOriginalName(),
+                            'type' => 'file',
+                            'file_path' => $path,
+                            'file_name' => $file->getClientOriginalName(),
+                            'mime_type' => $file->getClientMimeType(),
+                            'file_size' => $file->getSize(),
+                            'url' => null,
+                        ]);
+                    }
+                }
             }
         }
 
@@ -260,169 +260,49 @@ $submission->resources()->create([
     |--------------------------------------------------------------------------
     */
 
-    public function cancel(
-        Request $request,
-        ClassGroup $classGroup,
-        Quiz $quiz
-    ) {
-        $student = Auth::user();
+public function cancel(
+    Request $request,
+    ClassGroup $classGroup,
+    Quiz $quiz
+) {
+    $student = Auth::user();
 
+    /*
+    |--------------------------------------------------------------------------
+    | Check Enrollment
+    |--------------------------------------------------------------------------
+    */
 
-        /*
-        |--------------------------------------------------------------------------
-        | Check Enrollment
-        |--------------------------------------------------------------------------
-        */
+    $isStudent = $classGroup->students()
+        ->where('users.id', $student->id)
+        ->exists();
 
-        $isStudent = $classGroup->students()
-            ->where('users.id', $student->id)
-            ->exists();
+    if (!$isStudent) {
+        abort(403, 'You are not enrolled in this class.');
+    }
 
-        if (!$isStudent) {
-            abort(403, 'You are not enrolled in this class.');
-        }
+    /*
+    |--------------------------------------------------------------------------
+    | Make Sure Quiz Belongs To This Class
+    |--------------------------------------------------------------------------
+    */
 
+    if ($quiz->class_group_id !== $classGroup->id) {
+        abort(404);
+    }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Make Sure Quiz Belongs To This Class
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | Find Submission
+    |--------------------------------------------------------------------------
+    */
 
-        if ($quiz->class_group_id !== $classGroup->id) {
-            abort(404);
-        }
+    $submission = QuizSubmission::with('resources')
+        ->where('quiz_id', $quiz->id)
+        ->where('student_id', $student->id)
+        ->first();
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Find Submission
-        |--------------------------------------------------------------------------
-        */
-
-        $submission = QuizSubmission::with('resources')
-            ->where('quiz_id', $quiz->id)
-            ->where('student_id', $student->id)
-            ->first();
-
-
-        if (!$submission) {
-
-            return redirect()
-                ->route(
-                    'student.class-groups.quizzes.show',
-                    [
-                        'classGroup' => $classGroup->id,
-                        'quiz' => $quiz->id,
-                        'return_to' => $request->input(
-                            'return_to',
-                            'classwork'
-                        ),
-                    ]
-                )
-                ->with(
-                    'error',
-                    'No quiz submission was found.'
-                );
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Calculate Due Date / Time
-        |--------------------------------------------------------------------------
-        */
-
-        $dueAt = null;
-
-        if ($quiz->due_date) {
-
-            $dueAt = Carbon::parse(
-                $quiz->due_date
-            );
-
-            if ($quiz->due_time) {
-
-                $dueAt->setTimeFromTimeString(
-                    $quiz->due_time
-                );
-
-            } else {
-
-                $dueAt->endOfDay();
-
-            }
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Prevent Cancellation After Due Time
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $dueAt &&
-            now()->greaterThan($dueAt)
-        ) {
-
-            return redirect()
-                ->route(
-                    'student.class-groups.quizzes.show',
-                    [
-                        'classGroup' => $classGroup->id,
-                        'quiz' => $quiz->id,
-                        'return_to' => $request->input(
-                            'return_to',
-                            'classwork'
-                        ),
-                    ]
-                )
-                ->with(
-                    'error',
-                    'You can no longer cancel this submission because the quiz is past the due time.'
-                );
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Delete Uploaded Submission Files
-        |--------------------------------------------------------------------------
-        */
-
-        foreach ($submission->resources as $resource) {
-
-            if (
-                $resource->file_path &&
-                Storage::disk('public')->exists(
-                    $resource->file_path
-                )
-            ) {
-                Storage::disk('public')->delete(
-                    $resource->file_path
-                );
-            }
-
-            $resource->delete();
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Delete Submission
-        |--------------------------------------------------------------------------
-        */
-
-        $submission->delete();
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Redirect
-        |--------------------------------------------------------------------------
-        */
-
+    if (!$submission) {
         return redirect()
             ->route(
                 'student.class-groups.quizzes.show',
@@ -436,8 +316,134 @@ $submission->resources()->create([
                 ]
             )
             ->with(
-                'success',
-                'Quiz submission cancelled successfully.'
+                'error',
+                'No quiz submission was found.'
             );
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Prevent Cancellation After Grading
+    |--------------------------------------------------------------------------
+    */
+
+    if ($submission->graded_at) {
+        return redirect()
+            ->route(
+                'student.class-groups.quizzes.show',
+                [
+                    'classGroup' => $classGroup->id,
+                    'quiz' => $quiz->id,
+                    'return_to' => $request->input(
+                        'return_to',
+                        'classwork'
+                    ),
+                ]
+            )
+            ->with(
+                'error',
+                'You cannot cancel a submission after it has been graded.'
+            );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Calculate Due Date / Time
+    |--------------------------------------------------------------------------
+    */
+
+    $dueAt = null;
+
+    if ($quiz->due_date) {
+        $dueAt = Carbon::parse($quiz->due_date);
+
+        if ($quiz->due_time) {
+            $dueAt->setTimeFromTimeString(
+                $quiz->due_time
+            );
+        } else {
+            $dueAt->endOfDay();
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Prevent Cancellation After Due Time
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        $dueAt &&
+        now()->greaterThan($dueAt)
+    ) {
+        return redirect()
+            ->route(
+                'student.class-groups.quizzes.show',
+                [
+                    'classGroup' => $classGroup->id,
+                    'quiz' => $quiz->id,
+                    'return_to' => $request->input(
+                        'return_to',
+                        'classwork'
+                    ),
+                ]
+            )
+            ->with(
+                'error',
+                'You can no longer cancel this submission because the quiz is past the due time.'
+            );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Delete Uploaded Submission Files
+    |--------------------------------------------------------------------------
+    */
+
+    foreach ($submission->resources as $resource) {
+        if (
+            $resource->file_path &&
+            Storage::disk('public')->exists(
+                $resource->file_path
+            )
+        ) {
+            Storage::disk('public')->delete(
+                $resource->file_path
+            );
+        }
+
+        $resource->delete();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Delete Submission
+    |--------------------------------------------------------------------------
+    */
+
+    $submission->delete();
+
+    /*
+    |--------------------------------------------------------------------------
+    | Redirect
+    |--------------------------------------------------------------------------
+    */
+
+    return redirect()
+        ->route(
+            'student.class-groups.quizzes.show',
+            [
+                'classGroup' => $classGroup->id,
+                'quiz' => $quiz->id,
+                'return_to' => $request->input(
+                    'return_to',
+                    'classwork'
+                ),
+            ]
+        )
+        ->with(
+            'success',
+            'Quiz submission cancelled successfully.'
+        );
+}
 }

@@ -80,6 +80,7 @@ public function grade(
             'min:0',
             'max:' . $assignment->points,
         ],
+
         'feedback' => [
             'nullable',
             'string',
@@ -92,10 +93,37 @@ public function grade(
         'graded_at' => now(),
     ]);
 
+    // Grading from the Marks page
+    if ($request->boolean('from_marks')) {
+
+        return redirect()
+            ->route(
+                'professor.class-groups.marks',
+                $classGroupId
+            )
+            ->with(
+                'success',
+                'Assignment grade updated successfully.'
+            );
+    }
+
+    // Remember where the professor originally came from
+    $origin = $request->input('origin', 'stream');
+
+    if (!in_array($origin, ['stream', 'classwork'], true)) {
+        $origin = 'stream';
+    }
+
+    // Grading from the student's submission page
     return redirect()
         ->route(
-            'professor.class-groups.marks',
-            $classGroupId
+            'professor.class-groups.assignments.submissions.show',
+            [
+                'classGroup' => $classGroupId,
+                'assignment' => $assignmentId,
+                'submission' => $submissionId,
+                'origin' => $origin,
+            ]
         )
         ->with(
             'success',

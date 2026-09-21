@@ -1719,60 +1719,55 @@ $isPastDue = now()->greaterThan($dueAt);
 
 
                 {{-- CANCEL SUBMISSION --}}
+@if($submission->score === null && !$submission->graded_at)
 
-                <div class="quiz-cancel-wrapper">
+    {{-- CANCEL SUBMISSION --}}
 
-                    <form
-                        action="{{ route(
-                    'student.class-groups.quizzes.cancel',
-                    [
-                        'classGroup' => $classGroup->id,
-                        'quiz' => $quiz->id,
-                    ]
-                ) }}"
-                        method="POST"
-                        onsubmit="return confirm('Are you sure you want to cancel your submission?');">
+    <div class="quiz-cancel-wrapper">
 
-                        @csrf
+        <form
+            action="{{ route(
+                'student.class-groups.quizzes.cancel',
+                [
+                    'classGroup' => $classGroup->id,
+                    'quiz' => $quiz->id,
+                ]
+            ) }}"
+            method="POST"
+            onsubmit="return confirm('Are you sure you want to cancel your submission?');">
 
-                        @method('DELETE')
+            @csrf
+            @method('DELETE')
 
-                        <input
-                            type="hidden"
-                            name="return_to"
-                            value="{{ $returnTo }}">
+            <input
+                type="hidden"
+                name="return_to"
+                value="{{ $returnTo }}">
 
+            <button
+                type="submit"
+                class="quiz-cancel-button {{ $isPastDue ? 'disabled' : '' }}"
+                {{ $isPastDue ? 'disabled' : '' }}>
 
-                        <button
-                            type="submit"
-                            class="quiz-cancel-button {{ $isPastDue ? 'disabled' : '' }}"
-                            {{ $isPastDue ? 'disabled' : '' }}>
+                <i class="bx bx-undo"></i>
+                Cancel Submission
+            </button>
+        </form>
 
-                            <i class="bx bx-undo"></i>
+        @if($isPastDue)
+            <p class="quiz-cancel-note expired">
+                The quiz deadline has passed.
+                Your submission can no longer be cancelled.
+            </p>
+        @else
+            <p class="quiz-cancel-note">
+                You can cancel your submission before the quiz deadline.
+            </p>
+        @endif
 
-                            Cancel Submission
+    </div>
 
-                        </button>
-
-                    </form>
-
-
-                    @if($isPastDue)
-
-                    <p class="quiz-cancel-note expired">
-                        The quiz deadline has passed.
-                        Your submission can no longer be cancelled.
-                    </p>
-
-                    @else
-
-                    <p class="quiz-cancel-note">
-                        You can cancel your submission before the quiz deadline.
-                    </p>
-
-                    @endif
-
-                </div>
+@endif
 
 
                 @else

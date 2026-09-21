@@ -2595,6 +2595,14 @@
 @php
 
     $submission = $submission ?? null;
+
+    // Keep the page tied to the place the student opened it from.
+    // Prefer the current URL, then the controller value.
+    $returnTo = request('return_to', $returnTo ?? 'stream');
+
+    if (!in_array($returnTo, ['stream', 'classwork', 'marks'], true)) {
+        $returnTo = 'stream';
+    }
 @endphp
 
 <div class="classwork-show-page">
@@ -3070,15 +3078,15 @@
                             name="return_to"
                             value="{{ $returnTo }}">
 
-                        <button
-                            type="submit"
-                            class="student-submission-cancel-btn">
-
-                            <i class="bx bx-undo"></i>
-
-                            Cancel Submission
-
-                        </button>
+                        @if ($submission && !$submission->graded_at)
+    <button
+        type="submit"
+        class="student-submission-cancel-btn"
+    >
+        <i class="bx bx-undo"></i>
+        Cancel Submission
+    </button>
+@endif
 
                     </form>
 
@@ -3105,6 +3113,10 @@
 
                     @csrf
 
+                    <input
+                        type="hidden"
+                        name="return_to"
+                        value="{{ $returnTo }}">
 
                     {{-- ====================================================
                  UPLOAD AREA

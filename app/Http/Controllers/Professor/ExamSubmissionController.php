@@ -159,7 +159,6 @@ class ExamSubmissionController extends Controller
 | Grade Student Submission
 |--------------------------------------------------------------------------
 */
-
 public function grade(
     Request $request,
     int $classGroupId,
@@ -185,6 +184,7 @@ public function grade(
             'min:0',
             'max:' . $exam->points,
         ],
+
         'feedback' => [
             'nullable',
             'string',
@@ -197,10 +197,37 @@ public function grade(
         'graded_at' => now(),
     ]);
 
+    // Grading from Marks page
+    if ($request->boolean('from_marks')) {
+
+        return redirect()
+            ->route(
+                'professor.class-groups.marks',
+                $classGroupId
+            )
+            ->with(
+                'success',
+                'Exam grade updated successfully.'
+            );
+    }
+
+    // Remember where the professor originally came from
+    $origin = $request->input('origin', 'stream');
+
+    if (!in_array($origin, ['stream', 'classwork'], true)) {
+        $origin = 'stream';
+    }
+
+    // Grading from student's submission page
     return redirect()
         ->route(
-            'professor.class-groups.marks',
-            $classGroupId
+            'professor.class-groups.exams.submissions.show',
+            [
+                'classGroup' => $classGroupId,
+                'exam' => $examId,
+                'submission' => $submissionId,
+                'origin' => $origin,
+            ]
         )
         ->with(
             'success',

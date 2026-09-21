@@ -1225,7 +1225,17 @@
 @section('content')
 
 @php
-    $returnTo = request('origin', request('return_to', 'stream'));
+    /*
+     * Remember where the professor opened this assignment from.
+     */
+    $returnTo = request('return_to', 'stream');
+
+    /*
+     * Only allow the pages used by this flow.
+     */
+    if (!in_array($returnTo, ['stream', 'classwork', 'marks'], true)) {
+        $returnTo = 'stream';
+    }
 @endphp
 <div class="classwork-show-page">
 
@@ -1237,25 +1247,32 @@
 
         {{-- BACK BUTTON --}}
 
-        <a
-            href="{{ $returnTo === 'classwork'
-                ? route(
-                    'professor.class-groups.classroom-group.classwork',
-                    $classGroup
-                )
-                : route(
-                    'professor.class-groups.classroom-group',
-                    $classGroup
-                )
-            }}"
-            class="classwork-back-btn">
-            <i class="bx bx-arrow-back"></i>
+<a
+    href="{{ $returnTo === 'marks'
+        ? route('professor.class-groups.marks', $classGroup)
+        : ($returnTo === 'classwork'
+            ? route(
+                'professor.class-groups.classroom-group.classwork',
+                $classGroup
+            )
+            : route(
+                'professor.class-groups.classroom-group',
+                $classGroup
+            )
+        )
+    }}"
+    class="classwork-back-btn"
+>
+    <i class="bx bx-arrow-back"></i>
 
-            {{ $returnTo === 'classwork'
-                ? 'Back to Classwork'
-                : 'Back to Stream'
-            }}
-        </a>
+    {{ $returnTo === 'marks'
+        ? 'Back to Marks'
+        : ($returnTo === 'classwork'
+            ? 'Back to Classwork'
+            : 'Back to Stream'
+        )
+    }}
+</a>
 
 
         {{-- ASSIGNMENT HEADER --}}
@@ -1610,7 +1627,7 @@
         'classGroup' => $classGroup->id,
         'assignment' => $assignment->id,
         'submission' => $submission->id,
-        'origin' => request('return_to', 'stream'),
+        'origin' => $returnTo,
     ]) }}"
     class="submission-view-btn">
 

@@ -142,6 +142,37 @@ if (!in_array($returnTo, ['stream', 'classwork', 'marks'])) {
             abort(404);
         }
 
+        /*
+         * Prevent submission after the assignment deadline.
+         */
+        $dueAt = null;
+
+        if ($assignment->due_date) {
+            $dueAt = \Carbon\Carbon::parse($assignment->due_date);
+
+            if ($assignment->due_time) {
+                $dueAt->setTimeFromTimeString($assignment->due_time);
+            } else {
+                $dueAt->endOfDay();
+            }
+        }
+
+        if ($dueAt && now()->greaterThan($dueAt)) {
+            return redirect()
+                ->route(
+                    'student.class-groups.assignments.show',
+                    [
+                        'classGroup' => $classGroup->id,
+                        'assignment' => $assignment->id,
+                        'return_to' => 'classwork',
+                    ]
+                )
+                ->with(
+                    'error',
+                    'The assignment deadline has passed. You can no longer submit this assignment.'
+                );
+        }
+
         $request->validate([
             'attachments' => ['required', 'array', 'min:1'],
 
@@ -188,13 +219,20 @@ if (!in_array($returnTo, ['stream', 'classwork', 'marks'])) {
             'submitted_at' => now(),
         ]);
 
+        // Keep the page where the student originally opened the assignment.
+        $returnTo = $request->input('return_to', 'stream');
+
+        if (!in_array($returnTo, ['stream', 'classwork', 'marks'], true)) {
+            $returnTo = 'stream';
+        }
+
         return redirect()
             ->route(
                 'student.class-groups.assignments.show',
                 [
                     'classGroup' => $classGroup->id,
                     'assignment' => $assignment->id,
-                    'return_to' => 'classwork',
+                    'return_to' => $returnTo,
                 ]
             )
             ->with('success', 'Assignment submitted successfully.');
@@ -219,6 +257,42 @@ if (!in_array($returnTo, ['stream', 'classwork', 'marks'])) {
     // Make sure assignment belongs to this class
     if ($assignment->class_group_id !== $classGroup->id) {
         abort(404);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Prevent cancellation after the assignment deadline
+    |--------------------------------------------------------------------------
+    */
+    $dueAt = null;
+
+    if ($assignment->due_date) {
+        $dueAt = \Carbon\Carbon::parse($assignment->due_date);
+
+        if ($assignment->due_time) {
+            $dueAt->setTimeFromTimeString($assignment->due_time);
+        } else {
+            $dueAt->endOfDay();
+        }
+    }
+
+    if ($dueAt && now()->greaterThan($dueAt)) {
+        return redirect()
+            ->route(
+                'student.class-groups.assignments.show',
+                [
+                    'classGroup' => $classGroup->id,
+                    'assignment' => $assignment->id,
+                    'return_to' => $request->input(
+                        'return_to',
+                        'classwork'
+                    ),
+                ]
+            )
+            ->with(
+                'error',
+                'The assignment deadline has passed. You can no longer cancel your submission.'
+            );
     }
 
     $submission = AssignmentSubmission::where(

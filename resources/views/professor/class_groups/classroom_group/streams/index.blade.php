@@ -1193,6 +1193,7 @@ body.dark .stream-content-redesign .classroom-stream-empty p,
                                             [
                                                 'classGroupId' => $classGroup->id,
                                                 'projectId' => $item->id,
+                                                'return_to' => 'stream',
                                             ]
                                         ) }}"
                                         class="stream-options-item">

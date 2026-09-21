@@ -183,6 +183,7 @@ public function grade(
             'min:0',
             'max:' . $quiz->points,
         ],
+
         'feedback' => [
             'nullable',
             'string',
@@ -195,10 +196,37 @@ public function grade(
         'graded_at' => now(),
     ]);
 
+    // Grading from Marks page
+    if ($request->boolean('from_marks')) {
+
+        return redirect()
+            ->route(
+                'professor.class-groups.marks',
+                $classGroupId
+            )
+            ->with(
+                'success',
+                'Quiz grade updated successfully.'
+            );
+    }
+
+    // Remember where the professor came from
+    $origin = $request->input('origin', 'stream');
+
+    if (!in_array($origin, ['stream', 'classwork'], true)) {
+        $origin = 'stream';
+    }
+
+    // Grading from student's submission page
     return redirect()
         ->route(
-            'professor.class-groups.marks',
-            $classGroupId
+            'professor.class-groups.quizzes.submissions.show',
+            [
+                'classGroup' => $classGroupId,
+                'quiz' => $quizId,
+                'submission' => $submissionId,
+                'origin' => $origin,
+            ]
         )
         ->with(
             'success',

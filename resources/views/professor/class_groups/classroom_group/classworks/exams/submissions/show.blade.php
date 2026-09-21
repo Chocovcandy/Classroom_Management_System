@@ -701,6 +701,11 @@
         >
 
             @csrf
+                <input
+        type="hidden"
+        name="origin"
+        value="{{ $origin }}"
+    >
 
 
             <div class="grade-modal-body">

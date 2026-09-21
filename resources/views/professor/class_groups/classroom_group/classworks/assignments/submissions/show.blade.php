@@ -4,7 +4,20 @@
 
 @section('content')
 @php
-    $origin = request('origin', 'stream');
+    /*
+     * Remember where the professor came from.
+     *
+     * Support both parameter names because the previous page may pass
+     * the location as either "origin" or "return_to".
+     */
+    $origin = request('origin', request('return_to', 'stream'));
+
+    /*
+     * Only allow the locations used by the submission flow.
+     */
+    if (!in_array($origin, ['stream', 'classwork', 'marks'], true)) {
+        $origin = 'stream';
+    }
 @endphp
 <div class="student-submission-page">
 
@@ -432,6 +445,11 @@
             >
 
                 @csrf
+                    <input
+        type="hidden"
+        name="origin"
+        value="{{ $origin }}"
+    >
 
                 <div class="grading-field">
 

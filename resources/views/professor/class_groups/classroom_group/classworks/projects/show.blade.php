@@ -3639,7 +3639,20 @@ body.material-modal-open {
 
 @section('content')
 @php
-    $returnTo = request('origin', request('return_to', 'stream'));
+    /*
+     * Keep one variable for the page origin.
+     *
+     * Stream  -> stream
+     * Classwork -> classwork
+     */
+    $returnTo = request(
+        'return_to',
+        request('origin', 'stream')
+    );
+
+    if (!in_array($returnTo, ['stream', 'classwork'], true)) {
+        $returnTo = 'stream';
+    }
 @endphp
 
 <div class="classwork-show-page">
@@ -4051,6 +4064,7 @@ body.material-modal-open {
                                     'classGroupId' => $classGroup->id,
                                     'projectId' => $project->id,
                                     'submissionId' => $submission->id,
+                                    'origin' => $returnTo,
                                 ]
                             ) }}"
                             class="project-submission-view-btn"

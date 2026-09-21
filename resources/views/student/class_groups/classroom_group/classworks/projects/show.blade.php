@@ -1901,33 +1901,39 @@
                         </div>
                     @endif
 
-                    {{-- CANCEL SUBMISSION --}}
-                    @if(!$submission->graded_at)
-                        <div class="student-submission-actions">
-                            <form
-                                action="{{ route(
-                                    'student.class-groups.projects.cancel',
-                                    [
-                                        'classGroup' => $classGroup,
-                                        'project' => $project,
-                                    ]
-                                ) }}"
-                                method="POST"
-                                onsubmit="return confirm('Are you sure you want to cancel your submission?');"
-                            >
-                                @csrf
-                                @method('DELETE')
+{{-- CANCEL SUBMISSION --}}
+@if(!$gradedAt)
+    <div class="student-submission-actions">
+        <form
+            action="{{ route(
+                'student.class-groups.projects.cancel',
+                [
+                    'classGroup' => $classGroup,
+                    'project' => $project,
+                ]
+            ) }}"
+            method="POST"
+            onsubmit="return confirm('Are you sure you want to cancel your submission?');"
+        >
+            @csrf
+            @method('DELETE')
 
-                                <button
-                                    type="submit"
-                                    class="student-submission-cancel-btn"
-                                >
-                                    <i class="bx bx-undo"></i>
-                                    Cancel Submission
-                                </button>
-                            </form>
-                        </div>
-                    @endif
+            <input
+                type="hidden"
+                name="return_to"
+                value="{{ $returnTo }}"
+            >
+
+            <button
+                type="submit"
+                class="student-submission-cancel-btn"
+            >
+                <i class="bx bx-undo"></i>
+                Cancel Submission
+            </button>
+        </form>
+    </div>
+@endif
 
                 @else
 
@@ -2025,6 +2031,12 @@
                             id="projectSubmissionForm"
                         >
                             @csrf
+
+                            <input
+                                type="hidden"
+                                name="return_to"
+                                value="{{ $returnTo }}"
+                            >
 
                             <div
                                 class="student-submission-upload"

@@ -226,148 +226,49 @@ if (!in_array($returnTo, ['stream', 'classwork', 'marks'])) {
     /**
      * Cancel exam submission.
      */
-    public function cancel(
-        Request $request,
-        ClassGroup $classGroup,
-        Exam $exam
-    ) {
-        $student = Auth::user();
+public function cancel(
+    Request $request,
+    ClassGroup $classGroup,
+    Exam $exam
+) {
+    $student = Auth::user();
 
-        /*
-        |--------------------------------------------------------------------------
-        | Check enrollment
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | Check enrollment
+    |--------------------------------------------------------------------------
+    */
 
-        $isStudent = $classGroup->students()
-            ->where('users.id', $student->id)
-            ->exists();
+    $isStudent = $classGroup->students()
+        ->where('users.id', $student->id)
+        ->exists();
 
-        if (!$isStudent) {
-            abort(403, 'You are not enrolled in this class.');
-        }
+    if (!$isStudent) {
+        abort(403, 'You are not enrolled in this class.');
+    }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Make sure exam belongs to class
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | Make sure exam belongs to class
+    |--------------------------------------------------------------------------
+    */
 
-        if ($exam->class_group_id !== $classGroup->id) {
-            abort(404);
-        }
+    if ($exam->class_group_id !== $classGroup->id) {
+        abort(404);
+    }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Calculate due time
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | Find submission
+    |--------------------------------------------------------------------------
+    */
 
-        $dueAt = null;
+    $submission = ExamSubmission::with('resources')
+        ->where('exam_id', $exam->id)
+        ->where('student_id', $student->id)
+        ->first();
 
-        if ($exam->due_date) {
-
-            $dueAt = Carbon::parse(
-                $exam->due_date
-            );
-
-            if ($exam->due_time) {
-
-                $dueAt->setTimeFromTimeString(
-                    $exam->due_time
-                );
-
-            } else {
-
-                $dueAt->endOfDay();
-            }
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Prevent cancellation after deadline
-        |--------------------------------------------------------------------------
-        */
-
-        if ($dueAt && now()->greaterThan($dueAt)) {
-
-            return redirect()->route(
-                'student.class-groups.exams.show',
-                [
-                    'classGroup' => $classGroup->id,
-                    'exam' => $exam->id,
-                    'return_to' => $request->input(
-                        'return_to',
-                        'classwork'
-                    ),
-                ]
-            )->with(
-                'error',
-                'The submission can no longer be cancelled because the exam is past its due time.'
-            );
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Find submission
-        |--------------------------------------------------------------------------
-        */
-
-        $submission = ExamSubmission::with('resources')
-            ->where('exam_id', $exam->id)
-            ->where('student_id', $student->id)
-            ->first();
-
-        if (!$submission) {
-
-            return redirect()->route(
-                'student.class-groups.exams.show',
-                [
-                    'classGroup' => $classGroup->id,
-                    'exam' => $exam->id,
-                    'return_to' => $request->input(
-                        'return_to',
-                        'classwork'
-                    ),
-                ]
-            )->with(
-                'error',
-                'No exam submission was found.'
-            );
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Delete uploaded files
-        |--------------------------------------------------------------------------
-        */
-
-        foreach ($submission->resources as $resource) {
-
-            if ($resource->file_path) {
-
-                Storage::disk('public')->delete(
-                    $resource->file_path
-                );
-            }
-
-            $resource->delete();
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Delete submission
-        |--------------------------------------------------------------------------
-        */
-
-        $submission->delete();
-
-        /*
-        |--------------------------------------------------------------------------
-        | Redirect
-        |--------------------------------------------------------------------------
-        */
-
+    if (!$submission) {
         return redirect()->route(
             'student.class-groups.exams.show',
             [
@@ -379,8 +280,122 @@ if (!in_array($returnTo, ['stream', 'classwork', 'marks'])) {
                 ),
             ]
         )->with(
-            'success',
-            'Exam submission cancelled successfully.'
+            'error',
+            'No exam submission was found.'
         );
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Prevent cancellation after grading
+    |--------------------------------------------------------------------------
+    */
+
+    if ($submission->graded_at) {
+        return redirect()->route(
+            'student.class-groups.exams.show',
+            [
+                'classGroup' => $classGroup->id,
+                'exam' => $exam->id,
+                'return_to' => $request->input(
+                    'return_to',
+                    'classwork'
+                ),
+            ]
+        )->with(
+            'error',
+            'You cannot cancel a submission after it has been graded.'
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Calculate due time
+    |--------------------------------------------------------------------------
+    */
+
+    $dueAt = null;
+
+    if ($exam->due_date) {
+        $dueAt = Carbon::parse(
+            $exam->due_date
+        );
+
+        if ($exam->due_time) {
+            $dueAt->setTimeFromTimeString(
+                $exam->due_time
+            );
+        } else {
+            $dueAt->endOfDay();
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Prevent cancellation after deadline
+    |--------------------------------------------------------------------------
+    */
+
+    if ($dueAt && now()->greaterThan($dueAt)) {
+        return redirect()->route(
+            'student.class-groups.exams.show',
+            [
+                'classGroup' => $classGroup->id,
+                'exam' => $exam->id,
+                'return_to' => $request->input(
+                    'return_to',
+                    'classwork'
+                ),
+            ]
+        )->with(
+            'error',
+            'The submission can no longer be cancelled because the exam is past its due time.'
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Delete uploaded files
+    |--------------------------------------------------------------------------
+    */
+
+    foreach ($submission->resources as $resource) {
+        if ($resource->file_path) {
+            Storage::disk('public')->delete(
+                $resource->file_path
+            );
+        }
+
+        $resource->delete();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Delete submission
+    |--------------------------------------------------------------------------
+    */
+
+    $submission->delete();
+
+    /*
+    |--------------------------------------------------------------------------
+    | Redirect
+    |--------------------------------------------------------------------------
+    */
+
+    return redirect()->route(
+        'student.class-groups.exams.show',
+        [
+            'classGroup' => $classGroup->id,
+            'exam' => $exam->id,
+            'return_to' => $request->input(
+                'return_to',
+                'classwork'
+            ),
+        ]
+    )->with(
+        'success',
+        'Exam submission cancelled successfully.'
+    );
+}
 }

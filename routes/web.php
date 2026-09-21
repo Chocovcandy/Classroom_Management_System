@@ -1038,26 +1038,24 @@ Route::get('/dashboard', function () {
             )->name('classworks.projects.submissions.grade');
 
 
-            // GRADE ALL TEAMS
-            Route::put(
-                '/{classGroup}/classworks/projects/{project}/submissions/grade-all-teams',
-                [ProjectSubmissionController::class, 'gradeAllTeams']
-            )->name('classworks.projects.submissions.grade-all-teams');
+// GRADE ONE TEAM — SAME SCORE FOR ALL MEMBERS
+Route::put(
+    '/{classGroupId}/classworks/projects/{projectId}/submissions/{submissionId}/grade-team',
+    [ProjectSubmissionController::class, 'gradeTeam']
+)->name('classworks.projects.submissions.grade-team');
+
+// GRADE ALL TEAMS
+Route::post(
+    '/{classGroup}/classworks/projects/{project}/submissions/grade-all-teams',
+    [ProjectSubmissionController::class, 'gradeAllTeams']
+)->name('classworks.projects.submissions.grade-all-teams');
 
 
-            // GRADE AS COMPLETE — ALL TEAMS
-            Route::put(
-                '/{classGroupId}/classworks/projects/{projectId}/submissions/grade-as-complete',
-                [ProjectSubmissionController::class, 'gradeAsComplete']
-            )->name('classworks.projects.submissions.grade-as-complete');
-
-
-            // GRADE ONE TEAM — SAME SCORE FOR ALL MEMBERS
-            Route::put(
-                '/{classGroupId}/classworks/projects/{projectId}/submissions/{submissionId}/grade-team',
-                [ProjectSubmissionController::class, 'gradeTeam']
-            )->name('classworks.projects.submissions.grade-team');
-
+// GRADE AS COMPLETE — ALL TEAMS
+Route::post(
+    '/{classGroupId}/classworks/projects/{projectId}/submissions/grade-as-complete',
+    [ProjectSubmissionController::class, 'gradeAsComplete']
+)->name('classworks.projects.submissions.grade-as-complete');
 
             // GRADE ONE TEAM — MEMBER BY MEMBER
             Route::put(

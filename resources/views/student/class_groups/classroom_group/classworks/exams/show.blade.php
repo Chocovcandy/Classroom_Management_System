@@ -2018,68 +2018,65 @@ now()->greaterThan($dueAt);
                          CANCEL SUBMISSION
                     =================================================== --}}
 
-                <div class="exam-cancel-wrapper">
+@if($submission->score === null && !$submission->graded_at)
 
+    {{-- ==================================================
+         CANCEL SUBMISSION
+    =================================================== --}}
 
-                    <form
-                        action="{{ route(
-                                'student.class-groups.exams.cancel',
-                                [
-                                    'classGroup' => $classGroup->id,
-                                    'exam' => $exam->id,
-                                ]
-                            ) }}"
-                        method="POST"
-                        onsubmit="return confirm(
-                                'Are you sure you want to cancel your submission?'
-                            );">
+    <div class="exam-cancel-wrapper">
 
-                        @csrf
+        <form
+            action="{{ route(
+                'student.class-groups.exams.cancel',
+                [
+                    'classGroup' => $classGroup->id,
+                    'exam' => $exam->id,
+                ]
+            ) }}"
+            method="POST"
+            onsubmit="return confirm(
+                'Are you sure you want to cancel your submission?'
+            );">
 
-                        @method('DELETE')
+            @csrf
+            @method('DELETE')
 
+            <input
+                type="hidden"
+                name="return_to"
+                value="{{ $returnTo }}">
 
-                        <input
-                            type="hidden"
-                            name="return_to"
-                            value="{{ $returnTo }}">
+            <button
+                type="submit"
+                class="exam-cancel-button"
+                {{ $isPastDue ? 'disabled' : '' }}>
 
+                <i class="bx bx-undo"></i>
+                Cancel Submission
 
-                        <button
-                            type="submit"
-                            class="exam-cancel-button"
-                            {{ $isPastDue ? 'disabled' : '' }}>
+            </button>
 
-                            <i class="bx bx-undo"></i>
+        </form>
 
-                            Cancel Submission
+        @if($isPastDue)
 
-                        </button>
+            <p class="exam-cancel-note expired">
+                The exam deadline has passed.
+                Your submission can no longer be cancelled.
+            </p>
 
-                    </form>
+        @else
 
+            <p class="exam-cancel-note">
+                You can cancel your submission before the exam deadline.
+            </p>
 
-                    @if($isPastDue)
+        @endif
 
-                    <p class="exam-cancel-note expired">
+    </div>
 
-                        The exam deadline has passed.
-                        Your submission can no longer be cancelled.
-
-                    </p>
-
-                    @else
-
-                    <p class="exam-cancel-note">
-
-                        You can cancel your submission before the exam deadline.
-
-                    </p>
-
-                    @endif
-
-                </div>
-
+@endif
 
                 {{-- ==================================================
                      NOT SUBMITTED

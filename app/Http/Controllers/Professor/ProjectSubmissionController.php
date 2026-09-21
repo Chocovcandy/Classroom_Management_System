@@ -28,59 +28,6 @@ class ProjectSubmissionController extends Controller
      * - Team Project
      */
     public function show(
-    Request $request,
-    int $classGroupId,
-    int $projectId,
-    int $submissionId
-) {
-    // Get class group
-    $classGroup = ClassGroup::findOrFail($classGroupId);
-
-    // Professor authorization
-    Gate::authorize('manage', $classGroup);
-
-    // Make sure project belongs to this class
-    $project = Project::where('id', $projectId)
-        ->where('class_group_id', $classGroup->id)
-        ->firstOrFail();
-
-    // Get submission
-    $submission = ProjectSubmission::with([
-        'student',
-        'projectGroup.members.user',
-        'resources',
-        'grades.student',
-    ])
-        ->where('id', $submissionId)
-        ->where('project_id', $project->id)
-        ->firstOrFail();
-
-    // Keep track of where the professor came from
-    $returnTo = $request->query('return_to', 'stream');
-
-    // Only allow the expected values
-    if (!in_array($returnTo, ['stream', 'classwork'])) {
-        $returnTo = 'stream';
-    }
-
-    return view(
-        'professor.class_groups.classroom_group.classworks.projects.submissions.show',
-        compact(
-            'classGroup',
-            'project',
-            'submission',
-            'returnTo'
-        )
-    );
-}
-    /**
-     * ============================================================
-     * GRADE INDIVIDUAL SUBMISSION
-     * ============================================================
-     *
-     * Used for Individual Projects.
-     */
-    public function grade(
         Request $request,
         int $classGroupId,
         int $projectId,
@@ -92,41 +39,96 @@ class ProjectSubmissionController extends Controller
         // Professor authorization
         Gate::authorize('manage', $classGroup);
 
-        // Make sure project belongs to class
+        // Make sure project belongs to this class
         $project = Project::where('id', $projectId)
             ->where('class_group_id', $classGroup->id)
             ->firstOrFail();
 
-        // Make sure submission belongs to project
-        $submission = ProjectSubmission::where('id', $submissionId)
+        // Get submission
+        $submission = ProjectSubmission::with([
+            'student',
+            'projectGroup.members.user',
+            'resources',
+            'grades.student',
+        ])
+            ->where('id', $submissionId)
             ->where('project_id', $project->id)
             ->firstOrFail();
 
-        // This method is only for Individual Projects
-        if ($project->project_type !== 'individual') {
-            abort(404);
+        // Keep track of where the professor came from
+        $returnTo = $request->query('return_to', 'stream');
+
+        // Only allow the expected values
+        if (!in_array($returnTo, ['stream', 'classwork'])) {
+            $returnTo = 'stream';
         }
 
-        $validated = $request->validate([
-            'score' => [
-                'required',
-                'numeric',
-                'min:0',
-                'max:' . $project->points,
-            ],
+        return view(
+            'professor.class_groups.classroom_group.classworks.projects.submissions.show',
+            compact(
+                'classGroup',
+                'project',
+                'submission',
+                'returnTo'
+            )
+        );
+    }
 
-            'feedback' => [
-                'nullable',
-                'string',
-            ],
-        ]);
+    /**
+     * ============================================================
+     * GRADE INDIVIDUAL SUBMISSION
+     * ============================================================
+     *
+     * Used for Individual Projects.
+     */public function grade(
+    Request $request,
+    int $classGroupId,
+    int $projectId,
+    int $submissionId
+) {
+    // Get class group
+    $classGroup = ClassGroup::findOrFail($classGroupId);
 
-        $submission->update([
-            'score' => $validated['score'],
-            'feedback' => $validated['feedback'] ?? null,
-            'graded_at' => now(),
-        ]);
+    // Professor authorization
+    Gate::authorize('manage', $classGroup);
 
+    // Make sure project belongs to class
+    $project = Project::where('id', $projectId)
+        ->where('class_group_id', $classGroup->id)
+        ->firstOrFail();
+
+    // Make sure submission belongs to project
+    $submission = ProjectSubmission::where('id', $submissionId)
+        ->where('project_id', $project->id)
+        ->firstOrFail();
+
+    // This method is only for Individual Projects
+    if ($project->project_type !== 'individual') {
+        abort(404);
+    }
+
+    $validated = $request->validate([
+        'score' => [
+            'required',
+            'numeric',
+            'min:0',
+            'max:' . $project->points,
+        ],
+
+        'feedback' => [
+            'nullable',
+            'string',
+        ],
+    ]);
+
+    $submission->update([
+        'score' => $validated['score'],
+        'feedback' => $validated['feedback'] ?? null,
+        'graded_at' => now(),
+    ]);
+
+    // Grading from Marks page
+    if ($request->boolean('from_marks')) {
         return redirect()
             ->route(
                 'professor.class-groups.marks',
@@ -137,6 +139,33 @@ class ProjectSubmissionController extends Controller
                 'Project grade updated successfully.'
             );
     }
+
+    // Remember where the professor came from
+    $returnTo = $request->input(
+        'return_to',
+        $request->input('origin', 'stream')
+    );
+
+    if (!in_array($returnTo, ['stream', 'classwork'], true)) {
+        $returnTo = 'stream';
+    }
+
+    // Return to submission page and preserve origin
+    return redirect()
+        ->route(
+            'professor.classworks.projects.submissions.show',
+            [
+                'classGroupId' => $classGroupId,
+                'projectId' => $projectId,
+                'submissionId' => $submissionId,
+                'return_to' => $returnTo,
+            ]
+        )
+        ->with(
+            'success',
+            'Project grade updated successfully.'
+        );
+}
 
     /**
      * ============================================================
@@ -359,6 +388,26 @@ class ProjectSubmissionController extends Controller
             );
         }
 
+        /*
+         * If grading from the Marks page,
+         * return to Marks.
+         */
+        if ($request->boolean('from_marks')) {
+            return redirect()
+                ->route(
+                    'professor.class-groups.marks',
+                    $classGroup->id
+                )
+                ->with(
+                    'success',
+                    'All members of the team received the same grade.'
+                );
+        }
+
+        /*
+         * Otherwise, keep the existing behavior
+         * and return to the submission page.
+         */
         return redirect()
             ->route(
                 'professor.classworks.projects.submissions.show',
@@ -471,6 +520,26 @@ class ProjectSubmissionController extends Controller
             );
         }
 
+        /*
+         * If grading from the Marks page,
+         * return to Marks.
+         */
+        if ($request->boolean('from_marks')) {
+            return redirect()
+                ->route(
+                    'professor.class-groups.marks',
+                    $classGroup->id
+                )
+                ->with(
+                    'success',
+                    'Team member grades updated successfully.'
+                );
+        }
+
+        /*
+         * Otherwise, keep the existing behavior
+         * and return to the submission page.
+         */
         return redirect()
             ->route(
                 'professor.classworks.projects.submissions.show',

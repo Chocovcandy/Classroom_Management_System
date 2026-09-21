@@ -63,14 +63,14 @@
     gap: 8px;
     margin-bottom: 18px;
     color: var(--muted);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     text-decoration: none;
     transition: color .18s ease, transform .18s ease;
 }
 
 .ps-back i {
-    font-size: 21px;
+    font-size: 20px;
 }
 
 .ps-back:hover {
@@ -95,14 +95,14 @@
     border-radius: 16px;
     background: var(--yellow-soft);
     color: var(--yellow-dark);
-    font-size: 27px;
+    font-size: 26px;
 }
 
 .ps-type {
     display: block;
     margin-bottom: 4px;
     color: var(--yellow-dark);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: .12em;
     text-transform: uppercase;
@@ -111,7 +111,7 @@
 .ps-title-row h1 {
     margin: 0;
     color: var(--text);
-    font-size: 32px;
+    font-size: 31px;
     line-height: 1.15;
     font-weight: 800;
     letter-spacing: -.025em;
@@ -121,7 +121,7 @@
 .ps-subtitle {
     margin-top: 6px;
     color: var(--muted);
-    font-size: 15px;
+    font-size: 14px;
 }
 
 /* ============================================================
@@ -158,7 +158,7 @@
     border-radius: 11px;
     background: rgba(234, 179, 8, .14);
     color: var(--yellow-dark);
-    font-size: 22px;
+    font-size: 21px;
 }
 
 .ps-team-summary-copy {
@@ -169,7 +169,7 @@
     display: block;
     margin-bottom: 2px;
     color: var(--yellow-dark);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 800;
     letter-spacing: .12em;
 }
@@ -177,7 +177,7 @@
 .ps-team-summary-copy strong {
     display: block;
     color: var(--text2);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 800;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -199,7 +199,7 @@
 .ps-team-summary-stats span {
     display: block;
     color: var(--muted);
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 800;
     letter-spacing: .09em;
 }
@@ -208,7 +208,7 @@
     display: block;
     margin-top: 2px;
     color: var(--text2);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
 }
 
@@ -226,12 +226,12 @@
     border-radius: 10px;
     background: var(--green-soft);
     color: var(--green);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
 }
 
 .ps-alert i {
-    font-size: 18px;
+    font-size: 17px;
 }
 
 /* ============================================================
@@ -283,7 +283,7 @@
 .ps-card-header h2 {
     margin: 0;
     color: var(--text);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 800;
 }
 
@@ -314,7 +314,7 @@
     flex-shrink: 0;
     padding: 6px 10px;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
 }
 
@@ -354,7 +354,7 @@
     border-radius: 12px;
     background: var(--yellow-soft);
     color: var(--yellow-dark);
-    font-size: 21px;
+    font-size: 20px;
 }
 
 .ps-submitter-info {
@@ -364,7 +364,7 @@
 .ps-submitter-info strong {
     display: block;
     color: var(--text);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 800;
     overflow-wrap: anywhere;
 }
@@ -373,7 +373,7 @@
     display: block;
     margin-top: 3px;
     color: var(--muted);
-    font-size: 13px;
+    font-size: 12px;
 }
 
 /* ============================================================
@@ -422,7 +422,7 @@
     border-radius: 10px;
     background: #fff;
     color: var(--muted);
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .ps-member-info {
@@ -433,7 +433,7 @@
 .ps-member-info strong {
     display: block;
     color: var(--text2);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -444,7 +444,7 @@
     display: block;
     margin-top: 2px;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .ps-role {
@@ -454,7 +454,7 @@
     border-radius: 7px;
     background: var(--yellow-soft);
     color: var(--yellow-dark);
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 800;
     text-transform: uppercase;
 }
@@ -498,7 +498,7 @@
     border-radius: 10px;
     background: var(--yellow-soft);
     color: var(--yellow-dark);
-    font-size: 19px;
+    font-size: 18px;
 }
 
 .ps-file-info {
@@ -509,7 +509,7 @@
 .ps-file-info strong {
     display: block;
     color: var(--text2);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 750;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -520,7 +520,7 @@
     display: block;
     margin-top: 2px;
     color: var(--light);
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .ps-file-actions {
@@ -542,7 +542,7 @@
     background: #fff;
     color: var(--blue);
     text-decoration: none;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
     cursor: pointer;
     transition: background-color .18s ease, transform .18s ease;
@@ -554,7 +554,7 @@
 }
 
 .ps-file-btn i {
-    font-size: 17px;
+    font-size: 16px;
 }
 
 .ps-empty {
@@ -573,13 +573,13 @@
 .ps-empty i {
     margin-bottom: 7px;
     color: var(--light);
-    font-size: 28px;
+    font-size: 27px;
 }
 
 .ps-empty p {
     margin: 0;
     color: var(--muted);
-    font-size: 13px;
+    font-size: 12px;
 }
 
 /* ============================================================
@@ -613,7 +613,7 @@
     border-radius: 9px;
     background: var(--yellow-soft);
     color: var(--yellow-dark);
-    font-size: 17px;
+    font-size: 16px;
 }
 
 .ps-info-item div {
@@ -623,14 +623,14 @@
 .ps-info-item span {
     display: block;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .ps-info-item strong {
     display: block;
     margin-top: 1px;
     color: var(--text2);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 800;
     overflow-wrap: anywhere;
 }
@@ -683,8 +683,8 @@
 }
 
 .ps-grade-mode-option input:checked + .ps-grade-mode-label {
-    border-color: var(--border);
-    background: var(--surface);
+    border-color: var(--yellow);
+    background: var(--yellow-soft);
     box-shadow: 0 0 0 2px rgba(234,179,8,.08);
 }
 
@@ -698,7 +698,7 @@
     border-radius: 9px;
     background: var(--soft);
     color: var(--muted);
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .ps-grade-mode-option input:checked + .ps-grade-mode-label .ps-grade-mode-icon {
@@ -713,7 +713,7 @@
 .ps-grade-mode-copy strong {
     display: block;
     color: var(--text2);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
 }
 
@@ -721,7 +721,7 @@
     display: block;
     margin-top: 3px;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 10px;
     line-height: 1.45;
 }
 
@@ -739,7 +739,7 @@
     padding: 14px;
     border: 1px solid var(--border);
     border-radius: 12px;
-    background: var(--surface);
+    background: var(--yellow-soft);
 }
 
 .ps-grade-current {
@@ -752,12 +752,12 @@
 
 .ps-grade-current span {
     color: var(--muted);
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .ps-grade-current strong {
     color: var(--yellow-dark);
-    font-size: 23px;
+    font-size: 22px;
     font-weight: 850;
     text-align: right;
 }
@@ -770,7 +770,7 @@
     display: block;
     margin-bottom: 6px;
     color: var(--text2);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
 }
 
@@ -782,7 +782,7 @@
     background: #fff;
     color: var(--text);
     font-family: inherit;
-    font-size: 14px;
+    font-size: 13px;
     outline: none;
     transition: border-color .18s ease, box-shadow .18s ease;
 }
@@ -807,7 +807,7 @@
 .ps-error {
     margin-top: 5px;
     color: var(--red);
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .ps-btn {
@@ -821,7 +821,7 @@
     border-radius: 9px;
     cursor: pointer;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     transition: background-color .18s ease, transform .18s ease, box-shadow .18s ease;
 }
@@ -865,19 +865,19 @@
     padding: 14px;
     border: 1px solid var(--border);
     border-radius: 11px;
-    background: var(--surface);
+    background: var(--yellow-soft);
 }
 
 .ps-graded-score-label {
     color: var(--muted);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 800;
     text-transform: uppercase;
 }
 
 .ps-graded-score-value {
     color: var(--yellow-dark);
-    font-size: 26px;
+    font-size: 25px;
     font-weight: 850;
 }
 
@@ -892,13 +892,13 @@
     display: block;
     margin-bottom: 5px;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 800;
 }
 
 .ps-graded-feedback-text {
     color: var(--text2);
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.55;
     white-space: pre-wrap;
 }
@@ -916,7 +916,7 @@
     color: var(--blue);
     cursor: pointer;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     transition: background-color .18s ease, color .18s ease, transform .18s ease;
 }
@@ -952,7 +952,7 @@
 .ps-manual-graded-student strong {
     display: block;
     color: var(--text2);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -963,13 +963,13 @@
     display: block;
     margin-top: 2px;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .ps-manual-graded-score {
     flex: 0 0 auto;
     color: var(--yellow-dark);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 850;
 }
 
@@ -980,7 +980,7 @@
 .ps-grade-panel-heading strong {
     display: block;
     color: var(--text2);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
 }
 
@@ -988,183 +988,7 @@
     display: block;
     margin-top: 3px;
     color: var(--muted);
-    font-size: 11px;
-}
-
-
-/* ============================================================
-   MANUAL GRADING - CLEAN MEMBER EDIT FORM
-   ============================================================ */
-
-/* Keep the two grading-mode choices clean and neutral. */
-.ps-grade-mode-label {
-    min-height: 82px;
-    padding: 13px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-}
-
-.ps-grade-mode-label:hover {
-    border-color: var(--blue-border);
-    background: #fff;
-}
-
-.ps-grade-mode-option input:checked + .ps-grade-mode-label {
-    border-color: var(--blue);
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
-}
-
-.ps-grade-mode-option input:checked + .ps-grade-mode-label .ps-grade-mode-icon {
-    background: var(--yellow);
-    color: #fff;
-}
-
-/* Manual grading heading */
-#manualGradeEditPanel .ps-grade-panel-heading {
-    margin: 2px 0 16px;
-    padding: 0 2px;
-}
-
-#manualGradeEditPanel .ps-grade-panel-heading strong {
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.3;
-}
-
-#manualGradeEditPanel .ps-grade-panel-heading span {
-    margin-top: 4px;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.45;
-}
-
-/* One clean card per student */
-.ps-grade-member-card {
-    margin-bottom: 12px;
-    padding: 16px;
-    border: 1px solid var(--border);
-    border-radius: 13px;
-    background: #fff;
-    box-shadow: 0 3px 12px rgba(15, 23, 42, .035);
-    transition: border-color .18s ease, box-shadow .18s ease;
-}
-
-.ps-grade-member-card:hover {
-    border-color: #d7dee8;
-    box-shadow: 0 5px 16px rgba(15, 23, 42, .05);
-}
-
-.ps-grade-member-top {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 240px;
-    gap: 18px;
-    align-items: end;
-}
-
-.ps-grade-member-name {
-    min-width: 0;
-    padding-bottom: 2px;
-}
-
-.ps-grade-member-name strong {
-    display: block;
-    color: var(--text);
-    font-size: 15px;
-    font-weight: 800;
-    line-height: 1.35;
-    overflow-wrap: anywhere;
-}
-
-.ps-grade-member-name span {
-    display: inline-flex;
-    align-items: center;
-    margin-top: 6px;
-    padding: 4px 8px;
-    border-radius: 7px;
-    background: var(--soft);
-    color: var(--muted);
-    font-size: 11px;
-    font-weight: 700;
-}
-
-.ps-grade-member-score {
-    margin-bottom: 0;
-}
-
-.ps-grade-member-score .ps-form-label {
-    margin-bottom: 7px;
-    font-size: 13px;
-    color: var(--text2);
-}
-
-.ps-grade-member-score .ps-input {
-    height: 44px;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.ps-grade-member-feedback {
-    margin-top: 14px;
-    margin-bottom: 0;
-    padding-top: 14px;
-    border-top: 1px solid var(--border-light);
-}
-
-.ps-grade-member-feedback .ps-form-label {
-    margin-bottom: 7px;
-    font-size: 13px;
-}
-
-.ps-grade-member-feedback .ps-textarea {
-    min-height: 96px;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-#manualGradeEditPanel .ps-input:focus,
-#manualGradeEditPanel .ps-textarea:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
-}
-
-#manualGradeEditPanel > form > .ps-btn-blue {
-    min-height: 46px;
-    margin-top: 4px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 800;
-    box-shadow: 0 5px 14px rgba(37, 99, 235, .14);
-}
-
-#manualGradeEditPanel > form > .ps-btn-blue:hover {
-    box-shadow: 0 7px 18px rgba(37, 99, 235, .20);
-}
-
-@media (max-width: 700px) {
-    .ps-grade-member-top {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .ps-grade-member-card {
-        padding: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    #manualGradeEditPanel .ps-grade-panel-heading strong {
-        font-size: 14px;
-    }
-
-    #manualGradeEditPanel .ps-grade-panel-heading span {
-        font-size: 12px;
-    }
-
-    .ps-grade-member-name strong {
-        font-size: 14px;
-    }
+    font-size: 10px;
 }
 
 /* ============================================================
@@ -1233,14 +1057,14 @@
     gap: 9px;
     min-width: 0;
     color: var(--text2);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
 }
 
 .ps-modal-title i {
     flex: 0 0 auto;
     color: var(--yellow-dark);
-    font-size: 20px;
+    font-size: 19px;
 }
 
 .ps-modal-title span {
@@ -1271,7 +1095,7 @@
 }
 
 .ps-modal-action i {
-    font-size: 20px;
+    font-size: 19px;
 }
 
 .ps-modal-action:hover {
@@ -1374,11 +1198,11 @@
         width: 52px;
         height: 52px;
         flex-basis: 52px;
-        font-size: 24px;
+        font-size: 23px;
     }
 
     .ps-title-row h1 {
-        font-size: 27px;
+        font-size: 26px;
     }
 
     .ps-team-summary {
@@ -1438,7 +1262,7 @@
 
     .ps-back {
         margin-bottom: 16px;
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .ps-title-row {
@@ -1451,19 +1275,19 @@
         height: 46px;
         flex-basis: 46px;
         border-radius: 12px;
-        font-size: 21px;
+        font-size: 20px;
     }
 
     .ps-type {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .ps-title-row h1 {
-        font-size: 23px;
+        font-size: 22px;
     }
 
     .ps-subtitle {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .ps-team-summary {
@@ -1488,7 +1312,7 @@
     }
 
     .ps-card-header h2 {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .ps-card-body {
@@ -1508,7 +1332,7 @@
     }
 
     .ps-graded-score-value {
-        font-size: 23px;
+        font-size: 22px;
     }
 
     .ps-grade-current {
@@ -1544,7 +1368,17 @@
 </style>
 
 @php
-    $origin = request('origin', 'classwork');
+    // Preserve where the professor entered this submission.
+    // Stream    -> stream
+    // Classwork -> classwork
+    $returnTo = request(
+        'return_to',
+        request('origin', 'stream')
+    );
+
+    if (!in_array($returnTo, ['stream', 'classwork'], true)) {
+        $returnTo = 'stream';
+    }
 @endphp
 <div class="project-submission-page team-submission-page">
     @if(session('success'))
@@ -1557,7 +1391,7 @@
     href="{{ route('professor.classworks.projects.show', [
         'classGroupId' => $classGroup->id,
         'projectId' => $project->id,
-        'return_to' => $origin,
+        'return_to' => $returnTo,
     ]) }}"
 >
     <i class="bx bx-arrow-back"></i>
@@ -1938,6 +1772,8 @@
                             ]
                         ) }}">
 
+                                    
+                                    <input type="hidden" name="return_to" value="{{ $returnTo }}">
                                     @csrf
                                     @method('PUT')
 
@@ -2130,8 +1966,11 @@
                         ]
                     ) }}">
 
-                                @csrf
+                                
+                                    <input type="hidden" name="return_to" value="{{ $returnTo }}">
+                                    @csrf
                                 @method('PUT')
+
 
                                 @foreach($team->members as $member)
 
@@ -2142,66 +1981,73 @@
                                 );
                                 @endphp
 
-                                <div class="ps-grade-member-card">
 
-                                    <div class="ps-grade-member-top">
+                                <div class="ps-grade-member">
 
-                                        <div class="ps-grade-member-name">
-                                            <strong>
-                                                {{ $member->user->name ?? 'Unknown Student' }}
-                                            </strong>
+                                    <div class="ps-grade-member-name">
 
-                                            <span>
-                                                {{
-                                                    $member->role === 'leader'
-                                                        ? 'Team Leader'
-                                                        : (
-                                                            $member->role === 'backup'
-                                                                ? 'Backup Submitter'
-                                                                : 'Team Member'
-                                                        )
-                                                }}
-                                            </span>
-                                        </div>
+                                        <strong>
+                                            {{ $member->user->name ?? 'Unknown Student' }}
+                                        </strong>
 
-                                        <div class="ps-form-group ps-grade-member-score">
-                                            <label class="ps-form-label">
-                                                Score
-                                            </label>
-
-                                            <input
-                                                type="number"
-                                                name="grades[{{ $member->user_id }}][score]"
-                                                class="ps-input"
-                                                min="0"
-                                                max="{{ $project->points }}"
-                                                step="0.01"
-                                                value="{{ old(
-                                            'grades.' . $member->user_id . '.score',
-                                            $existingGrade?->score
-                                        ) }}"
-                                                required>
-                                        </div>
+                                        <span>
+                                            {{
+                                        $member->role === 'leader'
+                                            ? 'Team Leader'
+                                            : (
+                                                $member->role === 'backup'
+                                                    ? 'Backup Submitter'
+                                                    : 'Team Member'
+                                            )
+                                    }}
+                                        </span>
 
                                     </div>
 
-                                    <div class="ps-form-group ps-grade-member-feedback">
+
+                                    <div class="ps-form-group">
+
                                         <label class="ps-form-label">
-                                            Feedback for {{ $member->user->name ?? 'student' }}
+                                            Score
                                         </label>
 
-                                        <textarea
-                                            name="grades[{{ $member->user_id }}][feedback]"
-                                            class="ps-textarea"
-                                            placeholder="Optional feedback...">{{ old(
-                                        'grades.' . $member->user_id . '.feedback',
-                                        $existingGrade?->feedback
-                                    ) }}</textarea>
+                                        <input
+                                            type="number"
+                                            name="grades[{{ $member->user_id }}][score]"
+                                            class="ps-input"
+                                            min="0"
+                                            max="{{ $project->points }}"
+                                            step="0.01"
+                                            value="{{ old(
+                                        'grades.' . $member->user_id . '.score',
+                                        $existingGrade?->score
+                                    ) }}"
+                                            required>
+
                                     </div>
 
                                 </div>
 
+
+                                <div class="ps-form-group">
+
+                                    <label class="ps-form-label">
+                                        Feedback for
+                                        {{ $member->user->name ?? 'student' }}
+                                    </label>
+
+                                    <textarea
+                                        name="grades[{{ $member->user_id }}][feedback]"
+                                        class="ps-textarea"
+                                        placeholder="Optional feedback...">{{ old(
+                                'grades.' . $member->user_id . '.feedback',
+                                $existingGrade?->feedback
+                            ) }}</textarea>
+
+                                </div>
+
                                 @endforeach
+
 
                                 <button
                                     type="submit"
@@ -2234,7 +2080,9 @@
                             <strong>{{ $submission->score !== null ? rtrim(rtrim(number_format($submission->score,2),'0'),'.') : '—' }} / {{ rtrim(rtrim(number_format($project->points,2),'0'),'.') }}</strong>
                         </div>
                         <form method="POST" action="{{ route('professor.classworks.projects.submissions.grade',['classGroupId'=>$classGroup->id,'projectId'=>$project->id,'submissionId'=>$submission->id]) }}">
-                            @csrf @method('PUT')
+                            @csrf
+                            <input type="hidden" name="return_to" value="{{ $returnTo }}">
+                            @method('PUT')
                             <div class="ps-form-group"><label class="ps-form-label">Score</label><input type="number" name="score" class="ps-input" min="0" max="{{ $project->points }}" step="0.01" value="{{ old('score',$submission->score) }}" required>@error('score')<div class="ps-error">{{ $message }}</div>@enderror</div>
                             <div class="ps-form-group"><label class="ps-form-label">Feedback</label><textarea name="feedback" class="ps-textarea" placeholder="Write feedback for the student...">{{ old('feedback',$submission->feedback) }}</textarea>@error('feedback')<div class="ps-error">{{ $message }}</div>@enderror</div>
                             <button type="submit" class="ps-btn ps-btn-yellow"><i class="bx bx-check"></i>Save Grade</button>

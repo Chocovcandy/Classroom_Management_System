@@ -605,6 +605,11 @@
             >
 
                 @csrf
+                    <input
+        type="hidden"
+        name="origin"
+        value="{{ $origin }}"
+    >
 
                 <div class="grading-field">
 

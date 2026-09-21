@@ -2684,6 +2684,7 @@ rtrim(number_format((float) $number, 2), '0'),
                                     class="mark-edit-trigger"
                                     data-edit-grade
                                     data-grade-type="assignment"
+                                    data-grade-method="POST"
                                     data-grade-title="{{ $assignment->title }}"
                                     data-grade-student="{{ $student->name }}"
                                     data-grade-points="{{ $points }}"
@@ -2774,6 +2775,7 @@ rtrim(number_format((float) $number, 2), '0'),
                                     class="mark-edit-trigger"
                                     data-edit-grade
                                     data-grade-type="quiz"
+                                    data-grade-method="POST"
                                     data-grade-title="{{ $quiz->title }}"
                                     data-grade-student="{{ $student->name }}"
                                     data-grade-points="{{ $points }}"
@@ -2864,6 +2866,7 @@ rtrim(number_format((float) $number, 2), '0'),
                                     class="mark-edit-trigger"
                                     data-edit-grade
                                     data-grade-type="exam"
+                                    data-grade-method="POST"
                                     data-grade-title="{{ $exam->title }}"
                                     data-grade-student="{{ $student->name }}"
                                     data-grade-points="{{ $points }}"
@@ -2995,14 +2998,24 @@ rtrim(number_format((float) $number, 2), '0'),
                                         data-grade-points="{{ $points }}"
                                         data-grade-score="{{ $score ?? '' }}"
                                         data-grade-feedback="{{ $grade->feedback ?? $submission->feedback ?? '' }}"
-                                        data-grade-url="{{ route(
-                                            'professor.classworks.projects.submissions.grade',
-                                            [
-                                                'classGroupId' => $classGroup->id,
-                                                'projectId' => $project->id,
-                                                'submissionId' => $submission->id
-                                            ]
-                                        ) }}">
+                                        data-grade-method="PUT"
+                                        data-grade-url="{{ $project->project_type === 'team'
+                                            ? route(
+                                                'professor.classworks.projects.submissions.grade-team',
+                                                [
+                                                    'classGroupId' => $classGroup->id,
+                                                    'projectId' => $project->id,
+                                                    'submissionId' => $submission->id
+                                                ]
+                                            )
+                                            : route(
+                                                'professor.classworks.projects.submissions.grade',
+                                                [
+                                                    'classGroupId' => $classGroup->id,
+                                                    'projectId' => $project->id,
+                                                    'submissionId' => $submission->id
+                                                ]
+                                            ) }}">
 
                                         @if($graded)
 
@@ -3494,30 +3507,63 @@ rtrim(number_format((float) $number, 2), '0'),
             <strong id="singleGradeClasswork">—</strong>
         </div>
 
-        <form method="POST" id="singleGradeForm">
-            @csrf
-            <input type="hidden" name="return_to" id="singleGradeReturnTo" value="marks">
-            <div class="single-grade-field">
-                <label for="singleGradeScore">Score</label>
-                <div class="single-grade-score-wrap">
-                    <input type="number" name="score" id="singleGradeScore" min="0" step="0.01" required inputmode="decimal" placeholder="Enter score">
-                    <span>/ <strong id="singleGradePoints">0</strong></span>
-                </div>
-            </div>
+<form method="POST" id="singleGradeForm">
+    @csrf
+    <input type="hidden" name="_method" id="singleGradeMethod" value="POST">
 
-            <div class="single-grade-field">
-                <label for="singleGradeFeedback">Feedback <span>(optional)</span></label>
-                <textarea name="feedback" id="singleGradeFeedback" rows="4" placeholder="Write feedback for this student..."></textarea>
-            </div>
+    <input type="hidden" name="from_marks" value="1">
 
-            <div class="single-grade-actions">
-                <button type="button" class="single-grade-cancel" data-close-single-grade>Cancel</button>
-                <button type="submit" class="single-grade-save">
-                    <i class="bx bx-save"></i>
-                    <span id="singleGradeSaveText">Update Grade</span>
-                </button>
-            </div>
-        </form>
+    <div class="single-grade-field">
+        <label for="singleGradeScore">Score</label>
+
+        <div class="single-grade-score-wrap">
+            <input
+                type="number"
+                name="score"
+                id="singleGradeScore"
+                min="0"
+                step="0.01"
+                required
+                inputmode="decimal"
+                placeholder="Enter score"
+            >
+
+            <span>
+                /
+                <strong id="singleGradePoints">0</strong>
+            </span>
+        </div>
+    </div>
+
+    <div class="single-grade-field">
+        <label for="singleGradeFeedback">
+            Feedback <span>(optional)</span>
+        </label>
+
+        <textarea
+            name="feedback"
+            id="singleGradeFeedback"
+            rows="4"
+            placeholder="Write feedback for this student..."
+        ></textarea>
+    </div>
+
+    <div class="single-grade-actions">
+        <button
+            type="button"
+            class="single-grade-cancel"
+            data-close-single-grade>
+            Cancel
+        </button>
+
+        <button
+            type="submit"
+            class="single-grade-save">
+            <i class="bx bx-save"></i>
+            <span id="singleGradeSaveText">Update Grade</span>
+        </button>
+    </div>
+</form>
     </div>
 </div>
 
@@ -3751,6 +3797,7 @@ rtrim(number_format((float) $number, 2), '0'),
         ============================================================ */
         const singleGradeModal = document.getElementById('singleGradeModal');
         const singleGradeForm = document.getElementById('singleGradeForm');
+        const singleGradeMethod = document.getElementById('singleGradeMethod');
         const singleGradeScore = document.getElementById('singleGradeScore');
         const singleGradeFeedback = document.getElementById('singleGradeFeedback');
         const singleGradePoints = document.getElementById('singleGradePoints');
@@ -3768,7 +3815,14 @@ rtrim(number_format((float) $number, 2), '0'),
             const points = Number(button.dataset.gradePoints || 0);
             const score = button.dataset.gradeScore || '';
             const feedback = button.dataset.gradeFeedback || '';
+            const method = (button.dataset.gradeMethod || 'POST').toUpperCase();
+
             singleGradeForm.action = button.dataset.gradeUrl || '';
+
+            if (singleGradeMethod) {
+                singleGradeMethod.value = method === 'PUT' ? 'PUT' : 'POST';
+            }
+
             singleGradeClasswork.textContent = title;
             singleGradeStudent.textContent = student;
             singleGradePoints.textContent = formatScore(points);
