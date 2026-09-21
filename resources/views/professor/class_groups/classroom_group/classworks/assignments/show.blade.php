@@ -765,6 +765,8 @@
 }
 
 
+
+
 /* ============================================================
    VIEW SUBMISSION BUTTON
    ============================================================ */
@@ -1599,9 +1601,10 @@
                         @endif
 
 
-                        {{-- ========================================================
-         VIEW SUBMISSION
-    ========================================================= --}}
+{{-- ========================================================
+     VIEW SUBMISSION
+========================================================= --}}
+
 <a
     href="{{ route('professor.class-groups.assignments.submissions.show', [
         'classGroup' => $classGroup->id,
@@ -1609,13 +1612,14 @@
         'submission' => $submission->id,
         'origin' => request('return_to', 'stream'),
     ]) }}"
-    class="classwork-show-page submission-view-btn">
+    class="submission-view-btn">
 
     <i class="bx bx-show"></i>
     <span>View Submission</span>
 
-</a>
-                    </div>
+</a>            
+
+</div>
 
                     @endforeach
 
